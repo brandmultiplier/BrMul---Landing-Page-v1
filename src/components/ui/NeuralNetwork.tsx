@@ -34,7 +34,7 @@ export default function NeuralNetwork() {
 
         const initParticles = () => {
             particles = [];
-            const particleCount = Math.min(Math.floor((width * height) / 15000), 100); // Responsive count
+            const particleCount = Math.min(Math.floor((width * height) / 25000), 100); // Reduced density for mobile
 
             for (let i = 0; i < particleCount; i++) {
                 particles.push({

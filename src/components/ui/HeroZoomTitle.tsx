@@ -59,7 +59,7 @@ export default function HeroZoomTitle({ titlePhrases = [], subtitle = "" }: Hero
     // Shared content structure to guarantee 100% alignment
     const Content = ({ variant }: { variant: 'base' | 'spotlight' }) => (
         <div className="flex flex-col gap-4 md:gap-6 w-full">
-            <h1 className="text-[clamp(3rem,9vw,9.5rem)] leading-[0.9] font-medium tracking-tighter">
+            <h1 className="text-[clamp(3.5rem,9vw,9.5rem)] leading-[0.9] font-medium tracking-tighter">
                 {titlePhrases.map((word, i) => (
                     <span
                         key={i}
