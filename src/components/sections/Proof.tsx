@@ -19,7 +19,7 @@ export default function Proof() {
                     <span className="text-white text-xs font-bold tracking-[0.2em] uppercase mb-8 block pl-1">
                         The Proof
                     </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-7xl text-white font-medium tracking-tight leading-[1.1]">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tight leading-[1.1]">
                         We Measure What Matters. <br />
                         <span className="text-white/40">Not Impressions. Revenue.</span>
                     </h2>
@@ -38,8 +38,8 @@ export default function Proof() {
                             <div className="absolute top-0 left-0 w-32 h-32 bg-accent-indigo/5 blur-[80px]" />
 
                             <div>
-                                <div className="inline-flex items-center mb-10">
-                                    <div className="relative h-12 w-auto">
+                                <div className="inline-flex items-center mb-8">
+                                    <div className="relative h-8 w-auto">
                                         <img
                                             src="/accenture-logo.png"
                                             alt="Accenture Interactive"
@@ -48,7 +48,7 @@ export default function Proof() {
                                     </div>
                                     {/* <span className="text-white font-medium tracking-wide">Accenture Interactive</span> */}
                                 </div>
-                                <h3 className="text-3xl md:text-4xl text-white font-medium mb-8 leading-snug">
+                                <h3 className="text-2xl md:text-3xl text-white font-medium mb-8 leading-snug">
                                     Unified 5,000+ practitioners across 40 countries.
                                 </h3>
 
