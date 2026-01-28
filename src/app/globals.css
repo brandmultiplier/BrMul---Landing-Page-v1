@@ -1,26 +1,217 @@
 @import "tailwindcss";
 
+/* ========================================
+   BrandMultiplier.ai - Structured Premium System
+   Focus: Clean lines, Strict Grid, Premium Details
+   ======================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Ultra-Dark Base */
+  --bg-page: #000000;
+  --bg-card: #080808;
+  --bg-card-hover: #0F0F0F;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(255, 255, 255, 0.15);
+
+  /* Text - Pure & High Contrast */
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-tertiary: #52525B;
+
+  /* Accents */
+  --accent-purple: #A855F7;
+  --accent-indigo: #6366F1;
+  --accent-blue: #0EA5E9;
+
+  /* Gradients */
+  --gradient-main: linear-gradient(135deg, #A855F7 0%, #6366F1 100%);
+  --gradient-dark: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================================
+   Reset & Base
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  overscroll-behavior-y: none;
+  /* Prevents black background reveal on scroll up */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+/* ========================================
+   Typography System - SCALED UP
+   ======================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+.text-gradient {
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Massive Stats Utility */
+.text-giant {
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+/* ========================================
+   Layout Utilities - WIDER
+   ======================================== */
+
+.container-width {
+  width: 100%;
+  max-width: 1240px;
+  /* Tighter default for laptops */
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (min-width: 1536px) {
+  .container-width {
+    max-width: 1400px;
+    /* Restore wide width for large monitors */
+  }
+}
+
+.section-spacing {
+  padding: 80px 0;
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    padding: 100px 0;
+    /* Reduced from 160px for tighter laptop feel */
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-spacing {
+    padding: 140px 0;
+    /* Slightly more breathing room on larger desktops */
+  }
+}
+
+/* Grid Background - Subtle Order */
+.bg-grid {
+  background-size: 100px 100px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+
+/* ========================================
+   Component System
+   ======================================== */
+
+/* Cards: Strict boundaries, subtle interaction */
+.clean-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  /* Sharper corners for structural feel */
+  padding: 40px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.clean-card:hover {
+  border-color: var(--border-highlight);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Buttons: High contrast */
+.btn-primary {
+  height: 56px;
+  /* Taller touch targets */
+  padding: 0 40px;
+  border-radius: 100px;
+  background: white;
+  color: black;
+  font-weight: 500;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+}
+
+/* ========================================
+   Utilities
+   ======================================== */
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+/* ========================================
+   3D Animation Utilities
+   ======================================== */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }
