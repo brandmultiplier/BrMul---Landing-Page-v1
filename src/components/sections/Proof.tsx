@@ -38,9 +38,15 @@ export default function Proof() {
                             <div className="absolute top-0 left-0 w-32 h-32 bg-accent-indigo/5 blur-[80px]" />
 
                             <div>
-                                <div className="inline-flex items-center gap-2 mb-10">
-                                    <div className="w-8 h-8 rounded bg-white text-black flex items-center justify-center font-bold text-xs">AC</div>
-                                    <span className="text-white font-medium tracking-wide">Accenture Interactive</span>
+                                <div className="inline-flex items-center mb-10">
+                                    <div className="relative h-20 w-auto">
+                                        <img
+                                            src="/accenture-logo.png"
+                                            alt="Accenture Interactive"
+                                            className="h-full w-auto object-contain brightness-0 invert"
+                                        />
+                                    </div>
+                                    {/* <span className="text-white font-medium tracking-wide">Accenture Interactive</span> */}
                                 </div>
                                 <h3 className="text-3xl md:text-4xl text-white font-medium mb-8 leading-snug">
                                     Unified 5,000+ practitioners across 40 countries.
