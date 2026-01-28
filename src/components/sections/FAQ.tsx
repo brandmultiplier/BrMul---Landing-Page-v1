@@ -31,7 +31,7 @@ const faqs = [
 export default function FAQ() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-10%" });
-    const [openIndex, setOpenIndex] = useState<number | null>(0);
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     return (
         <section ref={sectionRef} className="section-spacing bg-bg-page relative overflow-hidden text-center md:text-left">
