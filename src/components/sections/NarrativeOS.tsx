@@ -140,13 +140,13 @@ export default function NarrativeOS() {
                                         }}
                                     >
                                         <div className="text-center transform -rotate-2">
-                                            <div className="inline-flex p-3 rounded-full bg-white/5 mb-3 border border-white/10">
-                                                <item.icon className="w-5 h-5 text-white" />
+                                            <div className={`inline-flex p-3 rounded-full bg-white/5 mb-3 border transition-colors duration-500 ${isHovered ? "border-white/40 bg-white/10" : "border-white/5"}`}>
+                                                <item.icon className={`w-5 h-5 transition-colors duration-500 ${isHovered ? "text-white" : "text-white/20"}`} />
                                             </div>
-                                            <div className="text-white font-medium text-base tracking-wide px-4">
+                                            <div className={`font-medium text-base tracking-wide px-4 transition-colors duration-500 ${isHovered ? "text-white" : "text-white/20"}`}>
                                                 {item.title}
                                             </div>
-                                            <div className="text-[9px] text-white/40 font-mono mt-2 uppercase tracking-widest border-t border-white/5 pt-2 inline-block">
+                                            <div className={`text-[9px] font-mono mt-2 uppercase tracking-widest border-t border-white/5 pt-2 inline-block transition-colors duration-500 ${isHovered ? "text-white/50" : "text-white/10"}`}>
                                                 Module 0{i + 1}
                                             </div>
                                         </div>
