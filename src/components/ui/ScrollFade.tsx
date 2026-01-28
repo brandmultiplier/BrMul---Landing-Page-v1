@@ -18,8 +18,8 @@ export default function ScrollFade({ children, className = "" }: ScrollFadeProps
 
     // Mimic Hero effect: Fade out/scale down as it leaves text viewport
     const y = useTransform(scrollYProgress, [0, 1], [0, 100]); // Less parallax than Hero (300) to avoid overlaps
-    const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-    const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.95]);
+    const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.1]); // Extended range and non-zero exit for visibility
+    const scale = useTransform(scrollYProgress, [0, 0.9], [1, 0.98]); // Subtler scale down
 
     return (
         <motion.div
