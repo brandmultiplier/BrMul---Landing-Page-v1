@@ -39,7 +39,7 @@ export default function Proof() {
 
                             <div>
                                 <div className="inline-flex items-center mb-10">
-                                    <div className="relative h-20 w-auto">
+                                    <div className="relative h-12 w-auto">
                                         <img
                                             src="/accenture-logo.png"
                                             alt="Accenture Interactive"
