@@ -94,18 +94,18 @@ export default function NarrativeOS() {
                                 const isDeployed = isInView;
 
                                 // Fan Calculation
-                                // Horizontal/Isometric spread
-                                const xOffset = isDeployed ? i * 80 : 0;
+                                // Horizontal/Isometric spread - INCREASED SPACING
+                                const xOffset = isDeployed ? i * 110 : 0; // Much wider spread to avoid overlap
                                 const yOffset = isDeployed ? 0 : 0;
                                 const zOffset = isDeployed ? i * -50 : 0;
 
                                 return (
                                     <motion.div
                                         key={i}
-                                        className={`absolute w-[360px] h-[220px] rounded-xl border backdrop-blur-[2px] flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)]
+                                        className={`absolute w-[360px] h-[220px] rounded-xl border backdrop-blur-md flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)]
                                             ${isDeployed // Highlight valid active cards or just make them all look good?
-                                                ? "bg-white/10 border-white/40 shadow-[0_0_60px_rgba(255,255,255,0.15)]"
-                                                : "bg-[#0A0A0A]/60 border-white/20 shadow-xl"
+                                                ? "bg-[#0A0A0A]/95 border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+                                                : "bg-[#0A0A0A]/60 border-white/10 shadow-xl"
                                             }
                                         `}
                                         style={{
@@ -113,12 +113,12 @@ export default function NarrativeOS() {
                                             zIndex: isDeployed ? 10 + i : 0 // Ensure stacking order is correct
                                         }}
                                         animate={{
-                                            x: xOffset - (2 * 80), // Center the group (approx center index is 2)
+                                            x: xOffset - (2 * 110), // Center based on new spread width
                                             y: yOffset,
                                             z: zOffset,
                                             scale: isDeployed ? 1 : 0.95,
-                                            rotateY: -20,
-                                            rotateX: 10,
+                                            rotateY: -15,   // Slightly less rotation to make text more readable
+                                            rotateX: 5,     // Less tilt
                                             opacity: 1, // Always visible, just stacked
                                         }}
                                         transition={{
@@ -128,16 +128,17 @@ export default function NarrativeOS() {
                                             damping: 15
                                         }}
                                     >
-                                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50 rounded-xl pointer-events-none" />
+                                        {/* Gradient overlay for depth but less interfering */}
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-30 rounded-xl pointer-events-none" />
 
-                                        <div className="text-center transform relative z-10">
-                                            <div className={`inline-flex p-3 rounded-full bg-white/5 mb-4 border transition-colors duration-500 ${isDeployed ? "border-white/40 bg-white/10" : "border-white/5"}`}>
-                                                <item.icon className="w-6 h-6 text-white/80" />
+                                        <div className="text-center transform relative z-10 px-4">
+                                            <div className={`inline-flex p-3 rounded-full bg-white/5 mb-3 border transition-colors duration-500 ${isDeployed ? "border-white/20 bg-white/10" : "border-white/5"}`}>
+                                                <item.icon className="w-6 h-6 text-white" />
                                             </div>
-                                            <div className={`font-medium text-lg tracking-wide px-6 transition-colors duration-500 text-white`}>
+                                            <div className={`font-medium text-lg leading-tight tracking-wide transition-colors duration-500 text-white`}>
                                                 {item.title}
                                             </div>
-                                            <div className="text-[10px] font-mono mt-4 uppercase tracking-widest border-t border-white/5 pt-3 inline-block text-white/40">
+                                            <div className="text-[10px] font-mono mt-3 uppercase tracking-widest border-t border-white/10 pt-2 inline-block text-white/40">
                                                 Module 0{i + 1}
                                             </div>
                                         </div>
