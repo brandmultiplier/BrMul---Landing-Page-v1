@@ -93,17 +93,17 @@ export default function NarrativeOS() {
                                 // Fan Calculation
                                 // COMPACT / SMALLER CARDS for better responsive fit
                                 // Cards are now SMALLER (260px wide).
-                                const xSpread = 120; // Tightened X to emphasize vertical/depth
-                                const ySpread = 60;  // Strong WATERFALL vertical drop
+                                const xSpread = 100; // Even tighter X to let vertical dominate
+                                const ySpread = 80;  // MAXIMIZED WATERFALL vertical drop
 
                                 // Center alignment constant: shifting everything so the "Group" is visually centered
-                                // Re-centered as requested (was -180, now -260)
-                                const layoutCenterOffset = -260;
-                                const layoutTopOffset = -50; // To center the vertical cascade roughly
+                                // Adjusted for tighter X spread (was -260)
+                                const layoutCenterOffset = -240;
+                                const layoutTopOffset = -80; // Start higher to accommodate steep drop
 
                                 const xOffset = i * xSpread;
                                 const yOffset = i * ySpread;
-                                const zOffset = isDeployed ? i * -100 : 0; // Deeper Z-axis stack for 3D waterfall effect
+                                const zOffset = isDeployed ? i * -120 : 0; // Even deeper Z for dramatic 3D
 
                                 return (
                                     <motion.div
@@ -124,10 +124,9 @@ export default function NarrativeOS() {
                                             // creating a "Left to Right" expansion effect.
                                             x: isDeployed ? (xOffset + layoutCenterOffset) : layoutCenterOffset,
                                             y: isDeployed ? (yOffset + layoutTopOffset) : layoutTopOffset,
-                                            z: isDeployed ? zOffset : 0, // Stacked at 0 depth
+                                            z: isDeployed ? zOffset : 0,
                                             scale: isDeployed ? 1 : 0.95,
                                             // Isometric "Standing" Angles when deployed, flat/neat when closed
-                                            // Reverted closer to original rotation for "central" feel, but slightly adjusted
                                             rotateY: isDeployed ? -20 : 0,
                                             rotateX: isDeployed ? 10 : 0,
                                             rotateZ: isDeployed ? 5 : 0,
