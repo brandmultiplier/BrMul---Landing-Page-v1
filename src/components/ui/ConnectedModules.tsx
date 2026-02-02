@@ -25,16 +25,16 @@ const modules = [
     { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -130, delay: 0.2 },
 
     // 2. Top Right (Tighter)
-    { id: "marketing", icon: Megaphone, label: "Marketing", x: 220, y: -50, delay: 0.3 },
+    { id: "marketing", icon: Megaphone, label: "Marketing", x: 240, y: -50, delay: 0.3 },
 
     // 3. Bottom Right (Tighter)
-    { id: "recruitment", icon: Users, label: "Recruiting", x: 150, y: 100, delay: 0.4 },
+    { id: "recruitment", icon: Users, label: "Recruiting", x: 160, y: 100, delay: 0.4 },
 
     // 4. Bottom Left (Reflected)
-    { id: "product", icon: Layout, label: "Product", x: -150, y: 100, delay: 0.5 },
+    { id: "product", icon: Layout, label: "Product", x: -160, y: 100, delay: 0.5 },
 
     // 5. Top Left (Reflected)
-    { id: "sales", icon: Briefcase, label: "Sales", x: -220, y: -50, delay: 0.6 },
+    { id: "sales", icon: Briefcase, label: "Sales", x: -240, y: -50, delay: 0.6 },
 ];
 
 export default function ConnectedModules() {
@@ -152,7 +152,8 @@ function getBoxIntersection(x1: number, y1: number, x2: number, y2: number, w: n
     if (Math.abs(dy) > 0) {
         const yEdge = dy > 0 ? hh : -hh;
         const xInt = yEdge / slope;
-        if (Math.abs(xInt) <= hw) {
+        // Float precision fix for exact corner hits
+        if (Math.abs(xInt) <= hw + 0.1) {
             return { x: x1 + xInt, y: y1 + yEdge };
         }
     }
@@ -163,10 +164,9 @@ function getBoxIntersection(x1: number, y1: number, x2: number, y2: number, w: n
 
 // Sub-component for Animated Line with "Box Clipping"
 function ConnectionLine({ startX, startY, endX, endY, color, delay }: any) {
-    // Defines node dimensions for clipping (Center approx 96px, Outer 80px)
-    // Add small buffer (-4px) so line tucks slightly under the border glow
-    const centerSize = 92;
-    const outerSize = 76;
+    // Exact Visual Dimensions (w-24 = 96px, w-20 = 80px)
+    const centerSize = 96;
+    const outerSize = 80;
 
     // Project vector from Center to Outer
     const dx = endX - startX;
@@ -183,23 +183,20 @@ function ConnectionLine({ startX, startY, endX, endY, color, delay }: any) {
     const actualEndX = endX + relativeEnd.x;
     const actualEndY = endY + relativeEnd.y;
 
-    // Curvature Logic
-    // Uses a gentle curve pulling towards the horizontal axis for "network" feel
-    // Midpoint average
-    const midY = (actualStartY + actualEndY) / 2;
-    const pathD = `M ${actualStartX} ${actualStartY} C ${actualStartX} ${midY} ${actualEndX} ${midY} ${actualEndX} ${actualEndY}`;
+    // Straight Line for taut connection
+    const pathD = `M ${actualStartX} ${actualStartY} L ${actualEndX} ${actualEndY}`;
 
     return (
         <>
             {/* Connection Terminals (Dots at exact overlap) */}
-            <circle cx={actualStartX} cy={actualStartY} r="4" fill="#A855F7" opacity="0.6" />
-            <circle cx={actualEndX} cy={actualEndY} r="3" fill="white" opacity="0.4" />
+            <circle cx={actualStartX} cy={actualStartY} r="3" fill="#A855F7" opacity="0.8" />
+            <circle cx={actualEndX} cy={actualEndY} r="3" fill="white" opacity="0.6" />
 
             {/* Background Line */}
             <path
                 d={pathD}
-                stroke="rgba(255,255,255,0.1)"
-                strokeWidth="1"
+                stroke="rgba(255,255,255,0.2)" // Increased brightness
+                strokeWidth="1.5"
                 fill="none"
             />
 
@@ -207,14 +204,14 @@ function ConnectionLine({ startX, startY, endX, endY, color, delay }: any) {
             <motion.path
                 d={pathD}
                 stroke={color}
-                strokeWidth="2"
+                strokeWidth="2.5"
                 fill="none"
                 strokeDasharray="4 80" // Short sharp pulses
                 strokeLinecap="round"
                 initial={{ strokeDashoffset: 84 }}
                 animate={{ strokeDashoffset: 0 }}
                 transition={{
-                    duration: 3,
+                    duration: 2.5,
                     repeat: Infinity,
                     repeatType: "loop",
                     ease: "linear",
