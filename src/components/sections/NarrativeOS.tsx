@@ -94,10 +94,10 @@ export default function NarrativeOS() {
                                 const isDeployed = isInView;
 
                                 // Fan Calculation
-                                // WIDER SPREAD for readability. 
-                                // Cards are 360px wide. Spacing of 240px leaves 120px overlap (1/3), good for depth but readable text.
-                                const xOffset = isDeployed ? i * 240 : 0;
-                                const yOffset = isDeployed ? 0 : 0;
+                                // WIDER SPREAD + DIAGONAL RISE (Verticality)
+                                // Cards are 360px wide. 
+                                const xOffset = isDeployed ? i * 200 : 0;
+                                const yOffset = isDeployed ? i * -40 : 0; // Rise up vertically
                                 const zOffset = isDeployed ? i * -50 : 0;
 
                                 return (
@@ -114,13 +114,14 @@ export default function NarrativeOS() {
                                             zIndex: isDeployed ? 10 + i : 0
                                         }}
                                         animate={{
-                                            x: xOffset - (2 * 240), // Force center around the middle card
-                                            y: yOffset,
+                                            x: xOffset - (2 * 200), // Force center around the middle card
+                                            y: yOffset - (2 * -40), // Center vertically too
                                             z: zOffset,
                                             scale: isDeployed ? 1 : 0.95,
-                                            rotateY: isDeployed ? -10 : 0, // Flatter angle
-                                            rotateX: isDeployed ? 5 : 0,    // Slight tilt up
-                                            rotateZ: isDeployed ? -2 : 0,   // Tiny chaotic tilt? No, let's keep it straight like reference
+                                            // Isometric "Standing" Angles
+                                            rotateY: isDeployed ? -25 : 0,
+                                            rotateX: isDeployed ? 10 : 0,
+                                            rotateZ: isDeployed ? 5 : 0,
                                             opacity: 1,
                                         }}
                                         transition={{
