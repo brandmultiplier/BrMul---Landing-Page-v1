@@ -93,17 +93,17 @@ export default function NarrativeOS() {
                                 // Fan Calculation
                                 // COMPACT / SMALLER CARDS for better responsive fit
                                 // Cards are now SMALLER (260px wide).
-                                const xSpread = 80;  // Extremely tight X to let vertical dominate
-                                const ySpread = 110; // EXTREME WATERFALL vertical drop
+                                const xSpread = 210; // WIDE spread for readability (Text visible)
+                                const ySpread = 100; // Strong WATERFALL vertical drop
 
                                 // Center alignment constant: shifting everything so the "Group" is visually centered
-                                // Adjusted for very tight X spread
-                                const layoutCenterOffset = -200;
-                                const layoutTopOffset = -120; // Start VERY high to accommodate long drop
+                                // Wide spread requires larger negative offset
+                                const layoutCenterOffset = -420;
+                                const layoutTopOffset = -120; // Start high
 
                                 const xOffset = i * xSpread;
                                 const yOffset = i * ySpread;
-                                const zOffset = isDeployed ? i * -150 : 0; // Deepest Z for dramatic perspective
+                                const zOffset = isDeployed ? i * -60 : 0; // Moderate Z-depth for readability
 
                                 return (
                                     <motion.div
@@ -127,7 +127,7 @@ export default function NarrativeOS() {
                                             z: isDeployed ? zOffset : 0,
                                             scale: isDeployed ? 1 : 0.95,
                                             // Isometric "Standing" Angles when deployed, flat/neat when closed
-                                            rotateY: isDeployed ? -20 : 0,
+                                            rotateY: isDeployed ? -15 : 0,
                                             rotateX: isDeployed ? 10 : 0,
                                             rotateZ: isDeployed ? 5 : 0,
                                             opacity: 1,
