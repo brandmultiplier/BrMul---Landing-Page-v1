@@ -46,9 +46,10 @@ export default function NarrativeOS() {
     ];
 
     return (
-        <section ref={containerRef} className="relative bg-bg-page overflow-hidden">
-            {/* Background Grid */}
-            <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none fixed" />
+        <section ref={containerRef} className="relative min-h-screen w-full bg-[#050505] flex items-center py-48 overflow-hidden">
+
+            {/* Background Elements */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.03),transparent_70%)]" />
 
             <ScrollFade className="container-width relative z-10 py-24 lg:py-32">
                 {/* Header - Stacks on mobile, top of flow on desktop */}
