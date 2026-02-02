@@ -96,8 +96,8 @@ export default function NarrativeOS() {
                                 // Fan Calculation
                                 // COMPACT / SMALLER CARDS for better responsive fit
                                 // Cards are now SMALLER (260px wide).
-                                const xOffset = isDeployed ? i * 140 : 0; // Tightened spread
-                                const yOffset = isDeployed ? i * -25 : 0; // Reduced vertical rise
+                                const xOffset = isDeployed ? i * 140 : 0;
+                                const yOffset = isDeployed ? i * -25 : 0;
                                 const zOffset = isDeployed ? i * -50 : 0;
 
                                 return (
@@ -115,21 +115,25 @@ export default function NarrativeOS() {
                                             zIndex: isDeployed ? 10 + i : 0
                                         }}
                                         animate={{
-                                            x: xOffset - (2 * 140), // Force center around the middle card
-                                            y: yOffset - (2 * -25), // Center vertically too
-                                            z: zOffset,
+                                            // When deployed: offset minus centering correction.
+                                            // When CLOSED: perfectly centered (0).
+                                            x: isDeployed ? xOffset - (2 * 140) : 0,
+                                            y: isDeployed ? yOffset - (2 * -25) : 0,
+                                            z: isDeployed ? zOffset : 0, // Stacked at 0 depth
                                             scale: isDeployed ? 1 : 0.95,
-                                            // Isometric "Standing" Angles
+                                            // Isometric "Standing" Angles when deployed, flat/neat when closed
                                             rotateY: isDeployed ? -25 : 0,
                                             rotateX: isDeployed ? 10 : 0,
                                             rotateZ: isDeployed ? 5 : 0,
                                             opacity: 1,
                                         }}
                                         transition={{
-                                            delay: i * 0.1,
+                                            // Slower, more elegant expansion
+                                            delay: isDeployed ? i * 0.15 : 0, // Slightly more stagger on open
+                                            duration: 1.2, // Explicit duration for slower movement
                                             type: "spring",
-                                            stiffness: 60,
-                                            damping: 15
+                                            stiffness: 30, // Much softer spring
+                                            damping: 15    // Smooth landing
                                         }}
                                     >
                                         {/* Clean gradient for depth */}
