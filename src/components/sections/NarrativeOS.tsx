@@ -176,19 +176,19 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
 
     return (
         <div
-            className={`min-h-[120px] flex items-center transition-all duration-700 delay-[${index * 100}ms]
+            className={`min-h-[100px] flex items-start transition-all duration-700 delay-[${index * 100}ms]
                 ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
             `}
         >
-            <div className="flex gap-6 lg:gap-8 items-start max-w-md">
-                <div className={`mt-1 text-2xl font-mono transition-colors duration-500 ${show ? "text-white/40" : "text-white/10"}`}>
+            <div className="flex gap-4 lg:gap-6 items-start max-w-md">
+                <div className={`mt-1 text-sm font-mono transition-colors duration-500 ${show ? "text-white/40" : "text-white/10"}`}>
                     0{index + 1}
                 </div>
                 <div>
-                    <h3 className="text-2xl font-medium mb-3 text-white">
+                    <h3 className="text-lg font-medium mb-2 text-white">
                         {item.title}
                     </h3>
-                    <p className="text-lg leading-relaxed text-text-secondary">
+                    <p className="text-sm leading-relaxed text-text-secondary/80">
                         {item.desc}
                     </p>
                 </div>
