@@ -85,7 +85,7 @@ export default function NarrativeOS() {
                         {/* Minimal Glow */}
                         <div className="absolute inset-0 bg-white/5 blur-[120px] rounded-full pointer-events-none opacity-20" />
 
-                        <div className="relative w-full h-full flex items-center justify-center transform-style-3d rotate-x-[10deg] rotate-z-[-5deg] rotate-y-[15deg]">
+                        <div className="relative w-full h-full flex items-center justify-center transform-style-3d">
                             {deliverables.map((item, i) => {
                                 // Accordion Logic - "BAM" Effect
                                 // When section is in view, ALL cards deploy to their fanned positions.
@@ -94,51 +94,55 @@ export default function NarrativeOS() {
                                 const isDeployed = isInView;
 
                                 // Fan Calculation
-                                // Horizontal/Isometric spread - INCREASED SPACING
-                                const xOffset = isDeployed ? i * 110 : 0; // Much wider spread to avoid overlap
+                                // WIDER SPREAD for readability. 
+                                // Cards are 360px wide. Spacing of 240px leaves 120px overlap (1/3), good for depth but readable text.
+                                const xOffset = isDeployed ? i * 240 : 0;
                                 const yOffset = isDeployed ? 0 : 0;
                                 const zOffset = isDeployed ? i * -50 : 0;
 
                                 return (
                                     <motion.div
                                         key={i}
-                                        className={`absolute w-[360px] h-[220px] rounded-xl border backdrop-blur-md flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)]
-                                            ${isDeployed // Highlight valid active cards or just make them all look good?
-                                                ? "bg-[#0A0A0A]/95 border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
-                                                : "bg-[#0A0A0A]/60 border-white/10 shadow-xl"
+                                        className={`absolute w-[360px] h-[220px] rounded-xl border flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)]
+                                            ${isDeployed
+                                                ? "bg-[#0A0A0A] border-white/20 shadow-2xl"
+                                                : "bg-[#0A0A0A] border-white/10 shadow-xl"
                                             }
                                         `}
                                         style={{
                                             transformOrigin: "center center",
-                                            zIndex: isDeployed ? 10 + i : 0 // Ensure stacking order is correct
+                                            zIndex: isDeployed ? 10 + i : 0
                                         }}
                                         animate={{
-                                            x: xOffset - (2 * 110), // Center based on new spread width
+                                            x: xOffset - (2 * 240), // Force center around the middle card
                                             y: yOffset,
                                             z: zOffset,
                                             scale: isDeployed ? 1 : 0.95,
-                                            rotateY: -15,   // Slightly less rotation to make text more readable
-                                            rotateX: 5,     // Less tilt
-                                            opacity: 1, // Always visible, just stacked
+                                            rotateY: isDeployed ? -10 : 0, // Flatter angle
+                                            rotateX: isDeployed ? 5 : 0,    // Slight tilt up
+                                            rotateZ: isDeployed ? -2 : 0,   // Tiny chaotic tilt? No, let's keep it straight like reference
+                                            opacity: 1,
                                         }}
                                         transition={{
-                                            delay: i * 0.1, // Stagger the "BAM" slightly for effect
+                                            delay: i * 0.1,
                                             type: "spring",
-                                            stiffness: 80,
+                                            stiffness: 60,
                                             damping: 15
                                         }}
                                     >
-                                        {/* Gradient overlay for depth but less interfering */}
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-30 rounded-xl pointer-events-none" />
+                                        {/* Clean gradient for depth */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-20 rounded-xl pointer-events-none" />
 
-                                        <div className="text-center transform relative z-10 px-4">
-                                            <div className={`inline-flex p-3 rounded-full bg-white/5 mb-3 border transition-colors duration-500 ${isDeployed ? "border-white/20 bg-white/10" : "border-white/5"}`}>
-                                                <item.icon className="w-6 h-6 text-white" />
+                                        <div className="text-center transform relative z-10 px-6">
+                                            <div className="mb-4 flex justify-center">
+                                                <div className={`p-3 rounded-full bg-white/5 border border-white/10 ${isDeployed ? "text-white" : "text-white/40"}`}>
+                                                    <item.icon className="w-6 h-6" />
+                                                </div>
                                             </div>
-                                            <div className={`font-medium text-lg leading-tight tracking-wide transition-colors duration-500 text-white`}>
+                                            <div className="font-medium text-lg leading-tight tracking-wide text-white mb-2">
                                                 {item.title}
                                             </div>
-                                            <div className="text-[10px] font-mono mt-3 uppercase tracking-widest border-t border-white/10 pt-2 inline-block text-white/40">
+                                            <div className="text-[10px] font-mono uppercase tracking-widest text-white/30">
                                                 Module 0{i + 1}
                                             </div>
                                         </div>
