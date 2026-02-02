@@ -195,10 +195,10 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
             `}
         >
             <div className="max-w-md">
-                <h3 className="text-lg font-medium mb-2 text-white">
+                <h3 className="text-xl font-medium mb-1 text-white">
                     {item.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-white/40">
+                <p className="text-base leading-relaxed text-gray-400">
                     {item.desc}
                 </p>
             </div>
