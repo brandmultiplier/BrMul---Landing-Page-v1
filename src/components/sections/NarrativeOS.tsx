@@ -93,17 +93,17 @@ export default function NarrativeOS() {
                                 // Fan Calculation
                                 // COMPACT / SMALLER CARDS for better responsive fit
                                 // Cards are now SMALLER (260px wide).
-                                const xSpread = 100; // Even tighter X to let vertical dominate
-                                const ySpread = 80;  // MAXIMIZED WATERFALL vertical drop
+                                const xSpread = 80;  // Extremely tight X to let vertical dominate
+                                const ySpread = 110; // EXTREME WATERFALL vertical drop
 
                                 // Center alignment constant: shifting everything so the "Group" is visually centered
-                                // Adjusted for tighter X spread (was -260)
-                                const layoutCenterOffset = -240;
-                                const layoutTopOffset = -80; // Start higher to accommodate steep drop
+                                // Adjusted for very tight X spread
+                                const layoutCenterOffset = -200;
+                                const layoutTopOffset = -120; // Start VERY high to accommodate long drop
 
                                 const xOffset = i * xSpread;
                                 const yOffset = i * ySpread;
-                                const zOffset = isDeployed ? i * -120 : 0; // Even deeper Z for dramatic 3D
+                                const zOffset = isDeployed ? i * -150 : 0; // Deepest Z for dramatic perspective
 
                                 return (
                                     <motion.div
