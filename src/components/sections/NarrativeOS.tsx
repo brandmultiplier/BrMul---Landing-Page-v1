@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import ScrollFade from "@/components/ui/ScrollFade";
 import { FileText, Mic, Layout, Award, BarChart3 } from "lucide-react";
@@ -9,7 +9,8 @@ import Button from "@/components/ui/Button";
 
 export default function NarrativeOS() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [activeIndex, setActiveIndex] = useState(0);
+    // Trigger animation when the section is 30% in view
+    const isInView = useInView(containerRef, { once: false, margin: "-30% 0px -30% 0px" });
 
     const deliverables = [
         {
@@ -51,7 +52,7 @@ export default function NarrativeOS() {
 
             <ScrollFade className="container-width relative z-10 py-24 lg:py-32">
                 {/* Header - Stacks on mobile, top of flow on desktop */}
-                <div className="mb-20 lg:mb-32 max-w-2xl">
+                <div className="mb-16 lg:mb-24 max-w-2xl">
                     <div className="text-sm font-semibold tracking-[0.2em] text-white uppercase mb-8 ml-1">
                         System Installation
                     </div>
@@ -64,84 +65,79 @@ export default function NarrativeOS() {
                     </p>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-                    {/* Left Column: Scrollable List - Compact Spacing */}
-                    <div className="relative z-10 space-y-12 lg:space-y-24 pb-24">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+                    {/* Left Column: Static List (No longer controls animation directly) */}
+                    <div className="relative z-10 space-y-8">
                         {deliverables.map((item, i) => (
                             <NarrativeItem
                                 key={i}
                                 item={item}
                                 index={i}
-                                setActiveIndex={setActiveIndex}
+                                // We pass the global "isInView" to highlight all items or cascade them if needed
+                                // helping the user see the connection, but the main "BAM" is the cards.
+                                show={isInView}
                             />
                         ))}
                     </div>
 
-                    {/* Right Column: Sticky Card Stack */}
-                    <div className="hidden lg:block sticky top-32 h-[500px] perspective-[2000px]">
+                    {/* Right Column: Card Fan (Triggers on Section View) */}
+                    <div className="hidden lg:block h-[500px] perspective-[2000px] relative">
                         {/* Minimal Glow */}
                         <div className="absolute inset-0 bg-white/5 blur-[120px] rounded-full pointer-events-none opacity-20" />
 
                         <div className="relative w-full h-full flex items-center justify-center transform-style-3d rotate-x-[10deg] rotate-z-[-5deg] rotate-y-[15deg]">
                             {deliverables.map((item, i) => {
-                                // Accordion Logic
-                                // If index <= activeIndex, the card is "deployed" (fanned out)
-                                // If index > activeIndex, the card remains stacked at the "base" (or behind the last active one)
+                                // Accordion Logic - "BAM" Effect
+                                // When section is in view, ALL cards deploy to their fanned positions.
+                                // When not in view, ALL cards collapse to 0,0,0.
 
-                                // To make them collapse into a "single layer" when scrolling up:
-                                // Base state (i > activeIndex): All collapse to origin (or closely stacked)
-                                // Active state (i <= activeIndex): Spread out
-
-                                const isDeployed = i <= activeIndex;
-                                const isActive = i === activeIndex; // The specific card being talked about
+                                const isDeployed = isInView;
 
                                 // Fan Calculation
-                                // "Horizontal" spread like the example (isometric)
-                                // Spread heavily on X, slightly on Z to create depth, little to no Y.
-
-                                const xOffset = isDeployed ? i * 80 : 0; // Much wider horizontal spread
-                                const yOffset = isDeployed ? 0 : 0;      // Keep them level
-                                const zOffset = isDeployed ? i * -50 : 0;  // Deepen the stack
+                                // Horizontal/Isometric spread
+                                const xOffset = isDeployed ? i * 80 : 0;
+                                const yOffset = isDeployed ? 0 : 0;
+                                const zOffset = isDeployed ? i * -50 : 0;
 
                                 return (
                                     <motion.div
                                         key={i}
-                                        className={`absolute w-[360px] h-[220px] rounded-xl border backdrop-blur-[2px] flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]
-                                            ${isActive
-                                                ? "bg-white/10 border-white/60 shadow-[0_0_60px_rgba(255,255,255,0.15)] z-30"
+                                        className={`absolute w-[360px] h-[220px] rounded-xl border backdrop-blur-[2px] flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)]
+                                            ${isDeployed // Highlight valid active cards or just make them all look good?
+                                                ? "bg-white/10 border-white/40 shadow-[0_0_60px_rgba(255,255,255,0.15)]"
                                                 : "bg-[#0A0A0A]/60 border-white/20 shadow-xl"
                                             }
-                                            ${isDeployed ? "z-20" : "z-0"}
                                         `}
                                         style={{
                                             transformOrigin: "center center",
+                                            zIndex: isDeployed ? 10 + i : 0 // Ensure stacking order is correct
                                         }}
                                         animate={{
-                                            x: xOffset - (activeIndex * 40), // Shift left to keep active card somewhat centered
+                                            x: xOffset - (2 * 80), // Center the group (approx center index is 2)
                                             y: yOffset,
                                             z: zOffset,
-                                            scale: isActive ? 1.05 : 0.95, // Slight scaling
-                                            rotateY: -20, // Constant isometric angle for all cards? Or rotate them?
-                                            // The reference shows them all parallel facing the same way.
+                                            scale: isDeployed ? 1 : 0.95,
+                                            rotateY: -20,
                                             rotateX: 10,
-                                            opacity: isDeployed ? 1 : 0,
+                                            opacity: 1, // Always visible, just stacked
                                         }}
                                         transition={{
+                                            delay: i * 0.1, // Stagger the "BAM" slightly for effect
                                             type: "spring",
-                                            stiffness: 100,
-                                            damping: 20
+                                            stiffness: 80,
+                                            damping: 15
                                         }}
                                     >
                                         <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50 rounded-xl pointer-events-none" />
 
                                         <div className="text-center transform relative z-10">
-                                            <div className={`inline-flex p-3 rounded-full bg-white/5 mb-4 border transition-colors duration-500 ${isActive ? "border-white/40 bg-white/10" : "border-white/5"}`}>
-                                                <item.icon className={`w-6 h-6 transition-colors duration-500 ${isActive ? "text-white" : "text-white/20"}`} />
+                                            <div className={`inline-flex p-3 rounded-full bg-white/5 mb-4 border transition-colors duration-500 ${isDeployed ? "border-white/40 bg-white/10" : "border-white/5"}`}>
+                                                <item.icon className="w-6 h-6 text-white/80" />
                                             </div>
-                                            <div className={`font-medium text-lg tracking-wide px-6 transition-colors duration-500 ${isActive ? "text-white" : "text-white/20"}`}>
+                                            <div className={`font-medium text-lg tracking-wide px-6 transition-colors duration-500 text-white`}>
                                                 {item.title}
                                             </div>
-                                            <div className={`text-[10px] font-mono mt-4 uppercase tracking-widest border-t border-white/5 pt-3 inline-block transition-colors duration-500 ${isActive ? "text-white/50" : "text-white/10"}`}>
+                                            <div className="text-[10px] font-mono mt-4 uppercase tracking-widest border-t border-white/5 pt-3 inline-block text-white/40">
                                                 Module 0{i + 1}
                                             </div>
                                         </div>
@@ -164,28 +160,26 @@ export default function NarrativeOS() {
     );
 }
 
-function NarrativeItem({ item, index, setActiveIndex }: { item: any, index: number, setActiveIndex: (i: number) => void }) {
-    const ref = useRef(null);
-    // Tighter margin to trigger "active" state more precisely in a compact list
-    const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
-
-    useEffect(() => {
-        if (isInView) {
-            setActiveIndex(index);
-        }
-    }, [isInView, index, setActiveIndex]);
+function NarrativeItem({ item, index, show }: { item: any, index: number, show: boolean }) {
+    // We can still use useInView for local highlighting if we want, 
+    // or just rely on the global "show" to trigger entrance animations.
+    // Let's use "show" to slide them in or fade them up when the section hits.
 
     return (
-        <div ref={ref} className={`min-h-[150px] flex items-center transition-opacity duration-500 ${isInView ? "opacity-100" : "opacity-30"}`}>
+        <div
+            className={`min-h-[120px] flex items-center transition-all duration-700 delay-[${index * 100}ms]
+                ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+            `}
+        >
             <div className="flex gap-6 lg:gap-8 items-start max-w-md">
-                <div className={`mt-1 text-2xl font-mono text-white/20`}>
+                <div className={`mt-1 text-2xl font-mono transition-colors duration-500 ${show ? "text-white/40" : "text-white/10"}`}>
                     0{index + 1}
                 </div>
                 <div>
-                    <h3 className={`text-2xl font-medium mb-3 ${isInView ? "text-white" : "text-white/60"}`}>
+                    <h3 className="text-2xl font-medium mb-3 text-white">
                         {item.title}
                     </h3>
-                    <p className={`text-lg leading-relaxed ${isInView ? "text-text-secondary" : "text-text-secondary/60"}`}>
+                    <p className="text-lg leading-relaxed text-text-secondary">
                         {item.desc}
                     </p>
                 </div>
