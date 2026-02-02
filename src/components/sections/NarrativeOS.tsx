@@ -82,9 +82,6 @@ export default function NarrativeOS() {
 
                     {/* Right Column: Card Fan (Triggers on Section View) */}
                     <div className="hidden lg:block h-[500px] perspective-[2000px] relative">
-                        {/* Minimal Glow */}
-                        <div className="absolute inset-0 bg-white/5 blur-[120px] rounded-full pointer-events-none opacity-20" />
-
                         <div className="relative w-full h-full flex items-center justify-center transform-style-3d">
                             {deliverables.map((item, i) => {
                                 // Accordion Logic - "BAM" Effect
@@ -97,7 +94,7 @@ export default function NarrativeOS() {
                                 // COMPACT / SMALLER CARDS for better responsive fit
                                 // Cards are now SMALLER (260px wide).
                                 const xOffset = isDeployed ? i * 140 : 0;
-                                const yOffset = isDeployed ? i * -25 : 0;
+                                const yOffset = isDeployed ? i * 25 : 0; // DESCENDING (Top to Bottom)
                                 const zOffset = isDeployed ? i * -50 : 0;
 
                                 return (
@@ -118,7 +115,7 @@ export default function NarrativeOS() {
                                             // When deployed: offset minus centering correction.
                                             // When CLOSED: perfectly centered (0).
                                             x: isDeployed ? xOffset - (2 * 140) : 0,
-                                            y: isDeployed ? yOffset - (2 * -25) : 0,
+                                            y: isDeployed ? yOffset - (2 * 25) : 0,
                                             z: isDeployed ? zOffset : 0, // Stacked at 0 depth
                                             scale: isDeployed ? 1 : 0.95,
                                             // Isometric "Standing" Angles when deployed, flat/neat when closed
