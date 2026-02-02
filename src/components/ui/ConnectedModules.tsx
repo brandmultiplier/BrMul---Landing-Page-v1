@@ -14,26 +14,26 @@ import {
     Globe
 } from "lucide-react";
 
-// Module Data Configuration - EXPANDED SPREAD
+// Module Data Configuration - FLATTENED VERTICALLY for better sandwich fit
 const modules = [
     // CENTRAL NODE (The Core / Narrative OS)
     { id: "core", icon: Target, label: "Narrative OS", x: 0, y: 0, isCenter: true },
 
     // PERIPHERAL NODES (Departments)
-    // Coords are relative to center - INCREASED SPREAD for visual impact
-    { id: "sales", icon: Briefcase, label: "Sales", x: -240, y: -100, delay: 0.2 },
-    { id: "marketing", icon: Megaphone, label: "Marketing", x: 240, y: -100, delay: 0.4 },
-    { id: "product", icon: Layout, label: "Product", x: -160, y: 160, delay: 0.3 },
-    { id: "recruitment", icon: Users, label: "Recruiting", x: 160, y: 160, delay: 0.5 },
-    { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -200, delay: 0.6 },
+    // Flattened Y coords to reduce overall height overlap
+    // Sales/Marketing moved up slightly, Strategy pulled down, Bottom nodes pulled up
+    { id: "sales", icon: Briefcase, label: "Sales", x: -240, y: -50, delay: 0.2 },
+    { id: "marketing", icon: Megaphone, label: "Marketing", x: 240, y: -50, delay: 0.4 },
+    { id: "product", icon: Layout, label: "Product", x: -160, y: 100, delay: 0.3 },
+    { id: "recruitment", icon: Users, label: "Recruiting", x: 160, y: 100, delay: 0.5 },
+    { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -140, delay: 0.6 },
 ];
 
 export default function ConnectedModules() {
     return (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
-            {/* Main Container for the visualization - SCALED UP & BRIGHTER */}
-            {/* Removed opacity-60 to make it pop. Increased scales. */}
-            <div className="relative w-[800px] h-[600px] scale-[0.8] sm:scale-90 md:scale-100 lg:scale-110 xl:scale-125 opacity-100">
+            {/* Main Container for the visualization - COMPACTED SCALE */}
+            <div className="relative w-[800px] h-[600px] scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 opacity-100">
 
                 {/* Connection Lines Layer (Behind nodes) */}
                 <svg className="absolute inset-0 w-full h-full visible">
