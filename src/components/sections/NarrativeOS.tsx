@@ -92,24 +92,24 @@ export default function NarrativeOS() {
 
                                 // Fan Calculation
                                 // COMPACT / SMALLER CARDS for better responsive fit
-                                // Cards are now SMALLER (260px wide).
-                                const xSpread = 210; // WIDE spread for readability (Text visible)
-                                const ySpread = 100; // Strong WATERFALL vertical drop
+                                // Cards are now SMALLER (220px wide) as requested to avoid text overlap.
+                                const xSpread = 110;
+                                const ySpread = 30;  // Standard isometric drop
 
                                 // Center alignment constant: shifting everything so the "Group" is visually centered
-                                // Wide spread requires larger negative offset
-                                const layoutCenterOffset = -420;
-                                const layoutTopOffset = -120; // Start high
+                                // Width approx 500-600. Center ~-220
+                                const layoutCenterOffset = -220;
+                                const layoutTopOffset = -40;
 
                                 const xOffset = i * xSpread;
                                 const yOffset = i * ySpread;
-                                const zOffset = isDeployed ? i * -60 : 0; // Moderate Z-depth for readability
+                                const zOffset = isDeployed ? i * -50 : 0;
 
                                 return (
                                     <motion.div
                                         key={i}
-                                        // Reduced dimensions: w-[260px] h-[160px]
-                                        className={`absolute w-[260px] h-[160px] rounded-lg border flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)]
+                                        // Reduced dimensions to prevent overlap: w-[220px] h-[135px]
+                                        className={`absolute w-[220px] h-[135px] rounded-lg border flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)]
                                             ${isDeployed
                                                 ? "bg-[#0A0A0A] border-white/20 shadow-xl"
                                                 : "bg-[#0A0A0A] border-white/10 shadow-lg"
@@ -127,7 +127,7 @@ export default function NarrativeOS() {
                                             z: isDeployed ? zOffset : 0,
                                             scale: isDeployed ? 1 : 0.95,
                                             // Isometric "Standing" Angles when deployed, flat/neat when closed
-                                            rotateY: isDeployed ? -15 : 0,
+                                            rotateY: isDeployed ? -25 : 0,
                                             rotateX: isDeployed ? 10 : 0,
                                             rotateZ: isDeployed ? 5 : 0,
                                             opacity: 1,
