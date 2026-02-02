@@ -65,8 +65,8 @@ export default function NarrativeOS() {
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-                    {/* Left Column: Scrollable List */}
-                    <div className="relative z-10 space-y-24 lg:space-y-[40vh] pb-[20vh]">
+                    {/* Left Column: Scrollable List - Compact Spacing */}
+                    <div className="relative z-10 space-y-12 lg:space-y-24 pb-24">
                         {deliverables.map((item, i) => (
                             <NarrativeItem
                                 key={i}
@@ -78,7 +78,7 @@ export default function NarrativeOS() {
                     </div>
 
                     {/* Right Column: Sticky Card Stack */}
-                    <div className="hidden lg:block sticky top-32 h-[600px] perspective-[2000px]">
+                    <div className="hidden lg:block sticky top-32 h-[500px] perspective-[2000px]">
                         {/* Minimal Glow */}
                         <div className="absolute inset-0 bg-white/5 blur-[120px] rounded-full pointer-events-none opacity-20" />
 
@@ -121,7 +121,7 @@ export default function NarrativeOS() {
                                             y: yOffset,
                                             z: zOffset,
                                             scale: isActive ? 1.05 : 0.95, // Slight scaling
-                                            rotateY: -20, // Constant isometric angle for all cards? Or rotate them? 
+                                            rotateY: -20, // Constant isometric angle for all cards? Or rotate them?
                                             // The reference shows them all parallel facing the same way.
                                             rotateX: 10,
                                             opacity: isDeployed ? 1 : 0,
@@ -166,7 +166,8 @@ export default function NarrativeOS() {
 
 function NarrativeItem({ item, index, setActiveIndex }: { item: any, index: number, setActiveIndex: (i: number) => void }) {
     const ref = useRef(null);
-    const isInView = useInView(ref, { margin: "-50% 0px -50% 0px" });
+    // Tighter margin to trigger "active" state more precisely in a compact list
+    const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
 
     useEffect(() => {
         if (isInView) {
@@ -175,7 +176,7 @@ function NarrativeItem({ item, index, setActiveIndex }: { item: any, index: numb
     }, [isInView, index, setActiveIndex]);
 
     return (
-        <div ref={ref} className={`min-h-[30vh] flex items-center transition-opacity duration-500 ${isInView ? "opacity-100" : "opacity-30"}`}>
+        <div ref={ref} className={`min-h-[150px] flex items-center transition-opacity duration-500 ${isInView ? "opacity-100" : "opacity-30"}`}>
             <div className="flex gap-6 lg:gap-8 items-start max-w-md">
                 <div className={`mt-1 text-2xl font-mono text-white/20`}>
                     0{index + 1}
