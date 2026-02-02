@@ -14,26 +14,26 @@ import {
     Globe
 } from "lucide-react";
 
-// Module Data Configuration
+// Module Data Configuration - EXPANDED SPREAD
 const modules = [
     // CENTRAL NODE (The Core / Narrative OS)
     { id: "core", icon: Target, label: "Narrative OS", x: 0, y: 0, isCenter: true },
 
     // PERIPHERAL NODES (Departments)
-    // Coords are relative to center (percentage or fixed pixels)
-    // Using a grid-like spread
-    { id: "sales", icon: Briefcase, label: "Sales", x: -180, y: -80, delay: 0.2 },
-    { id: "marketing", icon: Megaphone, label: "Marketing", x: 180, y: -80, delay: 0.4 },
-    { id: "product", icon: Layout, label: "Product", x: -120, y: 120, delay: 0.3 },
-    { id: "recruitment", icon: Users, label: "Recruiting", x: 120, y: 120, delay: 0.5 },
-    { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -160, delay: 0.6 },
+    // Coords are relative to center - INCREASED SPREAD for visual impact
+    { id: "sales", icon: Briefcase, label: "Sales", x: -240, y: -100, delay: 0.2 },
+    { id: "marketing", icon: Megaphone, label: "Marketing", x: 240, y: -100, delay: 0.4 },
+    { id: "product", icon: Layout, label: "Product", x: -160, y: 160, delay: 0.3 },
+    { id: "recruitment", icon: Users, label: "Recruiting", x: 160, y: 160, delay: 0.5 },
+    { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -200, delay: 0.6 },
 ];
 
 export default function ConnectedModules() {
     return (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-            {/* Main Container for the visualization - scaled for responsiveness */}
-            <div className="relative w-[800px] h-[600px] scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 opacity-60">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
+            {/* Main Container for the visualization - SCALED UP & BRIGHTER */}
+            {/* Removed opacity-60 to make it pop. Increased scales. */}
+            <div className="relative w-[800px] h-[600px] scale-[0.8] sm:scale-90 md:scale-100 lg:scale-110 xl:scale-125 opacity-100">
 
                 {/* Connection Lines Layer (Behind nodes) */}
                 <svg className="absolute inset-0 w-full h-full visible">
@@ -85,17 +85,17 @@ function ModuleNode({ module }: { module: any }) {
             <div className={`
                 relative flex items-center justify-center rounded-xl backdrop-blur-md border transition-colors duration-500
                 ${isCenter
-                    ? "w-20 h-20 bg-accent-purple/20 border-accent-purple/50 shadow-[0_0_30px_rgba(168,85,247,0.3)]"
-                    : "w-16 h-16 bg-white/5 border-white/10 shadow-lg"
+                    ? "w-24 h-24 bg-accent-purple/30 border-accent-purple/60 shadow-[0_0_50px_rgba(168,85,247,0.5)] z-20"
+                    : "w-20 h-20 bg-white/10 border-white/20 shadow-xl hover:bg-white/15 z-10"
                 }
             `}>
                 <module.icon className={`
-                    ${isCenter ? "w-8 h-8 text-white" : "w-6 h-6 text-white/70"}
+                    ${isCenter ? "w-10 h-10 text-white" : "w-8 h-8 text-white/90"}
                 `} />
 
                 {/* Active Pulse (Center only) */}
                 {isCenter && (
-                    <span className="absolute inset-0 rounded-xl border-2 border-accent-purple/30 animate-ping opacity-50" />
+                    <span className="absolute inset-0 rounded-xl border-2 border-accent-purple/40 animate-ping opacity-60" />
                 )}
             </div>
 
@@ -104,8 +104,11 @@ function ModuleNode({ module }: { module: any }) {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: (module.delay || 0) + 0.3 }}
-                className={`mt-3 text-[10px] items-center justify-center flex font-medium tracking-wider uppercase bg-black/40 px-2 py-1 rounded-full backdrop-blur-sm border border-white/5
-                    ${isCenter ? "text-accent-purple" : "text-white/40"}
+                className={`mt-4 text-[10px] md:text-xs items-center justify-center flex font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full backdrop-blur-md border shadow-lg
+                    ${isCenter
+                        ? "text-white bg-accent-purple/20 border-accent-purple/40"
+                        : "text-white/70 bg-black/40 border-white/10"
+                    }
                 `}
             >
                 {module.label}
