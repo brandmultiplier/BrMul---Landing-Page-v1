@@ -46,7 +46,7 @@ export default function NarrativeOS() {
     ];
 
     return (
-        <section ref={containerRef} className="relative min-h-screen w-full bg-[#050505] flex items-center py-48 overflow-hidden">
+        <section ref={containerRef} className="relative min-h-screen w-full bg-bg-page flex items-center py-48 overflow-hidden">
 
             {/* Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.03),transparent_70%)]" />
