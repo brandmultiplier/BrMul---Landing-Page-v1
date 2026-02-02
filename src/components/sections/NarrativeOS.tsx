@@ -94,19 +94,20 @@ export default function NarrativeOS() {
                                 const isDeployed = isInView;
 
                                 // Fan Calculation
-                                // WIDER SPREAD + DIAGONAL RISE (Verticality)
-                                // Cards are 360px wide. 
-                                const xOffset = isDeployed ? i * 200 : 0;
-                                const yOffset = isDeployed ? i * -40 : 0; // Rise up vertically
+                                // COMPACT / SMALLER CARDS for better responsive fit
+                                // Cards are now SMALLER (260px wide).
+                                const xOffset = isDeployed ? i * 140 : 0; // Tightened spread
+                                const yOffset = isDeployed ? i * -25 : 0; // Reduced vertical rise
                                 const zOffset = isDeployed ? i * -50 : 0;
 
                                 return (
                                     <motion.div
                                         key={i}
-                                        className={`absolute w-[360px] h-[220px] rounded-xl border flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)]
+                                        // Reduced dimensions: w-[260px] h-[160px]
+                                        className={`absolute w-[260px] h-[160px] rounded-lg border flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)]
                                             ${isDeployed
-                                                ? "bg-[#0A0A0A] border-white/20 shadow-2xl"
-                                                : "bg-[#0A0A0A] border-white/10 shadow-xl"
+                                                ? "bg-[#0A0A0A] border-white/20 shadow-xl"
+                                                : "bg-[#0A0A0A] border-white/10 shadow-lg"
                                             }
                                         `}
                                         style={{
@@ -114,8 +115,8 @@ export default function NarrativeOS() {
                                             zIndex: isDeployed ? 10 + i : 0
                                         }}
                                         animate={{
-                                            x: xOffset - (2 * 200), // Force center around the middle card
-                                            y: yOffset - (2 * -40), // Center vertically too
+                                            x: xOffset - (2 * 140), // Force center around the middle card
+                                            y: yOffset - (2 * -25), // Center vertically too
                                             z: zOffset,
                                             scale: isDeployed ? 1 : 0.95,
                                             // Isometric "Standing" Angles
@@ -132,18 +133,20 @@ export default function NarrativeOS() {
                                         }}
                                     >
                                         {/* Clean gradient for depth */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-20 rounded-xl pointer-events-none" />
+                                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-20 rounded-lg pointer-events-none" />
 
-                                        <div className="text-center transform relative z-10 px-6">
-                                            <div className="mb-4 flex justify-center">
-                                                <div className={`p-3 rounded-full bg-white/5 border border-white/10 ${isDeployed ? "text-white" : "text-white/40"}`}>
-                                                    <item.icon className="w-6 h-6" />
+                                        <div className="text-center transform relative z-10 px-4">
+                                            <div className="mb-3 flex justify-center">
+                                                <div className={`p-2 rounded-full bg-white/5 border border-white/10 ${isDeployed ? "text-white" : "text-white/40"}`}>
+                                                    {/* Smaller Icon */}
+                                                    <item.icon className="w-4 h-4" />
                                                 </div>
                                             </div>
-                                            <div className="font-medium text-lg leading-tight tracking-wide text-white mb-2">
+                                            {/* Smaller Text */}
+                                            <div className="font-medium text-sm leading-tight tracking-wide text-white mb-2">
                                                 {item.title}
                                             </div>
-                                            <div className="text-[10px] font-mono uppercase tracking-widest text-white/30">
+                                            <div className="text-[9px] font-mono uppercase tracking-widest text-white/30">
                                                 Module 0{i + 1}
                                             </div>
                                         </div>
