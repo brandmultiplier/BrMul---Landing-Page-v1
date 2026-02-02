@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Button from "../ui/Button";
 import HeroZoomTitle from "../ui/HeroZoomTitle";
-import ConnectedModules from "../ui/ConnectedModules";
 
 export default function Hero() {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -29,7 +28,7 @@ export default function Hero() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-accent-purple/5 rounded-full blur-[100px]" />
             </motion.div>
 
-            <div className="container-width relative z-10 flex flex-col items-center h-full py-12">
+            <div className="container-width relative z-10 flex flex-col items-center justify-center h-full py-12">
 
                 {/* 1. HERO TITLE */}
                 <motion.div
@@ -46,18 +45,7 @@ export default function Hero() {
                     </div>
                 </motion.div>
 
-                {/* 2. GRAPH (Connected Modules) - SANDWICHED IN MIDDLE */}
-                {/* Fixed height container, POSITIVE margins to ensure separation */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-                    className="relative w-full h-[300px] md:h-[380px] flex items-center justify-center my-6 md:my-8 z-10 pointer-events-none"
-                >
-                    <ConnectedModules />
-                </motion.div>
-
-                {/* 3. SUBHEADLINE & CTAS */}
+                {/* 2. SUBHEADLINE & CTAS */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
