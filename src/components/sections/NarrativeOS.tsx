@@ -190,23 +190,13 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
 
     return (
         <div
-            className={`group relative p-4 rounded-xl transition-all duration-500 ease-out cursor-default
+            className={`group relative p-4 rounded-xl transition-all duration-500 ease-out cursor-default border border-transparent
                 ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
-                hover:bg-[#111] hover:shadow-2xl
+                hover:bg-white/10 hover:backdrop-blur-md hover:border-white/10 hover:shadow-2xl
             `}
             style={{ transitionDelay: `${index * 100}ms` }}
         >
-            {/* Left Border Glow on Hover */}
-            <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-white/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-l-xl" />
-
             <div className="flex items-center">
-
-                {/* Left Icon (Slide in) */}
-                <div className="w-0 overflow-hidden opacity-0 group-hover:w-auto group-hover:opacity-100 group-hover:mr-4 transition-all duration-500 ease-out">
-                    <div className="p-2 rounded-lg bg-white/10 border border-white/5 text-white">
-                        <item.icon className="w-5 h-5" />
-                    </div>
-                </div>
 
                 {/* Text Content */}
                 <div className="flex-1 min-w-0">
@@ -218,14 +208,7 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
                     </p>
                 </div>
 
-                {/* Right Checkmark (Slide in) */}
-                <div className="w-0 overflow-hidden opacity-0 group-hover:w-auto group-hover:opacity-100 group-hover:ml-4 transition-all duration-500 ease-out">
-                    <div className="text-white border border-white/20 rounded-full p-1">
-                        <CheckCircle className="w-4 h-4" />
-                    </div>
-                </div>
             </div>
         </div>
     );
 }
-
