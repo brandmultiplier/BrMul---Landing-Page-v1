@@ -228,5 +228,4 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
         </div>
     );
 }
-    );
-}
+
