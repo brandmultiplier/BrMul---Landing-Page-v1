@@ -93,17 +93,17 @@ export default function NarrativeOS() {
                                 // Fan Calculation
                                 // COMPACT / SMALLER CARDS for better responsive fit
                                 // Cards are now SMALLER (260px wide).
-                                const xSpread = 140;
-                                const ySpread = 40; // STEEPER vertical drop
+                                const xSpread = 120; // Tightened X to emphasize vertical/depth
+                                const ySpread = 60;  // Strong WATERFALL vertical drop
 
                                 // Center alignment constant: shifting everything so the "Group" is visually centered
-                                // Shifted RIGHT to avoid text overlap (was -280)
-                                const layoutCenterOffset = -180;
+                                // Re-centered as requested (was -180, now -260)
+                                const layoutCenterOffset = -260;
                                 const layoutTopOffset = -50; // To center the vertical cascade roughly
 
                                 const xOffset = i * xSpread;
                                 const yOffset = i * ySpread;
-                                const zOffset = isDeployed ? i * -50 : 0;
+                                const zOffset = isDeployed ? i * -100 : 0; // Deeper Z-axis stack for 3D waterfall effect
 
                                 return (
                                     <motion.div
@@ -127,8 +127,8 @@ export default function NarrativeOS() {
                                             z: isDeployed ? zOffset : 0, // Stacked at 0 depth
                                             scale: isDeployed ? 1 : 0.95,
                                             // Isometric "Standing" Angles when deployed, flat/neat when closed
-                                            // Rotated slightly less negative (towards right relative to -25)
-                                            rotateY: isDeployed ? -15 : 0,
+                                            // Reverted closer to original rotation for "central" feel, but slightly adjusted
+                                            rotateY: isDeployed ? -20 : 0,
                                             rotateX: isDeployed ? 10 : 0,
                                             rotateZ: isDeployed ? 5 : 0,
                                             opacity: 1,
