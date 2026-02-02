@@ -8,217 +8,153 @@ import {
     Layout,
     Users,
     LineChart,
-    BarChart3,
-    PieChart,
-    Layers,
-    Globe
 } from "lucide-react";
 
-// Module Data Configuration - TIGHTER SYMMETRIC ELLIPSE
-// Compacted to ensure "connected" feel and prevent disconnects
+// =============================================================================
+// COMPLETELY REWRITTEN - Simple & Reliable Approach
+// =============================================================================
+// Strategy: Lines go center-to-center but render BEHIND opaque nodes.
+// This creates the visual effect of "connected" because lines disappear
+// under the solid card backgrounds. No complex clipping math needed.
+// =============================================================================
+
+// Node positions relative to a 600x400 virtual grid (center at 300, 200)
+const CENTER_X = 300;
+const CENTER_Y = 200;
+
 const modules = [
-    // CENTRAL NODE (The Core / Narrative OS)
-    { id: "core", icon: Target, label: "Narrative OS", x: 0, y: 0, isCenter: true },
+    // Central Node
+    { id: "core", icon: Target, label: "Narrative OS", x: CENTER_X, y: CENTER_Y, isCenter: true },
 
-    // PERIPHERAL NODES
-    // 1. Top Center
-    { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -130, delay: 0.2 },
-
-    // 2. Top Right (Tighter)
-    { id: "marketing", icon: Megaphone, label: "Marketing", x: 240, y: -50, delay: 0.3 },
-
-    // 3. Bottom Right (Tighter)
-    { id: "recruitment", icon: Users, label: "Recruiting", x: 160, y: 100, delay: 0.4 },
-
-    // 4. Bottom Left (Reflected)
-    { id: "product", icon: Layout, label: "Product", x: -160, y: 100, delay: 0.5 },
-
-    // 5. Top Left (Reflected)
-    { id: "sales", icon: Briefcase, label: "Sales", x: -240, y: -50, delay: 0.6 },
+    // Ring of 5 around center - Pentagon layout for symmetry
+    { id: "strategy", icon: LineChart, label: "Strategy", x: CENTER_X, y: CENTER_Y - 120, delay: 0.1 },      // Top
+    { id: "marketing", icon: Megaphone, label: "Marketing", x: CENTER_X + 140, y: CENTER_Y - 40, delay: 0.2 },  // Top-Right
+    { id: "recruitment", icon: Users, label: "Recruiting", x: CENTER_X + 90, y: CENTER_Y + 100, delay: 0.3 },   // Bottom-Right
+    { id: "product", icon: Layout, label: "Product", x: CENTER_X - 90, y: CENTER_Y + 100, delay: 0.4 },         // Bottom-Left
+    { id: "sales", icon: Briefcase, label: "Sales", x: CENTER_X - 140, y: CENTER_Y - 40, delay: 0.5 },          // Top-Left
 ];
 
 export default function ConnectedModules() {
-    return (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
-            {/* Main Container for the visualization - COMPACTED SCALE */}
-            <div className="relative w-[800px] h-[600px] scale-[0.55] sm:scale-70 md:scale-85 lg:scale-95 opacity-100">
+    const peripheralNodes = modules.filter(m => !m.isCenter);
 
-                {/* Connection Lines Layer (Behind nodes) */}
-                <svg className="absolute inset-0 w-full h-full visible">
-                    {modules.filter(m => !m.isCenter).map((mod, i) => (
-                        <ConnectionLine
-                            key={`line-${mod.id}`}
-                            startX={400} // Center of 800px
-                            startY={300} // Center of 600px
-                            endX={400 + mod.x}
-                            endY={300 + mod.y}
-                            color="#A855F7" // Purple accent
-                            delay={mod.delay}
-                        />
+    return (
+        <div className="relative w-full h-full flex items-center justify-center">
+            {/* Fixed size container for consistent scaling */}
+            <div
+                className="relative"
+                style={{ width: 600, height: 400, transform: 'scale(0.85)', transformOrigin: 'center center' }}
+            >
+                {/* === LAYER 1: Connection Lines (SVG) === */}
+                <svg
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    style={{ zIndex: 1 }}
+                    viewBox="0 0 600 400"
+                    preserveAspectRatio="xMidYMid meet"
+                >
+                    {peripheralNodes.map((node) => (
+                        <g key={`line-${node.id}`}>
+                            {/* Static Line */}
+                            <line
+                                x1={CENTER_X}
+                                y1={CENTER_Y}
+                                x2={node.x}
+                                y2={node.y}
+                                stroke="rgba(168, 85, 247, 0.3)"
+                                strokeWidth="2"
+                            />
+                            {/* Animated Pulse Dot traveling along line */}
+                            <motion.circle
+                                r="4"
+                                fill="#A855F7"
+                                initial={{
+                                    cx: CENTER_X,
+                                    cy: CENTER_Y,
+                                    opacity: 0.8
+                                }}
+                                animate={{
+                                    cx: [CENTER_X, node.x, CENTER_X],
+                                    cy: [CENTER_Y, node.y, CENTER_Y],
+                                    opacity: [0.8, 0.4, 0.8]
+                                }}
+                                transition={{
+                                    duration: 3,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                    delay: node.delay || 0
+                                }}
+                            />
+                        </g>
                     ))}
                 </svg>
 
-                {/* Nodes Layer */}
+                {/* === LAYER 2: Nodes (Higher z-index, covers lines) === */}
                 {modules.map((mod) => (
                     <ModuleNode key={mod.id} module={mod} />
                 ))}
-
             </div>
         </div>
     );
 }
 
-// Sub-component for a single Node
-function ModuleNode({ module }: { module: any }) {
+function ModuleNode({ module }: { module: typeof modules[0] }) {
     const isCenter = module.isCenter;
+    const size = isCenter ? 80 : 64; // px
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0 }}
+            initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
                 type: "spring",
-                stiffness: 260,
-                damping: 20,
-                delay: isCenter ? 0 : module.delay
+                stiffness: 200,
+                damping: 15,
+                delay: module.delay || 0
             }}
-            className={`absolute flex flex-col items-center justify-center`}
+            className="absolute flex flex-col items-center"
             style={{
-                left: `calc(50% + ${module.x}px)`,
-                top: `calc(50% + ${module.y}px)`,
-                transform: "translate(-50%, -50%)" // Centering fix
+                left: module.x,
+                top: module.y,
+                transform: 'translate(-50%, -50%)',
+                zIndex: isCenter ? 20 : 10
             }}
         >
-            {/* Icon Card */}
-            <div className={`
-                relative flex items-center justify-center rounded-xl backdrop-blur-md border transition-colors duration-500
-                ${isCenter
-                    ? "w-24 h-24 bg-accent-purple/30 border-accent-purple/60 shadow-[0_0_50px_rgba(168,85,247,0.5)] z-20"
-                    : "w-20 h-20 bg-white/10 border-white/20 shadow-xl hover:bg-white/15 z-10"
-                }
-            `}>
-                <module.icon className={`
-                    ${isCenter ? "w-10 h-10 text-white" : "w-8 h-8 text-white/90"}
-                `} />
+            {/* Card */}
+            <div
+                className={`
+                    flex items-center justify-center rounded-xl border backdrop-blur-sm
+                    ${isCenter
+                        ? "bg-[#0D0D0D] border-accent-purple/60 shadow-[0_0_30px_rgba(168,85,247,0.4)]"
+                        : "bg-[#0D0D0D] border-white/20 shadow-lg"
+                    }
+                `}
+                style={{ width: size, height: size }}
+            >
+                <module.icon
+                    className={isCenter ? "w-8 h-8 text-white" : "w-6 h-6 text-white/80"}
+                />
 
-                {/* Active Pulse (Center only) */}
+                {/* Center Pulse Ring */}
                 {isCenter && (
-                    <span className="absolute inset-0 rounded-xl border-2 border-accent-purple/40 animate-ping opacity-60" />
+                    <motion.span
+                        className="absolute inset-0 rounded-xl border-2 border-accent-purple/50"
+                        animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0.2, 0.6] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    />
                 )}
             </div>
 
-            {/* Label */}
-            <motion.span
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: (module.delay || 0) + 0.3 }}
-                className={`mt-4 text-[10px] md:text-xs items-center justify-center flex font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full backdrop-blur-md border shadow-lg
+            {/* Label Pill */}
+            <span
+                className={`
+                    mt-2 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider rounded-full border
                     ${isCenter
-                        ? "text-white bg-accent-purple/20 border-accent-purple/40"
-                        : "text-white/70 bg-black/40 border-white/10"
+                        ? "bg-accent-purple/20 border-accent-purple/40 text-white"
+                        : "bg-black/60 border-white/10 text-white/70"
                     }
                 `}
             >
                 {module.label}
-            </motion.span>
+            </span>
         </motion.div>
-    );
-}
-
-// Helper: Calculate intersection point on a separate box for precise clipping
-function getBoxIntersection(x1: number, y1: number, x2: number, y2: number, w: number, h: number) {
-    const dx = x2 - x1;
-    const dy = y2 - y1;
-
-    if (dx === 0 && dy === 0) return { x: x1, y: y1 };
-
-    // Calculate half widths
-    const hw = w / 2;
-    const hh = h / 2;
-
-    // Slopes
-    const slope = dy / dx;
-
-    // Check intersection with vertical edges (left/right)
-    if (Math.abs(dx) > 0) {
-        const xEdge = dx > 0 ? hw : -hw;
-        const yInt = slope * xEdge;
-        if (Math.abs(yInt) <= hh) {
-            return { x: x1 + xEdge, y: y1 + yInt };
-        }
-    }
-
-    // Check intersection with horizontal edges (top/bottom)
-    if (Math.abs(dy) > 0) {
-        const yEdge = dy > 0 ? hh : -hh;
-        const xInt = yEdge / slope;
-        // Float precision fix for exact corner hits
-        if (Math.abs(xInt) <= hw + 0.1) {
-            return { x: x1 + xInt, y: y1 + yEdge };
-        }
-    }
-
-    // Fallback (shouldn't happen for center-origin rays)
-    return { x: x1, y: y1 };
-}
-
-// Sub-component for Animated Line with "Box Clipping"
-function ConnectionLine({ startX, startY, endX, endY, color, delay }: any) {
-    // Exact Visual Dimensions (w-24 = 96px, w-20 = 80px)
-    const centerSize = 96;
-    const outerSize = 80;
-
-    // Project vector from Center to Outer
-    const dx = endX - startX;
-    const dy = endY - startY;
-
-    // 1. Find start point (Intersection with Center Box)
-    const relativeStart = getBoxIntersection(0, 0, dx, dy, centerSize, centerSize);
-    const actualStartX = startX + relativeStart.x;
-    const actualStartY = startY + relativeStart.y;
-
-    // 2. Find end point (Intersection with Peripheral Box)
-    // Vector from Target back to Center is (-dx, -dy)
-    const relativeEnd = getBoxIntersection(0, 0, -dx, -dy, outerSize, outerSize);
-    const actualEndX = endX + relativeEnd.x;
-    const actualEndY = endY + relativeEnd.y;
-
-    // Straight Line for taut connection
-    const pathD = `M ${actualStartX} ${actualStartY} L ${actualEndX} ${actualEndY}`;
-
-    return (
-        <>
-            {/* Connection Terminals (Dots at exact overlap) */}
-            <circle cx={actualStartX} cy={actualStartY} r="3" fill="#A855F7" opacity="0.8" />
-            <circle cx={actualEndX} cy={actualEndY} r="3" fill="white" opacity="0.6" />
-
-            {/* Background Line */}
-            <path
-                d={pathD}
-                stroke="rgba(255,255,255,0.2)" // Increased brightness
-                strokeWidth="1.5"
-                fill="none"
-            />
-
-            {/* Animated "Beam" Packet */}
-            <motion.path
-                d={pathD}
-                stroke={color}
-                strokeWidth="2.5"
-                fill="none"
-                strokeDasharray="4 80" // Short sharp pulses
-                strokeLinecap="round"
-                initial={{ strokeDashoffset: 84 }}
-                animate={{ strokeDashoffset: 0 }}
-                transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    ease: "linear",
-                    delay: delay
-                }}
-                style={{ opacity: 1 }} // Maximum brightness
-            />
-        </>
     );
 }
