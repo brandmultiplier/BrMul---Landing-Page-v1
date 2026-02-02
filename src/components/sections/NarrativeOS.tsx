@@ -198,7 +198,7 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
                 <h3 className="text-lg font-medium mb-2 text-white">
                     {item.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-text-secondary/80">
+                <p className="text-sm leading-relaxed text-white/40">
                     {item.desc}
                 </p>
             </div>
