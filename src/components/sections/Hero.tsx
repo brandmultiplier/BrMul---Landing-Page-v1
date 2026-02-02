@@ -47,12 +47,12 @@ export default function Hero() {
                 </motion.div>
 
                 {/* 2. GRAPH (Connected Modules) - SANDWICHED IN MIDDLE */}
-                {/* Fixed height container, no negative margins to prevent overlap */}
+                {/* Fixed height container, POSITIVE margins to ensure separation */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-                    className="relative w-full h-[300px] md:h-[380px] flex items-center justify-center my-4 z-10 pointer-events-none"
+                    className="relative w-full h-[300px] md:h-[380px] flex items-center justify-center my-6 md:my-8 z-10 pointer-events-none"
                 >
                     <ConnectedModules />
                 </motion.div>

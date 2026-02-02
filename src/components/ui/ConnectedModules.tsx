@@ -14,26 +14,25 @@ import {
     Globe
 } from "lucide-react";
 
-// Module Data Configuration - FLATTENED VERTICALLY for better sandwich fit
+// Module Data Configuration - FLATTENED & COMPACTED
 const modules = [
     // CENTRAL NODE (The Core / Narrative OS)
     { id: "core", icon: Target, label: "Narrative OS", x: 0, y: 0, isCenter: true },
 
     // PERIPHERAL NODES (Departments)
-    // Flattened Y coords to reduce overall height overlap
-    // Sales/Marketing moved up slightly, Strategy pulled down, Bottom nodes pulled up
-    { id: "sales", icon: Briefcase, label: "Sales", x: -240, y: -50, delay: 0.2 },
-    { id: "marketing", icon: Megaphone, label: "Marketing", x: 240, y: -50, delay: 0.4 },
-    { id: "product", icon: Layout, label: "Product", x: -160, y: 100, delay: 0.3 },
-    { id: "recruitment", icon: Users, label: "Recruiting", x: 160, y: 100, delay: 0.5 },
-    { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -140, delay: 0.6 },
+    // Further compacted to prevent text overlap
+    { id: "sales", icon: Briefcase, label: "Sales", x: -240, y: -40, delay: 0.2 },
+    { id: "marketing", icon: Megaphone, label: "Marketing", x: 240, y: -40, delay: 0.4 },
+    { id: "product", icon: Layout, label: "Product", x: -160, y: 90, delay: 0.3 },
+    { id: "recruitment", icon: Users, label: "Recruiting", x: 160, y: 90, delay: 0.5 },
+    { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -130, delay: 0.6 },
 ];
 
 export default function ConnectedModules() {
     return (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
             {/* Main Container for the visualization - COMPACTED SCALE */}
-            <div className="relative w-[800px] h-[600px] scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 opacity-100">
+            <div className="relative w-[800px] h-[600px] scale-[0.55] sm:scale-70 md:scale-85 lg:scale-95 opacity-100">
 
                 {/* Connection Lines Layer (Behind nodes) */}
                 <svg className="absolute inset-0 w-full h-full visible">
