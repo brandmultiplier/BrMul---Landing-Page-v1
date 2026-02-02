@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Button from "../ui/Button";
 import HeroZoomTitle from "../ui/HeroZoomTitle";
+import ConnectedModules from "../ui/ConnectedModules";
 
 export default function Hero() {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -19,12 +20,16 @@ export default function Hero() {
 
     return (
         <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20">
-            {/* Background Elements */}
+            {/* Background Elements - Now with Connected Modules Animation */}
             <motion.div
                 style={{ y: y1, opacity }}
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0 pointer-events-none z-0"
             >
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-accent-purple/10 rounded-full blur-[120px]" />
+                {/* Fallback blob for depth/atmosphere */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-accent-purple/5 rounded-full blur-[100px]" />
+
+                {/* The Module Visualization */}
+                <ConnectedModules />
             </motion.div>
 
             <div className="container-width relative z-10 flex flex-col justify-between h-full py-12">
