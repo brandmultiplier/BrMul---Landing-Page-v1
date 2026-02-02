@@ -93,8 +93,17 @@ export default function NarrativeOS() {
                                 // Fan Calculation
                                 // COMPACT / SMALLER CARDS for better responsive fit
                                 // Cards are now SMALLER (260px wide).
-                                const xOffset = isDeployed ? i * 140 : 0;
-                                const yOffset = isDeployed ? i * 25 : 0; // DESCENDING (Top to Bottom)
+                                const xSpread = 140;
+                                const ySpread = 25;
+
+                                // Center alignment constant: shifting everything so the "Group" is visually centered
+                                // Total width = 4 * 140 = 560. Half = 280.
+                                // We offset everything by -280 so the CENTER of the fan is at (0,0).
+                                const layoutCenterOffset = -280;
+                                const layoutTopOffset = -50; // To center the vertical cascade roughly
+
+                                const xOffset = i * xSpread;
+                                const yOffset = i * ySpread;
                                 const zOffset = isDeployed ? i * -50 : 0;
 
                                 return (
@@ -112,10 +121,12 @@ export default function NarrativeOS() {
                                             zIndex: isDeployed ? 10 + i : 0
                                         }}
                                         animate={{
-                                            // When deployed: offset minus centering correction.
-                                            // When CLOSED: perfectly centered (0).
-                                            x: isDeployed ? xOffset - (2 * 140) : 0,
-                                            y: isDeployed ? yOffset - (2 * 25) : 0,
+                                            // When CLOSED: All stack at the "start" position (Module 0's position),
+                                            // creating a "Left to Right" expansion effect.
+                                            // Or strictly centered? User said "from left to right".
+                                            // So stack should be at layoutCenterOffset (Leftmost point).
+                                            x: isDeployed ? (xOffset + layoutCenterOffset) : layoutCenterOffset,
+                                            y: isDeployed ? (yOffset + layoutTopOffset) : layoutTopOffset,
                                             z: isDeployed ? zOffset : 0, // Stacked at 0 depth
                                             scale: isDeployed ? 1 : 0.95,
                                             // Isometric "Standing" Angles when deployed, flat/neat when closed
@@ -126,7 +137,9 @@ export default function NarrativeOS() {
                                         }}
                                         transition={{
                                             // Slower, more elegant expansion
-                                            delay: isDeployed ? i * 0.15 : 0, // Slightly more stagger on open
+                                            // INVERTED DELAY: Last card (Module 05) moves FIRST. First card (Module 01) moves LAST.
+                                            // total items = 5. max index = 4.
+                                            delay: isDeployed ? (4 - i) * 0.15 : 0,
                                             duration: 1.2, // Explicit duration for slower movement
                                             type: "spring",
                                             stiffness: 30, // Much softer spring
