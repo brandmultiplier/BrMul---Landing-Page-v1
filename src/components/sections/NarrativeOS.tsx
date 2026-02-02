@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import ScrollFade from "@/components/ui/ScrollFade";
-import { FileText, Mic, Layout, Award, BarChart3 } from "lucide-react";
+import { FileText, Mic, Layout, Award, BarChart3, CheckCircle } from "lucide-react";
 
 import Button from "@/components/ui/Button";
 
@@ -190,18 +190,43 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
 
     return (
         <div
-            className={`min-h-[100px] flex items-start transition-all duration-700 delay-[${index * 100}ms]
+            className={`group relative p-4 rounded-xl transition-all duration-500 ease-out cursor-default
                 ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+                hover:bg-[#111] hover:shadow-2xl
             `}
+            style={{ transitionDelay: `${index * 100}ms` }}
         >
-            <div className="max-w-md">
-                <h3 className="text-xl font-medium mb-1 text-white">
-                    {item.title}
-                </h3>
-                <p className="text-base leading-relaxed text-gray-400">
-                    {item.desc}
-                </p>
+            {/* Left Border Glow on Hover */}
+            <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-white/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-l-xl" />
+
+            <div className="flex items-center">
+
+                {/* Left Icon (Slide in) */}
+                <div className="w-0 overflow-hidden opacity-0 group-hover:w-auto group-hover:opacity-100 group-hover:mr-4 transition-all duration-500 ease-out">
+                    <div className="p-2 rounded-lg bg-white/10 border border-white/5 text-white">
+                        <item.icon className="w-5 h-5" />
+                    </div>
+                </div>
+
+                {/* Text Content */}
+                <div className="flex-1 min-w-0">
+                    <h3 className="text-xl font-medium mb-1 text-white group-hover:text-white transition-colors">
+                        {item.title}
+                    </h3>
+                    <p className="text-base leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors">
+                        {item.desc}
+                    </p>
+                </div>
+
+                {/* Right Checkmark (Slide in) */}
+                <div className="w-0 overflow-hidden opacity-0 group-hover:w-auto group-hover:opacity-100 group-hover:ml-4 transition-all duration-500 ease-out">
+                    <div className="text-white border border-white/20 rounded-full p-1">
+                        <CheckCircle className="w-4 h-4" />
+                    </div>
+                </div>
             </div>
         </div>
+    );
+}
     );
 }
