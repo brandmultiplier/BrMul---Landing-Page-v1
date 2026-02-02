@@ -116,67 +116,76 @@ function ModuleNode({ module }: { module: any }) {
     );
 }
 
-// Sub-component for Animated Line
+// Sub-component for Animated Line with "Smart Clipping"
 function ConnectionLine({ startX, startY, endX, endY, color, delay }: any) {
-    // Calculate simpler path or bezier? Straight line is easiest for "Beam" effect
-    // But user wants "Stripe" style which is often bent. 
-    // Let's do a simple generic elbow: Center -> Horizontal/Vertical -> Target?
-    // Or just straight for now.
-    // Actually, Stripe uses rounded elbows. Let's try an elbow path.
-    // L-shape with radius.
+    // 1. Calculate geometry to clip lines at node edges
+    // Center Node Radius approx 45px (w-24 = 96px => 48px, leave cushion)
+    // Peripheral Node Radius approx 35px (w-20 = 80px => 40px)
+    const startRadius = 45;
+    const endRadius = 35;
 
-    // Simple L-shape: Move X then Move Y.
-    // Midpoint approach.
+    const dx = endX - startX;
+    const dy = endY - startY;
+    const angle = Math.atan2(dy, dx);
+    const dist = Math.sqrt(dx * dx + dy * dy);
 
-    const midX = startX; // First go vertical from center? Or horizontal?
-    // Let's go straight for simplicity and elegance first, or simple curve.
-    // A Quadratic Bezier curve is nice.
+    // Calculate actual start/end points on the circumference/box edge
+    // Simply moving along the vector for circular clipping
+    const actualStartX = startX + Math.cos(angle) * startRadius;
+    const actualStartY = startY + Math.sin(angle) * startRadius;
 
-    // Control point:
-    // If target is Top-Left, control point could be (startX, endY).
-    const cx = startX;
-    const cy = endY;
+    const actualEndX = endX - Math.cos(angle) * endRadius;
+    const actualEndY = endY - Math.sin(angle) * endRadius;
 
-    const pathD = `M ${startX} ${startY} Q ${cx} ${cy} ${endX} ${endY}`;
-    // Simple L turn: M startX startY L startX endY L endX endY (with radius)
-    // Let's stick to straight line but with "beam" particle for now—it's cleaner to implement quickly.
-    // Actually, standard straight line is boring.
-    // Let's do the "elbow" style: Horizontal then Vertical.
+    // Control point for the curve (Midpoint gravity)
+    // Using a simpler Quadratic curve for smoother "cable" look 
+    // or the "S" curve. Let's stick to the sigmoid-like C curve but adjusted coords.
+    const midX = (actualStartX + actualEndX) / 2;
+    const midY = (actualStartY + actualEndY) / 2;
 
-    const pathD_Elbow = `M ${startX} ${startY} L ${endX} ${startY} L ${endX} ${endY}`; // Horizontal first
-    // Or vertical first: `M ${startX} ${startY} L ${startX} ${endY} L ${endX} ${endY}` 
+    // Tweak control points to make it look like a tense cable
+    // C x1 y1 x2 y2 x y
+    // Use the S-shape: horizontal start, horizontal end? 
+    // Or just a direct line if they are radial?
+    // Let's try a direct line for "tight" connection, or slight curve.
+    // The previous C curve was: C startX midY endX midY endX endY
+    // Let's use a simple straight line for the "beam" feel if closely connected?
+    // No, curved is more "Stripe".
 
-    // Let's use a nice curved path:
-    const pathD_Curve = `M ${startX} ${startY} C ${startX} ${(startY + endY) / 2} ${endX} ${(startY + endY) / 2} ${endX} ${endY}`;
-
+    const pathD = `M ${actualStartX} ${actualStartY} C ${actualStartX} ${(actualStartY + actualEndY) / 2} ${actualEndX} ${(actualStartY + actualEndY) / 2} ${actualEndX} ${actualEndY}`;
 
     return (
         <>
-            {/* Background Line (Dim) */}
+            {/* Connection Terminals (Dots) */}
+            <circle cx={actualStartX} cy={actualStartY} r="3" fill="#A855F7" opacity="0.5" />
+            <circle cx={actualEndX} cy={actualEndY} r="3" fill="white" opacity="0.3" />
+
+            {/* Background Line (Visible dim cable) */}
             <path
-                d={pathD_Curve}
-                stroke="rgba(255,255,255,0.05)"
+                d={pathD}
+                stroke="rgba(255,255,255,0.15)" // Brighter static line
                 strokeWidth="1"
                 fill="none"
             />
-            {/* Animated "Beam" */}
+
+            {/* Animated "Beam" Packet */}
             <motion.path
-                d={pathD_Curve}
+                d={pathD}
                 stroke={color}
-                strokeWidth="1.5"
+                strokeWidth="2"
                 fill="none"
-                strokeDasharray="10 100" // Dot/Beam length, Gap length
+                strokeDasharray="4 60" // Sharper, shorter pulses
                 strokeLinecap="round"
-                initial={{ strokeDashoffset: 110 }}
+                initial={{ strokeDashoffset: 64 }}
                 animate={{ strokeDashoffset: 0 }}
                 transition={{
-                    duration: 3,
+                    duration: 2, // Faster data flow
                     repeat: Infinity,
                     repeatType: "loop",
                     ease: "linear",
                     delay: delay
                 }}
-                style={{ opacity: 0.4 }}
+                style={{ opacity: 0.8 }} // Brighter active state
             />
         </>
     );
