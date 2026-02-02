@@ -14,28 +14,27 @@ import {
     Globe
 } from "lucide-react";
 
-// Module Data Configuration - SYMMETRIC ELLIPTICAL DISTRIBUTION
-// 5 Nodes distributed symmetrically: 1 Top, 2 Middle-Right/Left, 2 Bottom-Right/Left
-// Ellipse Radii: Rx = 280, Ry = 130
+// Module Data Configuration - TIGHTER SYMMETRIC ELLIPSE
+// Compacted to ensure "connected" feel and prevent disconnects
 const modules = [
     // CENTRAL NODE (The Core / Narrative OS)
     { id: "core", icon: Target, label: "Narrative OS", x: 0, y: 0, isCenter: true },
 
     // PERIPHERAL NODES
-    // 1. Top Center (-90deg)
+    // 1. Top Center
     { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -130, delay: 0.2 },
 
-    // 2. Top Right (-18deg) -> x: ~266, y: ~-40
-    { id: "marketing", icon: Megaphone, label: "Marketing", x: 260, y: -45, delay: 0.3 },
+    // 2. Top Right (Tighter)
+    { id: "marketing", icon: Megaphone, label: "Marketing", x: 220, y: -50, delay: 0.3 },
 
-    // 3. Bottom Right (54deg) -> x: ~164, y: ~105
-    { id: "recruitment", icon: Users, label: "Recruiting", x: 170, y: 110, delay: 0.4 },
+    // 3. Bottom Right (Tighter)
+    { id: "recruitment", icon: Users, label: "Recruiting", x: 150, y: 100, delay: 0.4 },
 
-    // 4. Bottom Left (126deg) -> x: ~-164, y: ~105 (Reflected)
-    { id: "product", icon: Layout, label: "Product", x: -170, y: 110, delay: 0.5 },
+    // 4. Bottom Left (Reflected)
+    { id: "product", icon: Layout, label: "Product", x: -150, y: 100, delay: 0.5 },
 
-    // 5. Top Left (198deg/162deg Reflected) -> x: ~-266, y: ~-40
-    { id: "sales", icon: Briefcase, label: "Sales", x: -260, y: -45, delay: 0.6 },
+    // 5. Top Left (Reflected)
+    { id: "sales", icon: Briefcase, label: "Sales", x: -220, y: -50, delay: 0.6 },
 ];
 
 export default function ConnectedModules() {
@@ -126,54 +125,80 @@ function ModuleNode({ module }: { module: any }) {
     );
 }
 
-// Sub-component for Animated Line with "Smart Clipping"
-function ConnectionLine({ startX, startY, endX, endY, color, delay }: any) {
-    // 1. Calculate geometry to clip lines at node edges
-    // Center Node Radius approx 45px (w-24 = 96px => 48px, leave cushion)
-    // Peripheral Node Radius approx 35px (w-20 = 80px => 40px)
-    const startRadius = 45;
-    const endRadius = 35;
+// Helper: Calculate intersection point on a separate box for precise clipping
+function getBoxIntersection(x1: number, y1: number, x2: number, y2: number, w: number, h: number) {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
 
+    if (dx === 0 && dy === 0) return { x: x1, y: y1 };
+
+    // Calculate half widths
+    const hw = w / 2;
+    const hh = h / 2;
+
+    // Slopes
+    const slope = dy / dx;
+
+    // Check intersection with vertical edges (left/right)
+    if (Math.abs(dx) > 0) {
+        const xEdge = dx > 0 ? hw : -hw;
+        const yInt = slope * xEdge;
+        if (Math.abs(yInt) <= hh) {
+            return { x: x1 + xEdge, y: y1 + yInt };
+        }
+    }
+
+    // Check intersection with horizontal edges (top/bottom)
+    if (Math.abs(dy) > 0) {
+        const yEdge = dy > 0 ? hh : -hh;
+        const xInt = yEdge / slope;
+        if (Math.abs(xInt) <= hw) {
+            return { x: x1 + xInt, y: y1 + yEdge };
+        }
+    }
+
+    // Fallback (shouldn't happen for center-origin rays)
+    return { x: x1, y: y1 };
+}
+
+// Sub-component for Animated Line with "Box Clipping"
+function ConnectionLine({ startX, startY, endX, endY, color, delay }: any) {
+    // Defines node dimensions for clipping (Center approx 96px, Outer 80px)
+    // Add small buffer (-4px) so line tucks slightly under the border glow
+    const centerSize = 92;
+    const outerSize = 76;
+
+    // Project vector from Center to Outer
     const dx = endX - startX;
     const dy = endY - startY;
-    const angle = Math.atan2(dy, dx);
-    const dist = Math.sqrt(dx * dx + dy * dy);
 
-    // Calculate actual start/end points on the circumference/box edge
-    // Simply moving along the vector for circular clipping
-    const actualStartX = startX + Math.cos(angle) * startRadius;
-    const actualStartY = startY + Math.sin(angle) * startRadius;
+    // 1. Find start point (Intersection with Center Box)
+    const relativeStart = getBoxIntersection(0, 0, dx, dy, centerSize, centerSize);
+    const actualStartX = startX + relativeStart.x;
+    const actualStartY = startY + relativeStart.y;
 
-    const actualEndX = endX - Math.cos(angle) * endRadius;
-    const actualEndY = endY - Math.sin(angle) * endRadius;
+    // 2. Find end point (Intersection with Peripheral Box)
+    // Vector from Target back to Center is (-dx, -dy)
+    const relativeEnd = getBoxIntersection(0, 0, -dx, -dy, outerSize, outerSize);
+    const actualEndX = endX + relativeEnd.x;
+    const actualEndY = endY + relativeEnd.y;
 
-    // Control point for the curve (Midpoint gravity)
-    // Using a simpler Quadratic curve for smoother "cable" look 
-    // or the "S" curve. Let's stick to the sigmoid-like C curve but adjusted coords.
-    const midX = (actualStartX + actualEndX) / 2;
+    // Curvature Logic
+    // Uses a gentle curve pulling towards the horizontal axis for "network" feel
+    // Midpoint average
     const midY = (actualStartY + actualEndY) / 2;
-
-    // Tweak control points to make it look like a tense cable
-    // C x1 y1 x2 y2 x y
-    // Use the S-shape: horizontal start, horizontal end? 
-    // Or just a direct line if they are radial?
-    // Let's try a direct line for "tight" connection, or slight curve.
-    // The previous C curve was: C startX midY endX midY endX endY
-    // Let's use a simple straight line for the "beam" feel if closely connected?
-    // No, curved is more "Stripe".
-
-    const pathD = `M ${actualStartX} ${actualStartY} C ${actualStartX} ${(actualStartY + actualEndY) / 2} ${actualEndX} ${(actualStartY + actualEndY) / 2} ${actualEndX} ${actualEndY}`;
+    const pathD = `M ${actualStartX} ${actualStartY} C ${actualStartX} ${midY} ${actualEndX} ${midY} ${actualEndX} ${actualEndY}`;
 
     return (
         <>
-            {/* Connection Terminals (Dots) */}
-            <circle cx={actualStartX} cy={actualStartY} r="3" fill="#A855F7" opacity="0.5" />
-            <circle cx={actualEndX} cy={actualEndY} r="3" fill="white" opacity="0.3" />
+            {/* Connection Terminals (Dots at exact overlap) */}
+            <circle cx={actualStartX} cy={actualStartY} r="4" fill="#A855F7" opacity="0.6" />
+            <circle cx={actualEndX} cy={actualEndY} r="3" fill="white" opacity="0.4" />
 
-            {/* Background Line (Visible dim cable) */}
+            {/* Background Line */}
             <path
                 d={pathD}
-                stroke="rgba(255,255,255,0.15)" // Brighter static line
+                stroke="rgba(255,255,255,0.1)"
                 strokeWidth="1"
                 fill="none"
             />
@@ -184,18 +209,18 @@ function ConnectionLine({ startX, startY, endX, endY, color, delay }: any) {
                 stroke={color}
                 strokeWidth="2"
                 fill="none"
-                strokeDasharray="4 60" // Sharper, shorter pulses
+                strokeDasharray="4 80" // Short sharp pulses
                 strokeLinecap="round"
-                initial={{ strokeDashoffset: 64 }}
+                initial={{ strokeDashoffset: 84 }}
                 animate={{ strokeDashoffset: 0 }}
                 transition={{
-                    duration: 2, // Faster data flow
+                    duration: 3,
                     repeat: Infinity,
                     repeatType: "loop",
                     ease: "linear",
                     delay: delay
                 }}
-                style={{ opacity: 0.8 }} // Brighter active state
+                style={{ opacity: 1 }} // Maximum brightness
             />
         </>
     );
