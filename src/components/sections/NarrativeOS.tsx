@@ -1,152 +1,147 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 import ScrollFade from "@/components/ui/ScrollFade";
-import { FileText, Mic, Layout, Book, CheckCircle2, Award, BarChart3 } from "lucide-react";
+import { FileText, Mic, Layout, Award, BarChart3 } from "lucide-react";
 
 import Button from "@/components/ui/Button";
 
 export default function NarrativeOS() {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(sectionRef, { once: true, margin: "-20%" });
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const deliverables = [
         {
             icon: FileText,
             title: "Narrative Snapshot",
             desc: "Your story distilled to its essential truth—in your voice",
-            color: "border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+            id: "snapshot"
         },
         {
             icon: Layout,
             title: "Strategic Sales Narrative Deck",
             desc: "The exact slides and talk tracks that close enterprise deals",
-            color: "border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+            id: "deck"
         },
         {
             icon: Mic,
             title: "Voice Profile",
             desc: "Documented patterns so any team member can write \"like you\"",
-            color: "border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+            id: "voice"
         },
         {
             icon: Award,
             title: "Team Fluency Certification",
             desc: "Your team passes an articulation test before we're done",
-            color: "border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+            id: "cert"
         },
         {
             icon: BarChart3,
             title: "Quarterly Optimization Dashboard",
             desc: "CAC, velocity, LTV—tracked and improved over time",
-            color: "border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+            id: "dash"
         }
     ];
 
     return (
-        <section id="narrative-os" ref={sectionRef} className="section-spacing bg-bg-page relative overflow-hidden">
-            <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
+        <section ref={containerRef} className="relative bg-bg-page overflow-hidden">
+            {/* Background Grid */}
+            <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none fixed" />
 
-            <ScrollFade className="container-width relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-                    {/* Content */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <div className="text-sm font-semibold tracking-[0.2em] text-white uppercase mb-8 ml-1">
-                            System Installation
-                        </div>
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-8 font-medium tracking-tighter">
-                            What You <br />
-                            <span className="text-white/50">Actually Get.</span>
-                        </h2>
-                        <p className="text-text-secondary text-lg leading-relaxed mb-12 max-w-lg font-light">
-                            Not a 100-page PDF that sits in a drawer. A living system your team uses every day.
-                        </p>
+            <ScrollFade className="container-width relative z-10 py-24 lg:py-32">
+                {/* Header - Stacks on mobile, top of flow on desktop */}
+                <div className="mb-20 lg:mb-32 max-w-2xl">
+                    <div className="text-sm font-semibold tracking-[0.2em] text-white uppercase mb-8 ml-1">
+                        System Installation
+                    </div>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-8 font-medium tracking-tighter">
+                        What You <br />
+                        <span className="text-white/50">Actually Get.</span>
+                    </h2>
+                    <p className="text-text-secondary text-lg leading-relaxed max-w-lg font-light">
+                        Not a 100-page PDF that sits in a drawer. A living system your team uses every day.
+                    </p>
+                </div>
 
-                        <div className="space-y-4">
-                            {deliverables.map((item, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                                    transition={{ delay: 0.2 + (i * 0.1) }}
-                                    onMouseEnter={() => setHoveredIndex(i)}
-                                    onMouseLeave={() => setHoveredIndex(null)}
-                                    className={`flex items-start gap-4 p-4 rounded-xl transition-all duration-300 cursor-default border-l-2 ${hoveredIndex === i
-                                        ? "bg-white/5 border-white translate-x-2"
-                                        : "bg-transparent border-transparent hover:bg-white/5 hover:border-white/20"
-                                        }`}
-                                >
-                                    <div className={`mt-1 p-2 rounded-md ${hoveredIndex === i ? "text-accent-purple" : "text-white/40"} transition-colors bg-white/5`}>
-                                        <item.icon className="w-5 h-5" />
-                                    </div>
-                                    <div className="flex-1">
-                                        <h3 className={`text-lg font-medium transition-colors mb-1 ${hoveredIndex === i ? "text-white" : "text-white/80"}`}>
-                                            {item.title}
-                                        </h3>
-                                        <p className={`text-sm leading-relaxed transition-colors ${hoveredIndex === i ? "text-white/70" : "text-white/40"}`}>
-                                            {item.desc}
-                                        </p>
-                                    </div>
-                                    <div className={`mt-2 transition-opacity duration-300 ${hoveredIndex === i ? "opacity-100" : "opacity-0"}`}>
-                                        <CheckCircle2 className="w-5 h-5 text-accent-purple" />
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </motion.div>
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+                    {/* Left Column: Scrollable List */}
+                    <div className="relative z-10 space-y-24 lg:space-y-[40vh] pb-[20vh]">
+                        {deliverables.map((item, i) => (
+                            <NarrativeItem
+                                key={i}
+                                item={item}
+                                index={i}
+                                setActiveIndex={setActiveIndex}
+                            />
+                        ))}
+                    </div>
 
-                    {/* Interface Mockup - Holographic Stack */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative h-[600px] flex items-center justify-center perspective-[2000px] mt-12 lg:mt-0"
-                    >
+                    {/* Right Column: Sticky Card Stack */}
+                    <div className="hidden lg:block sticky top-32 h-[600px] perspective-[2000px]">
                         {/* Minimal Glow */}
                         <div className="absolute inset-0 bg-white/5 blur-[120px] rounded-full pointer-events-none opacity-20" />
 
-                        <div className="relative transform-style-3d rotate-x-[20deg] rotate-z-[-10deg] rotate-y-[20deg]">
+                        <div className="relative w-full h-full flex items-center justify-center transform-style-3d rotate-x-[10deg] rotate-z-[-5deg] rotate-y-[15deg]">
                             {deliverables.map((item, i) => {
-                                const isHovered = hoveredIndex === i;
-                                const isAnyHovered = hoveredIndex !== null;
-                                // Center point for 5 items is index 2.
-                                const offset_y = (i - 2) * -50;
-                                const offset_z = (i - 2) * 30;
+                                // Accordion Logic
+                                // If index <= activeIndex, the card is "deployed" (fanned out)
+                                // If index > activeIndex, the card remains stacked at the "base" (or behind the last active one)
+
+                                // To make them collapse into a "single layer" when scrolling up:
+                                // Base state (i > activeIndex): All collapse to origin (or closely stacked)
+                                // Active state (i <= activeIndex): Spread out
+
+                                const isDeployed = i <= activeIndex;
+                                const isActive = i === activeIndex; // The specific card being talked about
+
+                                // Fan Calculation
+                                // "Horizontal" spread like the example (isometric)
+                                // Spread heavily on X, slightly on Z to create depth, little to no Y.
+
+                                const xOffset = isDeployed ? i * 80 : 0; // Much wider horizontal spread
+                                const yOffset = isDeployed ? 0 : 0;      // Keep them level
+                                const zOffset = isDeployed ? i * -50 : 0;  // Deepen the stack
 
                                 return (
                                     <motion.div
                                         key={i}
-                                        className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[200px] rounded-xl border backdrop-blur-md transition-all duration-500 ease-out flex items-center justify-center
-                                            ${isHovered
-                                                ? "bg-white/10 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.15)] z-50 mix-blend-screen"
-                                                : "bg-[#050505]/80 border-white/10 shadow-xl z-0"
+                                        className={`absolute w-[360px] h-[220px] rounded-xl border backdrop-blur-[2px] flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]
+                                            ${isActive
+                                                ? "bg-white/10 border-white/60 shadow-[0_0_60px_rgba(255,255,255,0.15)] z-30"
+                                                : "bg-[#0A0A0A]/60 border-white/20 shadow-xl"
                                             }
-                                            ${isAnyHovered && !isHovered ? "opacity-20 blur-[1px]" : "opacity-100"}
+                                            ${isDeployed ? "z-20" : "z-0"}
                                         `}
                                         style={{
-                                            y: offset_y, // Tighter stack
-                                            z: offset_z,
+                                            transformOrigin: "center center",
                                         }}
                                         animate={{
-                                            y: isHovered ? offset_y - 20 : offset_y,
-                                            scale: isHovered ? 1.05 : 1,
-                                            rotateX: isHovered ? 2 : 0,
+                                            x: xOffset - (activeIndex * 40), // Shift left to keep active card somewhat centered
+                                            y: yOffset,
+                                            z: zOffset,
+                                            scale: isActive ? 1.05 : 0.95, // Slight scaling
+                                            rotateY: -20, // Constant isometric angle for all cards? Or rotate them? 
+                                            // The reference shows them all parallel facing the same way.
+                                            rotateX: 10,
+                                            opacity: isDeployed ? 1 : 0,
+                                        }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 100,
+                                            damping: 20
                                         }}
                                     >
-                                        <div className="text-center transform -rotate-2">
-                                            <div className={`inline-flex p-3 rounded-full bg-white/5 mb-3 border transition-colors duration-500 ${isHovered ? "border-white/40 bg-white/10" : "border-white/5"}`}>
-                                                <item.icon className={`w-5 h-5 transition-colors duration-500 ${isHovered ? "text-white" : "text-white/20"}`} />
+                                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50 rounded-xl pointer-events-none" />
+
+                                        <div className="text-center transform relative z-10">
+                                            <div className={`inline-flex p-3 rounded-full bg-white/5 mb-4 border transition-colors duration-500 ${isActive ? "border-white/40 bg-white/10" : "border-white/5"}`}>
+                                                <item.icon className={`w-6 h-6 transition-colors duration-500 ${isActive ? "text-white" : "text-white/20"}`} />
                                             </div>
-                                            <div className={`font-medium text-base tracking-wide px-4 transition-colors duration-500 ${isHovered ? "text-white" : "text-white/20"}`}>
+                                            <div className={`font-medium text-lg tracking-wide px-6 transition-colors duration-500 ${isActive ? "text-white" : "text-white/20"}`}>
                                                 {item.title}
                                             </div>
-                                            <div className={`text-[9px] font-mono mt-2 uppercase tracking-widest border-t border-white/5 pt-2 inline-block transition-colors duration-500 ${isHovered ? "text-white/50" : "text-white/10"}`}>
+                                            <div className={`text-[10px] font-mono mt-4 uppercase tracking-widest border-t border-white/5 pt-3 inline-block transition-colors duration-500 ${isActive ? "text-white/50" : "text-white/10"}`}>
                                                 Module 0{i + 1}
                                             </div>
                                         </div>
@@ -154,7 +149,7 @@ export default function NarrativeOS() {
                                 );
                             })}
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
 
                 <div className="text-center mt-20">
@@ -166,5 +161,34 @@ export default function NarrativeOS() {
                 </div>
             </ScrollFade>
         </section>
+    );
+}
+
+function NarrativeItem({ item, index, setActiveIndex }: { item: any, index: number, setActiveIndex: (i: number) => void }) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { margin: "-50% 0px -50% 0px" });
+
+    useEffect(() => {
+        if (isInView) {
+            setActiveIndex(index);
+        }
+    }, [isInView, index, setActiveIndex]);
+
+    return (
+        <div ref={ref} className={`min-h-[30vh] flex items-center transition-opacity duration-500 ${isInView ? "opacity-100" : "opacity-30"}`}>
+            <div className="flex gap-6 lg:gap-8 items-start max-w-md">
+                <div className={`mt-1 text-2xl font-mono text-white/20`}>
+                    0{index + 1}
+                </div>
+                <div>
+                    <h3 className={`text-2xl font-medium mb-3 ${isInView ? "text-white" : "text-white/60"}`}>
+                        {item.title}
+                    </h3>
+                    <p className={`text-lg leading-relaxed ${isInView ? "text-text-secondary" : "text-text-secondary/60"}`}>
+                        {item.desc}
+                    </p>
+                </div>
+            </div>
+        </div>
     );
 }
