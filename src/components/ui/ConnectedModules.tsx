@@ -14,18 +14,28 @@ import {
     Globe
 } from "lucide-react";
 
-// Module Data Configuration - FLATTENED & COMPACTED
+// Module Data Configuration - SYMMETRIC ELLIPTICAL DISTRIBUTION
+// 5 Nodes distributed symmetrically: 1 Top, 2 Middle-Right/Left, 2 Bottom-Right/Left
+// Ellipse Radii: Rx = 280, Ry = 130
 const modules = [
     // CENTRAL NODE (The Core / Narrative OS)
     { id: "core", icon: Target, label: "Narrative OS", x: 0, y: 0, isCenter: true },
 
-    // PERIPHERAL NODES (Departments)
-    // Further compacted to prevent text overlap
-    { id: "sales", icon: Briefcase, label: "Sales", x: -240, y: -40, delay: 0.2 },
-    { id: "marketing", icon: Megaphone, label: "Marketing", x: 240, y: -40, delay: 0.4 },
-    { id: "product", icon: Layout, label: "Product", x: -160, y: 90, delay: 0.3 },
-    { id: "recruitment", icon: Users, label: "Recruiting", x: 160, y: 90, delay: 0.5 },
-    { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -130, delay: 0.6 },
+    // PERIPHERAL NODES
+    // 1. Top Center (-90deg)
+    { id: "strategy", icon: LineChart, label: "Strategy", x: 0, y: -130, delay: 0.2 },
+
+    // 2. Top Right (-18deg) -> x: ~266, y: ~-40
+    { id: "marketing", icon: Megaphone, label: "Marketing", x: 260, y: -45, delay: 0.3 },
+
+    // 3. Bottom Right (54deg) -> x: ~164, y: ~105
+    { id: "recruitment", icon: Users, label: "Recruiting", x: 170, y: 110, delay: 0.4 },
+
+    // 4. Bottom Left (126deg) -> x: ~-164, y: ~105 (Reflected)
+    { id: "product", icon: Layout, label: "Product", x: -170, y: 110, delay: 0.5 },
+
+    // 5. Top Left (198deg/162deg Reflected) -> x: ~-266, y: ~-40
+    { id: "sales", icon: Briefcase, label: "Sales", x: -260, y: -45, delay: 0.6 },
 ];
 
 export default function ConnectedModules() {
