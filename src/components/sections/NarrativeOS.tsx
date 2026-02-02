@@ -94,12 +94,11 @@ export default function NarrativeOS() {
                                 // COMPACT / SMALLER CARDS for better responsive fit
                                 // Cards are now SMALLER (260px wide).
                                 const xSpread = 140;
-                                const ySpread = 25;
+                                const ySpread = 40; // STEEPER vertical drop
 
                                 // Center alignment constant: shifting everything so the "Group" is visually centered
-                                // Total width = 4 * 140 = 560. Half = 280.
-                                // We offset everything by -280 so the CENTER of the fan is at (0,0).
-                                const layoutCenterOffset = -280;
+                                // Shifted RIGHT to avoid text overlap (was -280)
+                                const layoutCenterOffset = -180;
                                 const layoutTopOffset = -50; // To center the vertical cascade roughly
 
                                 const xOffset = i * xSpread;
@@ -123,14 +122,13 @@ export default function NarrativeOS() {
                                         animate={{
                                             // When CLOSED: All stack at the "start" position (Module 0's position),
                                             // creating a "Left to Right" expansion effect.
-                                            // Or strictly centered? User said "from left to right".
-                                            // So stack should be at layoutCenterOffset (Leftmost point).
                                             x: isDeployed ? (xOffset + layoutCenterOffset) : layoutCenterOffset,
                                             y: isDeployed ? (yOffset + layoutTopOffset) : layoutTopOffset,
                                             z: isDeployed ? zOffset : 0, // Stacked at 0 depth
                                             scale: isDeployed ? 1 : 0.95,
                                             // Isometric "Standing" Angles when deployed, flat/neat when closed
-                                            rotateY: isDeployed ? -25 : 0,
+                                            // Rotated slightly less negative (towards right relative to -25)
+                                            rotateY: isDeployed ? -15 : 0,
                                             rotateX: isDeployed ? 10 : 0,
                                             rotateZ: isDeployed ? 5 : 0,
                                             opacity: 1,
