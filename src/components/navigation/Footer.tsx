@@ -45,7 +45,7 @@ export default function Footer() {
                                     <Link href="#pricing" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Pricing Plan</Link>
                                 </li>
                                 <li>
-                                    <Link href="#cta" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Schedule Your Rumble</Link>
+                                    <Link href="#cta" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Schedule The Diagnostic</Link>
                                 </li>
                             </ul>
                         </div>

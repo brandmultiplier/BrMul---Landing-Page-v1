@@ -19,9 +19,9 @@ export default function Alternatives() {
         },
         {
             feature: "The Cost",
-            agency: "$200K-$500K for output that decays",
+            agency: "$15K-$30K for a PDF nobody opened",
             fractional: "$4K-$30K/month ongoing dependency",
-            brandMultiplier: "$30K-$60K one-time infrastructure"
+            brandMultiplier: "$7.5K-$25K/month for 75 days. Then the system is yours."
         },
         {
             feature: "The Metric",
@@ -87,6 +87,26 @@ export default function Alternatives() {
                             </motion.div>
                         ))}
                     </div>
+
+                    {/* First Sales Hire Callout */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ delay: 0.6 }}
+                        className="mt-8 p-8 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] text-center md:text-left relative overflow-hidden group"
+                    >
+                        {/* Subtle gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-accent-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                            <div className="text-red-400 font-bold uppercase tracking-wider text-sm shrink-0 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20">
+                                The Hidden Cost
+                            </div>
+                            <div className="text-text-secondary leading-relaxed text-lg">
+                                <span className="text-white font-medium">First Sales Hire:</span> $150K-$250K per failed attempt. 70% fail within a year. Average company spends <span className="text-white font-medium">$300K-$750K</span> and 18-36 months before realizing the problem was never people.
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
 
                 <div className="max-w-3xl mx-auto text-center mt-20">

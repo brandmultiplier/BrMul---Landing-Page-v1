@@ -30,7 +30,7 @@ export default function Proof() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
-                    className="clean-card mb-24 p-0 overflow-hidden border-accent-indigo/20 bg-[#080808]"
+                    className="clean-card mb-8 p-0 overflow-hidden border-accent-indigo/20 bg-[#080808]"
                 >
                     <div className="grid lg:grid-cols-2 min-h-[500px]">
                         <div className="p-12 md:p-16 flex flex-col justify-center bg-gradient-to-br from-[#0A0A0A] to-[#050505] relative">
@@ -109,8 +109,15 @@ export default function Proof() {
                 </motion.div>
 
                 {/* Additional Stats Grid */}
-                <div className="mt-24">
-                    <h3 className="text-2xl text-white/40 mb-12 font-light">What about companies your size?</h3>
+                <div className="mt-32">
+                    <div className="max-w-4xl mb-24 space-y-8">
+                        <h3 className="text-2xl md:text-3xl text-white font-light leading-tight">
+                            This methodology was proven at Accenture’s scale.
+                        </h3>
+                        <p className="text-xl text-text-secondary font-light leading-relaxed max-w-3xl">
+                            We’ve since refined it for the specific challenge founder-led B2B companies face between $3M-$50M: <span className="text-white font-medium">getting the story out of one person’s head and into a system.</span>
+                        </p>
+                    </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {[
                             { val: "120+", label: "founder-led B2B companies transformed" },

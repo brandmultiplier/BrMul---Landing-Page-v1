@@ -58,14 +58,14 @@ export default function HeroZoomTitle({ titlePhrases = [], subtitle = "" }: Hero
 
     // Shared content structure to guarantee 100% alignment
     const Content = ({ variant }: { variant: 'base' | 'spotlight' }) => (
-        <div className="flex flex-col gap-4 md:gap-6 w-full">
+        <div className="flex flex-col gap-0 md:gap-2 w-full">
             <h1 className="text-[clamp(3.5rem,9vw,9.5rem)] leading-[0.9] font-medium tracking-tighter">
                 {titlePhrases.map((word, i) => (
                     <span
                         key={i}
                         className={`inline-block mr-3 md:mr-8 transition-colors duration-200 ${variant === 'spotlight'
                             ? "text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.5)]"  // Spotlight: Pure White + Glow
-                            : (i > 0 && i < 4 ? "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1]" : "text-white") // Base: Visible Gradient & White
+                            : (i > 0 && i < 3 ? "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1]" : "text-white") // Base: Visible Gradient & White
                             }`}
                     >
                         {word}
@@ -82,10 +82,10 @@ export default function HeroZoomTitle({ titlePhrases = [], subtitle = "" }: Hero
     return (
         <div
             ref={containerRef}
-            className="relative cursor-default group py-10 select-none"
+            className="relative cursor-default group py-4 select-none"
         >
             {/* Layer 1: Base Text (Background) */}
-            <div className="relative z-10 p-10">
+            <div className="relative z-10 p-4">
                 <Content variant="base" />
             </div>
 
@@ -98,7 +98,7 @@ export default function HeroZoomTitle({ titlePhrases = [], subtitle = "" }: Hero
                 <div className="absolute inset-0 bg-gradient-to-br from-accent-purple to-accent-indigo opacity-90 mix-blend-multiply" />
 
                 {/* 2B: The White Text on top of the circle */}
-                <div className="absolute inset-0 flex items-center justify-start p-10">
+                <div className="absolute inset-0 flex items-center justify-start p-4">
                     <Content variant="spotlight" />
                 </div>
             </motion.div>

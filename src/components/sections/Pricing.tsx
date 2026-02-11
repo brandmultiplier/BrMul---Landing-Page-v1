@@ -8,16 +8,17 @@ import Button from "@/components/ui/Button";
 
 const tiers = [
     {
-        name: "FOUNDATION",
-        price: "$7.5K",
+        name: "TRANSFORMATION",
+        price: "$20-25K",
         period: "/month",
         duration: "75 days",
         features: [
-            "Core narrative clarity",
-            "Limited internal rollout",
-            "Slower adoption timeline"
+            "Full leadership team involvement",
+            "Category/movement framing",
+            "Deep internal enablement",
+            "Fastest path to independence"
         ],
-        bestFor: "Budget-conscious, willing to move slower",
+        bestFor: "If budget weren’t a constraint, this is what we’d do.",
         highlight: false,
         color: "border-white/10"
     },
@@ -32,23 +33,22 @@ const tiers = [
             "30-day milestone review",
             "Team fluency certification"
         ],
-        bestFor: "Most founder-led B2B companies",
+        bestFor: "This is what we recommend for most companies at your stage. The balance point: enough depth to work, enough focus to move fast.",
         highlight: true,
         recommended: true,
         color: "border-accent-purple"
     },
     {
-        name: "TRANSFORMATION",
-        price: "$20-25K",
+        name: "FOUNDATION",
+        price: "$7.5K",
         period: "/month",
         duration: "75 days",
         features: [
-            "Full leadership team involvement",
-            "Category/movement framing",
-            "Deep internal enablement",
-            "Fastest path to independence"
+            "Core narrative clarity",
+            "Limited internal rollout",
+            "Slower adoption timeline"
         ],
-        bestFor: "Companies ready for aggressive growth",
+        bestFor: "This is the minimum we’d be comfortable with and still stand behind the work.",
         highlight: false,
         color: "border-white/10"
     }
@@ -185,7 +185,7 @@ export default function Pricing() {
                     <div className="mt-12">
                         <a href="#cta">
                             <Button className="px-10 py-5 text-lg">
-                                Schedule Your Rumble <span className="ml-2">→</span>
+                                Schedule The Diagnostic <span className="ml-2">→</span>
                             </Button>
                         </a>
                     </div>

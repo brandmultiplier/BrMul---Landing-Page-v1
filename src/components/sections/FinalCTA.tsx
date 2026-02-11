@@ -37,6 +37,18 @@ export default function FinalCTA() {
                     className="max-w-md mx-auto clean-card bg-[#0A0A0A]"
                 >
                     <form className="space-y-4">
+                        <div className="grid grid-cols-2 gap-4">
+                            <input
+                                type="text"
+                                placeholder="First Name"
+                                className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Last Name"
+                                className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
+                            />
+                        </div>
                         <input
                             type="text"
                             placeholder="Work Email"
@@ -47,8 +59,25 @@ export default function FinalCTA() {
                             placeholder="Company Name"
                             className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
                         />
+                        <div className="relative">
+                            <select
+                                className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors appearance-none cursor-pointer"
+                                defaultValue=""
+                            >
+                                <option value="" disabled className="bg-[#0A0A0A] text-text-tertiary">Approximate ARR</option>
+                                <option value="under-3m" className="bg-[#0A0A0A]">Under $3M</option>
+                                <option value="3m-10m" className="bg-[#0A0A0A]">$3M - $10M</option>
+                                <option value="10m-50m" className="bg-[#0A0A0A]">$10M - $50M</option>
+                                <option value="50m+" className="bg-[#0A0A0A]">$50M+</option>
+                            </select>
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-text-tertiary">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </div>
+                        </div>
                         <button className="btn-primary w-full justify-center h-12">
-                            Schedule Your Rumble
+                            Schedule The Diagnostic
                         </button>
                         <p className="text-xs text-text-tertiary text-center mt-4 uppercase tracking-wider">
                             3 Hours. One Session. Fixed Price.

@@ -8,23 +8,23 @@ import { Plus, Minus } from "lucide-react";
 const faqs = [
     {
         question: "We already have a brand strategy.",
-        answer: "Having a deck ≠ having an operating system. Quick test: Can your CEO, VP Sales, and CMO tell the exact same story right now, without looking at notes? If not, you have strategy that isn't installed."
+        answer: "Brand strategy tells your team what to say. What we install teaches your team how to think. You don’t need another PDF of guidelines. You need a system that extracts what’s in your head and deploys it across every conversation your team has—without you in the room. That’s not brand strategy. That’s narrative infrastructure."
     },
     {
         question: "This sounds expensive.",
-        answer: "Compared to what? Most founders have spent $200K+ on agencies that delivered decks that decay, or marketing hires that didn't work out. We're 3-10x more efficient with a 30-day checkpoint guarantee."
+        answer: "You’ve likely already spent $100K–$500K on solutions that didn’t work: brand agencies, failed sales hires, fractional CMOs, sales enablement tools nobody uses. Our fixed monthly model means no surprise bills. And most founders find they’re losing more revenue per month to this problem than our engagement costs. The question isn’t whether you can afford this. It’s how much longer you can afford not to have it."
     },
     {
         question: "We've been burned by agencies before.",
-        answer: "Every founder we work with has been burned. Most agencies hand you a deck and disappear. We install systems, then stay for optimization. 75% of clients retain beyond the initial engagement because the system compounds."
+        answer: "Every founder we work with has been burned before. You’ve watched consultants present your own ideas back in a different font. That’s not what this is. A brand agency gives you a PDF. We build a system. Brand guidelines sit in a drawer. What we install lives in how your team actually sells. The output isn’t a document—it’s your team closing deals without you in the room."
     },
     {
         question: "AI tools can do this cheaper.",
-        answer: "AI generates content—it can't run a Rumble session or extract the tacit knowledge in your head. We use AI to scale after architecture is installed, not to replace the thinking that creates differentiation."
+        answer: "AI is incredibly powerful for scaling content once you know what to say. But it cannot figure out what to say. Every competitor using the same AI tools is producing the same output. The companies that will differentiate are the ones with human-extracted, codified story that no AI can replicate. AI is the amplifier. Without a signal to amplify, you’re broadcasting noise at scale."
     },
     {
         question: "Our founder doesn't have time.",
-        answer: "The Rumble is 3 hours. Compare that to the 10+ hours per week you're currently spending in sales calls you can't delegate. Short-term investment for permanent liberation."
+        answer: "That’s the paradox: you don’t have time BECAUSE you haven’t done this. You’re spending 60–80 hours per month on sales calls your team should be handling. Our process requires roughly 10 hours of your time over 75 days. The return is 50+ hours per month back. The math is simple: invest 10 hours once, get 50+ hours back every month."
     }
 ];
 

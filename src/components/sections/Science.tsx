@@ -41,9 +41,8 @@ export default function Science() {
                         {/* Subtle glowing backdrop for the quote */}
                         <div className="absolute inset-0 bg-accent-purple/10 blur-[60px] rounded-full pointer-events-none" />
 
-                        <p className="relative text-3xl md:text-4xl lg:text-5xl text-white leading-tight font-light max-w-4xl mx-auto tracking-tight">
-                            &ldquo;Stories are remembered <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1] font-normal">22x more</span> than facts alone.
-                            Yet most B2B companies lead with feature lists.&rdquo;
+                        <p className="relative text-2xl md:text-3xl lg:text-4xl text-white leading-tight font-light max-w-5xl mx-auto tracking-tight">
+                            &ldquo;Oxytocin release during narrative increases trust and cooperation. Neural coupling synchronizes the listener’s brain with the speaker’s. Cortisol-to-dopamine sequence during tension-resolution creates memory encoding <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1] font-normal">22x stronger</span> than facts alone.&rdquo;
                         </p>
                         <div className="mt-8 flex items-center justify-center gap-4">
                             <div className="h-[1px] w-12 bg-white/20" />

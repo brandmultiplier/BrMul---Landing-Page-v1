@@ -63,6 +63,9 @@ export default function NarrativeOS() {
                     <p className="text-text-secondary text-lg leading-relaxed max-w-lg font-light">
                         Not a 100-page PDF that sits in a drawer. A living system your team uses every day.
                     </p>
+                    <p className="text-white/80 text-lg leading-relaxed max-w-lg font-medium mt-6 border-l-2 border-accent-purple pl-4 italic">
+                        "We don’t leave until your team passes. If they can’t articulate your value proposition without notes, we’re not done."
+                    </p>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">

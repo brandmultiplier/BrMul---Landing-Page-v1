@@ -14,8 +14,8 @@ export default function Hero() {
     const y1 = useTransform(scrollY, [0, 500], [0, 200]);
     const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-    // Words for the zoom title effect - "Your" is prepended by component
-    const words = ["Sales", "Team", "Is"];
+    // Words for the zoom title effect
+    const titlePhrases = ["You", "can", "close", "any", "room."];
 
     return (
         <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20">
@@ -35,12 +35,12 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="mb-8 w-full text-center flex justify-center z-20 relative"
+                    className="mb-12 md:mb-16 w-full text-center flex justify-center z-20 relative"
                 >
-                    <div className="mb-3">
+                    <div className="mb-0">
                         <HeroZoomTitle
-                            titlePhrases={["Your", ...words]}
-                            subtitle="40% Less Effective."
+                            titlePhrases={titlePhrases}
+                            subtitle="Your team can’t."
                         />
                     </div>
                 </motion.div>
@@ -50,28 +50,24 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="max-w-2xl mx-auto space-y-8 text-center relative z-20"
+                    className="max-w-2xl mx-auto space-y-10 text-center relative z-20"
                 >
-                    <p className="text-xl md:text-2xl text-text-secondary font-light leading-relaxed">
-                        We extract the story in your head and turn it into a system your team can execute—so you stop being the bottleneck.
+                    <p className="text-lg md:text-xl text-text-secondary font-light leading-relaxed max-w-xl mx-auto">
+                        We extract what’s in your head, and build the system that makes it travel without you—so your team closes with founder-level conviction, without founder dependency.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <div className="flex flex-col items-center justify-center gap-6">
                         <div className="flex flex-col items-center gap-2">
                             <a href="#cta">
                                 <Button className="w-full sm:w-auto px-10 py-5 text-xl font-bold text-white bg-gradient-to-r from-[#A855F7] to-[#6366F1] border border-white/20 rounded-full shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)] hover:scale-105 transition-all duration-300">
-                                    Schedule Your Rumble
+                                    Schedule The Diagnostic
                                 </Button>
                             </a>
-                            <span className="text-xs text-text-tertiary uppercase tracking-wider">3 hours. One session. No fluff.</span>
+                            <div className="flex flex-col items-center text-xs text-text-tertiary uppercase tracking-wider gap-0.5">
+                                <span>3 hours of your time.</span>
+                                <span>75 days to a system that scales without you.</span>
+                            </div>
                         </div>
-
-                        <a href="#case-studies" className="group flex items-center gap-2 text-white/80 hover:text-white transition-colors">
-                            <span className="underline underline-offset-4 decoration-white/30 group-hover:decoration-white/80">
-                                See How We Generated $1B
-                            </span>
-                            <span className="group-hover:translate-x-1 transition-transform">→</span>
-                        </a>
                     </div>
                 </motion.div>
 
@@ -83,10 +79,10 @@ export default function Hero() {
                     className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-white/5 pt-8 mt-12 w-full max-w-4xl"
                 >
                     {[
-                        { label: "revenue generated at Accenture", value: "$1B+" },
-                        { label: "win rate (up from 54%)", value: "88%" },
-                        { label: "average CAC reduction", value: "-30%" },
-                        { label: "founders freed from the bottleneck", value: "120+" },
+                        { label: "founders freed", value: "120+" },
+                        { label: "CAC reduction", value: "30%+" },
+                        { label: "deal acceleration", value: "35%+" },
+                        { label: "retention", value: "75%" },
                     ].map((stat, i) => (
                         <div key={i} className="text-center group cursor-default">
                             <div className="text-3xl md:text-4xl font-light text-white mb-2 group-hover:text-accent-purple transition-colors duration-300">
