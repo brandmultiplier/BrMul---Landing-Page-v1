@@ -50,9 +50,10 @@ function PersonaCard({ role, index }: { role: typeof roles[0], index: number }) 
 
     return (
         <div
-            className="relative h-[320px] w-full perspective-1000 group cursor-pointer"
+            className="relative h-[280px] sm:h-[320px] w-full perspective-1000 group cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => setIsHovered(!isHovered)}
         >
             <motion.div
                 initial={false}
@@ -64,7 +65,7 @@ function PersonaCard({ role, index }: { role: typeof roles[0], index: number }) 
                 {/* FRONT */}
                 <div className={cn(
                     "absolute inset-0 backface-hidden",
-                    "flex flex-col p-8 rounded-2xl border border-white/10 bg-[#0A0A0A] overflow-hidden",
+                    "flex flex-col p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#0A0A0A] overflow-hidden",
                     "transition-colors duration-500",
                     role.border
                 )}>
@@ -77,20 +78,21 @@ function PersonaCard({ role, index }: { role: typeof roles[0], index: number }) 
 
                     <div className="flex flex-col h-full z-10">
                         <div className="mb-auto">
-                            <h3 className="text-xl font-medium text-white mb-2">{role.label}</h3>
+                            <h3 className="text-lg sm:text-xl font-medium text-white mb-2">{role.label}</h3>
                             <div className="h-0.5 w-8 bg-white/20" />
                         </div>
 
                         <div className="mt-8">
                             <div className="text-xs text-red-400/80 uppercase tracking-widest mb-3 font-semibold">The Pain</div>
-                            <p className="text-lg text-white/70 leading-relaxed font-light">
+                            <p className="text-sm sm:text-lg text-white/70 leading-relaxed font-light">
                                 &quot;{role.pain}&quot;
                             </p>
                         </div>
 
-                        <div className="mt-auto pt-8 flex items-center gap-2 text-white/30 text-xs">
+                        <div className="mt-auto pt-6 sm:pt-8 flex items-center gap-2 text-white/30 text-xs">
                             <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-                            <span>Hover to reveal</span>
+                            <span className="hidden sm:inline">Hover to reveal</span>
+                            <span className="sm:hidden">Tap to reveal</span>
                         </div>
                     </div>
                 </div>
@@ -99,7 +101,7 @@ function PersonaCard({ role, index }: { role: typeof roles[0], index: number }) 
                 <div
                     className={cn(
                         "absolute inset-0 backface-hidden rotate-y-180",
-                        "flex flex-col p-8 rounded-2xl border border-white/10 bg-[#0A0A0A] overflow-hidden shadow-2xl"
+                        "flex flex-col p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#0A0A0A] overflow-hidden shadow-2xl"
                     )}
                     style={{ transform: "rotateY(180deg)" }}
                 >
@@ -120,7 +122,7 @@ function PersonaCard({ role, index }: { role: typeof roles[0], index: number }) 
 
                         <div className="mt-4">
                             <div className="text-xs text-emerald-400 uppercase tracking-widest mb-3 font-semibold">The Promise</div>
-                            <p className="text-lg text-white leading-relaxed font-medium">
+                            <p className="text-sm sm:text-lg text-white leading-relaxed font-medium">
                                 {role.promise}
                             </p>
                         </div>
@@ -129,7 +131,7 @@ function PersonaCard({ role, index }: { role: typeof roles[0], index: number }) 
                             <div className="flex flex-col">
                                 <span className="text-[10px] uppercase tracking-wider text-white/40 mb-1">Impact</span>
                                 <span className={cn(
-                                    "text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r",
+                                    "text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r",
                                     role.gradient.replace("/20", "").replace("from-", "from-white to-")
                                 )}>
                                     {role.metric}
@@ -149,13 +151,13 @@ export default function Protagonists() {
     return (
         <section ref={sectionRef} className="section-spacing bg-transparent relative overflow-hidden">
             <ScrollFade className="container-width">
-                <div className="text-center mb-24 max-w-4xl mx-auto">
+                <div className="text-center mb-16 sm:mb-24 max-w-4xl mx-auto">
                     <div className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase mb-8">The Stakeholders</div>
-                    <h2 className="text-5xl md:text-7xl font-medium tracking-tight text-white mb-8 leading-[1.1]">
+                    <h2 className="text-3xl sm:text-5xl md:text-7xl font-medium tracking-tight text-white mb-6 sm:mb-8 leading-[1.1]">
                         Built for the Leadership Team.
                         <span className="block text-white/40 mt-2">Every stakeholder wins.</span>
                     </h2>
-                    <p className="text-xl text-white/60 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-2xl mx-auto font-light leading-relaxed">
                         We align the entire c-suite around a single, revenue-generating narrative.
                     </p>
                 </div>

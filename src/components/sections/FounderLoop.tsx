@@ -10,7 +10,7 @@ const phrases = [
 
 export default function FounderLoop() {
     return (
-        <div className="relative py-12 overflow-hidden bg-bg-page">
+        <div className="relative py-8 sm:py-10 md:py-12 overflow-hidden bg-bg-page">
             {/* Top/bottom subtle dividers */}
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -19,12 +19,12 @@ export default function FounderLoop() {
             <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-bg-page to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-bg-page to-transparent z-10 pointer-events-none" />
 
-            <div className="relative h-[28px] overflow-hidden">
+            <div className="relative h-[56px] sm:h-[44px] md:h-[28px] overflow-hidden">
                 <motion.div
                     className="flex flex-col absolute w-full will-change-transform"
                     animate={{ y: ["0%", "-75%"] }}
                     transition={{
-                        duration: 20,
+                        duration: 26,
                         repeat: Infinity,
                         ease: "linear",
                     }}
@@ -34,9 +34,9 @@ export default function FounderLoop() {
                         phrases.map((phrase, i) => (
                             <div
                                 key={`${setIndex}-${i}`}
-                                className="h-[28px] flex items-center justify-center shrink-0"
+                                className="h-[56px] sm:h-[44px] md:h-[28px] flex items-center justify-center shrink-0 px-4"
                             >
-                                <p className="text-text-secondary text-sm md:text-base font-light tracking-wide whitespace-nowrap">
+                                <p className="text-text-secondary text-xs sm:text-sm md:text-base font-light tracking-wide text-center leading-snug max-w-[320px] sm:max-w-[520px] md:max-w-none">
                                     {phrase}
                                 </p>
                             </div>

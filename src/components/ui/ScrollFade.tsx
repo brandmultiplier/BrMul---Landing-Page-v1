@@ -17,9 +17,9 @@ export default function ScrollFade({ children, className = "" }: ScrollFadeProps
     });
 
     // Mimic Hero effect: Fade out/scale down as it leaves text viewport
-    const y = useTransform(scrollYProgress, [0, 1], [0, 50]); // Reduced parallax movement
-    const opacity = useTransform(scrollYProgress, [0, 0.95], [1, 0.4]); // Much lighter fade (min 0.4 opacity)
-    const scale = useTransform(scrollYProgress, [0, 0.95], [1, 0.99]); // Almost imperceptible scale down
+    const y = useTransform(scrollYProgress, [0, 1], [0, 30]); // Reduced parallax movement
+    const opacity = useTransform(scrollYProgress, [0, 0.95], [1, 0.7]); // Keep CTA readable while scrolling
+    const scale = useTransform(scrollYProgress, [0, 0.95], [1, 0.995]); // Almost imperceptible scale down
 
     return (
         <motion.div

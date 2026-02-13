@@ -38,20 +38,20 @@ export default function Solution() {
             <div className="absolute left-[30px] md:left-1/2 top-40 bottom-40 w-[1px] bg-gradient-to-b from-transparent via-accent-purple/50 to-transparent -z-10" />
 
             <ScrollFade className="container-width relative z-10">
-                <div className="text-center mb-20 max-w-4xl mx-auto">
+                <div className="text-center mb-16 sm:mb-20 max-w-4xl mx-auto">
                     <span className="text-accent-purple text-sm font-bold tracking-[0.2em] uppercase mb-8 block">
                         The System
                     </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tighter mb-8">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tighter mb-6 sm:mb-8">
                         We Don&apos;t Deliver Decks.<br />
                         <span className="text-white/40">We Install <span className="text-[#F36901]">Systems</span>.</span>
                     </h2>
-                    <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mx-auto">
+                    <p className="text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed max-w-3xl mx-auto">
                         A Narrative Operating System extracts what&apos;s in your head, codifies it into architecture, and deploys it across your team. The system stays. We don&apos;t have to.
                     </p>
                 </div>
 
-                <div className="space-y-16 md:space-y-24 relative">
+                <div className="space-y-12 sm:space-y-16 md:space-y-24 relative">
                     {steps.map((step, i) => (
                         <motion.div
                             key={i}
@@ -62,15 +62,18 @@ export default function Solution() {
                         >
                             {/* Number & Icon Area */}
                             <div className="md:w-1/2 flex justify-start md:justify-end relative">
-                                <div className={`text-[5rem] md:text-[10rem] font-bold leading-none text-white/10 absolute -top-8 md:-top-24 ${i % 2 === 1 ? 'md:-right-24 right-4' : 'md:-left-28 right-4'} z-0`}>
+                                <div className={`hidden md:block text-[5rem] md:text-[10rem] font-bold leading-none text-white/10 absolute -top-8 md:-top-24 ${i % 2 === 1 ? 'md:-right-24 right-4' : 'md:-left-28 right-4'} z-0`}>
                                     {step.num}
                                 </div>
-                                <div className={`relative z-10 p-8 rounded-2xl bg-[#121217] border border-white/5 w-full max-w-md ${i % 2 === 1 ? 'md:ml-auto' : 'md:mr-auto'}`}>
-                                    <div className="text-accent-purple text-lg font-bold tracking-widest uppercase mb-2">
+                                <div className={`relative z-10 p-6 sm:p-8 rounded-2xl bg-[#121217] border border-white/5 w-full max-w-md ${i % 2 === 1 ? 'md:ml-auto' : 'md:mr-auto'}`}>
+                                    <div className="md:hidden text-3xl sm:text-4xl font-semibold text-white/15 leading-none mb-3">
+                                        {step.num}
+                                    </div>
+                                    <div className="text-accent-purple text-sm sm:text-base md:text-lg font-bold tracking-widest uppercase mb-2">
                                         Phase {step.num}
                                     </div>
-                                    <h3 className="text-3xl text-white font-medium mb-4">{step.title}</h3>
-                                    <p className="text-text-secondary leading-relaxed">
+                                    <h3 className="text-2xl sm:text-3xl text-white font-medium mb-3 sm:mb-4">{step.title}</h3>
+                                    <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
                                         {step.desc}
                                     </p>
                                 </div>

@@ -24,29 +24,29 @@ export default function Science() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
-                    className="max-w-4xl mx-auto mb-20"
+                    className="max-w-4xl mx-auto mb-16 sm:mb-20"
                 >
                     <span className="text-white text-sm font-medium tracking-[0.2em] uppercase mb-8 block">
                         The Science
                     </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-8 font-medium tracking-tighter leading-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6 sm:mb-8 font-medium tracking-tighter leading-tight">
                         This Isn&apos;t Design. <br />
                         <span className="text-gradient">It&apos;s Biology.</span>
                     </h2>
-                    <p className="text-xl text-text-secondary leading-relaxed max-w-2xl mx-auto mb-12">
+                    <p className="text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed max-w-2xl mx-auto mb-10 sm:mb-12">
                         We don&apos;t guess. We engineer narrative to trigger specific neurochemical responses that <span className="text-[#F36901]">drive complex B2B decision making</span>.
                     </p>
 
-                    <div className="relative py-12 px-6">
+                    <div className="relative py-10 sm:py-12 px-4 sm:px-6">
                         {/* Subtle glowing backdrop for the quote */}
                         <div className="absolute inset-0 bg-accent-purple/10 blur-[60px] rounded-full pointer-events-none" />
 
-                        <p className="relative text-2xl md:text-3xl lg:text-4xl text-white leading-tight font-light max-w-5xl mx-auto tracking-tight">
+                        <p className="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white leading-tight font-light max-w-5xl mx-auto tracking-tight">
                             &ldquo;Oxytocin release during narrative increases trust and cooperation. Neural coupling synchronizes the listener’s brain with the speaker’s. Cortisol-to-dopamine sequence during tension-resolution creates memory encoding <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1] font-normal">22x stronger</span> than facts alone.&rdquo;
                         </p>
-                        <div className="mt-8 flex items-center justify-center gap-4">
+                        <div className="mt-6 sm:mt-8 flex items-center justify-center gap-3 sm:gap-4">
                             <div className="h-[1px] w-12 bg-white/20" />
-                            <div className="text-sm md:text-base text-text-secondary uppercase tracking-[0.2em] font-medium">Peer-reviewed research</div>
+                            <div className="text-xs sm:text-sm md:text-base text-text-secondary uppercase tracking-[0.2em] font-medium">Peer-reviewed research</div>
                             <div className="h-[1px] w-12 bg-white/20" />
                         </div>
                     </div>

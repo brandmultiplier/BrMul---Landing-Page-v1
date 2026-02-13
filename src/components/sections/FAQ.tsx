@@ -36,11 +36,11 @@ export default function FAQ() {
     return (
         <section ref={sectionRef} className="section-spacing bg-bg-page relative overflow-hidden text-center md:text-left">
             <ScrollFade className="container-width max-w-4xl mx-auto relative z-10">
-                <div className="mb-16 md:mb-24 text-center">
+                <div className="mb-12 sm:mb-16 md:mb-24 text-center">
                     <span className="text-white text-sm font-medium tracking-[0.2em] uppercase mb-8 block">
                         Questions We Get
                     </span>
-                    <h2 className="text-4xl md:text-5xl text-white font-medium tracking-tight leading-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-white font-medium tracking-tight leading-tight">
                         You're Skeptical. <span className="text-[#F36901]">Good</span>.
                     </h2>
                 </div>
@@ -61,9 +61,9 @@ export default function FAQ() {
                             >
                                 <button
                                     onClick={() => setOpenIndex(isOpen ? null : index)}
-                                    className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                                    className="w-full flex items-center justify-between p-4 sm:p-6 text-left focus:outline-none"
                                 >
-                                    <span className={`text-lg md:text-xl font-medium pr-8 transition-colors ${isOpen ? "text-white" : "text-white/70"}`}>
+                                    <span className={`text-base sm:text-lg md:text-xl font-medium pr-6 sm:pr-8 transition-colors ${isOpen ? "text-white" : "text-white/70"}`}>
                                         {faq.question}
                                     </span>
                                     <span className={`shrink-0 p-1 rounded-full border transition-all ${isOpen
@@ -82,7 +82,7 @@ export default function FAQ() {
                                             exit={{ height: 0, opacity: 0 }}
                                             transition={{ duration: 0.3, ease: "easeInOut" }}
                                         >
-                                            <div className="px-6 pb-6 text-text-secondary leading-relaxed border-t border-white/5 pt-4">
+                                            <div className="px-4 sm:px-6 pb-5 sm:pb-6 text-sm sm:text-base text-text-secondary leading-relaxed border-t border-white/5 pt-4">
                                                 {faq.answer}
                                             </div>
                                         </motion.div>

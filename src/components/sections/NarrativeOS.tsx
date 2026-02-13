@@ -52,25 +52,25 @@ export default function NarrativeOS() {
 
             <ScrollFade className="container-width relative z-10">
                 {/* Header - Stacks on mobile, top of flow on desktop */}
-                <div className="mb-16 lg:mb-24 max-w-2xl">
+                <div className="mb-14 lg:mb-24 max-w-2xl">
                     <div className="text-sm font-semibold tracking-[0.2em] text-white uppercase mb-8 ml-1">
                         System Installation
                     </div>
-                    <h2 className="text-4xl md:text-5xl text-white mb-8 font-medium tracking-tighter">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-white mb-6 sm:mb-8 font-medium tracking-tighter">
                         What You <br />
                         <span className="text-white/50">Actually <span className="text-[#F36901]">Get</span>.</span>
                     </h2>
-                    <p className="text-text-secondary text-lg leading-relaxed max-w-lg font-light">
+                    <p className="text-text-secondary text-base sm:text-lg leading-relaxed max-w-lg font-light">
                         Not a 100-page PDF that sits in a drawer. A living system your team uses every day.
                     </p>
-                    <p className="text-white/80 text-lg leading-relaxed max-w-lg font-medium mt-6 border-l-2 border-accent-purple pl-4 italic">
+                    <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-lg font-medium mt-5 sm:mt-6 border-l-2 border-accent-purple pl-4 italic">
                         "We don’t leave until your team passes. If they can’t articulate your value proposition without notes, we’re not done."
                     </p>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
                     {/* Left Column: Static List (No longer controls animation directly) */}
-                    <div className="relative z-10 space-y-8">
+                    <div className="relative z-10 space-y-5 sm:space-y-7">
                         {deliverables.map((item, i) => (
                             <NarrativeItem
                                 key={i}
@@ -81,6 +81,41 @@ export default function NarrativeOS() {
                                 show={isInView}
                             />
                         ))}
+                    </div>
+
+                    {/* Mobile-only animated module strip */}
+                    <div className="md:hidden relative">
+                        <div className="relative overflow-hidden">
+                            <motion.div
+                                className="flex gap-4"
+                                animate={{ x: ["0%", "-50%"] }}
+                                transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+                            >
+                                {[...Array(2)].map((_, setIndex) => (
+                                    deliverables.map((item, i) => (
+                                        <div
+                                            key={`mobile-${setIndex}-${i}`}
+                                            className="min-w-[220px] rounded-xl border border-white/10 bg-[#0A0A0A] px-4 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+                                        >
+                                            <div className="flex items-center gap-3 mb-2">
+                                                <div className="p-2 rounded-full bg-white/5 border border-white/10 text-white">
+                                                    <item.icon className="w-4 h-4" />
+                                                </div>
+                                                <div className="text-xs uppercase tracking-widest text-white/40">
+                                                    Module 0{i + 1}
+                                                </div>
+                                            </div>
+                                            <div className="text-sm font-medium text-white leading-snug mb-1">
+                                                {item.title}
+                                            </div>
+                                            <div className="text-xs text-text-secondary leading-relaxed">
+                                                {item.desc}
+                                            </div>
+                                        </div>
+                                    ))
+                                ))}
+                            </motion.div>
+                        </div>
                     </div>
 
                     {/* Right Column: Card Fan (Triggers on Section View) */}
@@ -171,9 +206,9 @@ export default function NarrativeOS() {
                     </div>
                 </div>
 
-                <div className="text-center mt-20">
+                <div className="text-center mt-12 sm:mt-20">
                     <a href="#cta">
-                        <Button className="text-base px-8 py-4 bg-gradient-to-r from-[#A855F7] to-[#6366F1] border border-white/20 shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)] text-white">
+                        <Button className="w-full sm:w-auto text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-[#A855F7] to-[#6366F1] border border-white/20 shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)] text-white">
                             Plug In Your System <span className="ml-2">→</span>
                         </Button>
                     </a>
@@ -190,7 +225,7 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
 
     return (
         <div
-            className={`group relative p-4 rounded-xl transition-all duration-500 ease-out cursor-default border border-transparent
+            className={`group relative p-4 sm:p-5 rounded-xl transition-all duration-500 ease-out cursor-default border border-transparent
                 ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
                 hover:bg-white/10 hover:backdrop-blur-md hover:border-white/10 hover:shadow-2xl
             `}
@@ -200,10 +235,10 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
 
                 {/* Text Content */}
                 <div className="flex-1 min-w-0">
-                    <h3 className="text-xl font-medium mb-1 text-white group-hover:text-white transition-colors">
+                    <h3 className="text-lg sm:text-xl font-medium mb-1 text-white group-hover:text-white transition-colors">
                         {item.title}
                     </h3>
-                    <p className="text-base leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors">
+                    <p className="text-sm sm:text-base leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors">
                         {item.desc}
                     </p>
                 </div>

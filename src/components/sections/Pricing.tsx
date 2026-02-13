@@ -64,11 +64,11 @@ export default function Pricing() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-accent-purple/5 rounded-full blur-[120px] pointer-events-none" />
 
             <ScrollFade className="container-width relative z-10">
-                <div className="text-center mb-20 max-w-3xl mx-auto">
+                <div className="text-center mb-14 sm:mb-20 max-w-3xl mx-auto">
                     <span className="text-white text-sm font-medium tracking-[0.2em] uppercase mb-8 block">
                         Transparent Pricing
                     </span>
-                    <h2 className="text-4xl md:text-5xl text-white font-medium tracking-tighter leading-tight mb-6">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-white font-medium tracking-tighter leading-tight mb-5 sm:mb-6">
                         Three Tiers. Clear Scope. <br />
                         <span className="text-white/40">No Surprises.</span>
                     </h2>
@@ -96,22 +96,22 @@ export default function Pricing() {
                                         <legend className="mx-auto px-4 text-[10px] font-bold uppercase tracking-widest text-accent-purple text-center">
                                             Recommended
                                         </legend>
-                                        <div className="flex flex-col flex-1 px-8 pb-10 pt-2">
-                                            <h3 className="text-lg font-medium tracking-wide mb-6 text-white text-center">
+                                        <div className="flex flex-col flex-1 px-6 sm:px-8 pb-8 sm:pb-10 pt-2">
+                                            <h3 className="text-base sm:text-lg font-medium tracking-wide mb-5 sm:mb-6 text-white text-center">
                                                 {tier.name}
                                             </h3>
 
                                             <div className="mb-2 flex items-baseline justify-center gap-1">
-                                                <span className="text-3xl lg:text-4xl font-light text-white tracking-tight">{tier.price}</span>
-                                                <span className="text-text-tertiary text-sm">{tier.period}</span>
+                                                <span className="text-2xl sm:text-3xl lg:text-4xl font-light text-white tracking-tight">{tier.price}</span>
+                                                <span className="text-text-tertiary text-xs sm:text-sm">{tier.period}</span>
                                             </div>
-                                            <div className="text-sm text-text-tertiary mb-8 font-mono text-center">{tier.duration}</div>
+                                            <div className="text-xs sm:text-sm text-text-tertiary mb-6 sm:mb-8 font-mono text-center">{tier.duration}</div>
 
-                                            <div className="w-full h-px bg-white/5 mb-8" />
+                                            <div className="w-full h-px bg-white/5 mb-6 sm:mb-8" />
 
-                                            <div className="space-y-4 mb-8 flex-1">
+                                            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 flex-1">
                                                 {tier.features.map((feature, i) => (
-                                                    <div key={i} className="flex items-start gap-3 text-sm leading-relaxed text-text-secondary transition-colors">
+                                                    <div key={i} className="flex items-start gap-3 text-xs sm:text-sm leading-relaxed text-text-secondary transition-colors">
                                                         <Check className="w-4 h-4 mt-0.5 shrink-0 text-accent-purple" />
                                                         <span>{feature}</span>
                                                     </div>
@@ -120,7 +120,7 @@ export default function Pricing() {
 
                                             <div className="p-4 rounded-lg text-center bg-accent-purple/10 border border-accent-purple/20">
                                                 <div className="text-[10px] uppercase tracking-wider text-text-tertiary mb-1">Best For</div>
-                                                <div className="text-sm font-medium text-accent-purple">
+                                                <div className="text-xs sm:text-sm font-medium text-accent-purple">
                                                     {tier.bestFor}
                                                 </div>
                                             </div>
@@ -133,22 +133,22 @@ export default function Pricing() {
                         // Standard Card
                         return (
                             <CardWrapper key={tier.name}>
-                                <div className="h-full rounded-2xl backdrop-blur-md bg-[#050505] border border-white/10 hover:border-white/20 py-8 px-8 flex flex-col transition-all duration-300">
-                                    <h3 className="text-lg font-medium tracking-wide mb-6 text-white/60">
+                                <div className="h-full rounded-2xl backdrop-blur-md bg-[#050505] border border-white/10 hover:border-white/20 py-6 sm:py-8 px-6 sm:px-8 flex flex-col transition-all duration-300">
+                                    <h3 className="text-base sm:text-lg font-medium tracking-wide mb-5 sm:mb-6 text-white/60">
                                         {tier.name}
                                     </h3>
 
                                     <div className="mb-2 flex items-baseline gap-1">
-                                        <span className="text-3xl lg:text-4xl font-light text-white tracking-tight">{tier.price}</span>
-                                        <span className="text-text-tertiary text-sm">{tier.period}</span>
+                                        <span className="text-2xl sm:text-3xl lg:text-4xl font-light text-white tracking-tight">{tier.price}</span>
+                                        <span className="text-text-tertiary text-xs sm:text-sm">{tier.period}</span>
                                     </div>
-                                    <div className="text-sm text-text-tertiary mb-8 font-mono">{tier.duration}</div>
+                                    <div className="text-xs sm:text-sm text-text-tertiary mb-6 sm:mb-8 font-mono">{tier.duration}</div>
 
-                                    <div className="w-full h-px bg-white/5 mb-8" />
+                                    <div className="w-full h-px bg-white/5 mb-6 sm:mb-8" />
 
-                                    <div className="space-y-4 mb-8 flex-1">
+                                    <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 flex-1">
                                         {tier.features.map((feature, i) => (
-                                            <div key={i} className="flex items-start gap-3 text-sm leading-relaxed text-text-secondary group-hover:text-white/80 transition-colors">
+                                            <div key={i} className="flex items-start gap-3 text-xs sm:text-sm leading-relaxed text-text-secondary group-hover:text-white/80 transition-colors">
                                                 <Check className="w-4 h-4 mt-0.5 shrink-0 text-white/20" />
                                                 <span>{feature}</span>
                                             </div>
@@ -158,7 +158,7 @@ export default function Pricing() {
                                     <div className="mt-auto">
                                         <div className="p-4 rounded-lg text-center bg-white/5 border border-white/5">
                                             <div className="text-[10px] uppercase tracking-wider text-text-tertiary mb-1">Best For</div>
-                                            <div className="text-sm font-medium text-white/60">
+                                            <div className="text-xs sm:text-sm font-medium text-white/60">
                                                 {tier.bestFor}
                                             </div>
                                         </div>
@@ -174,9 +174,9 @@ export default function Pricing() {
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ delay: 0.5 }}
-                    className="mt-20 mb-12 text-center max-w-3xl mx-auto"
+                    className="mt-16 sm:mt-20 mb-10 sm:mb-12 text-center max-w-3xl mx-auto"
                 >
-                    <p className="text-xl md:text-2xl text-white font-light leading-relaxed">
+                    <p className="text-base sm:text-lg md:text-2xl text-white font-light leading-relaxed">
                         “The average founder-led company has already spent <span className="text-red-400 font-normal">$100K-$500K</span> on solutions that didn’t work.”
                     </p>
                 </motion.div>
@@ -202,7 +202,7 @@ export default function Pricing() {
 
                     <div className="mt-12">
                         <a href="#cta">
-                            <Button className="px-10 py-5 text-lg bg-gradient-to-r from-[#A855F7] to-[#6366F1] border border-white/20 shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)] text-white">
+                            <Button className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg bg-gradient-to-r from-[#A855F7] to-[#6366F1] border border-white/20 shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)] text-white">
                                 Schedule The Diagnostic <span className="ml-2">→</span>
                             </Button>
                         </a>

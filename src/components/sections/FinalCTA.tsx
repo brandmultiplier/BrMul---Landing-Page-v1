@@ -13,19 +13,19 @@ export default function FinalCTA() {
         <section ref={sectionRef} id="cta" className="section-spacing bg-bg-page">
             <ScrollFade className="container-width relative z-10">
                 {/* Soft Divider */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-16 md:mb-24" />
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12 sm:mb-16 md:mb-24" />
 
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
-                    className="max-w-3xl mx-auto text-center mb-16"
+                    className="max-w-3xl mx-auto text-center mb-12 sm:mb-16"
                 >
-                    <h2 className="text-5xl md:text-6xl text-white font-medium tracking-tighter leading-tight mb-8">
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl text-white font-medium tracking-tighter leading-tight mb-6 sm:mb-8">
                         <span className="text-[#F36901]">Stop</span> being <br />
                         the bottleneck.
                     </h2>
-                    <p className="text-xl text-text-secondary mb-10 leading-relaxed">
+                    <p className="text-base sm:text-lg md:text-xl text-text-secondary mb-8 sm:mb-10 leading-relaxed">
                         We extract the story. We deploy the system. <br />
                         <span className="text-white">Your team sells like you do.</span>
                     </p>
@@ -38,7 +38,7 @@ export default function FinalCTA() {
                     className="max-w-md mx-auto clean-card bg-[#0A0A0A]"
                 >
                     <form className="space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <input
                                 type="text"
                                 placeholder="First Name"
@@ -80,7 +80,7 @@ export default function FinalCTA() {
                         <button className="btn-primary w-full justify-center h-12">
                             Schedule The Diagnostic
                         </button>
-                        <p className="text-xs text-text-tertiary text-center mt-4 uppercase tracking-wider flex flex-col gap-1">
+                        <p className="text-[10px] sm:text-xs text-text-tertiary text-center mt-4 uppercase tracking-wider flex flex-col gap-1">
                             <span>30 minutes or less.</span>
                             <span>Walk away knowing if your problem is structural, or not.</span>
                         </p>
