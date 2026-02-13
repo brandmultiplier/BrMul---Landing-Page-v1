@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useSpring, useScroll, useTransform } from "framer-motion";
 
 export default function GlobalMouseHalo() {
@@ -11,11 +11,13 @@ export default function GlobalMouseHalo() {
     const rafId = useRef<number>(0);
 
     const { scrollY } = useScroll();
-    // Fade out after scrolling past hero (first viewport height)
-    const haloOpacity = useTransform(scrollY, [0, 600, 900], [1, 0.6, 0]);
+    // Fade out after scrolling past hero — MOBILE ONLY
+    const scrollOpacity = useTransform(scrollY, [0, 600, 900], [1, 0.6, 0]);
+    const [isTouch, setIsTouch] = useState(false);
 
     useEffect(() => {
         isMobile.current = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+        setIsTouch(isMobile.current);
 
         if (!isMobile.current) {
             // Desktop: follow mouse
@@ -57,7 +59,7 @@ export default function GlobalMouseHalo() {
     return (
         <motion.div
             className="fixed top-0 left-0 w-[800px] h-[800px] pointer-events-none z-[9999]"
-            style={{ x, y, opacity: haloOpacity }}
+            style={{ x, y, opacity: isTouch ? scrollOpacity : 1 }}
         >
             <div
                 className="w-full h-full rounded-full"
