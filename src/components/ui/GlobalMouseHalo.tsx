@@ -55,7 +55,7 @@ export default function GlobalMouseHalo() {
 
     return (
         <motion.div
-            className="fixed top-0 left-0 w-[800px] h-[800px] pointer-events-none z-[9999] mix-blend-screen"
+            className="fixed top-0 left-0 w-[800px] h-[800px] pointer-events-none z-[9999]"
             style={{ x, y }}
         >
             <div
