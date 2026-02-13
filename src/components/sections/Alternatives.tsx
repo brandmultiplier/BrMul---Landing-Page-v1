@@ -54,12 +54,10 @@ export default function Alternatives() {
 
                 {/* Comparison Table */}
                 <div className="relative max-w-6xl mx-auto">
-                    {/* Scroll Hint Overlay - Visible only when content overflows */}
-                    <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-bg-page to-transparent z-10 md:hidden pointer-events-none" />
-                    <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-bg-page to-transparent z-10 md:hidden pointer-events-none" />
 
-                    <div className="overflow-x-auto pb-4">
-                        <div className="min-w-[720px] grid grid-cols-4 gap-6 mb-8 text-sm uppercase tracking-wider font-medium text-text-tertiary border-b border-white/10 pb-6">
+                    {/* Desktop: Original horizontal table */}
+                    <div className="hidden md:block">
+                        <div className="grid grid-cols-4 gap-6 mb-8 text-sm uppercase tracking-wider font-medium text-text-tertiary border-b border-white/10 pb-6">
                             <div className="pl-6">Comparison</div>
                             <div>Brand Agency</div>
                             <div>Fractional CMO</div>
@@ -73,11 +71,9 @@ export default function Alternatives() {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                                     transition={{ delay: 0.2 + (i * 0.1) }}
-                                    className="min-w-[720px] grid grid-cols-4 gap-6 p-6 rounded-xl hover:bg-white/5 transition-colors items-center group relative overflow-hidden"
+                                    className="grid grid-cols-4 gap-6 p-6 rounded-xl hover:bg-white/5 transition-colors items-center group relative overflow-hidden"
                                 >
-                                    {/* Highlight specifically the BrandMultiplier column */}
                                     <div className="absolute top-0 bottom-0 right-0 w-[25%] bg-accent-purple/5 -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
-
                                     <div className="font-medium text-white/60">{row.feature}</div>
                                     <div className="text-text-secondary flex items-start gap-2">
                                         <X className="w-4 h-4 text-red-500/50 mt-1 shrink-0" />
@@ -96,9 +92,42 @@ export default function Alternatives() {
                         </div>
                     </div>
 
-                    <div className="mt-3 flex items-center justify-center gap-2 text-[10px] uppercase tracking-wider text-text-tertiary md:hidden">
-                        <span>Swipe to compare</span>
-                        <span>→</span>
+                    {/* Mobile: Transposed — each feature as a vertical card */}
+                    <div className="md:hidden space-y-6">
+                        {comparisonData.map((row, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ delay: 0.2 + (i * 0.1) }}
+                                className="rounded-xl bg-white/[0.03] border border-white/10 p-5 space-y-4"
+                            >
+                                <div className="text-sm uppercase tracking-wider font-medium text-white/60 border-b border-white/10 pb-3">
+                                    {row.feature}
+                                </div>
+                                <div className="flex items-start gap-2 text-text-secondary">
+                                    <X className="w-4 h-4 text-red-500/50 mt-0.5 shrink-0" />
+                                    <div>
+                                        <span className="text-[10px] uppercase tracking-widest text-text-tertiary block mb-1">Brand Agency</span>
+                                        <span className="text-sm">{row.agency}</span>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-2 text-text-secondary">
+                                    <X className="w-4 h-4 text-red-500/50 mt-0.5 shrink-0" />
+                                    <div>
+                                        <span className="text-[10px] uppercase tracking-widest text-text-tertiary block mb-1">Fractional CMO</span>
+                                        <span className="text-sm">{row.fractional}</span>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-2 text-white font-medium bg-accent-purple/5 -mx-5 px-5 py-3 rounded-b-xl border-t border-accent-purple/10">
+                                    <Check className="w-4 h-4 text-accent-purple mt-0.5 shrink-0" />
+                                    <div>
+                                        <span className="text-[10px] uppercase tracking-widest text-accent-purple/60 block mb-1">BrandMultiplier</span>
+                                        <span className="text-sm">{row.brandMultiplier}</span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
 
                     {/* First Sales Hire Callout */}
