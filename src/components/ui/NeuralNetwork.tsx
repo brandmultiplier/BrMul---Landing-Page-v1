@@ -34,7 +34,10 @@ export default function NeuralNetwork() {
 
         const initParticles = () => {
             particles = [];
-            const particleCount = Math.min(Math.floor((width * height) / 25000), 100); // Reduced density for mobile
+            const isMobile = width < 768;
+            const particleCount = isMobile
+                ? Math.min(Math.floor((width * height) / 40000), 40)  // Lighter on mobile
+                : Math.min(Math.floor((width * height) / 25000), 100);
 
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
@@ -72,9 +75,10 @@ export default function NeuralNetwork() {
                     const dy = p1.y - p2.y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    if (dist < 150) {
+                    const maxDist = width < 768 ? 100 : 150;
+                    if (dist < maxDist) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.4 - dist / 150 * 0.4})`;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.4 - dist / maxDist * 0.4})`;
                         ctx.moveTo(p1.x, p1.y);
                         ctx.lineTo(p2.x, p2.y);
                         ctx.stroke();

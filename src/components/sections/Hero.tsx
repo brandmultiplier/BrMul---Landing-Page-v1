@@ -78,18 +78,18 @@ export default function Hero() {
                     transition={{ duration: 1, delay: 0.8 }}
                     className="w-full max-w-4xl border-t border-white/5 pt-6 md:pt-8 mt-8 md:mt-12"
                 >
-                    <div className="flex md:grid md:grid-cols-4 gap-3 md:gap-10 overflow-x-auto md:overflow-visible pb-2 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-10">
                         {[
                             { label: "founders freed", value: "120+" },
                             { label: "CAC reduction", value: "30%+" },
                             { label: "deal acceleration", value: "35%+" },
                             { label: "retention", value: "75%" },
                         ].map((stat, i) => (
-                            <div key={i} className="text-center group cursor-default min-w-[120px] md:min-w-0 snap-start">
-                                <div className="text-xl sm:text-2xl md:text-3xl font-light text-white mb-1 md:mb-2 group-hover:text-accent-purple transition-colors duration-300">
+                            <div key={i} className="text-center group cursor-default">
+                                <div className="text-2xl sm:text-2xl md:text-3xl font-light text-white mb-1 md:mb-2 group-hover:text-accent-purple transition-colors duration-300">
                                     {stat.value}
                                 </div>
-                                <div className="text-[8px] sm:text-[9px] md:text-xs font-medium text-text-tertiary uppercase tracking-wider group-hover:text-text-secondary transition-colors leading-relaxed">
+                                <div className="text-[9px] sm:text-[10px] md:text-xs font-medium text-text-tertiary uppercase tracking-wider group-hover:text-text-secondary transition-colors leading-relaxed">
                                     {stat.label}
                                 </div>
                             </div>
