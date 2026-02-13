@@ -46,7 +46,7 @@ export default function Alternatives() {
                     </span>
                     <h2 className="text-4xl md:text-5xl text-white font-medium tracking-tighter mb-8">
                         You&apos;ve Tried This Before.<br />
-                        <span className="text-white/40">It Didn&apos;t Work.</span>
+                        <span className="text-white/40">It <span className="text-[#F36901]">Didn&apos;t Work</span>.</span>
                     </h2>
                 </div>
 

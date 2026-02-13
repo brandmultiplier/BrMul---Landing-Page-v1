@@ -169,6 +169,18 @@ export default function Pricing() {
                     })}
                 </div>
 
+                {/* Bridge Quote */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ delay: 0.5 }}
+                    className="mt-20 mb-12 text-center max-w-3xl mx-auto"
+                >
+                    <p className="text-xl md:text-2xl text-white font-light leading-relaxed">
+                        “The average founder-led company has already spent <span className="text-red-400 font-normal">$100K-$500K</span> on solutions that didn’t work.”
+                    </p>
+                </motion.div>
+
                 {/* Guarantee */}
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -177,9 +189,15 @@ export default function Pricing() {
                     className="mt-16 sm:mt-24 max-w-3xl mx-auto text-center"
                 >
                     <div className="inline-block p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                        <p className="text-text-secondary text-sm md:text-base leading-relaxed">
-                            <span className="text-white font-semibold">Our Guarantee:</span> If we don&apos;t achieve the agreed outcomes within the pilot—and you&apos;ve met the participation requirements—we continue at no additional cost until we do.
-                        </p>
+                        <div className="space-y-4">
+                            <p className="text-text-secondary text-sm md:text-base leading-relaxed">
+                                <span className="text-white font-semibold">Risk-Free Pilot:</span> At the 30-day checkpoint, if you don’t believe this is creating real value, you can exit and only pay for work completed to date.
+                            </p>
+                            <div className="w-full h-px bg-white/5" />
+                            <p className="text-text-secondary text-sm md:text-base leading-relaxed">
+                                <span className="text-white font-semibold">Outcome Guarantee:</span> If we don&apos;t achieve the agreed outcomes within the pilot—and you&apos;ve met the participation requirements—we continue at no additional cost until we do.
+                            </p>
+                        </div>
                     </div>
 
                     <div className="mt-12">

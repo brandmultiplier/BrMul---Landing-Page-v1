@@ -44,7 +44,7 @@ export default function Solution() {
                     </span>
                     <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tighter mb-8">
                         We Don&apos;t Deliver Decks.<br />
-                        <span className="text-white/40">We Install Systems.</span>
+                        <span className="text-white/40">We Install <span className="text-[#F36901]">Systems</span>.</span>
                     </h2>
                     <p className="text-xl text-text-secondary leading-relaxed max-w-3xl mx-auto">
                         A Narrative Operating System extracts what&apos;s in your head, codifies it into architecture, and deploys it across your team. The system stays. We don&apos;t have to.

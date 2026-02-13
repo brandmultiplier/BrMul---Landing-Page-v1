@@ -21,7 +21,7 @@ export default function Proof() {
                     </span>
                     <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tight leading-[1.1]">
                         We Measure What Matters. <br />
-                        <span className="text-white/40">Not Impressions. Revenue.</span>
+                        <span className="text-white/40">Not Impressions. <span className="text-[#F36901]">Revenue</span>.</span>
                     </h2>
                 </div>
 

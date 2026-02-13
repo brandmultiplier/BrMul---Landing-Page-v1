@@ -64,8 +64,8 @@ export default function Hero() {
                                 </Button>
                             </a>
                             <div className="flex flex-col items-center text-xs text-text-tertiary uppercase tracking-wider gap-0.5">
-                                <span>3 hours of your time.</span>
-                                <span>75 days to a system that scales without you.</span>
+                                <span>30 minutes or less.</span>
+                                <span>Walk away knowing if your problem is structural, or not.</span>
                             </div>
                         </div>
                     </div>

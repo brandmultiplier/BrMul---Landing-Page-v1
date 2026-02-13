@@ -41,7 +41,7 @@ export default function FAQ() {
                         Questions We Get
                     </span>
                     <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tight leading-tight">
-                        You're Skeptical. <span className="text-white/40">Good.</span>
+                        You're Skeptical. <span className="text-[#F36901]">Good</span>.
                     </h2>
                 </div>
 

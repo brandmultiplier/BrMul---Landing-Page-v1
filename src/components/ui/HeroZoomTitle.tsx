@@ -74,7 +74,7 @@ export default function HeroZoomTitle({ titlePhrases = [], subtitle = "" }: Hero
             </h1>
             <h2 className={`text-[clamp(1.5rem,5vw,7rem)] leading-[0.9] tracking-tighter font-light transition-colors duration-200 ${variant === 'spotlight' ? "text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.3)]" : "text-white/40"
                 }`}>
-                {subtitle}
+                Your team <span className={variant === 'base' ? "text-[#F36901]" : ""}>can’t</span>.
             </h2>
         </div>
     );

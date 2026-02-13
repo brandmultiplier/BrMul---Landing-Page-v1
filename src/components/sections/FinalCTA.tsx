@@ -22,11 +22,12 @@ export default function FinalCTA() {
                     className="max-w-3xl mx-auto text-center mb-16"
                 >
                     <h2 className="text-5xl md:text-6xl lg:text-7xl text-white font-medium tracking-tighter leading-tight mb-8">
-                        Stop being <br />
+                        <span className="text-[#F36901]">Stop</span> being <br />
                         the bottleneck.
                     </h2>
-                    <p className="text-xl text-text-secondary mb-10">
-                        We extract the story. You deploy the system.
+                    <p className="text-xl text-text-secondary mb-10 leading-relaxed">
+                        We extract the story. We deploy the system. <br />
+                        <span className="text-white">Your team sells like you do.</span>
                     </p>
                 </motion.div>
 
@@ -79,8 +80,9 @@ export default function FinalCTA() {
                         <button className="btn-primary w-full justify-center h-12">
                             Schedule The Diagnostic
                         </button>
-                        <p className="text-xs text-text-tertiary text-center mt-4 uppercase tracking-wider">
-                            3 Hours. One Session. Fixed Price.
+                        <p className="text-xs text-text-tertiary text-center mt-4 uppercase tracking-wider flex flex-col gap-1">
+                            <span>30 minutes or less.</span>
+                            <span>Walk away knowing if your problem is structural, or not.</span>
                         </p>
                     </form>
                 </motion.div>

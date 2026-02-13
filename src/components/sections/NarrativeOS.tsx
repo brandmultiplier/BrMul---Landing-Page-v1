@@ -28,7 +28,7 @@ export default function NarrativeOS() {
         {
             icon: Mic,
             title: "Voice Profile",
-            desc: "Documented patterns so any team member can write \"like you\"",
+            desc: "Documented patterns so any team member can sound \"like you\"",
             id: "voice"
         },
         {
@@ -39,7 +39,7 @@ export default function NarrativeOS() {
         },
         {
             icon: BarChart3,
-            title: "Quarterly Optimization Dashboard",
+            title: "Daily Optimization Dashboard",
             desc: "CAC, velocity, LTV—tracked and improved over time",
             id: "dash"
         }
@@ -58,7 +58,7 @@ export default function NarrativeOS() {
                     </div>
                     <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-8 font-medium tracking-tighter">
                         What You <br />
-                        <span className="text-white/50">Actually Get.</span>
+                        <span className="text-white/50">Actually <span className="text-[#F36901]">Get</span>.</span>
                     </h2>
                     <p className="text-text-secondary text-lg leading-relaxed max-w-lg font-light">
                         Not a 100-page PDF that sits in a drawer. A living system your team uses every day.

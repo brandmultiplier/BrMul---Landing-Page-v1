@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import Problem from "@/components/sections/Problem";
+import FounderLoop from "@/components/sections/FounderLoop";
 import Alternatives from "@/components/sections/Alternatives";
 import Solution from "@/components/sections/Solution";
 import NarrativeOS from "@/components/sections/NarrativeOS";
@@ -17,6 +18,9 @@ export default function Home() {
     <>
       {/* Section 1: Hero - Dark theme, WebGL gradient, main value prop */}
       <Hero />
+
+      {/* Bridge: The Founder's Daily Loop */}
+      <FounderLoop />
 
       {/* Section 2: The Problem - 3-layer progressive reveal */}
       <Problem />

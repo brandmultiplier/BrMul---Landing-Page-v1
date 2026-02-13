@@ -34,7 +34,7 @@ export default function Science() {
                         <span className="text-gradient">It&apos;s Biology.</span>
                     </h2>
                     <p className="text-xl text-text-secondary leading-relaxed max-w-2xl mx-auto mb-12">
-                        We don&apos;t guess. We engineer narrative to trigger specific neurochemical responses that drive complex B2B decision making.
+                        We don&apos;t guess. We engineer narrative to trigger specific neurochemical responses that <span className="text-[#F36901]">drive complex B2B decision making</span>.
                     </p>
 
                     <div className="relative py-12 px-6">
@@ -46,7 +46,7 @@ export default function Science() {
                         </p>
                         <div className="mt-8 flex items-center justify-center gap-4">
                             <div className="h-[1px] w-12 bg-white/20" />
-                            <div className="text-sm md:text-base text-text-secondary uppercase tracking-[0.2em] font-medium">Stanford University Research</div>
+                            <div className="text-sm md:text-base text-text-secondary uppercase tracking-[0.2em] font-medium">Peer-reviewed research</div>
                             <div className="h-[1px] w-12 bg-white/20" />
                         </div>
                     </div>
