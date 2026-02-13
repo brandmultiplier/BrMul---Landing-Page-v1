@@ -59,7 +59,7 @@ export default function HeroZoomTitle({ titlePhrases = [], subtitle = "" }: Hero
     // Shared content structure to guarantee 100% alignment
     const Content = ({ variant }: { variant: 'base' | 'spotlight' }) => (
         <div className="flex flex-col gap-0 md:gap-2 w-full">
-            <h1 className="text-[clamp(2.5rem,9vw,9.5rem)] leading-[0.9] font-medium tracking-tighter">
+            <h1 className="text-[clamp(3.5rem,9vw,9.5rem)] leading-[0.9] font-medium tracking-tighter">
                 {titlePhrases.map((word, i) => (
                     <span
                         key={i}
@@ -72,7 +72,7 @@ export default function HeroZoomTitle({ titlePhrases = [], subtitle = "" }: Hero
                     </span>
                 ))}
             </h1>
-            <h2 className={`text-[clamp(1.2rem,5vw,7rem)] leading-[0.9] tracking-tighter font-light transition-colors duration-200 ${variant === 'spotlight' ? "text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.3)]" : "text-white/40"
+            <h2 className={`text-[clamp(1.5rem,5vw,7rem)] leading-[0.9] tracking-tighter font-light transition-colors duration-200 ${variant === 'spotlight' ? "text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.3)]" : "text-white/40"
                 }`}>
                 Your team <span className={variant === 'base' ? "text-[#F36901]" : ""}>can’t</span>.
             </h2>

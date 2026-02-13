@@ -112,6 +112,7 @@ export default function Alternatives() {
                         </div>
                     </motion.div>
                 </div>
+            </div>
 
                 <div className="max-w-3xl mx-auto text-center mt-20">
                     <p className="text-xl text-text-secondary leading-relaxed">
