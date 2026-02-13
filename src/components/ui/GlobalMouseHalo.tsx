@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useSpring, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { motion, useSpring, useScroll, useTransform } from "framer-motion";
 
 export default function GlobalMouseHalo() {
     const springConfig = { damping: 40, stiffness: 200, mass: 1 };
@@ -10,8 +10,9 @@ export default function GlobalMouseHalo() {
     const isMobile = useRef(false);
     const rafId = useRef<number>(0);
 
-    // Scroll-linked vertical position for mobile
     const { scrollY } = useScroll();
+    // Fade out after scrolling past hero (first viewport height)
+    const haloOpacity = useTransform(scrollY, [0, 600, 900], [1, 0.6, 0]);
 
     useEffect(() => {
         isMobile.current = "ontouchstart" in window || navigator.maxTouchPoints > 0;
@@ -56,22 +57,22 @@ export default function GlobalMouseHalo() {
     return (
         <motion.div
             className="fixed top-0 left-0 w-[800px] h-[800px] pointer-events-none z-[9999]"
-            style={{ x, y }}
+            style={{ x, y, opacity: haloOpacity }}
         >
             <div
                 className="w-full h-full rounded-full"
                 style={{
                     background: "conic-gradient(from 0deg, #a855f7, #6366f1, #0ea5e9, #a855f7)",
-                    filter: "blur(120px)",
-                    opacity: 0.25,
+                    filter: "blur(100px)",
+                    opacity: 0.15,
                 }}
             />
             <div
                 className="absolute inset-[25%] rounded-full"
                 style={{
-                    background: "radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%)",
+                    background: "radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%)",
                     filter: "blur(60px)",
-                    opacity: 0.6,
+                    opacity: 0.5,
                 }}
             />
         </motion.div>
