@@ -42,7 +42,6 @@ html {
   scroll-behavior: smooth;
   color-scheme: dark;
   overscroll-behavior-y: none;
-  overflow-x: hidden;
   /* Prevents black background reveal on scroll up */
 }
 
