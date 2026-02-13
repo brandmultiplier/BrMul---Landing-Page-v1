@@ -129,7 +129,7 @@ export default function Navbar() {
                                     <Link
                                         href={item.href}
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="text-4xl font-light text-white hover:text-gradient transition-colors block py-4 border-b border-white/5"
+                                        className="text-2xl font-light text-white hover:text-gradient transition-colors block py-3 border-b border-white/5"
                                     >
                                         {item.name}
                                     </Link>
