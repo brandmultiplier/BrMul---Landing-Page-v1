@@ -231,10 +231,9 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
             `}
             style={{ transitionDelay: `${index * 100}ms` }}
         >
-            <div className="flex items-center">
-
+            <div className="flex items-center w-full">
                 {/* Text Content */}
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 pr-2">
                     <h3 className="text-lg sm:text-xl font-medium mb-1 text-white group-hover:text-white transition-colors">
                         {item.title}
                     </h3>

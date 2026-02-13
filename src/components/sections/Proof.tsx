@@ -78,10 +78,6 @@ export default function Proof() {
                                 </div>
                             </div>
 
-                            <a href="#" className="inline-flex items-center text-white/60 hover:text-white transition-colors group text-sm font-medium uppercase tracking-wider">
-                                Read the Full Case Study
-                                <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
                         </div>
 
                         <div className="bg-[#050505] p-6 sm:p-8 md:p-12 lg:p-16 border-t lg:border-t-0 lg:border-l border-white/5 flex flex-col justify-center relative overflow-hidden">
