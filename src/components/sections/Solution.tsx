@@ -69,7 +69,7 @@ export default function Solution() {
                                     <div className="md:hidden text-3xl sm:text-4xl font-semibold text-white/15 leading-none mb-3">
                                         {step.num}
                                     </div>
-                                    <div className="text-accent-purple text-sm sm:text-base md:text-lg font-bold tracking-widest uppercase mb-2">
+                                    <div className="hidden sm:block text-accent-purple text-sm sm:text-base md:text-lg font-bold tracking-widest uppercase mb-2">
                                         Phase {step.num}
                                     </div>
                                     <h3 className="text-2xl sm:text-3xl text-white font-medium mb-3 sm:mb-4">{step.title}</h3>

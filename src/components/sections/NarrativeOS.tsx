@@ -95,20 +95,20 @@ export default function NarrativeOS() {
                                     deliverables.map((item, i) => (
                                         <div
                                             key={`mobile-${setIndex}-${i}`}
-                                            className="min-w-[220px] rounded-xl border border-white/10 bg-[#0A0A0A] px-4 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+                                            className="min-w-[240px] rounded-xl border border-white/10 bg-[#0A0A0A] px-4 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
                                         >
-                                            <div className="flex items-center gap-3 mb-2">
+                                            <div className="flex items-center gap-3 mb-3">
                                                 <div className="p-2 rounded-full bg-white/5 border border-white/10 text-white">
                                                     <item.icon className="w-4 h-4" />
                                                 </div>
-                                                <div className="text-xs uppercase tracking-widest text-white/40">
+                                                <div className="text-[10px] uppercase tracking-widest text-white/40">
                                                     Module 0{i + 1}
                                                 </div>
                                             </div>
-                                            <div className="text-sm font-medium text-white leading-snug mb-1">
+                                            <div className="text-base font-medium text-white leading-snug mb-1">
                                                 {item.title}
                                             </div>
-                                            <div className="text-xs text-text-secondary leading-relaxed">
+                                            <div className="text-sm text-text-secondary leading-relaxed">
                                                 {item.desc}
                                             </div>
                                         </div>
