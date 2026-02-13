@@ -29,7 +29,7 @@ export default function Science() {
                     <span className="text-white text-sm font-medium tracking-[0.2em] uppercase mb-8 block">
                         The Science
                     </span>
-                    <h2 className="text-5xl md:text-6xl text-white mb-8 font-medium tracking-tighter leading-tight">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-8 font-medium tracking-tighter leading-tight">
                         This Isn&apos;t Design. <br />
                         <span className="text-gradient">It&apos;s Biology.</span>
                     </h2>

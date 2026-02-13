@@ -68,7 +68,7 @@ export default function Pricing() {
                     <span className="text-white text-sm font-medium tracking-[0.2em] uppercase mb-8 block">
                         Transparent Pricing
                     </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tighter leading-tight mb-6">
+                    <h2 className="text-4xl md:text-5xl text-white font-medium tracking-tighter leading-tight mb-6">
                         Three Tiers. Clear Scope. <br />
                         <span className="text-white/40">No Surprises.</span>
                     </h2>

@@ -46,17 +46,17 @@ export default function NarrativeOS() {
     ];
 
     return (
-        <section ref={containerRef} className="relative min-h-screen w-full bg-bg-page flex items-center py-48 overflow-hidden">
+        <section ref={containerRef} className="relative min-h-screen w-full bg-bg-page flex items-center py-24 lg:py-32 overflow-hidden">
 
             {/* Background Elements */}
 
-            <ScrollFade className="container-width relative z-10 py-24 lg:py-32">
+            <ScrollFade className="container-width relative z-10">
                 {/* Header - Stacks on mobile, top of flow on desktop */}
                 <div className="mb-16 lg:mb-24 max-w-2xl">
                     <div className="text-sm font-semibold tracking-[0.2em] text-white uppercase mb-8 ml-1">
                         System Installation
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-8 font-medium tracking-tighter">
+                    <h2 className="text-4xl md:text-5xl text-white mb-8 font-medium tracking-tighter">
                         What You <br />
                         <span className="text-white/50">Actually <span className="text-[#F36901]">Get</span>.</span>
                     </h2>

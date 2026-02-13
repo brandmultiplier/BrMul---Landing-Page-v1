@@ -88,19 +88,19 @@ export default function Proof() {
                             <div className="absolute inset-0 bg-grid opacity-20" />
                             <div className="relative z-10 grid grid-cols-2 gap-x-12 gap-y-20">
                                 <div>
-                                    <div className="text-6xl md:text-8xl font-light text-white tracking-tighter mb-4">$1B</div>
+                                    <div className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tighter mb-4">$1B</div>
                                     <div className="text-xs font-bold text-text-tertiary uppercase tracking-[0.2em]">Attributed Revenue</div>
                                 </div>
                                 <div>
-                                    <div className="text-6xl md:text-8xl font-light text-white tracking-tighter mb-4">88%</div>
+                                    <div className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tighter mb-4">88%</div>
                                     <div className="text-xs font-bold text-text-tertiary uppercase tracking-[0.2em]">Win Rate</div>
                                 </div>
                                 <div>
-                                    <div className="text-6xl md:text-8xl font-light text-white tracking-tighter mb-4">#1</div>
+                                    <div className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tighter mb-4">#1</div>
                                     <div className="text-xs font-bold text-text-tertiary uppercase tracking-[0.2em]">Global Ranking</div>
                                 </div>
                                 <div>
-                                    <div className="text-6xl md:text-8xl font-light text-accent-indigo tracking-tighter mb-4">+34</div>
+                                    <div className="text-5xl md:text-6xl lg:text-7xl font-light text-accent-indigo tracking-tighter mb-4">+34</div>
                                     <div className="text-xs font-bold text-text-tertiary uppercase tracking-[0.2em]">NPS Increase</div>
                                 </div>
                             </div>

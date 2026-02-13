@@ -21,7 +21,7 @@ export default function FinalCTA() {
                     transition={{ duration: 0.6 }}
                     className="max-w-3xl mx-auto text-center mb-16"
                 >
-                    <h2 className="text-5xl md:text-6xl lg:text-7xl text-white font-medium tracking-tighter leading-tight mb-8">
+                    <h2 className="text-5xl md:text-6xl text-white font-medium tracking-tighter leading-tight mb-8">
                         <span className="text-[#F36901]">Stop</span> being <br />
                         the bottleneck.
                     </h2>

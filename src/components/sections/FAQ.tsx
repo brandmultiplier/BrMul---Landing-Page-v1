@@ -40,7 +40,7 @@ export default function FAQ() {
                     <span className="text-white text-sm font-medium tracking-[0.2em] uppercase mb-8 block">
                         Questions We Get
                     </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tight leading-tight">
+                    <h2 className="text-4xl md:text-5xl text-white font-medium tracking-tight leading-tight">
                         You're Skeptical. <span className="text-[#F36901]">Good</span>.
                     </h2>
                 </div>
