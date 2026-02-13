@@ -42,6 +42,7 @@ html {
   scroll-behavior: smooth;
   color-scheme: dark;
   overscroll-behavior-y: none;
+  overflow-x: hidden;
   /* Prevents black background reveal on scroll up */
 }
 
@@ -50,6 +51,7 @@ body {
   color: var(--text-primary);
   font-family: var(--font-sans), sans-serif;
   overflow-x: hidden;
+  max-width: 100vw;
   -webkit-font-smoothing: antialiased;
   overscroll-behavior-y: none;
 }
@@ -93,7 +95,8 @@ h5 {
   max-width: 1240px;
   /* Tighter default for laptops */
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 1536px) {
