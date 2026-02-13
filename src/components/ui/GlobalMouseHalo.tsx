@@ -62,16 +62,16 @@ export default function GlobalMouseHalo() {
                 className="w-full h-full rounded-full"
                 style={{
                     background: "conic-gradient(from 0deg, #a855f7, #6366f1, #0ea5e9, #a855f7)",
-                    filter: "blur(100px)",
-                    opacity: 0.15,
+                    filter: "blur(120px)",
+                    opacity: 0.25,
                 }}
             />
             <div
                 className="absolute inset-[25%] rounded-full"
                 style={{
-                    background: "radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%)",
+                    background: "radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%)",
                     filter: "blur(60px)",
-                    opacity: 0.5,
+                    opacity: 0.6,
                 }}
             />
         </motion.div>

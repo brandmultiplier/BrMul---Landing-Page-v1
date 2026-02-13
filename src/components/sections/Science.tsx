@@ -15,9 +15,8 @@ export default function Science() {
             {/* Neural Network Background */}
             <NeuralNetwork />
 
-            {/* Ambient Gradient Overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505] pointer-events-none" />
-            <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#050505]/50 to-[#050505] pointer-events-none" />
+            {/* Ambient Gradient Overlay for text readability — lighter to keep neural network visible */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-transparent to-[#050505]/60 pointer-events-none" />
 
             <ScrollFade className="container-width text-center relative z-10">
                 <motion.div
