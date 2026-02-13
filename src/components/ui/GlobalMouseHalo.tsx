@@ -1,30 +1,57 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useSpring, useMotionValue, useScroll, useTransform } from "framer-motion";
 
 export default function GlobalMouseHalo() {
-    // Mouse position state
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    // Spring configuration for smooth "magnetic" feel
     const springConfig = { damping: 40, stiffness: 200, mass: 1 };
-
-    // Motion values
     const x = useSpring(0, springConfig);
     const y = useSpring(0, springConfig);
+    const isMobile = useRef(false);
+    const rafId = useRef<number>(0);
+
+    // Scroll-linked vertical position for mobile
+    const { scrollY } = useScroll();
 
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            // Update target position (centered on cursor)
-            // Adjust offsets to center the 800px element
-            x.set(e.clientX - 400);
-            y.set(e.clientY - 400);
-        };
+        isMobile.current = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [x, y]);
+        if (!isMobile.current) {
+            // Desktop: follow mouse
+            const handleMouseMove = (e: MouseEvent) => {
+                x.set(e.clientX - 400);
+                y.set(e.clientY - 400);
+            };
+            window.addEventListener("mousemove", handleMouseMove);
+            return () => window.removeEventListener("mousemove", handleMouseMove);
+        } else {
+            // Mobile: gentle autonomous drift + scroll-linked Y
+            const vw = window.innerWidth;
+            let t = 0;
+
+            const drift = () => {
+                t += 0.008;
+                // Slow figure-8 drift horizontally
+                const driftX = Math.sin(t) * (vw * 0.3) + (vw / 2 - 400);
+                x.set(driftX);
+                rafId.current = requestAnimationFrame(drift);
+            };
+
+            // Follow scroll for Y position
+            const unsubScroll = scrollY.on("change", (latest) => {
+                y.set(latest + window.innerHeight * 0.3 - 400);
+            });
+
+            rafId.current = requestAnimationFrame(drift);
+            // Initialize Y
+            y.set(window.innerHeight * 0.3 - 400);
+
+            return () => {
+                cancelAnimationFrame(rafId.current);
+                unsubScroll();
+            };
+        }
+    }, [x, y, scrollY]);
 
     return (
         <motion.div
@@ -36,10 +63,9 @@ export default function GlobalMouseHalo() {
                 style={{
                     background: "conic-gradient(from 0deg, #a855f7, #6366f1, #0ea5e9, #a855f7)",
                     filter: "blur(100px)",
-                    opacity: 0.15, // Subtle enough to not interfere with text
+                    opacity: 0.15,
                 }}
             />
-            {/* Inner Core for intensity */}
             <div
                 className="absolute inset-[25%] rounded-full"
                 style={{
