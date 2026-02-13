@@ -233,11 +233,11 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
         >
             <div className="flex items-center w-full">
                 {/* Text Content */}
-                <div className="flex-1 min-w-0 pr-2">
-                    <h3 className="text-lg sm:text-xl font-medium mb-1 text-white group-hover:text-white transition-colors">
+                <div className="flex-1 min-w-0 w-full pr-2">
+                    <h3 className="text-lg sm:text-xl font-medium mb-1 text-white group-hover:text-white transition-colors break-words">
                         {item.title}
                     </h3>
-                    <p className="text-sm sm:text-base leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors">
+                    <p className="text-sm sm:text-base leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors break-words">
                         {item.desc}
                     </p>
                 </div>
