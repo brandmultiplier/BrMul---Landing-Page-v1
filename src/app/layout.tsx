@@ -55,7 +55,7 @@ export default function RootLayout({
       >
         <GlobalMouseHalo />
         <Navbar />
-        <main className="relative z-10 overflow-hidden">{children}</main>
+        <main className="relative z-10 overflow-x-clip">{children}</main>
       </body>
     </html>
   );
