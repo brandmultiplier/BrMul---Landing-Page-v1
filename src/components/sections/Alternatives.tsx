@@ -51,8 +51,12 @@ export default function Alternatives() {
                 </div>
 
                 {/* Comparison Table */}
-                <div className="max-w-6xl mx-auto overflow-x-auto">
-                    <div className="min-w-[800px] grid grid-cols-4 gap-6 mb-8 text-sm uppercase tracking-wider font-medium text-text-tertiary border-b border-white/10 pb-6">
+                <div className="relative max-w-6xl mx-auto">
+                    {/* Scroll Hint Overlay - Visible only when content overflows */}
+                    <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-bg-page to-transparent z-10 md:hidden pointer-events-none" />
+                    
+                    <div className="overflow-x-auto pb-4">
+                        <div className="min-w-[800px] grid grid-cols-4 gap-6 mb-8 text-sm uppercase tracking-wider font-medium text-text-tertiary border-b border-white/10 pb-6">
                         <div className="pl-6">Comparison</div>
                         <div>Brand Agency</div>
                         <div>Fractional CMO</div>
@@ -118,7 +122,7 @@ export default function Alternatives() {
                     </p>
                     <div className="mt-12">
                         <a href="#cta">
-                            <Button className="px-8 py-4 text-base">
+                            <Button className="px-8 py-4 text-base bg-gradient-to-r from-[#A855F7] to-[#6366F1] border border-white/20 shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)] text-white">
                                 Stop the Cycle <span className="ml-2">→</span>
                             </Button>
                         </a>

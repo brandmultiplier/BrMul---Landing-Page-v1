@@ -62,7 +62,7 @@ export default function Solution() {
                         >
                             {/* Number & Icon Area */}
                             <div className="md:w-1/2 flex justify-start md:justify-end relative">
-                                <div className={`text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold leading-none text-white/10 absolute -top-12 md:-top-24 ${i % 2 === 1 ? 'md:-right-24 right-4' : 'md:-left-28 right-4'} z-0`}>
+                                <div className={`text-[5rem] md:text-[10rem] font-bold leading-none text-white/10 absolute -top-8 md:-top-24 ${i % 2 === 1 ? 'md:-right-24 right-4' : 'md:-left-28 right-4'} z-0`}>
                                     {step.num}
                                 </div>
                                 <div className={`relative z-10 p-8 rounded-2xl bg-[#121217] border border-white/5 w-full max-w-md ${i % 2 === 1 ? 'md:ml-auto' : 'md:mr-auto'}`}>

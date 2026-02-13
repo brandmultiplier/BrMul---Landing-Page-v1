@@ -33,7 +33,7 @@ export default function Proof() {
                     className="clean-card mb-8 p-0 overflow-hidden border-accent-indigo/20 bg-[#080808]"
                 >
                     <div className="grid lg:grid-cols-2 min-h-[500px]">
-                        <div className="p-12 md:p-16 flex flex-col justify-center bg-gradient-to-br from-[#0A0A0A] to-[#050505] relative">
+                        <div className="p-8 md:p-16 flex flex-col justify-center bg-gradient-to-br from-[#0A0A0A] to-[#050505] relative">
                             {/* Corner Accent */}
                             <div className="absolute top-0 left-0 w-32 h-32 bg-accent-indigo/5 blur-[80px]" />
 
@@ -84,9 +84,9 @@ export default function Proof() {
                             </a>
                         </div>
 
-                        <div className="bg-[#050505] p-12 md:p-16 border-l border-white/5 flex flex-col justify-center relative overflow-hidden">
+                        <div className="bg-[#050505] p-8 md:p-16 border-l border-white/5 flex flex-col justify-center relative overflow-hidden">
                             <div className="absolute inset-0 bg-grid opacity-20" />
-                            <div className="relative z-10 grid grid-cols-2 gap-x-12 gap-y-20">
+                            <div className="relative z-10 grid grid-cols-2 gap-x-8 gap-y-12 md:gap-x-12 md:gap-y-20">
                                 <div>
                                     <div className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tighter mb-4">$1B</div>
                                     <div className="text-xs font-bold text-text-tertiary uppercase tracking-[0.2em]">Attributed Revenue</div>

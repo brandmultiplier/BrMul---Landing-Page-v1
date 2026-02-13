@@ -173,7 +173,7 @@ export default function NarrativeOS() {
 
                 <div className="text-center mt-20">
                     <a href="#cta">
-                        <Button className="text-base px-8 py-4">
+                        <Button className="text-base px-8 py-4 bg-gradient-to-r from-[#A855F7] to-[#6366F1] border border-white/20 shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)] text-white">
                             Plug In Your System <span className="ml-2">→</span>
                         </Button>
                     </a>
