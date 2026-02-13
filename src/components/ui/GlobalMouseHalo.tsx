@@ -1,74 +1,45 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useSpring, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function GlobalMouseHalo() {
+    // Mouse position state
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+    // Spring configuration for smooth "magnetic" feel
     const springConfig = { damping: 40, stiffness: 200, mass: 1 };
+
+    // Motion values
     const x = useSpring(0, springConfig);
     const y = useSpring(0, springConfig);
-    const isMobile = useRef(false);
-    const rafId = useRef<number>(0);
-
-    const { scrollY } = useScroll();
-    // Fade out after scrolling past hero — MOBILE ONLY
-    const scrollOpacity = useTransform(scrollY, [0, 600, 900], [1, 0.6, 0]);
-    const [isTouch, setIsTouch] = useState(false);
 
     useEffect(() => {
-        isMobile.current = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-        setIsTouch(isMobile.current);
+        const handleMouseMove = (e: MouseEvent) => {
+            // Update target position (centered on cursor)
+            // Adjust offsets to center the 800px element
+            x.set(e.clientX - 400);
+            y.set(e.clientY - 400);
+        };
 
-        if (!isMobile.current) {
-            // Desktop: follow mouse
-            const handleMouseMove = (e: MouseEvent) => {
-                x.set(e.clientX - 400);
-                y.set(e.clientY - 400);
-            };
-            window.addEventListener("mousemove", handleMouseMove);
-            return () => window.removeEventListener("mousemove", handleMouseMove);
-        } else {
-            // Mobile: gentle autonomous drift + scroll-linked Y
-            const vw = window.innerWidth;
-            let t = 0;
-
-            const drift = () => {
-                t += 0.008;
-                // Slow figure-8 drift horizontally
-                const driftX = Math.sin(t) * (vw * 0.3) + (vw / 2 - 400);
-                x.set(driftX);
-                rafId.current = requestAnimationFrame(drift);
-            };
-
-            // Follow scroll for Y position
-            const unsubScroll = scrollY.on("change", (latest) => {
-                y.set(latest + window.innerHeight * 0.3 - 400);
-            });
-
-            rafId.current = requestAnimationFrame(drift);
-            // Initialize Y
-            y.set(window.innerHeight * 0.3 - 400);
-
-            return () => {
-                cancelAnimationFrame(rafId.current);
-                unsubScroll();
-            };
-        }
-    }, [x, y, scrollY]);
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, [x, y]);
 
     return (
         <motion.div
-            className="fixed top-0 left-0 w-[800px] h-[800px] pointer-events-none z-[9999]"
-            style={{ x, y, opacity: isTouch ? scrollOpacity : 1 }}
+            className="fixed top-0 left-0 w-[800px] h-[800px] pointer-events-none z-0 mix-blend-screen"
+            style={{ x, y }}
         >
             <div
                 className="w-full h-full rounded-full"
                 style={{
                     background: "conic-gradient(from 0deg, #a855f7, #6366f1, #0ea5e9, #a855f7)",
                     filter: "blur(100px)",
-                    opacity: 0.15,
+                    opacity: 0.15, // Subtle enough to not interfere with text
                 }}
             />
+            {/* Inner Core for intensity */}
             <div
                 className="absolute inset-[25%] rounded-full"
                 style={{
