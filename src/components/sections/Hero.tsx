@@ -35,7 +35,7 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="mb-10 md:mb-16 w-full text-center flex justify-center z-20 relative"
+                    className="mb-2 md:mb-6 w-full text-center flex justify-center z-20 relative"
                 >
                     <div className="mb-0">
                         <HeroZoomTitle
