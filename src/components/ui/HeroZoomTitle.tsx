@@ -70,7 +70,7 @@ export default function HeroZoomTitle({ titlePhrases = [], subtitle = "" }: Hero
                         >
                             {word}
                         </span>
-                        {(i === 0 || i === 2) && <br className="md:hidden" />}
+                        {i === 2 && <br className="md:hidden" />}
                     </React.Fragment>
                 ))}
             </h1>
