@@ -46,7 +46,7 @@ export default function NarrativeOS() {
     ];
 
     return (
-        <section ref={containerRef} className="relative min-h-screen w-full bg-bg-page flex items-center py-24 lg:py-32 overflow-x-clip">
+        <section ref={containerRef} className="relative min-h-screen w-full bg-bg-page flex items-center py-24 lg:py-32 overflow-hidden">
 
             {/* Background Elements */}
 
@@ -69,53 +69,44 @@ export default function NarrativeOS() {
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-                    {/* Left Column: Static List (No longer controls animation directly) */}
-                    <div className="relative z-10 space-y-5 sm:space-y-7">
+                    {/* Left Column: Static List — hidden on mobile, shown on md+ */}
+                    <div className="hidden md:block relative z-10 space-y-5 sm:space-y-7">
                         {deliverables.map((item, i) => (
                             <NarrativeItem
                                 key={i}
                                 item={item}
                                 index={i}
-                                // We pass the global "isInView" to highlight all items or cascade them if needed
-                                // helping the user see the connection, but the main "BAM" is the cards.
                                 show={isInView}
                             />
                         ))}
                     </div>
 
-                    {/* Mobile-only animated module strip */}
-                    <div className="md:hidden relative">
-                        <div className="relative overflow-hidden">
+                    {/* Mobile-only: simple stacked cards (no horizontal scroll) */}
+                    <div className="md:hidden relative z-10 space-y-4">
+                        {deliverables.map((item, i) => (
                             <motion.div
-                                className="flex gap-4"
-                                animate={{ x: ["0%", "-50%"] }}
-                                transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+                                key={`mobile-${i}`}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ delay: i * 0.1 }}
+                                className="rounded-xl border border-white/10 bg-[#0A0A0A] px-5 py-5 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
                             >
-                                {[...Array(2)].map((_, setIndex) => (
-                                    deliverables.map((item, i) => (
-                                        <div
-                                            key={`mobile-${setIndex}-${i}`}
-                                            className="min-w-[240px] rounded-xl border border-white/10 bg-[#0A0A0A] px-4 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
-                                        >
-                                            <div className="flex items-center gap-3 mb-3">
-                                                <div className="p-2 rounded-full bg-white/5 border border-white/10 text-white">
-                                                    <item.icon className="w-4 h-4" />
-                                                </div>
-                                                <div className="text-[10px] uppercase tracking-widest text-white/40">
-                                                    Module 0{i + 1}
-                                                </div>
-                                            </div>
-                                            <div className="text-base font-medium text-white leading-snug mb-1">
-                                                {item.title}
-                                            </div>
-                                            <div className="text-sm text-text-secondary leading-relaxed">
-                                                {item.desc}
-                                            </div>
-                                        </div>
-                                    ))
-                                ))}
+                                <div className="flex items-center gap-3 mb-3">
+                                    <div className="p-2 rounded-full bg-white/5 border border-white/10 text-white">
+                                        <item.icon className="w-4 h-4" />
+                                    </div>
+                                    <div className="text-[10px] uppercase tracking-widest text-white/40">
+                                        Module 0{i + 1}
+                                    </div>
+                                </div>
+                                <div className="text-base font-medium text-white leading-snug mb-1.5">
+                                    {item.title}
+                                </div>
+                                <div className="text-sm text-text-secondary leading-relaxed">
+                                    {item.desc}
+                                </div>
                             </motion.div>
-                        </div>
+                        ))}
                     </div>
 
                     {/* Right Column: Card Fan (Triggers on Section View) */}
