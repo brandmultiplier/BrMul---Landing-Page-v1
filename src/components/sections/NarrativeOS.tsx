@@ -46,7 +46,7 @@ export default function NarrativeOS() {
     ];
 
     return (
-        <section ref={containerRef} className="relative min-h-screen w-full bg-bg-page flex items-center py-24 lg:py-32 overflow-hidden">
+        <section ref={containerRef} className="relative min-h-screen w-full bg-bg-page flex items-center py-24 lg:py-32 overflow-x-clip">
 
             {/* Background Elements */}
 
@@ -237,7 +237,7 @@ function NarrativeItem({ item, index, show }: { item: any, index: number, show: 
                     <h3 className="text-lg sm:text-xl font-medium mb-1 text-white group-hover:text-white transition-colors break-words">
                         {item.title}
                     </h3>
-                    <p className="text-sm sm:text-base leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors break-words">
+                    <p className="text-sm sm:text-base leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors break-words overflow-hidden">
                         {item.desc}
                     </p>
                 </div>
