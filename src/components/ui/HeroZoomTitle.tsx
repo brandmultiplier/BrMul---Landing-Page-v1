@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, useMotionTemplate, useSpring } from "framer-motion";
 
 interface HeroZoomTitleProps {
@@ -61,15 +61,17 @@ export default function HeroZoomTitle({ titlePhrases = [], subtitle = "" }: Hero
         <div className="flex flex-col gap-0 sm:gap-1 md:gap-2 w-full">
             <h1 className="text-[clamp(3.1rem,9vw,9.5rem)] leading-[0.9] font-medium tracking-tighter">
                 {titlePhrases.map((word, i) => (
-                    <span
-                        key={i}
-                        className={`inline-block mr-2 md:mr-8 transition-colors duration-200 ${variant === 'spotlight'
-                            ? "text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.5)]"  // Spotlight: Pure White + Glow
-                            : (i > 0 && i < 3 ? "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1]" : "text-white") // Base: Visible Gradient & White
-                            }`}
-                    >
-                        {word}
-                    </span>
+                    <React.Fragment key={i}>
+                        <span
+                            className={`inline-block mr-2 md:mr-8 transition-colors duration-200 ${variant === 'spotlight'
+                                ? "text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.5)]"  // Spotlight: Pure White + Glow
+                                : (i > 0 && i < 3 ? "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1]" : "text-white") // Base: Visible Gradient & White
+                                }`}
+                        >
+                            {word}
+                        </span>
+                        {(i === 0 || i === 2) && <br className="md:hidden" />}
+                    </React.Fragment>
                 ))}
             </h1>
             <h2 className={`mt-2 sm:mt-3 text-[clamp(1.4rem,4.8vw,7rem)] leading-[0.9] tracking-tighter font-light transition-colors duration-200 ${variant === 'spotlight' ? "text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.3)]" : "text-white/40"
