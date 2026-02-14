@@ -51,6 +51,7 @@ const testimonials = [
         metric: "+63% web revenue, +606% referral",
         metricDetail: "Website revenue +63% YOY, referral revenue +606%",
         stars: 5,
+        image: "/minjung-song.png",
     },
 ];
 
