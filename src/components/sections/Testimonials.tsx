@@ -23,6 +23,7 @@ const testimonials = [
         metric: "+41% revenue YOY",
         metricDetail: "Increased revenue 41% year-over-year",
         stars: 5,
+        image: "/jeff-jones.png",
     },
     {
         name: "Yair Levin",
