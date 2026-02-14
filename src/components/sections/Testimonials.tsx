@@ -14,6 +14,7 @@ const testimonials = [
         metric: "Regained 25% market share",
         metricDetail: "Moved from Gartner 'Visionary' to 'Leader' status",
         stars: 5,
+        image: "/jesse-levin.png",
     },
     {
         name: "Jeff Jones",
