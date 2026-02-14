@@ -33,6 +33,7 @@ const testimonials = [
         metric: "+18% conversion rates",
         metricDetail: "Increased conversion rates by 18%",
         stars: 5,
+        image: "/yair-levin.png",
     },
     {
         name: "James Tian",
