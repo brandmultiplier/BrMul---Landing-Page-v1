@@ -217,3 +217,21 @@ h5 {
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+/* Testimonials infinite scroll */
+@keyframes testimonials-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-testimonials-scroll {
+  animation: testimonials-scroll 60s linear infinite;
+}
+
+.animate-testimonials-scroll.paused {
+  animation-play-state: paused;
+}

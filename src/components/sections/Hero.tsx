@@ -53,7 +53,7 @@ export default function Hero() {
                     className="max-w-2xl mx-auto space-y-6 sm:space-y-8 md:space-y-10 text-center relative z-20"
                 >
                     <p className="text-base sm:text-lg md:text-xl text-text-secondary font-light leading-relaxed max-w-xl mx-auto">
-                        We extract what’s in your head, and build the system that makes it travel without you—so your team closes with founder-level conviction, without founder dependency.
+                        We extract what’s in your head, and build the system that makes it travel without you - so your team closes with founder-level conviction, without founder dependency.
                     </p>
 
                     <div className="flex flex-col items-center justify-center gap-6">

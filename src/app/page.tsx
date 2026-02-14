@@ -9,6 +9,7 @@ import Protagonists from "@/components/sections/Protagonists";
 import Stakes from "@/components/sections/Stakes";
 import Science from "@/components/sections/Science";
 import Pricing from "@/components/sections/Pricing";
+import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/navigation/Footer";
@@ -42,6 +43,9 @@ export default function Home() {
 
       {/* Section 11: Pricing */}
       <Pricing />
+
+      {/* Social Proof - Testimonials */}
+      <Testimonials />
 
       {/* Section 9: Final CTA - Form & conversion */}
       <FinalCTA />

@@ -9,6 +9,7 @@ const navItems = [
     { name: "Narrative OS", href: "#system" },
     { name: "Case Studies", href: "#case-studies" },
     { name: "Pricing Plan", href: "#pricing" },
+    { name: "Testimonials", href: "#testimonials" },
 ];
 
 export default function Navbar() {
