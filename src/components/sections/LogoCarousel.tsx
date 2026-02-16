@@ -28,17 +28,13 @@ const logos = [
 export default function LogoCarousel() {
     return (
         <section className="py-16 sm:py-24 bg-bg-page relative overflow-hidden border-t border-white/5">
-            <div className="container-width text-center">
+            <div className="container-width text-left sm:text-center">
                 <p className="text-sm font-bold text-text-tertiary uppercase tracking-[0.2em] mb-12 sm:mb-16">
                     Trusted by SMBs & Enterprise alike
                 </p>
             </div>
 
             <div className="relative overflow-hidden">
-                {/* Gradient fade edges - Hidden on mobile, visible on sm+ */}
-                <div className="hidden sm:block absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-[#000000] to-transparent z-10 pointer-events-none" />
-                <div className="hidden sm:block absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-[#000000] to-transparent z-10 pointer-events-none" />
-
                 <div className="animate-logo-scroll flex w-max">
                     {[...logos, ...logos].map((logo, i) => (
                         <div
@@ -49,7 +45,7 @@ export default function LogoCarousel() {
                             <img
                                 src={logo.src}
                                 alt={logo.alt}
-                                className="h-12 sm:h-16 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
+                                className="h-14 sm:h-20 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
                                 style={{ filter: "brightness(0) invert(1)" }}
                             />
                         </div>
