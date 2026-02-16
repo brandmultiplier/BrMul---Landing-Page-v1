@@ -25,15 +25,15 @@ export default function Problem() {
                         Answer one question: <span className="font-bold">Can your sales team consistently articulate your value proposition—in a way that resonates with buyers—without you in the room?</span>
                     </p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 mt-12 sm:mt-16">
-                        <div className="space-y-3 sm:space-y-4 border-l-2 md:border-l-0 md:border-t-2 border-white/10 pl-6 sm:pl-8 md:pl-0 md:pt-8 py-2 md:py-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 mt-12 sm:mt-16 text-left">
+                        <div className="space-y-3 sm:space-y-4 border-l-2 border-white/10 pl-6 sm:pl-8 py-2">
                             <p className="text-sm text-text-tertiary uppercase tracking-wider font-semibold">What you say</p>
                             <p className="text-2xl sm:text-3xl md:text-4xl text-white font-light tracking-tight">
                                 &ldquo;We just need to find the right person.&rdquo;
                             </p>
                         </div>
 
-                        <div className="space-y-3 sm:space-y-4 border-l-2 md:border-l-0 md:border-t-2 border-accent-purple pl-6 sm:pl-8 md:pl-0 md:pt-8 py-2 md:py-0">
+                        <div className="space-y-3 sm:space-y-4 border-l-2 border-accent-purple pl-6 sm:pl-8 py-2">
                             <p className="text-sm text-accent-purple uppercase tracking-wider font-semibold">What it means</p>
                             <p className="text-base sm:text-lg md:text-2xl text-text-secondary leading-relaxed font-light">
                                 You&apos;re framing a systems failure as a talent search because talent searches feel solvable and systems overhauls feel threatening.
