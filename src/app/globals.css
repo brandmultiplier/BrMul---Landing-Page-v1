@@ -235,3 +235,17 @@ h5 {
 .animate-testimonials-scroll.paused {
   animation-play-state: paused;
 }
+
+/* Logo carousel infinite scroll */
+@keyframes logo-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-logo-scroll {
+  animation: logo-scroll 40s linear infinite;
+}

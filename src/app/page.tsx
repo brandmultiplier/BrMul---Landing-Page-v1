@@ -8,6 +8,7 @@ import Proof from "@/components/sections/Proof";
 import Protagonists from "@/components/sections/Protagonists";
 import Stakes from "@/components/sections/Stakes";
 import Science from "@/components/sections/Science";
+import LogoCarousel from "@/components/sections/LogoCarousel";
 import Pricing from "@/components/sections/Pricing";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
@@ -40,6 +41,9 @@ export default function Home() {
 
       {/* Section 8: Scientific Foundation - Neuroscience backing */}
       <Science />
+
+      {/* Logo Carousel */}
+      <LogoCarousel />
 
       {/* Section 11: Pricing */}
       <Pricing />
