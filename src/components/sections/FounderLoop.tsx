@@ -24,7 +24,7 @@ export default function FounderLoop() {
                     className="flex flex-col absolute w-full will-change-transform"
                     animate={{ y: ["0%", "-75%"] }}
                     transition={{
-                        duration: 26,
+                        duration: 60,
                         repeat: Infinity,
                         ease: "linear",
                     }}

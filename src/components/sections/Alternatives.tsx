@@ -57,7 +57,7 @@ export default function Alternatives() {
 
                     {/* Desktop: Original horizontal table */}
                     <div className="hidden md:block">
-                        <div className="grid grid-cols-4 gap-6 mb-8 text-sm uppercase tracking-wider font-medium text-text-tertiary border-b border-white/10 pb-6">
+                        <div className="grid grid-cols-4 gap-6 mb-8 text-base uppercase tracking-wider font-bold text-white border-b border-white/10 pb-6">
                             <div className="pl-6">Comparison</div>
                             <div>Brand Agency</div>
                             <div>Fractional CMO</div>
@@ -74,7 +74,7 @@ export default function Alternatives() {
                                     className="grid grid-cols-4 gap-6 p-6 rounded-xl hover:bg-white/5 transition-colors items-center group relative overflow-hidden"
                                 >
                                     <div className="absolute top-0 bottom-0 right-0 w-[25%] bg-accent-purple/5 -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <div className="font-medium text-white/60">{row.feature}</div>
+                                    <div className="text-lg font-semibold text-white">{row.feature}</div>
                                     <div className="text-text-secondary flex items-start gap-2">
                                         <X className="w-4 h-4 text-red-500/50 mt-1 shrink-0" />
                                         <span>{row.agency}</span>
@@ -155,7 +155,7 @@ export default function Alternatives() {
                     <p className="text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed">
                         Every founder we work with has been burned before. Agencies that didn&apos;t "get" them. Marketing hires that didn&apos;t work out. Fractional CMOs who brought expertise in but couldn&apos;t pull the founder&apos;s expertise out.
                     </p>
-                    <p className="text-white mt-5 sm:mt-6 text-base sm:text-lg font-medium">
+                    <p className="text-white mt-5 sm:mt-6 text-xl sm:text-2xl font-bold">
                         We solve a different problem: extraction and systematization.
                     </p>
                     <div className="mt-10 sm:mt-12">

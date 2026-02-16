@@ -47,7 +47,7 @@ export default function Solution() {
                         <span className="text-white/40">We Install <span className="text-[#F36901]">Systems</span>.</span>
                     </h2>
                     <p className="text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed max-w-3xl mx-auto">
-                        A Narrative Operating System extracts what&apos;s in your head, codifies it into architecture, and deploys it across your team. The system stays. We don&apos;t have to.
+                        A Narrative Operating System extracts what&apos;s in your head, codifies it into architecture, and deploys it across your team. <br className="hidden sm:block" /> The system stays. We don&apos;t have to.
                     </p>
                 </div>
 
