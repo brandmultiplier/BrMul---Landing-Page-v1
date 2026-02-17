@@ -28,7 +28,7 @@ const logos = [
 export default function LogoCarousel() {
     return (
         <section className="py-16 sm:py-24 bg-bg-page relative overflow-hidden border-t border-white/5">
-            <div className="container-width text-left sm:text-center">
+            <div className="container-width text-center">
                 <p className="text-sm font-bold text-text-tertiary uppercase tracking-[0.2em] mb-12 sm:mb-16">
                     Trusted by SMBs & Enterprise alike
                 </p>
