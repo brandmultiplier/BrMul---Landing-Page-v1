@@ -1,13 +1,91 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 import ScrollFade from "@/components/ui/ScrollFade";
 
+const WEBHOOK_URL =
+    "https://brandmultiplier.app.n8n.cloud/webhook/f108ff75-70c3-4845-be05-5fb993711337";
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const EMPTY_FORM = {
+    first_name: "",
+    last_name: "",
+    work_email: "",
+    company_name: "",
+    approximate_arr: "",
+};
+
 export default function FinalCTA() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-20%" });
+
+    const [formData, setFormData] = useState(EMPTY_FORM);
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [submitError, setSubmitError] = useState("");
+
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        // Clear the error for this field as the user types
+        if (errors[name]) {
+            setErrors((prev) => {
+                const next = { ...prev };
+                delete next[name];
+                return next;
+            });
+        }
+    };
+
+    const validate = (): boolean => {
+        const next: Record<string, string> = {};
+
+        if (!formData.first_name.trim()) next.first_name = "First name is required.";
+        if (!formData.last_name.trim()) next.last_name = "Last name is required.";
+        if (!formData.work_email.trim()) {
+            next.work_email = "Work email is required.";
+        } else if (!EMAIL_REGEX.test(formData.work_email.trim())) {
+            next.work_email = "Please enter a valid email address.";
+        }
+        if (!formData.company_name.trim()) next.company_name = "Company name is required.";
+        if (!formData.approximate_arr) next.approximate_arr = "Please select your approximate ARR.";
+
+        setErrors(next);
+        return Object.keys(next).length === 0;
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!validate()) return;
+
+        setIsLoading(true);
+        setSubmitError("");
+
+        try {
+            const response = await fetch(WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+                setFormData(EMPTY_FORM);
+            } else {
+                setSubmitError("Something went wrong. Please try again.");
+            }
+        } catch {
+            setSubmitError("Something went wrong. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <section ref={sectionRef} id="cta" className="section-spacing bg-bg-page">
@@ -37,54 +115,121 @@ export default function FinalCTA() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="max-w-md mx-auto clean-card bg-[#0A0A0A]"
                 >
-                    <form className="space-y-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input
-                                type="text"
-                                placeholder="First Name"
-                                className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Last Name"
-                                className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
-                            />
+                    {submitted ? (
+                        <div className="text-center py-8 space-y-3">
+                            <p className="text-white text-lg font-medium">Thank you!</p>
+                            <p className="text-text-secondary text-sm">
+                                We&apos;ll be in touch shortly.
+                            </p>
                         </div>
-                        <input
-                            type="text"
-                            placeholder="Work Email"
-                            className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Company Name"
-                            className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
-                        />
-                        <div className="relative">
-                            <select
-                                className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors appearance-none cursor-pointer"
-                                defaultValue=""
-                            >
-                                <option value="" disabled className="bg-[#0A0A0A] text-text-tertiary">Approximate ARR</option>
-                                <option value="under-3m" className="bg-[#0A0A0A]">Under $3M</option>
-                                <option value="3m-10m" className="bg-[#0A0A0A]">$3M - $10M</option>
-                                <option value="10m-50m" className="bg-[#0A0A0A]">$10M - $50M</option>
-                                <option value="50m+" className="bg-[#0A0A0A]">$50M+</option>
-                            </select>
-                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-text-tertiary">
-                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                            {/* First Name + Last Name */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="flex flex-col gap-1">
+                                    <input
+                                        type="text"
+                                        name="first_name"
+                                        placeholder="First Name"
+                                        value={formData.first_name}
+                                        onChange={handleChange}
+                                        className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
+                                    />
+                                    {errors.first_name && (
+                                        <p className="text-red-400 text-xs">{errors.first_name}</p>
+                                    )}
+                                </div>
+                                <div className="flex flex-col gap-1">
+                                    <input
+                                        type="text"
+                                        name="last_name"
+                                        placeholder="Last Name"
+                                        value={formData.last_name}
+                                        onChange={handleChange}
+                                        className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
+                                    />
+                                    {errors.last_name && (
+                                        <p className="text-red-400 text-xs">{errors.last_name}</p>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                        <button className="btn-primary w-full justify-center h-12">
-                            Schedule The Diagnostic
-                        </button>
-                        <p className="text-[10px] sm:text-xs text-text-tertiary text-center mt-4 uppercase tracking-wider flex flex-col gap-1">
-                            <span>30 minutes or less.</span>
-                            <span>Walk away knowing if your problem is structural, or not.</span>
-                        </p>
-                    </form>
+
+                            {/* Work Email */}
+                            <div className="flex flex-col gap-1">
+                                <input
+                                    type="email"
+                                    name="work_email"
+                                    placeholder="Work Email"
+                                    value={formData.work_email}
+                                    onChange={handleChange}
+                                    className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
+                                />
+                                {errors.work_email && (
+                                    <p className="text-red-400 text-xs">{errors.work_email}</p>
+                                )}
+                            </div>
+
+                            {/* Company Name */}
+                            <div className="flex flex-col gap-1">
+                                <input
+                                    type="text"
+                                    name="company_name"
+                                    placeholder="Company Name"
+                                    value={formData.company_name}
+                                    onChange={handleChange}
+                                    className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
+                                />
+                                {errors.company_name && (
+                                    <p className="text-red-400 text-xs">{errors.company_name}</p>
+                                )}
+                            </div>
+
+                            {/* Approximate ARR */}
+                            <div className="flex flex-col gap-1">
+                                <div className="relative">
+                                    <select
+                                        name="approximate_arr"
+                                        value={formData.approximate_arr}
+                                        onChange={handleChange}
+                                        className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors appearance-none cursor-pointer"
+                                    >
+                                        <option value="" disabled className="bg-[#0A0A0A] text-text-tertiary">Approximate ARR</option>
+                                        <option value="Under $3M" className="bg-[#0A0A0A]">Under $3M</option>
+                                        <option value="$3M - $10M" className="bg-[#0A0A0A]">$3M - $10M</option>
+                                        <option value="$10M - $50M" className="bg-[#0A0A0A]">$10M - $50M</option>
+                                        <option value="$50M+" className="bg-[#0A0A0A]">$50M+</option>
+                                    </select>
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-text-tertiary">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                {errors.approximate_arr && (
+                                    <p className="text-red-400 text-xs">{errors.approximate_arr}</p>
+                                )}
+                            </div>
+
+                            {/* Submit button */}
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="btn-primary w-full justify-center h-12 disabled:opacity-60 disabled:cursor-not-allowed"
+                            >
+                                {isLoading ? "Submitting..." : "Schedule The Diagnostic"}
+                            </button>
+
+                            {/* Network / server error */}
+                            {submitError && (
+                                <p className="text-red-400 text-xs text-center">{submitError}</p>
+                            )}
+
+                            <p className="text-[10px] sm:text-xs text-text-tertiary text-center mt-4 uppercase tracking-wider flex flex-col gap-1">
+                                <span>30 minutes or less.</span>
+                                <span>Walk away knowing if your problem is structural, or not.</span>
+                            </p>
+                        </form>
+                    )}
                 </motion.div>
             </ScrollFade>
         </section>
