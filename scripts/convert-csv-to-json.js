@@ -14,6 +14,25 @@ const result = Papa.parse(csvContent, {
 
 console.log('Total rows parsed:', result.data.length);
 
+// Function to extract first image URL from HTML content
+function extractFirstImageFromHtml(html) {
+  if (!html) return '';
+  
+  // Match img tags and extract src attribute
+  const imgRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/i;
+  const match = html.match(imgRegex);
+  
+  if (match && match[1]) {
+    const src = match[1];
+    // Only return if it's a valid URL (not a data URI or relative path)
+    if (src.startsWith('http://') || src.startsWith('https://')) {
+      return src;
+    }
+  }
+  
+  return '';
+}
+
 const posts = [];
 
 // Valid slug pattern: lowercase letters, numbers, hyphens only
@@ -43,6 +62,19 @@ for (const row of result.data) {
   // Skip if name is too short (likely invalid)
   if (name.length < 10) continue;
   
+  const postBody = row['Post Body'] || '';
+  let mainImage = row['Main Image'] || '';
+  let thumbnailImage = row['Thumbnail image'] || '';
+  
+  // Fallback: Extract first image from post body if no main/thumbnail image
+  if (!mainImage && !thumbnailImage) {
+    const extractedImage = extractFirstImageFromHtml(postBody);
+    if (extractedImage) {
+      mainImage = extractedImage;
+      thumbnailImage = extractedImage;
+    }
+  }
+  
   const post = {
     name: name,
     slug: slug,
@@ -52,10 +84,10 @@ for (const row of result.data) {
     createdOn: row['Created On'] || '',
     updatedOn: row['Updated On'] || '',
     publishedOn: row['Published On'] || '',
-    postBody: row['Post Body'] || '',
+    postBody: postBody,
     postSummary: row['Post Summary'] || '',
-    mainImage: row['Main Image'] || '',
-    thumbnailImage: row['Thumbnail image'] || '',
+    mainImage: mainImage,
+    thumbnailImage: thumbnailImage,
     featured: row['Featured?'] === 'TRUE',
     color: row['Color'] || '',
     author: row['Author'] || '',
@@ -118,3 +150,10 @@ authors.forEach(a => console.log(`  - ${a}`));
 const featuredPosts = uniquePosts.filter(p => p.featured);
 console.log(`\nFeatured posts: ${featuredPosts.length}`);
 featuredPosts.forEach(p => console.log(`  - ${p.name}`));
+
+// Image coverage stats
+const withImages = uniquePosts.filter(p => p.mainImage || p.thumbnailImage).length;
+const withoutImages = uniquePosts.filter(p => !p.mainImage && !p.thumbnailImage).length;
+console.log(`\nImage coverage:`);
+console.log(`  - Posts with images: ${withImages}`);
+console.log(`  - Posts without images: ${withoutImages}`);
