@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "https://webflow.brandmultiplier.ai/blog"
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://webflow.brandmultiplier.ai/blog/:path*"
+    }
+  ]
+}
