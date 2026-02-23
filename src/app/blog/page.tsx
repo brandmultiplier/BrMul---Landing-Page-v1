@@ -14,11 +14,12 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-black">
-      <section className="section-spacing pt-32 md:pt-40">
-        <div className="container-width">
+      <section className="pt-32 md:pt-40 pb-20">
+        {/* Full-width container with minimal padding */}
+        <div className="w-full px-4 sm:px-6 lg:px-8 max-w-[1800px] mx-auto">
           {/* Featured Post */}
           {featuredPost && (
-            <div className="mb-16 md:mb-24">
+            <div className="mb-16 md:mb-20">
               <BlogCard post={featuredPost} featured />
             </div>
           )}
@@ -26,8 +27,8 @@ export default function BlogPage() {
           {/* Divider */}
           <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12 md:mb-16" />
 
-          {/* Blog Grid - 2 columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+          {/* Blog Grid - 2 columns full width */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             {remainingPosts.map((post) => (
               <BlogCard key={post.slug} post={post} />
             ))}

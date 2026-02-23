@@ -54,7 +54,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
       <article className="h-full flex flex-col">
-        <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-white/5 mb-6">
+        <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-white/5 mb-6">
           {imageUrl ? (
             <Image
               src={imageUrl}
@@ -67,14 +67,20 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
             <div className="w-full h-full bg-gradient-to-br from-accent-purple/20 to-accent-indigo/20" />
           )}
         </div>
-        <h3 className="text-xl md:text-2xl font-medium text-white leading-snug group-hover:text-accent-purple transition-colors mb-3">
+        <h3 className="text-xl md:text-2xl font-semibold text-white leading-snug group-hover:text-accent-purple transition-colors mb-3">
           {post.name}
         </h3>
         {post.postSummary && (
-          <p className="text-text-secondary text-base leading-relaxed line-clamp-3 flex-1">
+          <p className="text-text-secondary text-sm leading-relaxed line-clamp-2 mb-4">
             {post.postSummary}
           </p>
         )}
+        <span className="inline-flex items-center gap-2 text-[#F36901] font-medium uppercase tracking-wider text-xs group-hover:gap-3 transition-all mt-auto">
+          Explore Further
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </span>
       </article>
     </Link>
   );
