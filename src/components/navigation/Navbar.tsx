@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 const navItems = [
-    { name: "Founder's Trap", href: "#trap" },
-    { name: "Narrative OS", href: "#system" },
-    { name: "Case Studies", href: "#case-studies" },
-    { name: "Pricing Plan", href: "#pricing" },
-    { name: "Testimonials", href: "#testimonials" },
+    { name: "Founder's Trap", href: "/#trap" },
+    { name: "Narrative OS", href: "/#system" },
+    { name: "Case Studies", href: "/#case-studies" },
+    { name: "Pricing Plan", href: "/#pricing" },
+    { name: "Testimonials", href: "/#testimonials" },
 ];
 
 export default function Navbar() {
@@ -74,7 +74,7 @@ export default function Navbar() {
                         <div className="hidden md:flex items-center gap-6">
                             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                 <Link
-                                    href="#cta"
+                                    href="/#cta"
                                     className="relative px-5 py-2.5 text-sm font-medium text-white rounded-full overflow-hidden group"
                                 >
                                     <span className="absolute inset-0 bg-gradient-to-r from-[#a855f7] to-[#6366f1] opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
@@ -143,7 +143,7 @@ export default function Navbar() {
                                 className="pt-12"
                             >
                                 <Link
-                                    href="#cta"
+                                    href="/#cta"
                                     onClick={() => setMobileMenuOpen(false)}
                                     className="btn btn-primary w-full text-center justify-center text-lg"
                                 >

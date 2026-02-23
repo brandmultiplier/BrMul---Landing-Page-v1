@@ -54,7 +54,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
       <article className="h-full flex flex-col">
-        <div className="relative aspect-[16/10] rounded-lg overflow-hidden bg-white/5 mb-4">
+        <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-white/5 mb-6">
           {imageUrl ? (
             <Image
               src={imageUrl}
@@ -67,11 +67,11 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
             <div className="w-full h-full bg-gradient-to-br from-accent-purple/20 to-accent-indigo/20" />
           )}
         </div>
-        <h3 className="text-lg md:text-xl font-medium text-white leading-snug group-hover:text-accent-purple transition-colors mb-2">
+        <h3 className="text-xl md:text-2xl font-medium text-white leading-snug group-hover:text-accent-purple transition-colors mb-3">
           {post.name}
         </h3>
         {post.postSummary && (
-          <p className="text-text-secondary text-sm leading-relaxed line-clamp-3 flex-1">
+          <p className="text-text-secondary text-base leading-relaxed line-clamp-3 flex-1">
             {post.postSummary}
           </p>
         )}

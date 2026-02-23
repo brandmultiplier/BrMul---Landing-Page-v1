@@ -26,8 +26,8 @@ export default function BlogPage() {
           {/* Divider */}
           <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12 md:mb-16" />
 
-          {/* Blog Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          {/* Blog Grid - 2 columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             {remainingPosts.map((post) => (
               <BlogCard key={post.slug} post={post} />
             ))}
