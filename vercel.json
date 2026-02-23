@@ -1,12 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/blog",
-      "destination": "https://webflow.brandmultiplier.ai/blog"
+      "source": "/blog/:path*",
+      "destination": "https://brandmultiplier-ai.webflow.io/blog/:path*"
     },
     {
-      "source": "/blog/:path*",
-      "destination": "https://webflow.brandmultiplier.ai/blog/:path*"
+      "source": "/blog",
+      "destination": "https://brandmultiplier-ai.webflow.io/blog"
     }
   ]
 }
