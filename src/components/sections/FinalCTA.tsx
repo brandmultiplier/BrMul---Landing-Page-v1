@@ -10,6 +10,34 @@ const WEBHOOK_URL =
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const BLOCKED_EMAIL_DOMAINS = [
+    'gmail.com',
+    'yahoo.com',
+    'yahoo.co.in',
+    'yahoo.co.uk',
+    'hotmail.com',
+    'outlook.com',
+    'live.com',
+    'aol.com',
+    'icloud.com',
+    'me.com',
+    'mac.com',
+    'msn.com',
+    'protonmail.com',
+    'proton.me',
+    'mail.com',
+    'zoho.com',
+    'yandex.com',
+    'gmx.com',
+    'inbox.com',
+    'rediffmail.com',
+];
+
+const isPersonalEmail = (email: string): boolean => {
+    const domain = email.toLowerCase().split('@')[1];
+    return domain ? BLOCKED_EMAIL_DOMAINS.includes(domain) : false;
+};
+
 const EMPTY_FORM = {
     first_name: "",
     last_name: "",
@@ -52,6 +80,8 @@ export default function FinalCTA() {
             next.work_email = "Work email is required.";
         } else if (!EMAIL_REGEX.test(formData.work_email.trim())) {
             next.work_email = "Please enter a valid email address.";
+        } else if (isPersonalEmail(formData.work_email.trim())) {
+            next.work_email = "Please use your work email, not a personal one (Gmail, Yahoo, etc.)";
         }
         if (!formData.company_name.trim()) next.company_name = "Company name is required.";
         if (!formData.approximate_arr) next.approximate_arr = "Please select your approximate ARR.";
