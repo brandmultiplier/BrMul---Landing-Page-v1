@@ -68,7 +68,7 @@ export default function Navbar() {
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <nav className="hidden md:flex items-center gap-1">
+                        <nav className="hidden lg:flex items-center gap-1">
                             {navItems.map((item) => (
                                 <Link
                                     key={item.name}
@@ -87,7 +87,7 @@ export default function Navbar() {
                         </nav>
 
                         {/* Desktop CTA */}
-                        <div className="hidden md:flex items-center gap-6">
+                        <div className="hidden lg:flex items-center gap-6">
                             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                 <Link
                                     href="/#cta"
@@ -103,7 +103,7 @@ export default function Navbar() {
                         {/* Mobile Menu Button */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="md:hidden relative w-10 h-10 flex items-center justify-center"
+                            className="lg:hidden relative w-10 h-10 flex items-center justify-center"
                             aria-label="Toggle menu"
                         >
                             <div className="flex flex-col gap-1">
@@ -133,7 +133,7 @@ export default function Navbar() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl pt-24 md:hidden"
+                        className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl pt-24 lg:hidden"
                     >
                         <nav className="container flex flex-col py-12">
                             {navItems.map((item, index) => (
