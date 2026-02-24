@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
@@ -12,9 +13,19 @@ const navItems = [
     { name: "Testimonials", href: "/#testimonials" },
 ];
 
+const EMBED_ROUTES = [
+    '/mtg-interview',
+    '/storylock-assessment',
+    '/mtg-deal-win',
+];
+
 export default function Navbar() {
+    const pathname = usePathname();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    // Hide navbar on embed pages
+    const isEmbedPage = EMBED_ROUTES.includes(pathname);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,6 +34,11 @@ export default function Navbar() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Don't render navbar on embed pages
+    if (isEmbedPage) {
+        return null;
+    }
 
     return (
         <>

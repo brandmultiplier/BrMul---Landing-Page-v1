@@ -35,7 +35,7 @@ export default function LogoCarousel() {
             </div>
 
             <div className="relative overflow-hidden">
-                <div className="animate-logo-scroll flex w-max">
+                <div className="animate-logo-scroll flex w-max" style={{ transform: 'translateZ(0)' }}>
                     {[...logos, ...logos].map((logo, i) => (
                         <div
                             key={i}

@@ -1,12 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
-export default function GlobalMouseHalo() {
-    // Mouse position state
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+const EMBED_ROUTES = [
+    '/mtg-interview',
+    '/storylock-assessment',
+    '/mtg-deal-win',
+];
 
+export default function GlobalMouseHalo() {
+    const pathname = usePathname();
+    
+    // Hide on embed pages
+    const isEmbedPage = EMBED_ROUTES.includes(pathname);
+    
     // Spring configuration for smooth "magnetic" feel
     const springConfig = { damping: 40, stiffness: 200, mass: 1 };
 
@@ -15,6 +24,8 @@ export default function GlobalMouseHalo() {
     const y = useSpring(0, springConfig);
 
     useEffect(() => {
+        if (isEmbedPage) return;
+        
         const handleMouseMove = (e: MouseEvent) => {
             // Update target position (centered on cursor)
             // Adjust offsets to center the 800px element
@@ -24,7 +35,12 @@ export default function GlobalMouseHalo() {
 
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [x, y]);
+    }, [x, y, isEmbedPage]);
+
+    // Don't render on embed pages
+    if (isEmbedPage) {
+        return null;
+    }
 
     return (
         <motion.div

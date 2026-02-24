@@ -70,6 +70,25 @@ h5 {
   text-wrap: balance;
 }
 
+/* Large screen typography scaling (2K/4K monitors) */
+@media (min-width: 1920px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 3840px) {
+  html {
+    font-size: 24px;
+  }
+}
+
 .text-gradient {
   background: var(--gradient-main);
   -webkit-background-clip: text;
@@ -248,4 +267,10 @@ h5 {
 
 .animate-logo-scroll {
   animation: logo-scroll 40s linear infinite;
+  -webkit-animation: logo-scroll 40s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
