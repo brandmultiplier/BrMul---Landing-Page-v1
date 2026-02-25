@@ -256,11 +256,24 @@ h5 {
 }
 
 /* Logo carousel infinite scroll */
-@keyframes logo-scroll {
+@-webkit-keyframes logo-scroll {
   0% {
+    -webkit-transform: translateX(0);
     transform: translateX(0);
   }
   100% {
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes logo-scroll {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
   }
 }

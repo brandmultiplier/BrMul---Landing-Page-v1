@@ -68,12 +68,12 @@ export default function Navbar() {
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <nav className="hidden lg:flex items-center gap-1">
+                        <nav className="hidden lg:flex items-center gap-2 xl:gap-4 2xl:gap-6">
                             {navItems.map((item) => (
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    className="relative px-5 py-2 text-sm text-[rgba(255,255,255,0.6)] hover:text-white transition-colors group"
+                                    className="relative px-5 xl:px-6 2xl:px-8 py-2 text-sm xl:text-base text-[rgba(255,255,255,0.6)] hover:text-white transition-colors group"
                                 >
                                     {item.name}
                                     <motion.span
