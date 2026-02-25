@@ -68,16 +68,16 @@ export default function Navbar() {
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <nav className="hidden lg:flex items-center gap-2 xl:gap-4 2xl:gap-6">
+                        <nav className="hidden lg:flex items-center gap-1 xl:gap-2 2xl:gap-4 flex-nowrap">
                             {navItems.map((item) => (
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    className="relative px-5 xl:px-6 2xl:px-8 py-2 text-sm xl:text-base text-[rgba(255,255,255,0.6)] hover:text-white transition-colors group"
+                                    className="relative px-3 lg:px-4 xl:px-5 2xl:px-6 py-2 text-sm xl:text-base text-[rgba(255,255,255,0.6)] hover:text-white transition-colors group whitespace-nowrap"
                                 >
                                     {item.name}
                                     <motion.span
-                                        className="absolute bottom-1 left-5 right-5 h-[1px] bg-gradient-to-r from-[#a855f7] to-[#6366f1] origin-left"
+                                        className="absolute bottom-1 left-3 right-3 lg:left-4 lg:right-4 xl:left-5 xl:right-5 h-[1px] bg-gradient-to-r from-[#a855f7] to-[#6366f1] origin-left"
                                         initial={{ scaleX: 0 }}
                                         whileHover={{ scaleX: 1 }}
                                         transition={{ duration: 0.3 }}
