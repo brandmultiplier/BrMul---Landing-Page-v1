@@ -8,6 +8,7 @@ const EMBED_ROUTES = [
     '/mtg-interview',
     '/storylock-assessment',
     '/mtg-deal-win',
+    '/mtg-go-live',
 ];
 
 export default function GlobalMouseHalo() {

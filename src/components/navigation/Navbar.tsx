@@ -17,6 +17,7 @@ const EMBED_ROUTES = [
     '/mtg-interview',
     '/storylock-assessment',
     '/mtg-deal-win',
+    '/mtg-go-live',
 ];
 
 export default function Navbar() {
@@ -51,24 +52,26 @@ export default function Navbar() {
                     : "py-6 bg-transparent"
                     }`}
             >
-                <div className="container-width max-w-[1600px]">
-                    <div className="flex items-center justify-between gap-4">
+                <div className="container-width">
+                    <div className="flex items-center justify-between gap-4 w-full">
                         {/* Logo */}
-                        <Link href="/" className="group flex items-center gap-3">
-                            <div className="relative h-10 w-auto">
-                                <img
-                                    src="/brandmultiplier-logo.png"
-                                    alt="BrandMultiplier"
-                                    className="h-full w-auto object-contain rounded-lg"
-                                />
-                            </div>
-                            <span className="font-bold text-lg tracking-tight text-white group-hover:text-white/90 transition-colors">
-                                BrandMultiplier
-                            </span>
-                        </Link>
+                        <div className="flex-1 flex justify-start">
+                            <Link href="/" className="group flex items-center gap-3">
+                                <div className="relative h-10 w-auto">
+                                    <img
+                                        src="/brandmultiplier-logo.png"
+                                        alt="BrandMultiplier"
+                                        className="h-full w-auto object-contain rounded-lg"
+                                    />
+                                </div>
+                                <span className="font-bold text-lg tracking-tight text-white group-hover:text-white/90 transition-colors">
+                                    BrandMultiplier
+                                </span>
+                            </Link>
+                        </div>
 
                         {/* Desktop Navigation */}
-                        <nav className="hidden lg:flex items-center gap-0 flex-nowrap">
+                        <nav className="hidden lg:flex items-center gap-0 flex-nowrap justify-center">
                             {navItems.map((item) => (
                                 <Link
                                     key={item.name}
@@ -86,43 +89,45 @@ export default function Navbar() {
                             ))}
                         </nav>
 
-                        {/* Desktop CTA */}
-                        <div className="hidden lg:flex items-center gap-6">
-                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                <Link
-                                    href="/#cta"
-                                    className="relative px-5 py-2.5 text-sm font-medium text-white rounded-full overflow-hidden group"
-                                >
-                                    <span className="absolute inset-0 bg-gradient-to-r from-[#a855f7] to-[#6366f1] opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
-                                    <span className="absolute inset-0 border border-white/20 rounded-full group-hover:border-transparent transition-colors" />
-                                    <span className="relative">Get Started</span>
-                                </Link>
-                            </motion.div>
-                        </div>
-
-                        {/* Mobile Menu Button */}
-                        <button
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="lg:hidden relative w-10 h-10 flex items-center justify-center"
-                            aria-label="Toggle menu"
-                        >
-                            <div className="flex flex-col gap-1">
-                                <motion.span
-                                    animate={mobileMenuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
-                                    className="w-5 h-[1px] bg-white block origin-center"
-                                />
-                                <motion.span
-                                    animate={mobileMenuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-                                    className="w-5 h-[1px] bg-white block"
-                                />
-                                <motion.span
-                                    animate={mobileMenuOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
-                                    className="w-5 h-[1px] bg-white block origin-center"
-                                />
+                        {/* Desktop CTA & Mobile Menu Button */}
+                        <div className="flex-1 flex justify-end items-center gap-6">
+                            <div className="hidden lg:block">
+                                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                    <Link
+                                        href="/#cta"
+                                        className="relative px-5 py-2.5 text-sm font-medium text-white rounded-full overflow-hidden group whitespace-nowrap flex-shrink-0 inline-flex"
+                                    >
+                                        <span className="absolute inset-0 bg-gradient-to-r from-[#a855f7] to-[#6366f1] opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+                                        <span className="absolute inset-0 border border-white/20 rounded-full group-hover:border-transparent transition-colors" />
+                                        <span className="relative whitespace-nowrap">Get Started</span>
+                                    </Link>
+                                </motion.div>
                             </div>
-                        </button>
-                    </div>
-                </div>
+
+                            {/* Mobile Menu Button */}
+                            <button
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                className="lg:hidden relative w-10 h-10 flex items-center justify-center"
+                                aria-label="Toggle menu"
+                            >
+                                <div className="flex flex-col gap-1">
+                                    <motion.span
+                                        animate={mobileMenuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
+                                        className="w-5 h-[1px] bg-white block origin-center"
+                                    />
+                                    <motion.span
+                                        animate={mobileMenuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
+                                        className="w-5 h-[1px] bg-white block"
+                                    />
+                                    <motion.span
+                                        animate={mobileMenuOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
+                                        className="w-5 h-[1px] bg-white block origin-center"
+                                    />
+                                </div>
+                            </button>
+                        </div>{/* end: flex-1 justify-end */}
+                    </div>{/* end: flex justify-between */}
+                </div>{/* end: container-width */}
             </motion.header>
 
             {/* Mobile Menu */}
