@@ -13,6 +13,16 @@ const nextConfig: NextConfig = {
         hostname: 'uploads-ssl.webflow.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: '**.seobotai.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.cloudfront.net',
+        pathname: '/**',
+      },
     ],
   },
 };
