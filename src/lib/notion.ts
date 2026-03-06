@@ -250,8 +250,13 @@ async function queryNotionPages(
   throw new Error('Unsupported Notion client version: no query method found');
 }
 
-export async function getNotionPosts(): Promise<NotionBlogPost[]> {
+interface GetNotionPostsOptions {
+  includeContent?: boolean;
+}
+
+export async function getNotionPosts(options: GetNotionPostsOptions = {}): Promise<NotionBlogPost[]> {
   try {
+    const { includeContent = false } = options;
     const client = getNotionClient();
     const databaseId = getDatabaseId();
     const response = await queryNotionPages(client, databaseId, undefined, [
@@ -265,8 +270,11 @@ export async function getNotionPosts(): Promise<NotionBlogPost[]> {
       if (!pageData.slug) continue;
       if (pageData.status.toLowerCase() !== 'published') continue;
 
-      const blocksResponse = await client.blocks.children.list({ block_id: page.id, page_size: 100 });
-      const content = await blocksToHtml(blocksResponse.results);
+      let content = '';
+      if (includeContent) {
+        const blocksResponse = await client.blocks.children.list({ block_id: page.id, page_size: 100 });
+        content = await blocksToHtml(blocksResponse.results);
+      }
       posts.push({ ...pageData, content });
     }
     return posts;
@@ -299,3 +307,4 @@ export async function getNotionPostBySlug(slug: string): Promise<NotionBlogPost 
     return null;
   }
 }
+
