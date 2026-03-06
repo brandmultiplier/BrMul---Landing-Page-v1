@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getAllPosts } from '@/lib/blog';
+import { getAllPostsUnified } from '@/lib/blog';
 import BlogCard from '@/components/blog/BlogCard';
 
 export const metadata: Metadata = {
@@ -7,8 +7,10 @@ export const metadata: Metadata = {
   description: 'Insights on AI marketing, brand strategy, storytelling, and growth tactics for founder-led B2B companies.',
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export const dynamic = 'force-dynamic';
+
+export default async function BlogPage() {
+  const posts = await getAllPostsUnified();
   const featuredPost = posts[0];
   const remainingPosts = posts.slice(1);
 

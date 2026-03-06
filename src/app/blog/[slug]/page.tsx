@@ -2,23 +2,18 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAllPosts, getPostBySlug, formatDate, getAuthorDisplayName } from '@/lib/blog';
+import { getPostBySlugUnified, formatDate, getAuthorDisplayName } from '@/lib/blog';
 import './blog-content.css';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlugUnified(slug);
   
   if (!post) {
     return {
@@ -41,7 +36,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlugUnified(slug);
 
   if (!post) {
     notFound();
