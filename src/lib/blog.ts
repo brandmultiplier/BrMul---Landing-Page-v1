@@ -1,6 +1,8 @@
 import blogPostsData from '@/data/blog-posts.json';
 import { getSeobotArticle, getSeobotArticles } from '@/lib/seobot';
+import { getNotionPosts, getNotionPostBySlug } from '@/lib/notion';
 import type { SeoBotArticle } from '@/types/seobot';
+import type { NotionBlogPost } from '@/types/notion';
 
 export interface BlogPost {
   name: string;
@@ -22,7 +24,7 @@ export interface BlogPost {
 
 const posts: BlogPost[] = blogPostsData as BlogPost[];
 
-export type BlogSource = 'static' | 'seobot';
+export type BlogSource = 'static' | 'seobot' | 'notion';
 
 export interface UnifiedBlogPost extends BlogPost {
   source: BlogSource;
@@ -64,6 +66,28 @@ function normalizeSeobotPost(article: SeoBotArticle): UnifiedBlogPost {
   };
 }
 
+function normalizeNotionPost(post: NotionBlogPost): UnifiedBlogPost {
+  return {
+    name: post.title,
+    slug: post.slug,
+    collectionId: '',
+    localeId: '',
+    itemId: post.id,
+    createdOn: post.publishedAt || '',
+    updatedOn: post.publishedAt || '',
+    publishedOn: post.publishedAt || '',
+    postBody: post.content,
+    postSummary: post.summary || post.seoDescription || '',
+    mainImage: post.coverImage || '',
+    thumbnailImage: post.coverImage || '',
+    featured: false,
+    color: '',
+    author: '',
+    source: 'notion',
+    tags: post.tags,
+  };
+}
+
 function sortByPublishedDateDesc(a: UnifiedBlogPost, b: UnifiedBlogPost): number {
   const aTime = new Date(a.publishedOn).getTime();
   const bTime = new Date(b.publishedOn).getTime();
@@ -86,34 +110,55 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 
 export async function getAllPostsUnified(): Promise<UnifiedBlogPost[]> {
   const staticPosts = posts.map(normalizeStaticPost);
-  const seobotArticles = await getSeobotArticles(0, 100);
+  
+  const [seobotArticles, notionPosts] = await Promise.all([
+    getSeobotArticles(0, 100),
+    getNotionPosts(),
+  ]);
 
   const publishedSeoBotPosts = seobotArticles
     .filter((article) => article.published && !article.deleted)
     .map(normalizeSeobotPost);
 
+  const normalizedNotionPosts = notionPosts.map(normalizeNotionPost);
+
   const mergedBySlug = new Map<string, UnifiedBlogPost>();
 
+  // Priority: Notion > SEObot > Static
+  // Add static posts first (lowest priority)
+  for (const post of staticPosts) {
+    mergedBySlug.set(post.slug, post);
+  }
+
+  // SEObot posts override static posts
   for (const post of publishedSeoBotPosts) {
     mergedBySlug.set(post.slug, post);
   }
 
-  for (const post of staticPosts) {
-    if (!mergedBySlug.has(post.slug)) {
-      mergedBySlug.set(post.slug, post);
-    }
+  // Notion posts have highest priority
+  for (const post of normalizedNotionPosts) {
+    mergedBySlug.set(post.slug, post);
   }
 
   return Array.from(mergedBySlug.values()).sort(sortByPublishedDateDesc);
 }
 
 export async function getPostBySlugUnified(slug: string): Promise<UnifiedBlogPost | undefined> {
-  const seobotArticle = await getSeobotArticle(slug);
+  // Priority: Notion > SEObot > Static
+  
+  // Check Notion first (highest priority)
+  const notionPost = await getNotionPostBySlug(slug);
+  if (notionPost) {
+    return normalizeNotionPost(notionPost);
+  }
 
+  // Then check SEObot
+  const seobotArticle = await getSeobotArticle(slug);
   if (seobotArticle && seobotArticle.published && !seobotArticle.deleted) {
     return normalizeSeobotPost(seobotArticle);
   }
 
+  // Finally check static posts
   const staticPost = getPostBySlug(slug);
   if (staticPost) {
     return normalizeStaticPost(staticPost);

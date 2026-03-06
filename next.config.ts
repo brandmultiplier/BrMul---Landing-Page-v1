@@ -23,6 +23,21 @@ const nextConfig: NextConfig = {
         hostname: '**.cloudfront.net',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: '**.amazonaws.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.notion.so',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
     ],
   },
 };
