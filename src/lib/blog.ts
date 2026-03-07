@@ -1,4 +1,4 @@
-import blogPostsData from '@/data/blog-posts.json';
+﻿import blogPostsData from '@/data/blog-posts.json';
 import { getSeobotArticle, getSeobotArticles } from '@/lib/seobot';
 import { getNotionPosts, getNotionPostBySlug } from '@/lib/notion';
 import type { SeoBotArticle } from '@/types/seobot';
@@ -117,7 +117,7 @@ export async function getAllPostsUnified(): Promise<UnifiedBlogPost[]> {
   ]);
 
   const publishedSeoBotPosts = seobotArticles
-    .filter((article) => article.published && !article.deleted)
+    .filter((article) => (article.published ?? true) && !(article.deleted ?? false))
     .map(normalizeSeobotPost);
 
   const normalizedNotionPosts = notionPosts.map(normalizeNotionPost);
@@ -154,7 +154,7 @@ export async function getPostBySlugUnified(slug: string): Promise<UnifiedBlogPos
 
   // Then check SEObot
   const seobotArticle = await getSeobotArticle(slug);
-  if (seobotArticle && seobotArticle.published && !seobotArticle.deleted) {
+  if (seobotArticle && (seobotArticle.published ?? true) && !(seobotArticle.deleted ?? false)) {
     return normalizeSeobotPost(seobotArticle);
   }
 
@@ -198,3 +198,4 @@ export function getAuthorDisplayName(author: string): string {
   
   return authorMap[author] || author || 'BrandMultiplier Team';
 }
+
