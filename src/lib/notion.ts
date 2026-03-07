@@ -291,18 +291,34 @@ export async function getNotionPostBySlug(slug: string): Promise<NotionBlogPost 
     // Keep detail-page lookup aligned with listing source.
     // If a post is visible on /blog, this guarantees we can resolve it here too.
     const listedPosts = await getNotionPosts({ includeContent: false });
-    const matchingPost = listedPosts.find((post) => post.slug === slug);
+    const targetSlug = decodeURIComponent(slug || '').trim().toLowerCase();
+    const matchingPost = listedPosts.find(
+      (post) => decodeURIComponent(post.slug || '').trim().toLowerCase() === targetSlug
+    );
 
     if (!matchingPost) return null;
 
-    const blocksResponse = await client.blocks.children.list({ block_id: matchingPost.id, page_size: 100 });
-    const content = await blocksToHtml(blocksResponse.results);
-    return { ...matchingPost, content };
+    try {
+      const blocksResponse = await client.blocks.children.list({ block_id: matchingPost.id, page_size: 100 });
+      const content = await blocksToHtml(blocksResponse.results);
+      if (content && content.trim()) {
+        return { ...matchingPost, content };
+      }
+    } catch (blocksError) {
+      console.error('Error fetching Notion post blocks, using fallback content:', blocksError);
+    }
+
+    const fallbackContent = matchingPost.summary
+      ? '<p>' + matchingPost.summary + '</p>'
+      : '<p>Content coming soon.</p>';
+
+    return { ...matchingPost, content: fallbackContent };
   } catch (error) {
     console.error('Error fetching Notion post by slug:', error);
     return null;
   }
 }
+
 
 
 
