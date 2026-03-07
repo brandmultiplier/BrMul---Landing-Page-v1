@@ -287,24 +287,22 @@ export async function getNotionPosts(options: GetNotionPostsOptions = {}): Promi
 export async function getNotionPostBySlug(slug: string): Promise<NotionBlogPost | null> {
   try {
     const client = getNotionClient();
-    const databaseId = getDatabaseId();
-    const response = await queryNotionPages(client, databaseId);
 
-    const matchingPage = response.results.find((page) => {
-      if (!('properties' in page)) return false;
-      const pageData = parseNotionPage(page as { id: string; properties: NotionPageProperties });
-      return pageData.slug === slug && pageData.status.toLowerCase() === 'published';
-    });
+    // Keep detail-page lookup aligned with listing source.
+    // If a post is visible on /blog, this guarantees we can resolve it here too.
+    const listedPosts = await getNotionPosts({ includeContent: false });
+    const matchingPost = listedPosts.find((post) => post.slug === slug);
 
-    if (!matchingPage || !('properties' in matchingPage)) return null;
+    if (!matchingPost) return null;
 
-    const pageData = parseNotionPage(matchingPage as { id: string; properties: NotionPageProperties });
-    const blocksResponse = await client.blocks.children.list({ block_id: matchingPage.id, page_size: 100 });
+    const blocksResponse = await client.blocks.children.list({ block_id: matchingPost.id, page_size: 100 });
     const content = await blocksToHtml(blocksResponse.results);
-    return { ...pageData, content };
+    return { ...matchingPost, content };
   } catch (error) {
     console.error('Error fetching Notion post by slug:', error);
     return null;
   }
 }
+
+
 
