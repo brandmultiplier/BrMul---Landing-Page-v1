@@ -1,4 +1,5 @@
-﻿import type { SeoBotArticle } from '@/types/seobot';
+import { unstable_noStore as noStore } from 'next/cache';
+import type { SeoBotArticle } from '@/types/seobot';
 
 interface SeoBotArticlesResponse {
   articles?: SeoBotArticle[];
@@ -152,6 +153,8 @@ async function fetchSeobotIndex(apiKey: string): Promise<SeoBotArticle[]> {
 }
 
 export async function getSeobotArticles(page = 0, limit = 100): Promise<SeoBotArticle[]> {
+  noStore();
+
   try {
     const apiKey = getSeoBotApiKey();
     const allArticles = await fetchSeobotIndex(apiKey);
@@ -177,6 +180,8 @@ export async function getSeobotArticles(page = 0, limit = 100): Promise<SeoBotAr
 }
 
 export async function getSeobotArticle(slug: string): Promise<SeoBotArticle | null> {
+  noStore();
+
   try {
     const apiKey = getSeoBotApiKey();
     const normalizedSlug = normalizeSlug(slug);

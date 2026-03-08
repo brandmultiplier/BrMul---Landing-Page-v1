@@ -1,4 +1,5 @@
-﻿import blogPostsData from '@/data/blog-posts.json';
+import { unstable_noStore as noStore } from 'next/cache';
+import blogPostsData from '@/data/blog-posts.json';
 import { getSeobotArticle, getSeobotArticles } from '@/lib/seobot';
 import { getNotionPosts, getNotionPostBySlug } from '@/lib/notion';
 import type { SeoBotArticle } from '@/types/seobot';
@@ -120,6 +121,8 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 }
 
 export async function getAllPostsUnified(): Promise<UnifiedBlogPost[]> {
+  noStore();
+
   const staticPosts = posts.map(normalizeStaticPost);
 
   const [seobotArticles, notionPosts] = await Promise.all([
@@ -155,6 +158,8 @@ export async function getAllPostsUnified(): Promise<UnifiedBlogPost[]> {
 }
 
 export async function getPostBySlugUnified(slug: string): Promise<UnifiedBlogPost | undefined> {
+  noStore();
+
   const normalizedSlug = normalizeSlugKey(slug);
 
   // Priority: Notion > SEObot > Static
