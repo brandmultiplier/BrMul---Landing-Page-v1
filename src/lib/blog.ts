@@ -33,6 +33,16 @@ export interface UnifiedBlogPost extends BlogPost {
   category?: string;
 }
 
+function normalizeSlugKey(value: string): string {
+  if (!value) return '';
+
+  try {
+    return decodeURIComponent(value).trim().toLowerCase();
+  } catch {
+    return value.trim().toLowerCase();
+  }
+}
+
 function normalizeStaticPost(post: BlogPost): UnifiedBlogPost {
   return {
     ...post,
@@ -105,12 +115,13 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return posts.find((post) => post.slug === slug);
+  const normalizedSlug = normalizeSlugKey(slug);
+  return posts.find((post) => normalizeSlugKey(post.slug) === normalizedSlug);
 }
 
 export async function getAllPostsUnified(): Promise<UnifiedBlogPost[]> {
   const staticPosts = posts.map(normalizeStaticPost);
-  
+
   const [seobotArticles, notionPosts] = await Promise.all([
     getSeobotArticles(0, 100),
     getNotionPosts(),
@@ -127,25 +138,27 @@ export async function getAllPostsUnified(): Promise<UnifiedBlogPost[]> {
   // Priority: Notion > SEObot > Static
   // Add static posts first (lowest priority)
   for (const post of staticPosts) {
-    mergedBySlug.set(post.slug, post);
+    mergedBySlug.set(normalizeSlugKey(post.slug), post);
   }
 
   // SEObot posts override static posts
   for (const post of publishedSeoBotPosts) {
-    mergedBySlug.set(post.slug, post);
+    mergedBySlug.set(normalizeSlugKey(post.slug), post);
   }
 
   // Notion posts have highest priority
   for (const post of normalizedNotionPosts) {
-    mergedBySlug.set(post.slug, post);
+    mergedBySlug.set(normalizeSlugKey(post.slug), post);
   }
 
   return Array.from(mergedBySlug.values()).sort(sortByPublishedDateDesc);
 }
 
 export async function getPostBySlugUnified(slug: string): Promise<UnifiedBlogPost | undefined> {
+  const normalizedSlug = normalizeSlugKey(slug);
+
   // Priority: Notion > SEObot > Static
-  
+
   // Check Notion first (highest priority)
   const notionPost = await getNotionPostBySlug(slug);
   if (notionPost) {
@@ -159,7 +172,7 @@ export async function getPostBySlugUnified(slug: string): Promise<UnifiedBlogPos
   }
 
   // Finally check static posts
-  const staticPost = getPostBySlug(slug);
+  const staticPost = posts.find((post) => normalizeSlugKey(post.slug) === normalizedSlug);
   if (staticPost) {
     return normalizeStaticPost(staticPost);
   }
@@ -177,7 +190,7 @@ export function getLatestPosts(count: number = 10): BlogPost[] {
 
 export function formatDate(dateString: string): string {
   if (!dateString) return '';
-  
+
   try {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -195,7 +208,6 @@ export function getAuthorDisplayName(author: string): string {
     'team-crc': 'BrandMultiplier Team',
     'chris-rubin': 'Chris Rubin',
   };
-  
+
   return authorMap[author] || author || 'BrandMultiplier Team';
 }
-
