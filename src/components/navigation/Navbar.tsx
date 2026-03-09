@@ -71,7 +71,7 @@ export default function Navbar() {
                         </div>
 
                         {/* Desktop Navigation */}
-                        <nav className="hidden lg:flex items-center gap-0 flex-nowrap justify-center">
+                        <nav className="hidden lg:flex items-center gap-0 flex-nowrap flex-shrink-0 justify-center">
                             {navItems.map((item) => (
                                 <Link
                                     key={item.name}
