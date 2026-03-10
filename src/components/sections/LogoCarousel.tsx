@@ -23,6 +23,21 @@ const logos = [
     { src: "/logos/sequence.png", alt: "Sequence" },
     { src: "/logos/paige.png", alt: "Paige" },
     { src: "/logos/phil.png", alt: "Phil" },
+    { src: "/logos/a-team.png", alt: "a.team" },
+    { src: "/logos/bettercloud.png", alt: "BetterCloud" },
+    { src: "/logos/digica.png", alt: "Digica" },
+    { src: "/logos/four-oaks-medicare-planning.png", alt: "Four Oaks Medicare Planning" },
+    { src: "/logos/ledger-wordmark.png", alt: "Ledger" },
+    { src: "/logos/ledger-stax.png", alt: "Ledger Stax" },
+    { src: "/logos/headquarters.png", alt: "Headquarters" },
+    { src: "/logos/ledger-live.png", alt: "Ledger Live" },
+    { src: "/logos/ledger-recover.png", alt: "Ledger Recover" },
+    { src: "/logos/ledger-quest.png", alt: "Ledger Quest" },
+    { src: "/logos/ikan.png", alt: "ikan" },
+    { src: "/logos/mtg.png", alt: "MTG" },
+    { src: "/logos/qrabbit.png", alt: "QRabbit" },
+    { src: "/logos/ascent.png", alt: "Ascent" },
+    { src: "/logos/relationships-transformed.png", alt: "Relationships Transformed" },
 ];
 
 export default function LogoCarousel() {
@@ -47,15 +62,17 @@ export default function LogoCarousel() {
                     {[...logos, ...logos].map((logo, i) => (
                         <div
                             key={i}
-                            className="flex items-center justify-center mx-6 sm:mx-12 shrink-0"
+                            className="mx-6 sm:mx-12 shrink-0"
                         >
+                            <div className="flex h-14 sm:h-20 w-[150px] sm:w-[210px] items-center justify-center">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={logo.src}
                                 alt={logo.alt}
-                                className="h-14 sm:h-20 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
+                                className="h-full w-full object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
                                 style={{ filter: "brightness(0) invert(1)" }}
                             />
+                            </div>
                         </div>
                     ))}
                 </div>
