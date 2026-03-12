@@ -16,6 +16,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.brandmultiplier.ai"),
   title: "BrandMultiplier.ai | Narrative Infrastructure for Founder-Led B2B Companies",
   description: "We extract your narrative and codify it into infrastructure anyone can deploy. Stop being the bottleneck. CAC down 30%, deal cycles 35% faster.",
   keywords: ["B2B marketing", "founder-led companies", "narrative infrastructure", "brand strategy", "CAC reduction", "sales enablement"],
