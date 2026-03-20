@@ -18,8 +18,8 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.brandmultiplier.ai"),
-  title: "BrandMultiplier.ai | Narrative Infrastructure for Founder-Led B2B Companies",
-  description: "We extract your narrative and codify it into infrastructure anyone can deploy. Stop being the bottleneck. CAC down 30%, deal cycles 35% faster.",
+  title: "B2B Narrative Infrastructure | BrandMultiplier.ai",
+  description: "B2B narrative infrastructure that scales your founder story into a system your team deploys. CAC down 30%, deal cycles 35% faster — without you in every room.",
   keywords: ["B2B marketing", "founder-led companies", "narrative infrastructure", "brand strategy", "CAC reduction", "sales enablement"],
   authors: [{ name: "BrandMultiplier.ai" }],
   openGraph: {

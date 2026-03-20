@@ -1,6 +1,6 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import Image from 'next/image';
-import { BlogPost } from '@/lib/blog';
+import { BlogPost, formatDate } from '@/lib/blog';
 
 interface BlogCardProps {
   post: BlogPost;
@@ -17,7 +17,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ') ||
     'Untitled Post';
-
+  
   if (featured) {
     return (
       <Link href={`/blog/${post.slug}`} className="group block">
@@ -26,7 +26,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
             {imageUrl ? (
               <Image
                 src={imageUrl}
-                alt={displayTitle}
+                alt={post.name}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 unoptimized
@@ -66,7 +66,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
           {imageUrl ? (
             <Image
               src={imageUrl}
-              alt={displayTitle}
+              alt={post.name}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               unoptimized
