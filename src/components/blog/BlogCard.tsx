@@ -9,6 +9,14 @@ interface BlogCardProps {
 
 export default function BlogCard({ post, featured = false }: BlogCardProps) {
   const imageUrl = post.thumbnailImage || post.mainImage;
+  const displayTitle =
+    post.name?.trim() ||
+    post.slug
+      ?.split('-')
+      .filter(Boolean)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ') ||
+    'Untitled Post';
   
   if (featured) {
     return (
@@ -32,7 +40,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
               Newest Blog Post
             </span>
             <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight group-hover:text-accent-purple transition-colors">
-              {post.name}
+              {displayTitle}
             </h2>
             {post.postSummary && (
               <p className="text-text-secondary text-base leading-relaxed line-clamp-3">
@@ -68,13 +76,8 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
           )}
         </div>
         <h3 className="text-xl md:text-2xl font-semibold text-white leading-snug group-hover:text-accent-purple transition-colors mb-3">
-          {post.name}
+          {displayTitle}
         </h3>
-        {post.postSummary && (
-          <p className="text-text-secondary text-sm leading-relaxed line-clamp-2 mb-4">
-            {post.postSummary}
-          </p>
-        )}
         <span className="inline-flex items-center gap-2 text-[#F36901] font-medium uppercase tracking-wider text-xs group-hover:gap-3 transition-all mt-auto">
           Explore Further
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
