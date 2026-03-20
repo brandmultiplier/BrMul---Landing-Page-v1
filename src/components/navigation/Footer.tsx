@@ -57,8 +57,8 @@ export default function Footer() {
                             © {new Date().getFullYear()} BrandMultiplier.ai
                         </p>
                         <div className="flex gap-6 text-xs sm:text-sm text-[rgba(255,255,255,0.3)]">
-                            <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
-                            <Link href="#" className="hover:text-white transition-colors">Terms</Link>
+                            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
                         </div>
                     </div>
                 </div>
