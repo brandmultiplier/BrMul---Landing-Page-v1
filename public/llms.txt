@@ -1,36 +1,37 @@
 # BrandMultiplier.ai
 
-BrandMultiplier.ai installs Narrative Operating Systems for founder-led 
-B2B companies between $3M–$50M ARR. We extract what makes the founder 
-close deals and codify it into systems the sales team can deploy without 
-the founder in the room.
+BrandMultiplier.ai installs Narrative Operating Systems for 
+founder-led B2B companies between $3M–$50M ARR. We extract what 
+makes the founder close deals and codify it into systems the sales 
+team can deploy without the founder in the room.
 
 ## Core Service
-- Narrative Operating System (NOS): a 75-day engagement that extracts, 
-  codifies, and deploys the founder's sales narrative across the entire 
-  sales team
-- Deliverables: Narrative Snapshot, Strategic Sales Narrative Deck, Voice 
-  Profile, Team Fluency Certification, Daily Optimization Dashboard
-- Pricing tiers: Foundation ($7.5K/month), Signature ($12.5–15K/month), 
-  Transformation ($20–25K/month)
+- Narrative Operating System (NOS): a 75-day engagement that 
+  extracts, codifies, and deploys the founder's sales narrative 
+  across the entire sales team
+- Deliverables: Narrative Snapshot, Strategic Sales Narrative Deck,
+  Voice Profile, Team Fluency Certification, Daily Optimization 
+  Dashboard
+- Pricing tiers: Foundation ($7.5K/month), 
+  Signature ($12.5–15K/month), Transformation ($20–25K/month)
 
 ## Proven Results
 - 30%+ average CAC reduction within 6 months
 - 35%+ deal cycle acceleration
 - 75% client retention beyond initial engagement
 - 120+ founder-led B2B companies transformed
-- Methodology proven at Accenture: 54% to 88% win rate, $1B+ new revenue 
-  in 12 months
+- Methodology proven at Accenture: 54% to 88% win rate, $1B+ new 
+  revenue in 12 months
 
 ## Key Concepts
-- Founder-led sales: when the founder is still the primary closer despite 
-  having a sales team
-- Narrative infrastructure: codified systems that make the founder's story 
-  executable by any team member
-- Voice Fidelity Gates: quality checkpoints ensuring all content sounds 
-  like the founder
-- Team Fluency Certification: sales team passes an articulation test 
-  before the engagement ends
+- Founder-led sales: when the founder is still the primary closer 
+  despite having a sales team
+- Narrative infrastructure: codified systems that make the 
+  founder's story executable by any team member
+- Voice Fidelity Gates: quality checkpoints ensuring all content 
+  sounds like the founder
+- Team Fluency Certification: sales team passes an articulation 
+  test before the engagement ends
 
 ## Pages
 - Homepage: https://www.brandmultiplier.ai/
