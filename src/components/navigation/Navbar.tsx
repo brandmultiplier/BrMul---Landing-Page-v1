@@ -18,6 +18,11 @@ const EMBED_ROUTES = [
     '/storylock-assessment',
     '/mtg-deal-win',
     '/mtg-go-live',
+    '/storylock-tax',
+];
+
+const MINIMAL_HEADER_ROUTES = [
+    '/storylock-tax',
 ];
 
 export default function Navbar() {
@@ -27,6 +32,7 @@ export default function Navbar() {
 
     // Hide navbar on embed pages
     const isEmbedPage = EMBED_ROUTES.includes(pathname);
+    const isMinimalHeaderRoute = MINIMAL_HEADER_ROUTES.includes(pathname);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -36,7 +42,47 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Don't render navbar on embed pages
+    // Render minimal header for selected embed pages
+    if (isMinimalHeaderRoute) {
+        return (
+            <motion.header
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="fixed top-0 left-0 right-0 z-50 py-4 bg-black/50 backdrop-blur-2xl"
+            >
+                <div className="container-width">
+                    <div className="flex items-center justify-between gap-4 w-full">
+                        <Link href="/" className="group flex items-center gap-3">
+                            <div className="relative h-10 w-auto">
+                                <img
+                                    src="/brandmultiplier-logo.png"
+                                    alt="BrandMultiplier"
+                                    className="h-full w-auto object-contain rounded-lg"
+                                />
+                            </div>
+                            <span className="font-bold text-lg tracking-tight text-white group-hover:text-white/90 transition-colors">
+                                BrandMultiplier
+                            </span>
+                        </Link>
+
+                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <Link
+                                href="/#cta"
+                                className="relative px-5 py-2.5 text-sm font-medium text-white rounded-full overflow-hidden group whitespace-nowrap inline-flex"
+                            >
+                                <span className="absolute inset-0 bg-gradient-to-r from-[#a855f7] to-[#6366f1] opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+                                <span className="absolute inset-0 border border-white/20 rounded-full group-hover:border-transparent transition-colors" />
+                                <span className="relative whitespace-nowrap">Get Started</span>
+                            </Link>
+                        </motion.div>
+                    </div>
+                </div>
+            </motion.header>
+        );
+    }
+
+    // Don't render navbar on other embed pages
     if (isEmbedPage) {
         return null;
     }
