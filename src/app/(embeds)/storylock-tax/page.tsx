@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef, CSSProperties } from "react";
+import {
+  BUSINESS_EMAIL_REQUIRED_MESSAGE,
+  isBusinessEmail,
+} from "@/lib/business-email";
 
 declare global {
   interface Window {
@@ -229,7 +233,7 @@ export default function NarrativeLeverageModel() {
   const [captureEmail, setCaptureEmail] = useState("");
   const [captureName, setCaptureName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
   const [defaultsAccepted, setDefaultsAccepted] = useState(false);
   const [inputActivityTick, setInputActivityTick] = useState(0);
@@ -290,8 +294,12 @@ export default function NarrativeLeverageModel() {
 
   const handleEmailSubmit = async () => {
     if (!captureEmail || !captureName) return;
+    if (!isBusinessEmail(captureEmail)) {
+      setSubmitError(BUSINESS_EMAIL_REQUIRED_MESSAGE);
+      return;
+    }
     setIsSubmitting(true);
-    setSubmitError(false);
+    setSubmitError("");
 
     try {
       const response = await fetch("/api/storylock-tax-capture", {
@@ -339,6 +347,11 @@ export default function NarrativeLeverageModel() {
       });
 
       if (!response.ok) {
+        if (response.status === 400) {
+          const data = (await response.json()) as { error?: string };
+          setSubmitError(data.error ?? BUSINESS_EMAIL_REQUIRED_MESSAGE);
+          return;
+        }
         throw new Error("Request failed");
       }
 
@@ -350,7 +363,7 @@ export default function NarrativeLeverageModel() {
         event_label: "email_submitted",
       });
     } catch {
-      setSubmitError(true);
+      setSubmitError("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -911,7 +924,7 @@ export default function NarrativeLeverageModel() {
                   marginTop: 8,
                 }}
               >
-                Something went wrong. Please try again.
+                {submitError}
               </div>
             )}
 

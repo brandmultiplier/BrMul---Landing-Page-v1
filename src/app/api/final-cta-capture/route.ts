@@ -1,28 +1,29 @@
 import { NextResponse } from "next/server";
+
 import {
   BUSINESS_EMAIL_REQUIRED_MESSAGE,
   isStrictBusinessEmail,
 } from "@/lib/business-email";
 
-const STORYLOCK_WEBHOOK_URL =
-  "https://brandmultiplier.app.n8n.cloud/webhook/abc55240-f07d-440e-a7ad-f6a78a786254";
+const FINAL_CTA_WEBHOOK_URL =
+  "https://brandmultiplier.app.n8n.cloud/webhook/f108ff75-70c3-4845-be05-5fb993711337";
 
-type StorylockPayload = {
-  email?: string;
+type FinalCtaPayload = {
+  work_email?: string;
 };
 
 export async function POST(req: Request) {
   try {
-    const payload = (await req.json()) as StorylockPayload;
+    const payload = (await req.json()) as FinalCtaPayload;
 
-    if (!(await isStrictBusinessEmail(payload.email ?? ""))) {
+    if (!(await isStrictBusinessEmail(payload.work_email ?? ""))) {
       return NextResponse.json(
         { ok: false, error: BUSINESS_EMAIL_REQUIRED_MESSAGE },
         { status: 400 },
       );
     }
 
-    const upstream = await fetch(STORYLOCK_WEBHOOK_URL, {
+    const upstream = await fetch(FINAL_CTA_WEBHOOK_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

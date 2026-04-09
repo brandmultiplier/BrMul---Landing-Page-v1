@@ -4,39 +4,10 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 import ScrollFade from "@/components/ui/ScrollFade";
-
-const WEBHOOK_URL =
-    "https://brandmultiplier.app.n8n.cloud/webhook/f108ff75-70c3-4845-be05-5fb993711337";
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const BLOCKED_EMAIL_DOMAINS = [
-    'gmail.com',
-    'yahoo.com',
-    'yahoo.co.in',
-    'yahoo.co.uk',
-    'hotmail.com',
-    'outlook.com',
-    'live.com',
-    'aol.com',
-    'icloud.com',
-    'me.com',
-    'mac.com',
-    'msn.com',
-    'protonmail.com',
-    'proton.me',
-    'mail.com',
-    'zoho.com',
-    'yandex.com',
-    'gmx.com',
-    'inbox.com',
-    'rediffmail.com',
-];
-
-const isPersonalEmail = (email: string): boolean => {
-    const domain = email.toLowerCase().split('@')[1];
-    return domain ? BLOCKED_EMAIL_DOMAINS.includes(domain) : false;
-};
+import {
+    BUSINESS_EMAIL_REQUIRED_MESSAGE,
+    isBusinessEmail,
+} from "@/lib/business-email";
 
 const EMPTY_FORM = {
     first_name: "",
@@ -78,10 +49,8 @@ export default function FinalCTA() {
         if (!formData.last_name.trim()) next.last_name = "Last name is required.";
         if (!formData.work_email.trim()) {
             next.work_email = "Work email is required.";
-        } else if (!EMAIL_REGEX.test(formData.work_email.trim())) {
-            next.work_email = "Please enter a valid email address.";
-        } else if (isPersonalEmail(formData.work_email.trim())) {
-            next.work_email = "Please use your work email, not a personal one (Gmail, Yahoo, etc.)";
+        } else if (!isBusinessEmail(formData.work_email.trim())) {
+            next.work_email = BUSINESS_EMAIL_REQUIRED_MESSAGE;
         }
         if (!formData.company_name.trim()) next.company_name = "Company name is required.";
         if (!formData.approximate_arr) next.approximate_arr = "Please select your approximate ARR.";
@@ -98,7 +67,7 @@ export default function FinalCTA() {
         setSubmitError("");
 
         try {
-            const response = await fetch(WEBHOOK_URL, {
+            const response = await fetch("/api/final-cta-capture", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
@@ -107,6 +76,12 @@ export default function FinalCTA() {
             if (response.ok) {
                 setSubmitted(true);
                 setFormData(EMPTY_FORM);
+            } else if (response.status === 400) {
+                const data = (await response.json()) as { error?: string };
+                setErrors((prev) => ({
+                    ...prev,
+                    work_email: data.error ?? BUSINESS_EMAIL_REQUIRED_MESSAGE,
+                }));
             } else {
                 setSubmitError("Something went wrong. Please try again.");
             }
