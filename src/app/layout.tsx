@@ -50,13 +50,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <Script id="rb2b-loader" strategy="afterInteractive">
         {`!function(key) {if (window.reb2b) return;window.reb2b = {loaded: true};var s = document.createElement("script");s.async = true;s.src = "https://b2bjsstore.s3.us-west-2.amazonaws.com/b/" + key + "/" + key + ".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);}("ZQ6J2RH73W6D");`}
       </Script>
       <body
         className={`${inter.variable} ${outfit.variable} antialiased bg-black`}
         style={{ fontFamily: "var(--font-inter), sans-serif" }}
+        suppressHydrationWarning
       >
         <GlobalMouseHalo />
         <Navbar />

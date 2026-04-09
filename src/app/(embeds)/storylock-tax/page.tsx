@@ -2,6 +2,12 @@
 
 import { useState, useEffect, useRef, CSSProperties } from "react";
 
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void;
+  }
+}
+
 /* ─── BRAND TOKENS ─── */
 const C = {
   purple: "#4940C6",
@@ -30,6 +36,7 @@ const C = {
 const FONT = "'Arial', 'Helvetica Neue', sans-serif";
 const FOUNDER_HOURLY = 500;
 const WORK_WEEKS = 50;
+const TOTAL_CALCULATOR_FIELDS = 6;
 
 /* ─── UTILITIES ─── */
 const fmt = (n: number) =>
@@ -217,6 +224,18 @@ export default function NarrativeLeverageModel() {
   const [hireCost, setHireCost] = useState(120000);
   const [hrsWeek, setHrsWeek] = useState(15);
   const [showResult, setShowResult] = useState(false);
+  const [showEmailBar, setShowEmailBar] = useState(false);
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [captureEmail, setCaptureEmail] = useState("");
+  const [captureName, setCaptureName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
+  const [defaultsAccepted, setDefaultsAccepted] = useState(false);
+  const [inputActivityTick, setInputActivityTick] = useState(0);
+  const [visitedTabs, setVisitedTabs] = useState<Set<"calc" | "model" | "proof">>(
+    new Set(["calc"]),
+  );
   const [expandedLevel, setExpandedLevel] = useState<number | null>(null);
 
   const rateGap = Math.max(0, (yourRate - teamRate) / 100);
@@ -228,6 +247,138 @@ export default function NarrativeLeverageModel() {
   useEffect(() => {
     if (total > 0) setShowResult(true);
   }, [total]);
+
+  useEffect(() => {
+    if (emailSubmitted || touchedFields.size === 0) {
+      return;
+    }
+
+    if (touchedFields.size === TOTAL_CALCULATOR_FIELDS) {
+      setDefaultsAccepted(true);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setDefaultsAccepted(true);
+    }, 8000);
+
+    return () => clearTimeout(timer);
+  }, [emailSubmitted, inputActivityTick, touchedFields.size]);
+
+  useEffect(() => {
+    if (
+      showResult &&
+      total > 0 &&
+      defaultsAccepted &&
+      !emailSubmitted
+    ) {
+      const timer = setTimeout(() => {
+        setShowEmailBar(true);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showResult, total, defaultsAccepted, emailSubmitted]);
+
+  const fireGtagEvent = (
+    eventName: string,
+    params: Record<string, string | number>,
+  ) => {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", eventName, params);
+    }
+  };
+
+  const handleEmailSubmit = async () => {
+    if (!captureEmail || !captureName) return;
+    setIsSubmitting(true);
+    setSubmitError(false);
+
+    try {
+      const response = await fetch("/api/storylock-tax-capture", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // User details
+          name: captureName,
+          email: captureEmail,
+
+          // Meta
+          source: "storylock-tax-calculator",
+          submitted_from_tab: view,
+          submitted_at: new Date().toISOString(),
+
+          // Calculator inputs (Tab 1)
+          your_close_rate: yourRate,
+          team_close_rate: teamRate,
+          close_rate_gap: yourRate - teamRate,
+          average_deal_size: dealSize,
+          deals_per_quarter: dealsQ,
+          deals_per_year: dealsQ * 4,
+          annual_sales_hire_cost: hireCost,
+          hours_per_week_selling: hrsWeek,
+
+          // Calculated results (Tab 1)
+          storylock_tax_total: Math.round(total),
+          revenue_leakage: Math.round(revLeak),
+          payroll_waste: Math.round(payrollWaste),
+          founder_time_tax: Math.round(founderTime),
+
+          // Derived insights
+          revenue_leakage_pct: total > 0 ? Math.round((revLeak / total) * 100) : 0,
+          payroll_waste_pct: total > 0 ? Math.round((payrollWaste / total) * 100) : 0,
+          founder_time_pct: total > 0 ? Math.round((founderTime / total) * 100) : 0,
+
+          // Behavioral data
+          fields_touched: Array.from(visitedTabs),
+          fields_touched_count: visitedTabs.size,
+          viewed_all_tabs: visitedTabs.size === 3,
+          current_tab_when_submitted: view,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      setEmailSubmitted(true);
+      setShowEmailBar(false);
+      fireGtagEvent("storylock_tax_email_captured", {
+        event_category: "StoryLock Tax",
+        storylock_tax_total: Math.round(total),
+        event_label: "email_submitted",
+      });
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleDismissBar = () => {
+    setShowEmailBar(false);
+    fireGtagEvent("storylock_tax_email_dismissed", {
+      event_category: "StoryLock Tax",
+      event_label: "email_prompt_dismissed",
+    });
+  };
+
+  const setViewWithTracking = (tab: "calc" | "model" | "proof") => {
+    setView(tab);
+    setVisitedTabs((prev) => new Set(prev).add(tab));
+  };
+
+  const handleCalculatorFieldChange = (
+    fieldName: string,
+    setter: (value: number) => void,
+    value: number,
+  ) => {
+    setter(value);
+    setTouchedFields((prev) => new Set(prev).add(fieldName));
+    setDefaultsAccepted(false);
+    setInputActivityTick((prev) => prev + 1);
+  };
 
   const navStyle = (v: string): CSSProperties => ({
     padding: "10px 0",
@@ -247,7 +398,17 @@ export default function NarrativeLeverageModel() {
   });
 
   return (
-    <div style={{ minHeight: "100vh", background: C.dark, fontFamily: FONT, color: C.white }}>
+    <>
+      <div
+        style={{
+          minHeight: "100vh",
+          background: C.dark,
+          fontFamily: FONT,
+          color: C.white,
+          paddingBottom: showEmailBar ? 220 : 0,
+          transition: "padding-bottom 0.3s ease",
+        }}
+      >
       {/* ─── HEADER ─── */}
       <div style={{ padding: "32px 20px 0", textAlign: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: -80, right: -80, width: 240, height: 240, borderRadius: "50%", background: `radial-gradient(circle, ${C.orange}15, transparent 70%)` }} />
@@ -267,9 +428,9 @@ export default function NarrativeLeverageModel() {
 
       {/* ─── NAV ─── */}
       <div style={{ display: "flex", maxWidth: 480, margin: "0 auto", padding: "0 20px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <button onClick={() => setView("calc")} style={navStyle("calc")}>Calculator</button>
-        <button onClick={() => setView("model")} style={navStyle("model")}>The 5 Levels</button>
-        <button onClick={() => setView("proof")} style={navStyle("proof")}>Proof</button>
+        <button onClick={() => setViewWithTracking("calc")} style={navStyle("calc")}>Calculator</button>
+        <button onClick={() => setViewWithTracking("model")} style={navStyle("model")}>The 5 Levels</button>
+        <button onClick={() => setViewWithTracking("proof")} style={navStyle("proof")}>Proof</button>
       </div>
 
       {/* ─── CONTENT ─── */}
@@ -281,13 +442,58 @@ export default function NarrativeLeverageModel() {
             <div style={{ background: C.darkCard, borderRadius: 14, padding: "24px 20px", border: "1px solid rgba(255,255,255,0.06)", marginBottom: 16 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: C.purple, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 18 }}>YOUR NUMBERS</div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
-                <Field label="Your Close Rate" sub="Deals you personally close" value={yourRate} onChange={setYourRate} suffix="%" min={0} max={100} />
-                <Field label="Team Close Rate" sub="Without your involvement" value={teamRate} onChange={setTeamRate} suffix="%" min={0} max={100} />
+                <Field
+                  label="Your Close Rate"
+                  sub="Deals you personally close"
+                  value={yourRate}
+                  onChange={(v) => handleCalculatorFieldChange("yourRate", setYourRate, v)}
+                  suffix="%"
+                  min={0}
+                  max={100}
+                />
+                <Field
+                  label="Team Close Rate"
+                  sub="Without your involvement"
+                  value={teamRate}
+                  onChange={(v) => handleCalculatorFieldChange("teamRate", setTeamRate, v)}
+                  suffix="%"
+                  min={0}
+                  max={100}
+                />
               </div>
-              <Field label="Average Deal Size" prefix="$" value={dealSize} onChange={setDealSize} min={0} step={1000} />
-              <Field label="Deals Per Quarter Requiring You" sub="Deals where you&apos;re in the room to close" value={dealsQ} onChange={setDealsQ} min={0} />
-              <Field label="Annual Sales Hire Cost" sub="Base + commission for your best rep" prefix="$" value={hireCost} onChange={setHireCost} min={0} step={5000} />
-              <Field label="Hours / Week You Spend Selling" sub="Calls, demos, proposals, follow-ups" value={hrsWeek} onChange={setHrsWeek} suffix="hrs" min={0} max={80} />
+              <Field
+                label="Average Deal Size"
+                prefix="$"
+                value={dealSize}
+                onChange={(v) => handleCalculatorFieldChange("dealSize", setDealSize, v)}
+                min={0}
+                step={1000}
+              />
+              <Field
+                label="Deals Per Quarter Requiring You"
+                sub="Deals where you&apos;re in the room to close"
+                value={dealsQ}
+                onChange={(v) => handleCalculatorFieldChange("dealsQ", setDealsQ, v)}
+                min={0}
+              />
+              <Field
+                label="Annual Sales Hire Cost"
+                sub="Base + commission for your best rep"
+                prefix="$"
+                value={hireCost}
+                onChange={(v) => handleCalculatorFieldChange("hireCost", setHireCost, v)}
+                min={0}
+                step={5000}
+              />
+              <Field
+                label="Hours / Week You Spend Selling"
+                sub="Calls, demos, proposals, follow-ups"
+                value={hrsWeek}
+                onChange={(v) => handleCalculatorFieldChange("hrsWeek", setHrsWeek, v)}
+                suffix="hrs"
+                min={0}
+                max={80}
+              />
             </div>
 
             {showResult && (
@@ -310,7 +516,7 @@ export default function NarrativeLeverageModel() {
                       Your story is trapped in your head. Every number above is a symptom of missing narrative infrastructure — not a marketing problem.
                     </div>
                     <button
-                      onClick={() => setView("model")}
+                      onClick={() => setViewWithTracking("model")}
                       style={{ marginTop: 10, background: C.purple, color: C.white, border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 12, fontWeight: 700, cursor: "pointer", fontFamily: FONT, letterSpacing: "0.02em", transition: "opacity 0.2s" }}
                       onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.opacity = "0.85")}
                       onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.opacity = "1")}
@@ -463,7 +669,7 @@ export default function NarrativeLeverageModel() {
 
             <div style={{ marginTop: 16, textAlign: "center" }}>
               <button
-                onClick={() => setView("proof")}
+                onClick={() => setViewWithTracking("proof")}
                 style={{ background: C.orange, color: C.white, border: "none", borderRadius: 8, padding: "12px 24px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: FONT, letterSpacing: "0.02em", boxShadow: `0 4px 16px ${C.orange}30`, transition: "opacity 0.2s" }}
                 onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.opacity = "0.85")}
                 onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.opacity = "1")}
@@ -546,6 +752,237 @@ export default function NarrativeLeverageModel() {
           </div>
         )}
       </div>
-    </div>
+      </div>
+
+      {showEmailBar && !emailSubmitted && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 9999,
+            background: "linear-gradient(135deg, #16152a, #1a1a2e)",
+            borderTop: "1px solid rgba(243,105,1,0.25)",
+            padding: "12px 16px",
+            boxShadow: "0 -4px 24px rgba(0,0,0,0.4)",
+            fontFamily: FONT,
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 480,
+              margin: "0 auto",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                marginBottom: 12,
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 700,
+                    color: "#F36901",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    marginBottom: 4,
+                  }}
+                >
+                  WANT MORE INSIGHT?
+                </div>
+                <div
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    lineHeight: 1.4,
+                    maxWidth: 340,
+                  }}
+                >
+                  Want a detailed breakdown with industry benchmarks for your company profile?
+                </div>
+                <div
+                  style={{
+                    fontSize: 11,
+                    color: "rgba(255,255,255,0.5)",
+                    marginTop: 2,
+                  }}
+                >
+                  We&apos;ll send it to your inbox.
+                </div>
+              </div>
+
+              <button
+                onClick={handleDismissBar}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "rgba(255,255,255,0.3)",
+                  fontSize: 20,
+                  cursor: "pointer",
+                  padding: "0 0 0 12px",
+                  lineHeight: 1,
+                  flexShrink: 0,
+                }}
+                type="button"
+              >
+                ×
+              </button>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 8,
+                marginBottom: 10,
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Your name"
+                value={captureName}
+                onChange={(e) => setCaptureName(e.target.value)}
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: 8,
+                  padding: "8px 10px",
+                  fontSize: 13,
+                  color: "#ffffff",
+                  fontFamily: FONT,
+                  outline: "none",
+                  width: "100%",
+                }}
+              />
+              <input
+                type="email"
+                placeholder="Your work email"
+                value={captureEmail}
+                onChange={(e) => setCaptureEmail(e.target.value)}
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: 8,
+                  padding: "8px 10px",
+                  fontSize: 13,
+                  color: "#ffffff",
+                  fontFamily: FONT,
+                  outline: "none",
+                  width: "100%",
+                }}
+              />
+            </div>
+
+            <button
+              onClick={handleEmailSubmit}
+              disabled={isSubmitting || !captureEmail || !captureName}
+              style={{
+                width: "100%",
+                background: isSubmitting ? "rgba(243,105,1,0.5)" : "#F36901",
+                color: "#ffffff",
+                border: "none",
+                borderRadius: 8,
+                padding: "9px 20px",
+                fontSize: 12,
+                fontWeight: 700,
+                cursor: isSubmitting ? "not-allowed" : "pointer",
+                fontFamily: FONT,
+                letterSpacing: "0.02em",
+                transition: "opacity 0.2s",
+              }}
+              type="button"
+            >
+              {isSubmitting ? "Sending..." : "Send My Report →"}
+            </button>
+
+            {submitError && (
+              <div
+                style={{
+                  fontSize: 12,
+                  color: "#ef4444",
+                  textAlign: "center",
+                  marginTop: 8,
+                }}
+              >
+                Something went wrong. Please try again.
+              </div>
+            )}
+
+            <div style={{ textAlign: "center", marginTop: 10 }}>
+              <button
+                onClick={() => setShowEmailBar(false)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  fontSize: 11,
+                  color: "rgba(255,255,255,0.25)",
+                  cursor: "pointer",
+                  fontFamily: FONT,
+                }}
+                type="button"
+              >
+                No thanks
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {emailSubmitted && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 9999,
+            background: "linear-gradient(135deg, #16152a, #1a1a2e)",
+            borderTop: "1px solid rgba(16,185,129,0.25)",
+            padding: "16px 20px",
+            fontFamily: FONT,
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 480,
+              margin: "0 auto",
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 700,
+                color: "#10b981",
+                marginBottom: 4,
+              }}
+            >
+              ✓ Check your inbox — your report will be delivered in a couple of minutes.
+            </div>
+            <button
+              onClick={() => setEmailSubmitted(false)}
+              style={{
+                background: "none",
+                border: "none",
+                fontSize: 11,
+                color: "rgba(255,255,255,0.25)",
+                cursor: "pointer",
+                fontFamily: FONT,
+              }}
+              type="button"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
