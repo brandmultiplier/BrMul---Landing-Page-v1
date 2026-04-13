@@ -752,7 +752,7 @@ export default function NarrativeLeverageModel() {
                 <span style={{ color: C.orange, fontWeight: 600 }}>The Rumble is 3 hours. The results are permanent.</span>
               </div>
               <a
-                href="https://www.brandmultiplier.ai/"
+                href="https://calendly.com/book-crc/storyline/?utm_source=linkedin&utm_medium=social&utm_campaign=personal_profile_chris&utm_content=profile_cta&month=2026-04"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ display: "inline-block", background: C.orange, color: C.white, fontWeight: 700, fontSize: 13, padding: "12px 24px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.02em", boxShadow: `0 4px 16px ${C.orange}30`, fontFamily: FONT, transition: "transform 0.15s" }}
