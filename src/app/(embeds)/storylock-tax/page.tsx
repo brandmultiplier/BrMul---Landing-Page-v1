@@ -423,7 +423,7 @@ export default function NarrativeLeverageModel() {
           background: C.dark,
           fontFamily: FONT,
           color: C.white,
-          paddingBottom: showEmailBar ? 220 : 0,
+          paddingBottom: showEmailBar ? 220 : 48,
           transition: "padding-bottom 0.3s ease",
         }}
       >
@@ -454,7 +454,7 @@ export default function NarrativeLeverageModel() {
       </div>
 
       {/* ─── CONTENT ─── */}
-      <div className="sl-wrap" style={{ padding: "20px 20px 40px" }}>
+      <div className="sl-wrap" style={{ padding: "20px 20px 72px" }}>
 
         {/* ═══ CALCULATOR TAB ═══ */}
         {view === "calc" && (
