@@ -414,8 +414,8 @@ export default function NarrativeLeverageModel() {
     <>
       <style>{`
         .sl-wrap { max-width: 480px; margin: 0 auto; }
-        @media (min-width: 768px) { .sl-wrap { max-width: 640px; } }
-        @media (min-width: 1200px) { .sl-wrap { max-width: 720px; } }
+        @media (min-width: 768px) { .sl-wrap { max-width: 720px; } }
+        @media (min-width: 1200px) { .sl-wrap { max-width: 960px; } }
       `}</style>
       <div
         style={{
