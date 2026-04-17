@@ -412,6 +412,11 @@ export default function NarrativeLeverageModel() {
 
   return (
     <>
+      <style>{`
+        .sl-wrap { max-width: 480px; margin: 0 auto; }
+        @media (min-width: 768px) { .sl-wrap { max-width: 640px; } }
+        @media (min-width: 1200px) { .sl-wrap { max-width: 720px; } }
+      `}</style>
       <div
         style={{
           minHeight: "100vh",
@@ -440,14 +445,14 @@ export default function NarrativeLeverageModel() {
       </div>
 
       {/* ─── NAV ─── */}
-      <div style={{ display: "flex", maxWidth: 480, margin: "0 auto", padding: "0 20px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="sl-wrap" style={{ display: "flex", padding: "0 20px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <button onClick={() => setViewWithTracking("calc")} style={navStyle("calc")}>Calculator</button>
         <button onClick={() => setViewWithTracking("model")} style={navStyle("model")}>The 5 Levels</button>
         <button onClick={() => setViewWithTracking("proof")} style={navStyle("proof")}>Proof</button>
       </div>
 
       {/* ─── CONTENT ─── */}
-      <div style={{ maxWidth: 480, margin: "0 auto", padding: "20px 20px 40px" }}>
+      <div className="sl-wrap" style={{ padding: "20px 20px 40px" }}>
 
         {/* ═══ CALCULATOR TAB ═══ */}
         {view === "calc" && (
@@ -782,12 +787,7 @@ export default function NarrativeLeverageModel() {
             fontFamily: FONT,
           }}
         >
-          <div
-            style={{
-              maxWidth: 480,
-              margin: "0 auto",
-            }}
-          >
+          <div className="sl-wrap">
             <div
               style={{
                 display: "flex",
@@ -962,13 +962,7 @@ export default function NarrativeLeverageModel() {
             fontFamily: FONT,
           }}
         >
-          <div
-            style={{
-              maxWidth: 480,
-              margin: "0 auto",
-              textAlign: "center",
-            }}
-          >
+          <div className="sl-wrap" style={{ textAlign: "center" }}>
             <div
               style={{
                 fontSize: 13,
