@@ -423,7 +423,7 @@ export default function NarrativeLeverageModel() {
           background: C.dark,
           fontFamily: FONT,
           color: C.white,
-          paddingBottom: showEmailBar ? 220 : 48,
+          paddingBottom: showEmailBar ? 260 : 48,
           transition: "padding-bottom 0.3s ease",
         }}
       >
