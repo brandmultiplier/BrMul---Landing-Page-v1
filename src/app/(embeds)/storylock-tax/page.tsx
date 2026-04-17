@@ -525,10 +525,89 @@ export default function NarrativeLeverageModel() {
                     <Anim value={total} />
                   </div>
                   <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginBottom: 24 }}>per year in lost revenue, wasted payroll & founder time</div>
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "16px 16px 4px", textAlign: "left" }}>
-                    <Bar label="Revenue Leakage" value={revLeak} total={total} color={C.orange} detail={`${yourRate - teamRate}pt gap × ${dealsQ * 4} annual deals × ${fmtShort(dealSize)}`} />
-                    <Bar label="Underperforming Payroll" value={payrollWaste} total={total} color={C.purpleMid} detail={`${fmtShort(hireCost)} hire closing at ${teamRate}% vs. your ${yourRate}%`} />
-                    <Bar label="Founder Time Tax" value={founderTime} total={total} color={C.cyan} detail={`${hrsWeek}hrs/wk × 50 weeks × $500 implied rate`} />
+                  <div style={{ position: "relative" }}>
+                    <div
+                      aria-hidden={!emailSubmitted}
+                      style={{
+                        background: "rgba(255,255,255,0.04)",
+                        borderRadius: 10,
+                        padding: "16px 16px 4px",
+                        textAlign: "left",
+                        filter: emailSubmitted ? "none" : "blur(8px)",
+                        pointerEvents: emailSubmitted ? "auto" : "none",
+                        userSelect: emailSubmitted ? "auto" : "none",
+                        transition: "filter 0.35s ease",
+                      }}
+                    >
+                      <Bar label="Revenue Leakage" value={revLeak} total={total} color={C.orange} detail={`${yourRate - teamRate}pt gap × ${dealsQ * 4} annual deals × ${fmtShort(dealSize)}`} />
+                      <Bar label="Underperforming Payroll" value={payrollWaste} total={total} color={C.purpleMid} detail={`${fmtShort(hireCost)} hire closing at ${teamRate}% vs. your ${yourRate}%`} />
+                      <Bar label="Founder Time Tax" value={founderTime} total={total} color={C.cyan} detail={`${hrsWeek}hrs/wk × 50 weeks × $500 implied rate`} />
+                    </div>
+                    {!emailSubmitted && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          borderRadius: 10,
+                          background: "linear-gradient(180deg, rgba(15,14,26,0.55), rgba(15,14,26,0.88))",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          padding: "18px 16px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <div style={{ fontSize: 11, fontWeight: 700, color: C.orange, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>
+                          UNLOCK YOUR BREAKDOWN
+                        </div>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: C.white, lineHeight: 1.4, marginBottom: 4 }}>
+                          See exactly where the {fmtShort(total)} is leaking.
+                        </div>
+                        <div style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", lineHeight: 1.45, marginBottom: 14, maxWidth: 380 }}>
+                          Revenue leakage, payroll waste, founder time tax — delivered to your inbox in a couple of minutes.
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="Full name"
+                          value={captureName}
+                          onChange={(e) => setCaptureName(e.target.value)}
+                          style={{ width: "100%", maxWidth: 320, padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.06)", color: C.white, fontSize: 13, fontFamily: FONT, outline: "none", marginBottom: 8 }}
+                        />
+                        <input
+                          type="email"
+                          placeholder="Work email"
+                          value={captureEmail}
+                          onChange={(e) => setCaptureEmail(e.target.value)}
+                          style={{ width: "100%", maxWidth: 320, padding: "10px 12px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.06)", color: C.white, fontSize: 13, fontFamily: FONT, outline: "none", marginBottom: 10 }}
+                        />
+                        <button
+                          onClick={handleEmailSubmit}
+                          disabled={isSubmitting || !captureEmail || !captureName}
+                          style={{
+                            width: "100%",
+                            maxWidth: 320,
+                            padding: "11px 16px",
+                            borderRadius: 8,
+                            border: "none",
+                            background: isSubmitting ? "rgba(243,105,1,0.5)" : C.orange,
+                            color: C.white,
+                            fontWeight: 700,
+                            fontSize: 13,
+                            fontFamily: FONT,
+                            cursor: isSubmitting || !captureEmail || !captureName ? "not-allowed" : "pointer",
+                            letterSpacing: "0.02em",
+                            opacity: !captureEmail || !captureName ? 0.5 : 1,
+                            transition: "opacity 0.2s",
+                          }}
+                        >
+                          {isSubmitting ? "Sending…" : "Send My Report →"}
+                        </button>
+                        {submitError && (
+                          <div style={{ fontSize: 11, color: C.red, marginTop: 8, maxWidth: 320 }}>{submitError}</div>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <div style={{ marginTop: 20, padding: "14px 16px", background: `${C.purple}12`, borderRadius: 10, border: `1px solid ${C.purple}25` }}>
                     <div style={{ fontSize: 12, fontWeight: 700, color: C.purple, marginBottom: 4 }}>THIS IS LEVEL 1: FOUNDER-LOCKED</div>
