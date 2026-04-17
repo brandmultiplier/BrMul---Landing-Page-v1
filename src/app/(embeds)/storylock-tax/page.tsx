@@ -432,9 +432,11 @@ export default function NarrativeLeverageModel() {
         <div style={{ position: "absolute", top: -80, right: -80, width: 240, height: 240, borderRadius: "50%", background: `radial-gradient(circle, ${C.orange}15, transparent 70%)` }} />
         <div style={{ position: "absolute", bottom: -60, left: -60, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${C.purple}20, transparent 70%)` }} />
         <div style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", background: `${C.orange}18`, border: `1px solid ${C.orange}30`, borderRadius: 16, padding: "4px 12px", marginBottom: 14 }}>
-            <span style={{ fontSize: 10, fontWeight: 700, color: C.orange, letterSpacing: "0.1em" }}>BRANDMULTIPLIER</span>
-          </div>
+          <img
+            src="/brandmultiplier-logo.png"
+            alt="BrandMultiplier"
+            style={{ height: 44, width: "auto", display: "block", margin: "0 auto 14px", borderRadius: 8 }}
+          />
           <h1 style={{ fontSize: 26, fontWeight: 800, color: C.white, margin: "0 0 6px", lineHeight: 1.15, letterSpacing: "-0.02em" }}>
             The Narrative<br />Leverage Model
           </h1>
