@@ -40,7 +40,6 @@ const C = {
 const FONT = "'Arial', 'Helvetica Neue', sans-serif";
 const FOUNDER_HOURLY = 500;
 const WORK_WEEKS = 50;
-const TOTAL_CALCULATOR_FIELDS = 6;
 
 /* ─── UTILITIES ─── */
 const fmt = (n: number) =>
@@ -95,6 +94,15 @@ interface FieldProps {
 }
 
 function Field({ label, sub, prefix, suffix, value, onChange, min, max, step = 1 }: FieldProps) {
+  const [inputValue, setInputValue] = useState<string>(String(value));
+
+  const clampValue = (rawValue: number): number => {
+    let nextValue = rawValue;
+    if (min !== undefined) nextValue = Math.max(min, nextValue);
+    if (max !== undefined) nextValue = Math.min(max, nextValue);
+    return nextValue;
+  };
+
   return (
     <div style={{ marginBottom: 20 }}>
       <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: C.white, marginBottom: 3, fontFamily: FONT, opacity: 0.9 }}>
@@ -117,13 +125,45 @@ function Field({ label, sub, prefix, suffix, value, onChange, min, max, step = 1
         )}
         <input
           type="number"
-          value={value}
+          value={inputValue}
+          onBlur={() => {
+            const raw = inputValue.trim();
+
+            if (raw === "") {
+              const fallback = clampValue(min ?? 0);
+              onChange(fallback);
+              setInputValue(String(fallback));
+              return;
+            }
+
+            const parsed = parseFloat(raw);
+            if (Number.isNaN(parsed)) {
+              const fallback = clampValue(value);
+              onChange(fallback);
+              setInputValue(String(fallback));
+              return;
+            }
+
+            const nextValue = clampValue(parsed);
+            onChange(nextValue);
+            setInputValue(String(nextValue));
+          }}
           onChange={(e) => {
-            let v = parseFloat(e.target.value);
-            if (isNaN(v)) v = 0;
-            if (min !== undefined) v = Math.max(min, v);
-            if (max !== undefined) v = Math.min(max, v);
-            onChange(v);
+            const raw = e.target.value;
+            setInputValue(raw);
+
+            if (raw.trim() === "") {
+              return;
+            }
+
+            const parsed = parseFloat(raw);
+            if (Number.isNaN(parsed)) {
+              return;
+            }
+
+            const nextValue = clampValue(parsed);
+            onChange(nextValue);
+            setInputValue(String(nextValue));
           }}
           min={min}
           max={max}
@@ -228,15 +268,11 @@ export default function NarrativeLeverageModel() {
   const [hireCost, setHireCost] = useState(120000);
   const [hrsWeek, setHrsWeek] = useState(15);
   const [showResult, setShowResult] = useState(false);
-  const [showEmailBar, setShowEmailBar] = useState(false);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [captureEmail, setCaptureEmail] = useState("");
   const [captureName, setCaptureName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
-  const [defaultsAccepted, setDefaultsAccepted] = useState(false);
-  const [inputActivityTick, setInputActivityTick] = useState(0);
   const [visitedTabs, setVisitedTabs] = useState<Set<"calc" | "model" | "proof">>(
     new Set(["calc"]),
   );
@@ -251,37 +287,6 @@ export default function NarrativeLeverageModel() {
   useEffect(() => {
     if (total > 0) setShowResult(true);
   }, [total]);
-
-  useEffect(() => {
-    if (emailSubmitted || touchedFields.size === 0) {
-      return;
-    }
-
-    if (touchedFields.size === TOTAL_CALCULATOR_FIELDS) {
-      setDefaultsAccepted(true);
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      setDefaultsAccepted(true);
-    }, 8000);
-
-    return () => clearTimeout(timer);
-  }, [emailSubmitted, inputActivityTick, touchedFields.size]);
-
-  useEffect(() => {
-    if (
-      showResult &&
-      total > 0 &&
-      defaultsAccepted &&
-      !emailSubmitted
-    ) {
-      const timer = setTimeout(() => {
-        setShowEmailBar(true);
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [showResult, total, defaultsAccepted, emailSubmitted]);
 
   const fireGtagEvent = (
     eventName: string,
@@ -356,7 +361,6 @@ export default function NarrativeLeverageModel() {
       }
 
       setEmailSubmitted(true);
-      setShowEmailBar(false);
       fireGtagEvent("storylock_tax_email_captured", {
         event_category: "StoryLock Tax",
         storylock_tax_total: Math.round(total),
@@ -369,29 +373,20 @@ export default function NarrativeLeverageModel() {
     }
   };
 
-  const handleDismissBar = () => {
-    setShowEmailBar(false);
-    fireGtagEvent("storylock_tax_email_dismissed", {
-      event_category: "StoryLock Tax",
-      event_label: "email_prompt_dismissed",
-    });
-  };
-
   const setViewWithTracking = (tab: "calc" | "model" | "proof") => {
     setView(tab);
     setVisitedTabs((prev) => new Set(prev).add(tab));
   };
 
   const handleCalculatorFieldChange = (
-    fieldName: string,
     setter: (value: number) => void,
     value: number,
   ) => {
     setter(value);
-    setTouchedFields((prev) => new Set(prev).add(fieldName));
-    setDefaultsAccepted(false);
-    setInputActivityTick((prev) => prev + 1);
   };
+
+  const tabsLocked = !emailSubmitted;
+  const detailsLocked = showResult && !emailSubmitted;
 
   const navStyle = (v: string): CSSProperties => ({
     padding: "10px 0",
@@ -423,8 +418,7 @@ export default function NarrativeLeverageModel() {
           background: C.dark,
           fontFamily: FONT,
           color: C.white,
-          paddingBottom: showEmailBar ? 220 : 48,
-          transition: "padding-bottom 0.3s ease",
+          paddingBottom: 48,
         }}
       >
       {/* ─── HEADER ─── */}
@@ -448,9 +442,33 @@ export default function NarrativeLeverageModel() {
 
       {/* ─── NAV ─── */}
       <div className="sl-wrap" style={{ display: "flex", padding: "0 20px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <button onClick={() => setViewWithTracking("calc")} style={navStyle("calc")}>Calculator</button>
-        <button onClick={() => setViewWithTracking("model")} style={navStyle("model")}>The 5 Levels</button>
-        <button onClick={() => setViewWithTracking("proof")} style={navStyle("proof")}>Proof</button>
+        <button type="button" onClick={() => setViewWithTracking("calc")} style={navStyle("calc")}>Calculator</button>
+        <button
+          type="button"
+          onClick={() => {
+            if (!tabsLocked) setViewWithTracking("model");
+          }}
+          style={{
+            ...navStyle("model"),
+            opacity: tabsLocked ? 0.6 : 1,
+            cursor: tabsLocked ? "not-allowed" : "pointer",
+          }}
+        >
+          The 5 Levels {tabsLocked ? "🔒" : ""}
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            if (!tabsLocked) setViewWithTracking("proof");
+          }}
+          style={{
+            ...navStyle("proof"),
+            opacity: tabsLocked ? 0.6 : 1,
+            cursor: tabsLocked ? "not-allowed" : "pointer",
+          }}
+        >
+          Proof {tabsLocked ? "🔒" : ""}
+        </button>
       </div>
 
       {/* ─── CONTENT ─── */}
@@ -466,7 +484,7 @@ export default function NarrativeLeverageModel() {
                   label="Your Close Rate"
                   sub="Deals you personally close"
                   value={yourRate}
-                  onChange={(v) => handleCalculatorFieldChange("yourRate", setYourRate, v)}
+                  onChange={(v) => handleCalculatorFieldChange(setYourRate, v)}
                   suffix="%"
                   min={0}
                   max={100}
@@ -475,7 +493,7 @@ export default function NarrativeLeverageModel() {
                   label="Team Close Rate"
                   sub="Without your involvement"
                   value={teamRate}
-                  onChange={(v) => handleCalculatorFieldChange("teamRate", setTeamRate, v)}
+                  onChange={(v) => handleCalculatorFieldChange(setTeamRate, v)}
                   suffix="%"
                   min={0}
                   max={100}
@@ -485,7 +503,7 @@ export default function NarrativeLeverageModel() {
                 label="Average Deal Size"
                 prefix="$"
                 value={dealSize}
-                onChange={(v) => handleCalculatorFieldChange("dealSize", setDealSize, v)}
+                onChange={(v) => handleCalculatorFieldChange(setDealSize, v)}
                 min={0}
                 step={1000}
               />
@@ -493,7 +511,7 @@ export default function NarrativeLeverageModel() {
                 label="Deals Per Quarter Requiring You"
                 sub="Deals where you&apos;re in the room to close"
                 value={dealsQ}
-                onChange={(v) => handleCalculatorFieldChange("dealsQ", setDealsQ, v)}
+                onChange={(v) => handleCalculatorFieldChange(setDealsQ, v)}
                 min={0}
               />
               <Field
@@ -501,7 +519,7 @@ export default function NarrativeLeverageModel() {
                 sub="Base + commission for your best rep"
                 prefix="$"
                 value={hireCost}
-                onChange={(v) => handleCalculatorFieldChange("hireCost", setHireCost, v)}
+                onChange={(v) => handleCalculatorFieldChange(setHireCost, v)}
                 min={0}
                 step={5000}
               />
@@ -509,7 +527,7 @@ export default function NarrativeLeverageModel() {
                 label="Hours / Week You Spend Selling"
                 sub="Calls, demos, proposals, follow-ups"
                 value={hrsWeek}
-                onChange={(v) => handleCalculatorFieldChange("hrsWeek", setHrsWeek, v)}
+                onChange={(v) => handleCalculatorFieldChange(setHrsWeek, v)}
                 suffix="hrs"
                 min={0}
                 max={80}
@@ -525,30 +543,140 @@ export default function NarrativeLeverageModel() {
                     <Anim value={total} />
                   </div>
                   <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginBottom: 24 }}>per year in lost revenue, wasted payroll & founder time</div>
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "16px 16px 4px", textAlign: "left" }}>
-                    <Bar label="Revenue Leakage" value={revLeak} total={total} color={C.orange} detail={`${yourRate - teamRate}pt gap × ${dealsQ * 4} annual deals × ${fmtShort(dealSize)}`} />
-                    <Bar label="Underperforming Payroll" value={payrollWaste} total={total} color={C.purpleMid} detail={`${fmtShort(hireCost)} hire closing at ${teamRate}% vs. your ${yourRate}%`} />
-                    <Bar label="Founder Time Tax" value={founderTime} total={total} color={C.cyan} detail={`${hrsWeek}hrs/wk × 50 weeks × $500 implied rate`} />
-                  </div>
-                  <div style={{ marginTop: 20, padding: "14px 16px", background: `${C.purple}12`, borderRadius: 10, border: `1px solid ${C.purple}25` }}>
-                    <div style={{ fontSize: 12, fontWeight: 700, color: C.purple, marginBottom: 4 }}>THIS IS LEVEL 1: FOUNDER-LOCKED</div>
-                    <div style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>
-                      Your story is trapped in your head. Every number above is a symptom of missing narrative infrastructure — not a marketing problem.
-                    </div>
-                    <button
-                      onClick={() => setViewWithTracking("model")}
-                      style={{ marginTop: 10, background: C.purple, color: C.white, border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 12, fontWeight: 700, cursor: "pointer", fontFamily: FONT, letterSpacing: "0.02em", transition: "opacity 0.2s" }}
-                      onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.opacity = "0.85")}
-                      onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.opacity = "1")}
+                  <div style={{ position: "relative" }}>
+                    <div
+                      style={{
+                        filter: detailsLocked ? "blur(6px)" : "none",
+                        opacity: detailsLocked ? 0.55 : 1,
+                        pointerEvents: detailsLocked ? "none" : "auto",
+                        userSelect: detailsLocked ? "none" : "auto",
+                        transition: "filter 0.25s ease, opacity 0.25s ease",
+                      }}
                     >
-                      See the 5 Levels →
-                    </button>
+                      <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "16px 16px 4px", textAlign: "left" }}>
+                        <Bar label="Revenue Leakage" value={revLeak} total={total} color={C.orange} detail={`${yourRate - teamRate}pt gap × ${dealsQ * 4} annual deals × ${fmtShort(dealSize)}`} />
+                        <Bar label="Underperforming Payroll" value={payrollWaste} total={total} color={C.purpleMid} detail={`${fmtShort(hireCost)} hire closing at ${teamRate}% vs. your ${yourRate}%`} />
+                        <Bar label="Founder Time Tax" value={founderTime} total={total} color={C.cyan} detail={`${hrsWeek}hrs/wk × 50 weeks × $500 implied rate`} />
+                      </div>
+                      <div style={{ marginTop: 20, padding: "14px 16px", background: `${C.purple}12`, borderRadius: 10, border: `1px solid ${C.purple}25` }}>
+                        <div style={{ fontSize: 12, fontWeight: 700, color: C.purple, marginBottom: 4 }}>THIS IS LEVEL 1: FOUNDER-LOCKED</div>
+                        <div style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>
+                          Your story is trapped in your head. Every number above is a symptom of missing narrative infrastructure — not a marketing problem.
+                        </div>
+                        <button
+                          onClick={() => {
+                            if (!tabsLocked) {
+                              setViewWithTracking("model");
+                            }
+                          }}
+                          style={{
+                            marginTop: 10,
+                            background: C.purple,
+                            color: C.white,
+                            border: "none",
+                            borderRadius: 8,
+                            padding: "10px 20px",
+                            fontSize: 12,
+                            fontWeight: 700,
+                            cursor: tabsLocked ? "not-allowed" : "pointer",
+                            opacity: tabsLocked ? 0.55 : 1,
+                            fontFamily: FONT,
+                            letterSpacing: "0.02em",
+                            transition: "opacity 0.2s",
+                          }}
+                          onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.opacity = tabsLocked ? "0.55" : "0.85")}
+                          onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.opacity = tabsLocked ? "0.55" : "1")}
+                          type="button"
+                        >
+                          See the 5 Levels {tabsLocked ? "🔒" : "→"}
+                        </button>
+                      </div>
+                    </div>
+
+                    {detailsLocked && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          padding: 12,
+                          background: "rgba(10,10,10,0.34)",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "100%",
+                            maxWidth: 360,
+                            background: "linear-gradient(135deg, #16152a, #1a1a2e)",
+                            border: "1px solid rgba(243,105,1,0.25)",
+                            borderRadius: 12,
+                            padding: "16px 14px",
+                            textAlign: "left",
+                          }}
+                        >
+                          <div style={{ fontSize: 10, fontWeight: 700, color: C.orange, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>
+                            UNLOCK FULL BREAKDOWN
+                          </div>
+                          <div style={{ fontSize: 13, fontWeight: 700, color: C.white, lineHeight: 1.4, marginBottom: 4 }}>
+                            Fill out this form to see the full breakdown.
+                          </div>
+                          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.55)", marginBottom: 10 }}>
+                            We&apos;ll send your detailed report to your inbox.
+                          </div>
+
+                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
+                            <input
+                              type="text"
+                              placeholder="Your name"
+                              value={captureName}
+                              onChange={(e) => setCaptureName(e.target.value)}
+                              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "8px 10px", fontSize: 13, color: "#ffffff", fontFamily: FONT, outline: "none", width: "100%" }}
+                            />
+                            <input
+                              type="email"
+                              placeholder="Your work email"
+                              value={captureEmail}
+                              onChange={(e) => setCaptureEmail(e.target.value)}
+                              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "8px 10px", fontSize: 13, color: "#ffffff", fontFamily: FONT, outline: "none", width: "100%" }}
+                            />
+                          </div>
+
+                          <button
+                            onClick={handleEmailSubmit}
+                            disabled={isSubmitting || !captureEmail || !captureName}
+                            style={{ width: "100%", background: isSubmitting ? "rgba(243,105,1,0.5)" : "#F36901", color: "#ffffff", border: "none", borderRadius: 8, padding: "9px 20px", fontSize: 12, fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: FONT, letterSpacing: "0.02em", transition: "opacity 0.2s" }}
+                            type="button"
+                          >
+                            {isSubmitting ? "Sending..." : "Send My Report →"}
+                          </button>
+
+                          {submitError && (
+                            <div style={{ fontSize: 12, color: "#ef4444", textAlign: "center", marginTop: 8 }}>
+                              {submitError}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             )}
 
-            <div style={{ textAlign: "center", marginTop: 14, fontSize: 10, color: "rgba(255,255,255,0.25)", lineHeight: 1.5 }}>
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: 14,
+                fontSize: 10,
+                color: "rgba(255,255,255,0.25)",
+                lineHeight: 1.5,
+                filter: detailsLocked ? "blur(4px)" : "none",
+                opacity: detailsLocked ? 0.6 : 1,
+                transition: "filter 0.25s ease, opacity 0.25s ease",
+              }}
+            >
               Uses $500/hr implied founder rate based on median for B2B founders at $3M–$50M ARR.
               <br />Revenue leakage = close rate gap × annual deal volume × deal size.
             </div>
@@ -689,12 +817,17 @@ export default function NarrativeLeverageModel() {
 
             <div style={{ marginTop: 16, textAlign: "center" }}>
               <button
-                onClick={() => setViewWithTracking("proof")}
-                style={{ background: C.orange, color: C.white, border: "none", borderRadius: 8, padding: "12px 24px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: FONT, letterSpacing: "0.02em", boxShadow: `0 4px 16px ${C.orange}30`, transition: "opacity 0.2s" }}
-                onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.opacity = "0.85")}
-                onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.opacity = "1")}
+                onClick={() => {
+                  if (!tabsLocked) {
+                    setViewWithTracking("proof");
+                  }
+                }}
+                style={{ background: C.orange, color: C.white, border: "none", borderRadius: 8, padding: "12px 24px", fontSize: 13, fontWeight: 700, cursor: tabsLocked ? "not-allowed" : "pointer", opacity: tabsLocked ? 0.55 : 1, fontFamily: FONT, letterSpacing: "0.02em", boxShadow: `0 4px 16px ${C.orange}30`, transition: "opacity 0.2s" }}
+                onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.opacity = tabsLocked ? "0.55" : "0.85")}
+                onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.opacity = tabsLocked ? "0.55" : "1")}
+                type="button"
               >
-                See the Evidence →
+                See the Evidence {tabsLocked ? "🔒" : "→"}
               </button>
             </div>
           </div>
@@ -774,224 +907,6 @@ export default function NarrativeLeverageModel() {
       </div>
       </div>
 
-      {showEmailBar && !emailSubmitted && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: 9999,
-            background: "linear-gradient(135deg, #16152a, #1a1a2e)",
-            borderTop: "1px solid rgba(243,105,1,0.25)",
-            padding: "12px 16px",
-            boxShadow: "0 -4px 24px rgba(0,0,0,0.4)",
-            fontFamily: FONT,
-          }}
-        >
-          <div className="sl-wrap">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                marginBottom: 12,
-              }}
-            >
-              <div>
-                <div
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    color: "#F36901",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    marginBottom: 4,
-                  }}
-                >
-                  WANT MORE INSIGHT?
-                </div>
-                <div
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: "#ffffff",
-                    lineHeight: 1.4,
-                    maxWidth: 340,
-                  }}
-                >
-                  Want a detailed breakdown with industry benchmarks for your company profile?
-                </div>
-                <div
-                  style={{
-                    fontSize: 11,
-                    color: "rgba(255,255,255,0.5)",
-                    marginTop: 2,
-                  }}
-                >
-                  We&apos;ll send it to your inbox.
-                </div>
-              </div>
-
-              <button
-                onClick={handleDismissBar}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "rgba(255,255,255,0.3)",
-                  fontSize: 20,
-                  cursor: "pointer",
-                  padding: "0 0 0 12px",
-                  lineHeight: 1,
-                  flexShrink: 0,
-                }}
-                type="button"
-              >
-                ×
-              </button>
-            </div>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 8,
-                marginBottom: 10,
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Your name"
-                value={captureName}
-                onChange={(e) => setCaptureName(e.target.value)}
-                style={{
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  borderRadius: 8,
-                  padding: "8px 10px",
-                  fontSize: 13,
-                  color: "#ffffff",
-                  fontFamily: FONT,
-                  outline: "none",
-                  width: "100%",
-                }}
-              />
-              <input
-                type="email"
-                placeholder="Your work email"
-                value={captureEmail}
-                onChange={(e) => setCaptureEmail(e.target.value)}
-                style={{
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  borderRadius: 8,
-                  padding: "8px 10px",
-                  fontSize: 13,
-                  color: "#ffffff",
-                  fontFamily: FONT,
-                  outline: "none",
-                  width: "100%",
-                }}
-              />
-            </div>
-
-            <button
-              onClick={handleEmailSubmit}
-              disabled={isSubmitting || !captureEmail || !captureName}
-              style={{
-                width: "100%",
-                background: isSubmitting ? "rgba(243,105,1,0.5)" : "#F36901",
-                color: "#ffffff",
-                border: "none",
-                borderRadius: 8,
-                padding: "9px 20px",
-                fontSize: 12,
-                fontWeight: 700,
-                cursor: isSubmitting ? "not-allowed" : "pointer",
-                fontFamily: FONT,
-                letterSpacing: "0.02em",
-                transition: "opacity 0.2s",
-              }}
-              type="button"
-            >
-              {isSubmitting ? "Sending..." : "Send My Report →"}
-            </button>
-
-            {submitError && (
-              <div
-                style={{
-                  fontSize: 12,
-                  color: "#ef4444",
-                  textAlign: "center",
-                  marginTop: 8,
-                }}
-              >
-                {submitError}
-              </div>
-            )}
-
-            <div style={{ textAlign: "center", marginTop: 10 }}>
-              <button
-                onClick={() => setShowEmailBar(false)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  fontSize: 11,
-                  color: "rgba(255,255,255,0.25)",
-                  cursor: "pointer",
-                  fontFamily: FONT,
-                }}
-                type="button"
-              >
-                No thanks
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {emailSubmitted && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: 9999,
-            background: "linear-gradient(135deg, #16152a, #1a1a2e)",
-            borderTop: "1px solid rgba(16,185,129,0.25)",
-            padding: "16px 20px",
-            fontFamily: FONT,
-          }}
-        >
-          <div className="sl-wrap" style={{ textAlign: "center" }}>
-            <div
-              style={{
-                fontSize: 13,
-                fontWeight: 700,
-                color: "#10b981",
-                marginBottom: 4,
-              }}
-            >
-              ✓ Check your inbox — your report will be delivered in a couple of minutes.
-            </div>
-            <button
-              onClick={() => setEmailSubmitted(false)}
-              style={{
-                background: "none",
-                border: "none",
-                fontSize: 11,
-                color: "rgba(255,255,255,0.25)",
-                cursor: "pointer",
-                fontFamily: FONT,
-              }}
-              type="button"
-            >
-              Dismiss
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 }
