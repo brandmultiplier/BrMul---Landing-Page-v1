@@ -432,8 +432,8 @@ export default function NarrativeLeverageModel() {
             style={{ height: 44, width: "auto", display: "block", margin: "0 auto 14px", borderRadius: 8 }}
           />
           <h1 style={{ fontSize: 26, fontWeight: 800, color: C.white, margin: "0 0 6px", lineHeight: 1.15, letterSpacing: "-0.02em" }}>
-            What StoryLock is costing your business<br />
-            this year
+            What StoryLock is Costing Your Business<br />
+            this Year
           </h1>
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", margin: "0 auto 20px", maxWidth: 360, lineHeight: 1.5 }}>
             Two axes: what it costs you and what it caps your revenue at.
