@@ -24,7 +24,6 @@ export default function FinalCTA() {
     const [formData, setFormData] = useState(EMPTY_FORM);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [isLoading, setIsLoading] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState("");
 
     const handleChange = (
@@ -74,8 +73,8 @@ export default function FinalCTA() {
             });
 
             if (response.ok) {
-                setSubmitted(true);
-                setFormData(EMPTY_FORM);
+                window.location.href = "https://calendly.com/book-crc/storyline/";
+                return;
             } else if (response.status === 400) {
                 const data = (await response.json()) as { error?: string };
                 setErrors((prev) => ({
@@ -120,15 +119,7 @@ export default function FinalCTA() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="max-w-md mx-auto clean-card bg-[#0A0A0A]"
                 >
-                    {submitted ? (
-                        <div className="text-center py-8 space-y-3">
-                            <p className="text-white text-lg font-medium">Thank you!</p>
-                            <p className="text-text-secondary text-sm">
-                                We&apos;ll be in touch shortly.
-                            </p>
-                        </div>
-                    ) : (
-                        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                             {/* First Name + Last Name */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="flex flex-col gap-1">
@@ -234,7 +225,6 @@ export default function FinalCTA() {
                                 <span>Walk away knowing if your problem is structural, or not.</span>
                             </p>
                         </form>
-                    )}
                 </motion.div>
             </ScrollFade>
         </section>
