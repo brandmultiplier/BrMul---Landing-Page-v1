@@ -474,9 +474,14 @@ export default function StoryLockTaxV2Page() {
           -webkit-font-smoothing: antialiased;
         }
         .slv2-wrap {
-          max-width: 820px;
+          max-width: 1120px;
           margin: 0 auto;
-          padding: 48px 24px 96px;
+          padding: 56px 32px 96px;
+        }
+        @media (max-width: 768px) {
+          .slv2-wrap {
+            padding: 32px 16px 64px;
+          }
         }
         .slv2-field-row {
           display: grid;
