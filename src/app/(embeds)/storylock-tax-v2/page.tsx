@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * StoryLock Tax Calculator — v2 (parallel A/B variant of /storylock-tax).
+ * StoryLock Tax Calculator—v2 (parallel A/B variant of /storylock-tax).
  * Content/structure/math from 02_StoryLock-Tax-Calculator (1).html (4-tax stack, 5-level taxonomy).
  * Plumbing (API, business-email gate, gtag, Calendly CTA) ported from sibling /storylock-tax.
  * Payload sends new field names (arr, mult, closePct, hours, fails, aecost, rate, tier, level_match).
@@ -26,7 +26,7 @@ declare global {
   }
 }
 
-// Calendly CTA — same root as live page, scoped utm_content for v2 split in GA.
+// Calendly CTA—same root as live page, scoped utm_content for v2 split in GA.
 const CTA_HREF =
   "https://calendly.com/book-crc/storyline/?utm_source=linkedin&utm_medium=social&utm_campaign=personal_profile_chris&utm_content=storylock_tax_v2&month=2026-04";
 
@@ -60,7 +60,7 @@ const computeVerdict = (
       tier: "Critical StoryLock",
       levelMatch: 1,
       body:
-        "You are not running a company. You are running a sales floor that happens to have a product attached to it. The hiring loop is funded by a belief that the next person will be different. The math on this page says the next person will not be different — because the variable you keep adjusting is not the variable that determines the outcome.",
+        "You are not running a company. You are running a sales floor that happens to have a product attached to it. The hiring loop is funded by a belief that the next person will be different. The math on this page says the next person will not be different—because the variable you keep adjusting is not the variable that determines the outcome.",
       action:
         "The work that fixes this takes about ten hours of your time over seventy-five days. You spend that much in a slow week of sales calls your team should be handling.",
     };
@@ -70,7 +70,7 @@ const computeVerdict = (
       tier: "Significant StoryLock",
       levelMatch: 2,
       body:
-        "The team can handle some deals; the ones that matter still route to you. Marketing is producing collateral that translates something that was never fully articulated. You are paying for the gap quarterly — in hours, in delayed hires, in the discount a buyer will eventually apply to your valuation.",
+        "The team can handle some deals; the ones that matter still route to you. Marketing is producing collateral that translates something that was never fully articulated. You are paying for the gap quarterly—in hours, in delayed hires, in the discount a buyer will eventually apply to your valuation.",
       action:
         "The window where this is fixable in one quarter is open. It does not stay open. The fix is finite. Postponement is not.",
     };
@@ -80,7 +80,7 @@ const computeVerdict = (
       tier: "Moderate StoryLock",
       levelMatch: 3,
       body:
-        "You have built more transferable structure than most founders at your stage, and the team can carry meaningful weight without you. The remaining gap is real — and it shows up at the deals you cannot afford to lose, the hires that take longer than they should, and the marketing that lands close to your voice but never exactly in it.",
+        "You have built more transferable structure than most founders at your stage, and the team can carry meaningful weight without you. The remaining gap is real—and it shows up at the deals you cannot afford to lose, the hires that take longer than they should, and the marketing that lands close to your voice but never exactly in it.",
       action:
         "Closing the last twenty percent of the gap is what separates a company that scales from one that plateaus. The work compounds.",
     };
@@ -121,9 +121,9 @@ const LEVELS: LevelDef[] = [
     n: 2,
     name: "Performed",
     where:
-      "Story lives in the founder's performance — the team mimics, but cannot reproduce",
+      "Story lives in the founder's performance—the team mimics, but cannot reproduce",
     body:
-      "You have given the same pitch enough times that the team has memorized phrases. They use your vocabulary. They cannot, however, deploy your reasoning. When a buyer pushes back outside the memorized script, the deal stalls or the team escalates. The story exists as a performance, not as a system. Watch a sales rep try to handle a hard objection — the moment of failure is the moment they reach for a phrase you said and discover the phrase has no engine behind it.",
+      "You have given the same pitch enough times that the team has memorized phrases. They use your vocabulary. They cannot, however, deploy your reasoning. When a buyer pushes back outside the memorized script, the deal stalls or the team escalates. The story exists as a performance, not as a system. Watch a sales rep try to handle a hard objection—the moment of failure is the moment they reach for a phrase you said and discover the phrase has no engine behind it.",
     indicators: [
       { label: "Founder close rate", value: "60–80%" },
       { label: "Team selling without you", value: "Light deals only" },
@@ -134,7 +134,7 @@ const LEVELS: LevelDef[] = [
   {
     n: 3,
     name: "Drafted",
-    where: "Story has been partially written down — adoption is uneven",
+    where: "Story has been partially written down—adoption is uneven",
     body:
       "A messaging doc exists. A playbook exists. The website has been rewritten in the last 18 months. Pieces of the story have made it onto paper. The team uses some of it, ignores most of it, and reconstructs the rest. This is the most expensive level to be stuck on, because you have paid for the artifact and not for the system. The artifact decays the day it ships. The system would have updated itself.",
     indicators: [
@@ -149,7 +149,7 @@ const LEVELS: LevelDef[] = [
     name: "Codified",
     where: "Story is a system the team operates from",
     body:
-      "The narrative is extracted, codified, and installed across discovery scripts, objection handling, multi-stakeholder framing, marketing collateral, and outbound. The team can carry deals you have not touched. New hires reach productivity in weeks, not quarters. You are still present in the highest-stakes conversations — but by choice, not by necessity. Most companies that reach this level never go back.",
+      "The narrative is extracted, codified, and installed across discovery scripts, objection handling, multi-stakeholder framing, marketing collateral, and outbound. The team can carry deals you have not touched. New hires reach productivity in weeks, not quarters. You are still present in the highest-stakes conversations—but by choice, not by necessity. Most companies that reach this level never go back.",
     indicators: [
       { label: "Founder close rate", value: "30–40%" },
       { label: "Team selling without you", value: "Most deals" },
@@ -161,9 +161,9 @@ const LEVELS: LevelDef[] = [
     n: 5,
     name: "Compounding",
     where:
-      "System teaches itself — new hires absorb the story without founder intervention",
+      "System teaches itself—new hires absorb the story without founder intervention",
     body:
-      "The Narrative Operating System has become how the company thinks. The team improves the system from real-world deal data. Marketing iterates without re-asking what the company does. Onboarding compresses the founder's seven years of pattern recognition into a thirty-day ramp. This is the level where the valuation discount disappears, because the company's value is no longer locked inside one person. You become the architect of how everyone closes — not the only person who can.",
+      "The Narrative Operating System has become how the company thinks. The team improves the system from real-world deal data. Marketing iterates without re-asking what the company does. Onboarding compresses the founder's seven years of pattern recognition into a thirty-day ramp. This is the level where the valuation discount disappears, because the company's value is no longer locked inside one person. You become the architect of how everyone closes—not the only person who can.",
     indicators: [
       { label: "Founder close rate", value: "Strategic deals only" },
       { label: "Team selling without you", value: "All deals" },
@@ -179,7 +179,7 @@ const STATS = [
     body: (
       <>
         <strong>of first sales hires fail in year one.</strong> Not because of
-        talent — because they were dropped into a vacuum with zero enablement.{" "}
+        talent—because they were dropped into a vacuum with zero enablement.{" "}
         <em>(SaaStr)</em>
       </>
     ),
@@ -210,45 +210,45 @@ const OPERATOR_QUOTES = [
   {
     text:
       "I told myself for years that the problem was the people I was hiring. After we'd burned through three VPs of Sales, I realized the problem was that I had never written down what I knew. We were a company built on undocumented genius. That isn't a company. That's a magic trick.",
-    cite: "— Mike Molinet, Co-founder, Branch",
+    cite: "—Mike Molinet, Co-founder, Branch",
   },
   {
     text:
-      "Every founder I've ever worked with closes at roughly 50% higher rates than their best non-founder sales hire. That's a statement about the founder's structural credibility advantage — and it's a perfect measurement of how much of the sales conversation has never been codified.",
-    cite: "— Eyal Worthalter, Marvell",
+      "Every founder I've ever worked with closes at roughly 50% higher rates than their best non-founder sales hire. That's a statement about the founder's structural credibility advantage—and it's a perfect measurement of how much of the sales conversation has never been codified.",
+    cite: "—Eyal Worthalter, Marvell",
   },
   {
     text:
       "There is no transition out of sales for a founder. There is only a transition in how you spend your sales time. The founder who tries to transition out is the founder who breaks the company.",
-    cite: "— Seth DeHart, Growth Unhinged",
+    cite: "—Seth DeHart, Growth Unhinged",
   },
   {
     text:
       "The companies that cross $50M with the founder still in every deal don't cross $100M. They sell. Or they break. The math doesn't allow the third option.",
-    cite: "— David Blake, Degreed",
+    cite: "—David Blake, Degreed",
   },
 ];
 
 const CLIENT_QUOTES = [
   {
     text:
-      "What impressed us most was the ability to take our inputs — the bulk of which were quite technically complex — and transform them into a powerful story that really speaks to our customers. The final result was everything we had been trying to say, much better said.",
-    cite: "— Co-founder / CEO, Apto Solutions",
+      "What impressed us most was the ability to take our inputs—the bulk of which were quite technically complex—and transform them into a powerful story that really speaks to our customers. The final result was everything we had been trying to say, much better said.",
+    cite: "—Co-founder / CEO, Apto Solutions",
   },
   {
     text:
       "You were able to act as an external catalyst to help us reconcile different viewpoints on the brand. You helped us shift our messaging from focusing on rational drivers to emotional drivers of customer behavior.",
-    cite: "— CEO, BetterCloud",
+    cite: "—CEO, BetterCloud",
   },
   {
     text:
-      "The Brand Playbook resonated completely with our team. It's a practical guide — the North Star — that's driving our business forward.",
-    cite: "— Client team, Ikan",
+      "The Brand Playbook resonated completely with our team. It's a practical guide—the North Star—that's driving our business forward.",
+    cite: "—Client team, Ikan",
   },
   {
     text:
       "There are levels to the message and positioning game. I didn't know there were levels until I worked with you.",
-    cite: "— Anonymous client, post-engagement",
+    cite: "—Anonymous client, post-engagement",
   },
 ];
 
@@ -310,10 +310,11 @@ export default function StoryLockTaxV2Page() {
     }
   }, []);
 
-  // Math — exact formulas from the HTML source.
+  // Math—exact formulas from the HTML source.
   const hireTax = fails * Math.max(150_000, Math.min(aecost, 250_000));
   const calTax = hours * 48 * rate;
-  const compTax = arr * 0.15;
+  // Compounding drag scales with founder close-rate dominance (baseline 70% = 0.15).
+  const compTax = arr * 0.15 * (closePct / 70);
   const valTax = arr * mult * 0.5;
   const total = hireTax + calTax + compTax + valTax;
   const verdict = computeVerdict(closePct, fails, hours);
@@ -758,7 +759,7 @@ export default function StoryLockTaxV2Page() {
               </div>
             </div>
 
-            {/* Breakdown — gated */}
+            {/* Breakdown—gated */}
             <div style={{ position: "relative" }}>
               <div
                 style={{
@@ -973,7 +974,7 @@ export default function StoryLockTaxV2Page() {
               >
                 Every founder-led B2B company sits somewhere on this five-level
                 scale. The level is not a judgment of effort. It is a structural
-                read of where the company&apos;s story currently lives — and
+                read of where the company&apos;s story currently lives—and
                 what the team can do with it. The score from your calculator
                 places you on this scale. The descriptions below tell you what
                 comes next.
@@ -1188,7 +1189,7 @@ export default function StoryLockTaxV2Page() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                What founders said — on the record.
+                What founders said—on the record.
               </h3>
               {OPERATOR_QUOTES.map((q) => (
                 <QuoteCard key={q.cite} text={q.text} cite={q.cite} />
@@ -1298,29 +1299,55 @@ export default function StoryLockTaxV2Page() {
             fontSize: 12,
             color: "var(--ink-faint)",
             lineHeight: 1.6,
-            textAlign: "center",
+            textAlign: "left",
           }}
         >
-          <p style={{ margin: "0 0 10px" }}>
-            <strong style={{ color: "var(--ink-dim)" }}>About the math.</strong>{" "}
-            Hiring Loop Tax = failed hires × your AE cost (clamped to the
-            $150K–$250K SaaStr range). Calendar Tax = hours/week × 48 working
-            weeks × your hourly value. Compounding Tax = a single year of
-            forgone growth at 15% applied to current ARR — a conservative proxy
-            for the multi-year revenue surface lost while the hiring loop runs
-            (ProductLed). Valuation Tax = ARR × revenue multiple × 50% mid-point
-            of the Bain founder-dependency discount range. Each number is
-            independently sourced and deliberately under-stated.
-          </p>
-          <p style={{ margin: "0 0 10px" }}>
-            <strong style={{ color: "var(--ink-dim)" }}>
-              What this calculator does not include.
-            </strong>{" "}
-            Spousal cost. Sleep cost. The school events you&apos;ve already
-            missed. Those are real and they are not on this page because they
-            are not yours to monetize.
-          </p>
-          <p style={{ margin: "24px 0 0" }}>
+          <div style={{ marginBottom: 18 }}>
+            <div
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "var(--accent)",
+                fontWeight: 700,
+                marginBottom: 8,
+              }}
+            >
+              About the math
+            </div>
+            <p style={{ margin: 0 }}>
+              Hiring Loop Tax = failed hires × your AE cost (clamped to the
+              $150K–$250K SaaStr range). Calendar Tax = hours/week × 48 working
+              weeks × your hourly value. Compounding Tax = a single year of
+              forgone growth at 15% applied to current ARR—a conservative proxy
+              for the multi-year revenue surface lost while the hiring loop
+              runs (ProductLed). Valuation Tax = ARR × revenue multiple × 50%
+              mid-point of the Bain founder-dependency discount range. Each
+              number is independently sourced and deliberately under-stated.
+            </p>
+          </div>
+
+          <div style={{ marginBottom: 18 }}>
+            <div
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "var(--accent)",
+                fontWeight: 700,
+                marginBottom: 8,
+              }}
+            >
+              What this calculator does not include
+            </div>
+            <p style={{ margin: 0 }}>
+              Spousal cost. Sleep cost. The school events you&apos;ve already
+              missed. Those are real and they are not on this page because they
+              are not yours to monetize.
+            </p>
+          </div>
+
+          <p style={{ margin: "24px 0 0", textAlign: "center" }}>
             © BrandMultiplier · brandmultiplier.ai
           </p>
         </div>
