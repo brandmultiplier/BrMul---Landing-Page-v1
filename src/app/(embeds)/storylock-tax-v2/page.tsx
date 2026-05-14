@@ -552,7 +552,7 @@ export default function StoryLockTaxV2Page() {
 
       <div className="slv2-wrap">
         {/* Header */}
-        <header style={{ marginBottom: 36 }}>
+        <header style={{ marginBottom: 36, textAlign: "center" }}>
           <img
             src="/brandmultiplier-logo.png"
             alt="BrandMultiplier"
@@ -560,7 +560,7 @@ export default function StoryLockTaxV2Page() {
               height: 44,
               width: "auto",
               display: "block",
-              margin: "0 0 24px",
+              margin: "0 auto 24px",
               borderRadius: 8,
             }}
           />
@@ -593,7 +593,7 @@ export default function StoryLockTaxV2Page() {
               fontSize: 17,
               color: "var(--ink-dim)",
               maxWidth: 740,
-              margin: 0,
+              margin: "0 auto",
               lineHeight: 1.55,
             }}
           >
@@ -1319,10 +1319,10 @@ export default function StoryLockTaxV2Page() {
             fontSize: 12,
             color: "var(--ink-faint)",
             lineHeight: 1.6,
-            textAlign: "left",
+            textAlign: "center",
           }}
         >
-          <div style={{ marginBottom: 18 }}>
+          <div style={{ marginBottom: 24, maxWidth: 740, margin: "0 auto 24px" }}>
             <div
               style={{
                 fontSize: 11,
@@ -1347,7 +1347,7 @@ export default function StoryLockTaxV2Page() {
             </p>
           </div>
 
-          <div style={{ marginBottom: 18 }}>
+          <div style={{ marginBottom: 24, maxWidth: 740, margin: "0 auto 24px" }}>
             <div
               style={{
                 fontSize: 11,
@@ -1367,7 +1367,7 @@ export default function StoryLockTaxV2Page() {
             </p>
           </div>
 
-          <p style={{ margin: "24px 0 0", textAlign: "center" }}>
+          <p style={{ margin: "24px 0 0" }}>
             © BrandMultiplier · brandmultiplier.ai
           </p>
         </div>
