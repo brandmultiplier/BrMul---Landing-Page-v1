@@ -552,7 +552,7 @@ export default function StoryLockTaxV2Page() {
 
       <div className="slv2-wrap">
         {/* Header */}
-        <header style={{ textAlign: "center", marginBottom: 36 }}>
+        <header style={{ marginBottom: 36 }}>
           <img
             src="/brandmultiplier-logo.png"
             alt="BrandMultiplier"
@@ -560,31 +560,51 @@ export default function StoryLockTaxV2Page() {
               height: 44,
               width: "auto",
               display: "block",
-              margin: "0 auto 20px",
+              margin: "0 0 24px",
               borderRadius: 8,
             }}
           />
+          <div
+            style={{
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              marginBottom: 14,
+              fontWeight: 600,
+            }}
+          >
+            The StoryLock Tax Calculator
+          </div>
           <h1
             style={{
-              fontSize: 34,
+              fontSize: 38,
               lineHeight: 1.18,
-              margin: "0 0 14px",
+              margin: "0 0 18px",
               fontWeight: 700,
               letterSpacing: "-0.015em",
             }}
           >
-            What StoryLock is Costing Your Business this Year
+            The cost of leaving your story locked in your head—measured in
+            dollars, hours, and exit multiples.
           </h1>
           <p
             style={{
-              fontSize: 16,
+              fontSize: 17,
               color: "var(--ink-dim)",
-              maxWidth: 580,
-              margin: "0 auto",
+              maxWidth: 740,
+              margin: 0,
+              lineHeight: 1.55,
             }}
           >
-            Two axes: what it has already cost you, and what it caps your
-            revenue at.
+            StoryLock is not a marketing problem. It is a structural condition
+            with a measurable price. This calculator runs the math on what it
+            has already cost you, what it is costing you right now, and what
+            it will cost at exit.{" "}
+            <strong style={{ color: "var(--ink)" }}>
+              The numbers are conservative.
+            </strong>{" "}
+            Real damage runs higher.
           </p>
         </header>
 
