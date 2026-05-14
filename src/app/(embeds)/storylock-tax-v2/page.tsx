@@ -585,8 +585,8 @@ export default function StoryLockTaxV2Page() {
               letterSpacing: "-0.015em",
             }}
           >
-            The cost of leaving your story locked in your head&nbsp;— measured
-            in dollars, hours, and exit multiples.
+            The cost of leaving your story locked in your head—measured in
+            dollars, hours, and exit multiples.
           </h1>
           <p
             style={{
