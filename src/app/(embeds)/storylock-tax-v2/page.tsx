@@ -552,7 +552,7 @@ export default function StoryLockTaxV2Page() {
 
       <div className="slv2-wrap">
         {/* Header */}
-        <header style={{ marginBottom: 36, textAlign: "center" }}>
+        <header style={{ marginBottom: 36 }}>
           <img
             src="/brandmultiplier-logo.png"
             alt="BrandMultiplier"
@@ -560,7 +560,7 @@ export default function StoryLockTaxV2Page() {
               height: 44,
               width: "auto",
               display: "block",
-              margin: "0 auto 24px",
+              margin: "0 0 24px",
               borderRadius: 8,
             }}
           />
@@ -585,8 +585,7 @@ export default function StoryLockTaxV2Page() {
               letterSpacing: "-0.015em",
             }}
           >
-            The cost of leaving your story locked in your{" "}
-            <span style={{ whiteSpace: "nowrap" }}>head—measured</span> in
+            The cost of leaving your story locked in your head… measured in
             dollars, hours, and exit multiples.
           </h1>
           <p
@@ -594,7 +593,7 @@ export default function StoryLockTaxV2Page() {
               fontSize: 17,
               color: "var(--ink-dim)",
               maxWidth: 740,
-              margin: "0 auto",
+              margin: 0,
               lineHeight: 1.55,
             }}
           >
@@ -1320,10 +1319,10 @@ export default function StoryLockTaxV2Page() {
             fontSize: 12,
             color: "var(--ink-faint)",
             lineHeight: 1.6,
-            textAlign: "center",
+            textAlign: "left",
           }}
         >
-          <div style={{ marginBottom: 24, maxWidth: 740, margin: "0 auto 24px" }}>
+          <div style={{ marginBottom: 24 }}>
             <div
               style={{
                 fontSize: 11,
@@ -1340,15 +1339,16 @@ export default function StoryLockTaxV2Page() {
               Hiring Loop Tax = failed hires × your AE cost (clamped to the
               $150K–$250K SaaStr range). Calendar Tax = hours/week × 48 working
               weeks × your hourly value. Compounding Tax = a single year of
-              forgone growth at 15% applied to current ARR—a conservative proxy
-              for the multi-year revenue surface lost while the hiring loop
-              runs (ProductLed). Valuation Tax = ARR × revenue multiple × 50%
-              mid-point of the Bain founder-dependency discount range. Each
-              number is independently sourced and deliberately under-stated.
+              forgone growth at 15% applied to current ARR… a conservative
+              proxy for the multi-year revenue surface lost while the hiring
+              loop runs (ProductLed). Valuation Tax = ARR × revenue multiple ×
+              50% mid-point of the Bain founder-dependency discount range.
+              Each number is independently sourced and deliberately
+              under-stated.
             </p>
           </div>
 
-          <div style={{ marginBottom: 24, maxWidth: 740, margin: "0 auto 24px" }}>
+          <div style={{ marginBottom: 24 }}>
             <div
               style={{
                 fontSize: 11,
