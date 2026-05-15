@@ -5,7 +5,7 @@ import {
 } from "@/lib/business-email";
 
 const STORYLOCK_WEBHOOK_URL =
-  "https://brandmultiplier.app.n8n.cloud/webhook/abc55240-f07d-440e-a7ad-f6a78a786254";
+  "https://brandmultiplier.app.n8n.cloud/webhook/2858fbb7-bcf0-4a7e-88e7-a7367e28d481";
 
 type StorylockPayload = {
   email?: string;

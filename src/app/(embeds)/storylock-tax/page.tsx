@@ -1,6 +1,20 @@
 "use client";
 
-import { useState, useEffect, useRef, CSSProperties } from "react";
+/**
+ * StoryLock Tax Calculator.
+ * Content/structure/math from 02_StoryLock-Tax-Calculator (1).html (4-tax stack, 5-level taxonomy).
+ * Plumbing includes API capture, business-email gate, gtag, and Calendly CTA.
+ * Payload sends calculator inputs and result fields for n8n automation.
+ * LocalStorage keeps the calculator unlock state across visits.
+ */
+
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type CSSProperties,
+  type FormEvent,
+} from "react";
 import {
   BUSINESS_EMAIL_REQUIRED_MESSAGE,
   isBusinessEmail,
@@ -12,76 +26,1507 @@ declare global {
   }
 }
 
-/* ─── BRAND TOKENS ─── */
-const C = {
-  purple: "#4940C6",
-  purpleLight: "#EDE8F5",
-  purpleMid: "#7c6df0",
-  orange: "#F36901",
-  orangeGlow: "#ff8534",
-  dark: "#0f0e1a",
-  darkMid: "#1a1a2e",
-  darkCard: "#16152a",
-  white: "#ffffff",
-  gray50: "#fafafa",
-  gray100: "#f3f4f6",
-  gray300: "#d1d5db",
-  gray400: "#9ca3af",
-  gray500: "#6b7280",
-  gray700: "#374151",
-  gray900: "#111827",
-  cyan: "#29b6f6",
-  cyanLight: "#4fc3f7",
-  green: "#10b981",
-  greenLight: "#34d399",
-  red: "#ef4444",
+// Calendly CTA—same root as live page, canonical calculator tracking.
+const CTA_HREF =
+  "https://calendly.com/book-crc/storyline/?utm_source=linkedin&utm_medium=social&utm_campaign=personal_profile_chris&utm_content=storylock_tax&month=2026-04";
+
+const UNLOCK_STORAGE_KEY = "storylock_tax_unlocked";
+const UNLOCK_NAME_KEY = "storylock_tax_name";
+const UNLOCK_EMAIL_KEY = "storylock_tax_email";
+
+type TabKey = "calc" | "levels" | "proof";
+
+type Verdict = {
+  tier: string;
+  levelMatch: 1 | 2 | 3 | 4;
+  body: string;
+  action: string;
 };
 
-const FONT = "'Arial', 'Helvetica Neue', sans-serif";
-const FOUNDER_HOURLY = 500;
-const WORK_WEEKS = 50;
-
-/* ─── UTILITIES ─── */
-const fmt = (n: number) =>
+const fmt = (n: number): string =>
   new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 0,
-  }).format(n);
+  }).format(Math.round(n));
 
-const fmtShort = (n: number) => {
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
-  return `$${n.toFixed(0)}`;
+const computeVerdict = (
+  closePct: number,
+  fails: number,
+  hours: number,
+): Verdict => {
+  if (closePct >= 80 || (fails >= 2 && hours >= 25)) {
+    return {
+      tier: "Critical StoryLock",
+      levelMatch: 1,
+      body:
+        "You are not running a company. You are running a sales floor that happens to have a product attached to it. The hiring loop is funded by a belief that the next person will be different. The math on this page says the next person will not be different—because the variable you keep adjusting is not the variable that determines the outcome.",
+      action:
+        "The work that fixes this takes about ten hours of your time over seventy-five days. You spend that much in a slow week of sales calls your team should be handling.",
+    };
+  }
+  if (closePct >= 60 || (fails >= 1 && hours >= 15)) {
+    return {
+      tier: "Significant StoryLock",
+      levelMatch: 2,
+      body:
+        "The team can handle some deals; the ones that matter still route to you. Marketing is producing collateral that translates something that was never fully articulated. You are paying for the gap quarterly—in hours, in delayed hires, in the discount a buyer will eventually apply to your valuation.",
+      action:
+        "The window where this is fixable in one quarter is open. It does not stay open. The fix is finite. Postponement is not.",
+    };
+  }
+  if (closePct >= 40 || fails >= 1) {
+    return {
+      tier: "Moderate StoryLock",
+      levelMatch: 3,
+      body:
+        "You have built more transferable structure than most founders at your stage, and the team can carry meaningful weight without you. The remaining gap is real—and it shows up at the deals you cannot afford to lose, the hires that take longer than they should, and the marketing that lands close to your voice but never exactly in it.",
+      action:
+        "Closing the last twenty percent of the gap is what separates a company that scales from one that plateaus. The work compounds.",
+    };
+  }
+  return {
+    tier: "Light StoryLock",
+    levelMatch: 4,
+    body:
+      "The system is largely in place. The team carries weight. The remaining drift is operational, not structural. You are in a rarer category than the data on this page assumes.",
+    action:
+      "From here, the work is maintenance and amplification rather than extraction. Worth confirming the system is genuinely codified rather than reliant on the current people who happen to be carrying it.",
+  };
 };
 
-/* ─── ANIMATED NUMBER ─── */
-function Anim({ value, dur = 700 }: { value: number; dur?: number }) {
-  const [d, setD] = useState(0);
-  const ref = useRef<number | null>(null);
+type LevelDef = {
+  n: 1 | 2 | 3 | 4 | 5;
+  name: string;
+  where: string;
+  body: string;
+  indicators: { label: string; value: string }[];
+};
+
+const LEVELS: LevelDef[] = [
+  {
+    n: 1,
+    name: "Locked",
+    where: "Story lives entirely in the founder's head",
+    body:
+      "You are the company. The pitch is you. The close is you. The product story is yours and yours alone, and the team has been trying to reconstruct it from the residue of the calls they were allowed to watch. Every deal that closes runs through you. Every deal that doesn't is lost to the gap.",
+    indicators: [
+      { label: "Founder close rate", value: "80%+" },
+      { label: "Team selling without you", value: "Impossible" },
+      { label: "Founder hours / week in sales", value: "30+" },
+      { label: "Growth ceiling", value: "Your calendar" },
+    ],
+  },
+  {
+    n: 2,
+    name: "Performed",
+    where:
+      "Story lives in the founder's performance—the team mimics, but cannot reproduce",
+    body:
+      "You have given the same pitch enough times that the team has memorized phrases. They use your vocabulary. They cannot, however, deploy your reasoning. When a buyer pushes back outside the memorized script, the deal stalls or the team escalates. The story exists as a performance, not as a system. Watch a sales rep try to handle a hard objection—the moment of failure is the moment they reach for a phrase you said and discover the phrase has no engine behind it.",
+    indicators: [
+      { label: "Founder close rate", value: "60–80%" },
+      { label: "Team selling without you", value: "Light deals only" },
+      { label: "Founder hours / week in sales", value: "20–30" },
+      { label: "Growth ceiling", value: "Light-deal volume" },
+    ],
+  },
+  {
+    n: 3,
+    name: "Drafted",
+    where: "Story has been partially written down—adoption is uneven",
+    body:
+      "A messaging doc exists. A playbook exists. The website has been rewritten in the last 18 months. Pieces of the story have made it onto paper. The team uses some of it, ignores most of it, and reconstructs the rest. This is the most expensive level to be stuck on, because you have paid for the artifact and not for the system. The artifact decays the day it ships. The system would have updated itself.",
+    indicators: [
+      { label: "Founder close rate", value: "40–60%" },
+      { label: "Team selling without you", value: "Mid-tier deals" },
+      { label: "Founder hours / week in sales", value: "12–20" },
+      { label: "Growth ceiling", value: "Whatever the doc can support" },
+    ],
+  },
+  {
+    n: 4,
+    name: "Codified",
+    where: "Story is a system the team operates from",
+    body:
+      "The narrative is extracted, codified, and installed across discovery scripts, objection handling, multi-stakeholder framing, marketing collateral, and outbound. The team can carry deals you have not touched. New hires reach productivity in weeks, not quarters. You are still present in the highest-stakes conversations—but by choice, not by necessity. Most companies that reach this level never go back.",
+    indicators: [
+      { label: "Founder close rate", value: "30–40%" },
+      { label: "Team selling without you", value: "Most deals" },
+      { label: "Founder hours / week in sales", value: "5–12" },
+      { label: "Growth ceiling", value: "Market opportunity" },
+    ],
+  },
+  {
+    n: 5,
+    name: "Compounding",
+    where:
+      "System teaches itself—new hires absorb the story without founder intervention",
+    body:
+      "The Narrative Operating System has become how the company thinks. The team improves the system from real-world deal data. Marketing iterates without re-asking what the company does. Onboarding compresses the founder's seven years of pattern recognition into a thirty-day ramp. This is the level where the valuation discount disappears, because the company's value is no longer locked inside one person. You become the architect of how everyone closes—not the only person who can.",
+    indicators: [
+      { label: "Founder close rate", value: "Strategic deals only" },
+      { label: "Team selling without you", value: "All deals" },
+      { label: "Founder hours / week in sales", value: "0–5 by choice" },
+      { label: "Growth ceiling", value: "None imposed by you" },
+    ],
+  },
+];
+
+const STATS = [
+  {
+    num: "70%",
+    body: (
+      <>
+        <strong>of first sales hires fail in year one.</strong> Not because of
+        talent—because they were dropped into a vacuum with zero enablement.{" "}
+        <em>(SaaStr)</em>
+      </>
+    ),
+  },
+  {
+    num: "50%",
+    body: (
+      <>
+        <strong>higher close rates for founders</strong> than their best hired
+        salespeople. A structural credibility advantage, not a talent gap.{" "}
+        <em>(Marvell)</em>
+      </>
+    ),
+  },
+  {
+    num: "9–12",
+    body: (
+      <>
+        <strong>months average ramp</strong> before a B2B sales hire engages
+        effectively. For complex products, add 30–50%.{" "}
+        <em>(Brooks Group, 150+ B2B leaders)</em>
+      </>
+    ),
+  },
+];
+
+const OPERATOR_QUOTES = [
+  {
+    text:
+      "I told myself for years that the problem was the people I was hiring. After we'd burned through three VPs of Sales, I realized the problem was that I had never written down what I knew. We were a company built on undocumented genius. That isn't a company. That's a magic trick.",
+    cite: "—Mike Molinet, Co-founder, Branch",
+  },
+  {
+    text:
+      "Every founder I've ever worked with closes at roughly 50% higher rates than their best non-founder sales hire. That's a statement about the founder's structural credibility advantage—and it's a perfect measurement of how much of the sales conversation has never been codified.",
+    cite: "—Eyal Worthalter, Marvell",
+  },
+  {
+    text:
+      "There is no transition out of sales for a founder. There is only a transition in how you spend your sales time. The founder who tries to transition out is the founder who breaks the company.",
+    cite: "—Seth DeHart, Growth Unhinged",
+  },
+  {
+    text:
+      "The companies that cross $50M with the founder still in every deal don't cross $100M. They sell. Or they break. The math doesn't allow the third option.",
+    cite: "—David Blake, Degreed",
+  },
+];
+
+const CLIENT_QUOTES = [
+  {
+    text:
+      "What impressed us most was the ability to take our inputs—the bulk of which were quite technically complex—and transform them into a powerful story that really speaks to our customers. The final result was everything we had been trying to say, much better said.",
+    cite: "—Co-founder / CEO, Apto Solutions",
+  },
+  {
+    text:
+      "You were able to act as an external catalyst to help us reconcile different viewpoints on the brand. You helped us shift our messaging from focusing on rational drivers to emotional drivers of customer behavior.",
+    cite: "—CEO, BetterCloud",
+  },
+  {
+    text:
+      "The Brand Playbook resonated completely with our team. It's a practical guide—the North Star—that's driving our business forward.",
+    cite: "—Client team, Ikan",
+  },
+  {
+    text:
+      "There are levels to the message and positioning game. I didn't know there were levels until I worked with you.",
+    cite: "—Anonymous client, post-engagement",
+  },
+];
+
+const RESEARCH = [
+  {
+    label: "Bain · M&A Research",
+    finding:
+      "Founder-dependent businesses sell at a 40–60% discount to comparable businesses with independent operating capacity at exit.",
+  },
+  {
+    label: "Gartner / Forrester · 2024",
+    finding:
+      "Average B2B buying committees have grown from 5 to 11–13 stakeholders. Purchase likelihood drops from 81% to 31% as the committee expands.",
+  },
+  {
+    label: "ProductLed · 446-Company Survey",
+    finding:
+      "32.1% of companies can't consistently identify their primary bottleneck. Those that can report 41% faster revenue growth.",
+  },
+  {
+    label: "Cascade Insights",
+    finding:
+      "The single biggest predictor of B2B revenue stagnation between $5M and $20M ARR is founder-dependent sales motion combined with absent narrative infrastructure.",
+  },
+];
+
+export default function StoryLockTaxPage() {
+  const [arr, setArr] = useState<number>(10_000_000);
+  const [mult, setMult] = useState<number>(6);
+  const [closePct, setClosePct] = useState<number>(70);
+  const [hours, setHours] = useState<number>(20);
+  const [fails, setFails] = useState<number>(2);
+  const [aecost, setAecost] = useState<number>(200_000);
+  const [rate, setRate] = useState<number>(500);
+
+  const [tab, setTab] = useState<TabKey>("calc");
+  const [unlocked, setUnlocked] = useState<boolean>(false);
+  const [formName, setFormName] = useState<string>("");
+  const [formEmail, setFormEmail] = useState<string>("");
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [formError, setFormError] = useState<string>("");
+
+  // Restore unlock state on mount + fire view event.
   useEffect(() => {
-    const s = d;
-    const diff = value - s;
-    if (Math.abs(diff) < 1) {
-      setD(value);
+    try {
+      if (typeof window !== "undefined") {
+        if (window.localStorage.getItem(UNLOCK_STORAGE_KEY) === "1") {
+          setUnlocked(true);
+        }
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "storylock_tax_view", {
+            event_category: "StoryLock Tax",
+            event_label: "page_view",
+          });
+        }
+      }
+    } catch {
+      // localStorage may be unavailable (privacy mode); silently ignore.
+    }
+  }, []);
+
+  // Math—exact formulas from the HTML source.
+  const hireTax = fails * Math.max(150_000, Math.min(aecost, 250_000));
+  const calTax = hours * 48 * rate;
+  // Compounding drag scales with founder close-rate dominance (baseline 70% = 0.15).
+  const compTax = arr * 0.15 * (closePct / 70);
+  const valTax = arr * mult * 0.5;
+  const total = hireTax + calTax + compTax + valTax;
+  const verdict = computeVerdict(closePct, fails, hours);
+
+  const handleSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const name = formName.trim();
+      const email = formEmail.trim();
+      if (!name || !email) {
+        setFormError("Please fill both fields.");
+        return;
+      }
+      if (!isBusinessEmail(email)) {
+        setFormError(BUSINESS_EMAIL_REQUIRED_MESSAGE);
+        return;
+      }
+      setSubmitting(true);
+      setFormError("");
+      try {
+        const response = await fetch("/api/storylock-tax-capture", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            source: "storylock-tax-calculator",
+            submitted_at: new Date().toISOString(),
+            submitted_from_tab: tab,
+
+            // Calculator inputs
+            arr,
+            mult,
+            closePct,
+            hours,
+            fails,
+            aecost,
+            rate,
+
+            // Calculated taxes
+            hiring_loop_tax: Math.round(hireTax),
+            calendar_tax: Math.round(calTax),
+            compounding_tax: Math.round(compTax),
+            valuation_tax: Math.round(valTax),
+            storylock_tax_total: Math.round(total),
+
+            // Severity
+            tier: verdict.tier,
+            level_match: verdict.levelMatch,
+          }),
+        });
+
+        if (!response.ok) {
+          if (response.status === 400) {
+            const data = (await response.json()) as { error?: string };
+            setFormError(data.error ?? BUSINESS_EMAIL_REQUIRED_MESSAGE);
+            return;
+          }
+          throw new Error("Request failed");
+        }
+
+        try {
+          window.localStorage.setItem(UNLOCK_STORAGE_KEY, "1");
+          window.localStorage.setItem(UNLOCK_NAME_KEY, name);
+          window.localStorage.setItem(UNLOCK_EMAIL_KEY, email);
+        } catch {
+          // ignore storage errors
+        }
+        setUnlocked(true);
+        if (typeof window !== "undefined" && typeof window.gtag === "function") {
+          window.gtag("event", "storylock_tax_email_captured", {
+            event_category: "StoryLock Tax",
+            event_label: "email_submitted",
+            storylock_tax_total: Math.round(total),
+            tier: verdict.tier,
+            level_match: verdict.levelMatch,
+          });
+        }
+      } catch {
+        setFormError("Couldn't submit. Try once more.");
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    [
+      formName,
+      formEmail,
+      tab,
+      arr,
+      mult,
+      closePct,
+      hours,
+      fails,
+      aecost,
+      rate,
+      hireTax,
+      calTax,
+      compTax,
+      valTax,
+      total,
+      verdict.tier,
+      verdict.levelMatch,
+    ],
+  );
+
+  const handleTabClick = (next: TabKey): void => {
+    if (!unlocked && (next === "levels" || next === "proof")) {
+      const el = document.getElementById("gateCard");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    const t0 = performance.now();
-    const go = (now: number) => {
-      const p = Math.min((now - t0) / dur, 1);
-      setD(s + diff * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) ref.current = requestAnimationFrame(go);
-    };
-    ref.current = requestAnimationFrame(go);
-    return () => {
-      if (ref.current) cancelAnimationFrame(ref.current);
-    };
-  }, [value]);
-  return <span>{fmt(Math.round(d))}</span>;
+    setTab(next);
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const tabStyle = (k: TabKey): CSSProperties => ({
+    padding: "14px 22px",
+    fontSize: 13,
+    fontWeight: 600,
+    letterSpacing: "0.10em",
+    textTransform: "uppercase",
+    color: tab === k ? "var(--accent)" : "var(--ink-faint)",
+    cursor: "pointer",
+    borderBottom:
+      tab === k ? "2px solid var(--accent)" : "2px solid transparent",
+    transition: "color 0.15s, border-color 0.15s",
+    userSelect: "none",
+  });
+
+  return (
+    <>
+      <style jsx global>{`
+        :root {
+          --bg: #0e0822;
+          --surface: #150e30;
+          --surface-2: #1b1438;
+          --border: #2a1f4d;
+          --border-soft: #1f1740;
+          --ink: #f4f1ff;
+          --ink-dim: #9a92b8;
+          --ink-faint: #6b6489;
+          --accent: #ff6b35;
+          --accent-soft: rgba(255, 107, 53, 0.1);
+          --accent-line: rgba(255, 107, 53, 0.35);
+          --good: #6db193;
+        }
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+          background: var(--bg);
+          color: var(--ink);
+          font-family: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text",
+            "Segoe UI", Helvetica, Arial, sans-serif;
+          line-height: 1.55;
+          -webkit-font-smoothing: antialiased;
+        }
+        .sltax-wrap {
+          max-width: 1120px;
+          margin: 0 auto;
+          padding: 56px 32px 96px;
+        }
+        @media (max-width: 768px) {
+          .sltax-wrap {
+            padding: 32px 16px 64px;
+          }
+        }
+        .sltax-field-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+          margin-bottom: 22px;
+        }
+        .sltax-field-row.single {
+          grid-template-columns: 1fr;
+        }
+        @media (max-width: 640px) {
+          .sltax-field-row {
+            grid-template-columns: 1fr;
+          }
+        }
+        .sltax-input-wrap input {
+          width: 100%;
+          padding: 14px 16px;
+          background: var(--surface-2);
+          color: var(--ink);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          font-size: 16px;
+          font-weight: 600;
+          font-family: inherit;
+          font-variant-numeric: tabular-nums;
+          transition: border-color 0.15s;
+        }
+        .sltax-input-wrap.has-prefix input {
+          padding-left: 32px;
+        }
+        .sltax-input-wrap.has-suffix input {
+          padding-right: 36px;
+        }
+        .sltax-input-wrap input:focus {
+          outline: none;
+          border-color: var(--accent);
+        }
+        .sltax-input-wrap input::-webkit-outer-spin-button,
+        .sltax-input-wrap input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        .sltax-input-wrap input[type="number"] {
+          -moz-appearance: textfield;
+        }
+        .sltax-stat-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-bottom: 28px;
+        }
+        .sltax-research-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+        }
+        @media (max-width: 640px) {
+          .sltax-stat-grid {
+            grid-template-columns: 1fr;
+          }
+          .sltax-research-grid {
+            grid-template-columns: 1fr;
+          }
+          .sltax-h1 {
+            font-size: 26px !important;
+            line-height: 1.2 !important;
+            margin-bottom: 12px !important;
+          }
+          .sltax-hero-sub {
+            font-size: 14px !important;
+            line-height: 1.55 !important;
+          }
+          .sltax-header {
+            margin-bottom: 20px !important;
+          }
+          .sltax-logo {
+            height: 36px !important;
+            margin-bottom: 16px !important;
+          }
+          .sltax-tabs {
+            margin: 20px 0 18px !important;
+          }
+          .sltax-tab {
+            padding: 12px 14px !important;
+            font-size: 12px !important;
+          }
+          .sltax-calc-section {
+            padding: 22px 18px !important;
+          }
+          .sltax-total-card {
+            padding: 28px 18px 24px !important;
+          }
+          .sltax-total-value {
+            font-size: 44px !important;
+          }
+        }
+        .sltax-sticky-cta {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          body {
+            padding-bottom: 76px;
+          }
+          .sltax-sticky-cta {
+            display: flex;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(14, 8, 34, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+          }
+          .sltax-sticky-cta__meta {
+            flex: 1;
+            min-width: 0;
+          }
+          .sltax-sticky-cta__label {
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            line-height: 1;
+            margin-bottom: 5px;
+            font-weight: 700;
+          }
+          .sltax-sticky-cta__value {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.01em;
+          }
+          .sltax-sticky-cta__btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
+          }
+        }
+      `}</style>
+
+      <div className="sltax-wrap">
+        {/* Header */}
+        <header className="sltax-header" style={{ marginBottom: 36 }}>
+          <img
+            src="/brandmultiplier-logo.png"
+            alt="BrandMultiplier"
+            className="sltax-logo"
+            style={{
+              height: 44,
+              width: "auto",
+              display: "block",
+              margin: "0 0 24px",
+              borderRadius: 8,
+            }}
+          />
+          <div
+            style={{
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              marginBottom: 14,
+              fontWeight: 600,
+            }}
+          >
+            The StoryLock Tax Calculator
+          </div>
+          <h1
+            className="sltax-h1"
+            style={{
+              fontSize: 38,
+              lineHeight: 1.18,
+              margin: "0 0 18px",
+              fontWeight: 700,
+              letterSpacing: "-0.015em",
+            }}
+          >
+            The cost of leaving your story locked in your head… measured in
+            dollars, hours, and exit multiples.
+          </h1>
+          <p
+            className="sltax-hero-sub"
+            style={{
+              fontSize: 17,
+              color: "var(--ink-dim)",
+              maxWidth: 740,
+              margin: 0,
+              lineHeight: 1.55,
+            }}
+          >
+            StoryLock is not a marketing problem. It is a structural condition
+            with a measurable price. This calculator runs the math on what it
+            has already cost you, what it is costing you right now, and what
+            it will cost at exit.{" "}
+            <strong style={{ color: "var(--ink)" }}>
+              The numbers are conservative.
+            </strong>{" "}
+            Real damage runs higher.
+          </p>
+        </header>
+
+        {/* Tabs */}
+        <div
+          className="sltax-tabs"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 0,
+            margin: "36px 0 32px",
+            borderBottom: "1px solid var(--border)",
+          }}
+        >
+          <div className="sltax-tab" style={tabStyle("calc")} onClick={() => handleTabClick("calc")}>
+            Calculator
+          </div>
+          <div
+            className="sltax-tab"
+            style={tabStyle("levels")}
+            onClick={() => handleTabClick("levels")}
+          >
+            The 5 Levels{!unlocked ? " 🔒" : ""}
+          </div>
+          <div
+            className="sltax-tab"
+            style={tabStyle("proof")}
+            onClick={() => handleTabClick("proof")}
+          >
+            Proof{!unlocked ? " 🔒" : ""}
+          </div>
+        </div>
+
+        {/* ====================== CALCULATOR TAB ====================== */}
+        {tab === "calc" && (
+          <div>
+            <section
+              className="sltax-calc-section"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                borderRadius: 12,
+                padding: 32,
+                marginBottom: 24,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  fontWeight: 700,
+                  marginBottom: 22,
+                }}
+              >
+                Your Numbers
+              </div>
+
+              <div className="sltax-field-row">
+                <NumberField
+                  label="Current ARR"
+                  sub="Annual recurring revenue, today"
+                  prefix="$"
+                  value={arr}
+                  onChange={setArr}
+                  min={1_000_000}
+                  step={500_000}
+                />
+                <NumberField
+                  label="Expected Exit Multiple"
+                  sub="Revenue multiple your bankers imply"
+                  suffix="x"
+                  value={mult}
+                  onChange={setMult}
+                  min={1}
+                  max={15}
+                  step={0.5}
+                />
+              </div>
+
+              <div className="sltax-field-row">
+                <NumberField
+                  label="Your Close Rate"
+                  sub="Complex deals you personally close"
+                  suffix="%"
+                  value={closePct}
+                  onChange={setClosePct}
+                  min={0}
+                  max={100}
+                  step={5}
+                />
+                <NumberField
+                  label="Hours / Week You Spend Selling"
+                  sub="Calls, demos, deal saves, founder bailouts"
+                  suffix="hrs"
+                  value={hours}
+                  onChange={setHours}
+                  min={0}
+                  max={80}
+                  step={1}
+                />
+              </div>
+
+              <div className="sltax-field-row">
+                <NumberField
+                  label="Failed Sales Hires (24 mo)"
+                  sub="Including the one you haven't fired yet"
+                  value={fails}
+                  onChange={setFails}
+                  min={0}
+                  max={10}
+                  step={1}
+                />
+                <NumberField
+                  label="Fully-Loaded AE Cost"
+                  sub="Base + variable + benefits + ramp"
+                  prefix="$"
+                  value={aecost}
+                  onChange={setAecost}
+                  min={100_000}
+                  step={10_000}
+                />
+              </div>
+
+              <div className="sltax-field-row single">
+                <NumberField
+                  label="Your Hourly Value"
+                  sub="What an hour of your time is worth on product, strategy, or what only you can do"
+                  prefix="$"
+                  value={rate}
+                  onChange={setRate}
+                  min={100}
+                  step={50}
+                />
+              </div>
+            </section>
+
+            <div
+              className="sltax-total-card"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                borderRadius: 12,
+                padding: "40px 32px 32px",
+                textAlign: "center",
+                marginBottom: 24,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "var(--ink-dim)",
+                  fontWeight: 700,
+                  marginBottom: 14,
+                }}
+              >
+                Your Total StoryLock Tax
+              </div>
+              <div
+                className="sltax-total-value"
+                style={{
+                  fontSize: 64,
+                  fontWeight: 800,
+                  color: "var(--accent)",
+                  lineHeight: 1,
+                  letterSpacing: "-0.025em",
+                  fontVariantNumeric: "tabular-nums",
+                  marginBottom: 12,
+                }}
+              >
+                {fmt(total)}
+              </div>
+              <div style={{ fontSize: 14, color: "var(--ink-dim)" }}>
+                Through your next exit window. Conservatively calculated.
+              </div>
+            </div>
+
+            {/* Breakdown—gated */}
+            <div style={{ position: "relative" }}>
+              <div
+                style={{
+                  filter: unlocked ? "none" : "blur(6px)",
+                  pointerEvents: unlocked ? "auto" : "none",
+                  userSelect: unlocked ? "auto" : "none",
+                }}
+              >
+                <BreakdownTable
+                  hire={hireTax}
+                  cal={calTax}
+                  comp={compTax}
+                  val={valTax}
+                />
+              </div>
+
+              {!unlocked && (
+                <div
+                  id="gateCard"
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: "calc(100% - 48px)",
+                    maxWidth: 380,
+                    background: "var(--surface)",
+                    border: "1px solid var(--accent-line)",
+                    borderRadius: 12,
+                    padding: 26,
+                    boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+                    zIndex: 10,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 11,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "var(--accent)",
+                      fontWeight: 700,
+                      marginBottom: 10,
+                    }}
+                  >
+                    Unlock Your Report
+                  </div>
+                  <h3
+                    style={{
+                      fontSize: 19,
+                      margin: "0 0 8px",
+                      lineHeight: 1.3,
+                      fontWeight: 700,
+                    }}
+                  >
+                    See the full breakdown, your severity level, and the proof
+                    stack.
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: "var(--ink-dim)",
+                      margin: "0 0 18px",
+                    }}
+                  >
+                    We&apos;ll email your detailed report and unlock the next
+                    two tabs.
+                  </p>
+                  <form onSubmit={handleSubmit}>
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      value={formName}
+                      onChange={(e) => setFormName(e.target.value)}
+                      required
+                      style={gateInputStyle}
+                    />
+                    <input
+                      type="email"
+                      placeholder="Your work email"
+                      value={formEmail}
+                      onChange={(e) => setFormEmail(e.target.value)}
+                      required
+                      style={gateInputStyle}
+                    />
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      style={{
+                        width: "100%",
+                        padding: 13,
+                        background: "var(--accent)",
+                        color: "white",
+                        border: "none",
+                        borderRadius: 8,
+                        fontSize: 14,
+                        fontWeight: 600,
+                        fontFamily: "inherit",
+                        cursor: submitting ? "not-allowed" : "pointer",
+                        opacity: submitting ? 0.7 : 1,
+                        transition: "background 0.15s",
+                      }}
+                    >
+                      {submitting ? "Sending…" : "Send My Report →"}
+                    </button>
+                    {formError && (
+                      <div
+                        style={{
+                          color: "var(--accent)",
+                          fontSize: 12,
+                          marginTop: 8,
+                        }}
+                      >
+                        {formError}
+                      </div>
+                    )}
+                  </form>
+                </div>
+              )}
+            </div>
+
+            {/* Verdict */}
+            {unlocked && (
+              <div
+                style={{
+                  marginTop: 24,
+                  padding: "28px 32px",
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
+                  borderLeft: "3px solid var(--accent)",
+                  borderRadius: 12,
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    color: "var(--accent)",
+                    fontWeight: 700,
+                    marginBottom: 14,
+                  }}
+                >
+                  Severity Read
+                </div>
+                <div
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 700,
+                    marginBottom: 12,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {verdict.tier}
+                </div>
+                <p
+                  style={{
+                    fontSize: 15,
+                    color: "var(--ink)",
+                    margin: "0 0 12px",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {verdict.body}
+                </p>
+                <p
+                  style={{
+                    fontSize: 15,
+                    color: "var(--ink)",
+                    margin: 0,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {verdict.action}
+                </p>
+              </div>
+            )}
+
+            <CTABlock />
+          </div>
+        )}
+
+        {/* ====================== 5 LEVELS TAB ====================== */}
+        {tab === "levels" && (
+          <div>
+            <div
+              style={{
+                textAlign: "center",
+                maxWidth: 620,
+                margin: "0 auto 36px",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  fontWeight: 700,
+                  marginBottom: 22,
+                  textAlign: "center",
+                }}
+              >
+                The StoryLock Maturity Scale
+              </div>
+              <p
+                style={{
+                  fontSize: 15,
+                  color: "var(--ink-dim)",
+                  lineHeight: 1.6,
+                  margin: 0,
+                }}
+              >
+                Every founder-led B2B company sits somewhere on this five-level
+                scale. The level is not a judgment of effort. It is a structural
+                read of where the company&apos;s story currently lives—and
+                what the team can do with it. The score from your calculator
+                places you on this scale. The descriptions below tell you what
+                comes next.
+              </p>
+            </div>
+
+            {LEVELS.map((lv) => {
+              const current = unlocked && lv.n === verdict.levelMatch;
+              return (
+                <div
+                  key={lv.n}
+                  style={{
+                    background: "var(--surface)",
+                    border: current
+                      ? "1px solid var(--accent)"
+                      : "1px solid var(--border)",
+                    borderRadius: 12,
+                    padding: "26px 28px",
+                    marginBottom: 14,
+                    display: "grid",
+                    gridTemplateColumns: "60px 1fr",
+                    gap: 24,
+                    alignItems: "start",
+                    boxShadow: current
+                      ? "0 0 0 1px var(--accent-line)"
+                      : undefined,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 36,
+                      fontWeight: 800,
+                      color: "var(--accent)",
+                      lineHeight: 1,
+                      fontVariantNumeric: "tabular-nums",
+                    }}
+                  >
+                    {String(lv.n).padStart(2, "0")}
+                  </div>
+                  <div>
+                    <h4
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 700,
+                        margin: "0 0 8px",
+                        letterSpacing: "-0.005em",
+                      }}
+                    >
+                      {lv.name}
+                      {current && (
+                        <span
+                          style={{
+                            display: "inline-block",
+                            fontSize: 10,
+                            fontWeight: 700,
+                            color: "white",
+                            background: "var(--accent)",
+                            padding: "3px 8px",
+                            borderRadius: 4,
+                            letterSpacing: "0.08em",
+                            textTransform: "uppercase",
+                            marginLeft: 8,
+                            verticalAlign: "middle",
+                          }}
+                        >
+                          You are here
+                        </span>
+                      )}
+                    </h4>
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: "var(--accent)",
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        fontWeight: 700,
+                        marginBottom: 12,
+                      }}
+                    >
+                      {lv.where}
+                    </div>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        color: "var(--ink-dim)",
+                        margin: "0 0 10px",
+                        lineHeight: 1.55,
+                      }}
+                    >
+                      {lv.body}
+                    </p>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: "8px 24px",
+                        marginTop: 14,
+                        paddingTop: 14,
+                        borderTop: "1px solid var(--border-soft)",
+                      }}
+                    >
+                      {lv.indicators.map((ind) => (
+                        <div
+                          key={ind.label}
+                          style={{ fontSize: 12, color: "var(--ink-dim)" }}
+                        >
+                          <strong
+                            style={{ color: "var(--ink)", fontWeight: 600 }}
+                          >
+                            {ind.label}:
+                          </strong>{" "}
+                          {ind.value}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
+            <CTABlock />
+          </div>
+        )}
+
+        {/* ====================== PROOF TAB ====================== */}
+        {tab === "proof" && (
+          <div>
+            {/* Validation stack */}
+            <div style={{ marginBottom: 32 }}>
+              <div
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  fontWeight: 700,
+                  marginBottom: 14,
+                  textAlign: "center",
+                }}
+              >
+                The Validation Stack
+              </div>
+              <h3
+                style={{
+                  fontSize: 22,
+                  fontWeight: 700,
+                  margin: "0 0 18px",
+                  letterSpacing: "-0.01em",
+                  textAlign: "center",
+                }}
+              >
+                The three numbers behind every claim on this page.
+              </h3>
+              <div className="sltax-stat-grid">
+                {STATS.map((s) => (
+                  <div
+                    key={s.num}
+                    style={{
+                      background: "var(--surface)",
+                      border: "1px solid var(--border)",
+                      borderRadius: 12,
+                      padding: "26px 22px",
+                      textAlign: "center",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 42,
+                        fontWeight: 800,
+                        color: "var(--accent)",
+                        lineHeight: 1,
+                        letterSpacing: "-0.02em",
+                        marginBottom: 8,
+                        fontVariantNumeric: "tabular-nums",
+                      }}
+                    >
+                      {s.num}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 13,
+                        color: "var(--ink-dim)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {s.body}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Operator quotes */}
+            <div style={{ marginBottom: 32 }}>
+              <div
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  fontWeight: 700,
+                  marginBottom: 14,
+                }}
+              >
+                From Industry Operators
+              </div>
+              <h3
+                style={{
+                  fontSize: 22,
+                  fontWeight: 700,
+                  margin: "0 0 18px",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                What founders said—on the record.
+              </h3>
+              {OPERATOR_QUOTES.map((q) => (
+                <QuoteCard key={q.cite} text={q.text} cite={q.cite} />
+              ))}
+            </div>
+
+            {/* Client quotes */}
+            <div style={{ marginBottom: 32 }}>
+              <div
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  fontWeight: 700,
+                  marginBottom: 14,
+                }}
+              >
+                From Our Clients
+              </div>
+              <h3
+                style={{
+                  fontSize: 22,
+                  fontWeight: 700,
+                  margin: "0 0 18px",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                What it sounds like on the other side of the work.
+              </h3>
+              {CLIENT_QUOTES.map((q) => (
+                <QuoteCard key={q.cite} text={q.text} cite={q.cite} />
+              ))}
+            </div>
+
+            {/* Research */}
+            <div style={{ marginBottom: 32 }}>
+              <div
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  fontWeight: 700,
+                  marginBottom: 14,
+                }}
+              >
+                The Research Stack
+              </div>
+              <h3
+                style={{
+                  fontSize: 22,
+                  fontWeight: 700,
+                  margin: "0 0 18px",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                Where the numbers come from.
+              </h3>
+              <div className="sltax-research-grid">
+                {RESEARCH.map((r) => (
+                  <div
+                    key={r.label}
+                    style={{
+                      background: "var(--surface)",
+                      border: "1px solid var(--border)",
+                      borderRadius: 10,
+                      padding: "18px 22px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 11,
+                        color: "var(--accent)",
+                        fontWeight: 700,
+                        letterSpacing: "0.10em",
+                        textTransform: "uppercase",
+                        marginBottom: 6,
+                      }}
+                    >
+                      {r.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 14,
+                        color: "var(--ink)",
+                        lineHeight: 1.45,
+                      }}
+                    >
+                      {r.finding}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <CTABlock />
+          </div>
+        )}
+
+        {/* Footnote */}
+        <div
+          style={{
+            marginTop: 56,
+            paddingTop: 28,
+            borderTop: "1px solid var(--border)",
+            fontSize: 12,
+            color: "var(--ink-faint)",
+            lineHeight: 1.6,
+            textAlign: "left",
+          }}
+        >
+          <div style={{ marginBottom: 24 }}>
+            <div
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "var(--accent)",
+                fontWeight: 700,
+                marginBottom: 8,
+              }}
+            >
+              About the math
+            </div>
+            <p style={{ margin: 0 }}>
+              Hiring Loop Tax = failed hires × your AE cost (clamped to the
+              $150K–$250K SaaStr range). Calendar Tax = hours/week × 48 working
+              weeks × your hourly value. Compounding Tax = a single year of
+              forgone growth at 15% applied to current ARR… a conservative
+              proxy for the multi-year revenue surface lost while the hiring
+              loop runs (ProductLed). Valuation Tax = ARR × revenue multiple ×
+              50% mid-point of the Bain founder-dependency discount range.
+              Each number is independently sourced and deliberately
+              under-stated.
+            </p>
+          </div>
+
+          <div style={{ marginBottom: 24 }}>
+            <div
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "var(--accent)",
+                fontWeight: 700,
+                marginBottom: 8,
+              }}
+            >
+              What this calculator does not include
+            </div>
+            <p style={{ margin: 0 }}>
+              Spousal cost. Sleep cost. The school events you&apos;ve already
+              missed. Those are real and they are not on this page because they
+              are not yours to monetize.
+            </p>
+          </div>
+
+          <p style={{ margin: "24px 0 0" }}>
+            © BrandMultiplier · brandmultiplier.ai
+          </p>
+        </div>
+      </div>
+
+      {/* Mobile sticky CTA — total tax + primary action */}
+      <div className="sltax-sticky-cta">
+        <div className="sltax-sticky-cta__meta">
+          <div className="sltax-sticky-cta__label">Your StoryLock Tax</div>
+          <div className="sltax-sticky-cta__value">{fmt(total)}</div>
+        </div>
+        {unlocked ? (
+          <a
+            href={CTA_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sltax-sticky-cta__btn"
+          >
+            Book Diagnostic →
+          </a>
+        ) : (
+          <button
+            type="button"
+            className="sltax-sticky-cta__btn"
+            onClick={() => {
+              if (tab !== "calc") setTab("calc");
+              setTimeout(() => {
+                const el = document.getElementById("gateCard");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+              }, 60);
+            }}
+          >
+            Unlock Report →
+          </button>
+        )}
+      </div>
+    </>
+  );
 }
 
-/* ─── INPUT FIELD ─── */
-interface FieldProps {
+/* ============== Sub-components ============== */
+
+const gateInputStyle: CSSProperties = {
+  width: "100%",
+  padding: "12px 14px",
+  background: "var(--surface-2)",
+  color: "var(--ink)",
+  border: "1px solid var(--border)",
+  borderRadius: 8,
+  fontSize: 14,
+  fontFamily: "inherit",
+  marginBottom: 10,
+};
+
+interface NumberFieldProps {
   label: string;
   sub?: string;
   prefix?: string;
@@ -93,85 +1538,112 @@ interface FieldProps {
   step?: number;
 }
 
-function Field({ label, sub, prefix, suffix, value, onChange, min, max, step = 1 }: FieldProps) {
-  const [inputValue, setInputValue] = useState<string>(String(value));
+function NumberField({
+  label,
+  sub,
+  prefix,
+  suffix,
+  value,
+  onChange,
+  min,
+  max,
+  step,
+}: NumberFieldProps) {
+  const [text, setText] = useState<string>(String(value));
 
-  const clampValue = (rawValue: number): number => {
-    let nextValue = rawValue;
-    if (min !== undefined) nextValue = Math.max(min, nextValue);
-    if (max !== undefined) nextValue = Math.min(max, nextValue);
-    return nextValue;
-  };
+  useEffect(() => {
+    setText(String(value));
+  }, [value]);
+
+  const wrapClass =
+    "sltax-input-wrap" +
+    (prefix ? " has-prefix" : "") +
+    (suffix ? " has-suffix" : "");
 
   return (
-    <div style={{ marginBottom: 20 }}>
-      <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: C.white, marginBottom: 3, fontFamily: FONT, opacity: 0.9 }}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <label
+        style={{
+          fontSize: 14,
+          fontWeight: 600,
+          color: "var(--ink)",
+          marginBottom: 4,
+        }}
+      >
         {label}
       </label>
       {sub && (
-        <span style={{ display: "block", fontSize: 11, color: "rgba(255,255,255,0.45)", marginBottom: 7, lineHeight: 1.4, fontFamily: FONT }}>
+        <div
+          style={{
+            fontSize: 12,
+            color: "var(--ink-dim)",
+            marginBottom: 10,
+          }}
+        >
           {sub}
-        </span>
+        </div>
       )}
       <div
-        style={{ display: "flex", alignItems: "center", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "0 12px", height: 44, transition: "border-color 0.2s" }}
-        onFocus={(e) => ((e.currentTarget as HTMLDivElement).style.borderColor = C.purple)}
-        onBlur={(e) => ((e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.12)")}
+        className={wrapClass}
+        style={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+        }}
       >
         {prefix && (
-          <span style={{ color: C.orange, fontWeight: 700, fontSize: 15, marginRight: 6, fontFamily: FONT }}>
+          <span
+            style={{
+              position: "absolute",
+              left: 14,
+              color: "var(--accent)",
+              fontWeight: 600,
+              fontSize: 16,
+              pointerEvents: "none",
+            }}
+          >
             {prefix}
           </span>
         )}
         <input
           type="number"
-          value={inputValue}
-          onBlur={() => {
-            const raw = inputValue.trim();
-
-            if (raw === "") {
-              const fallback = clampValue(min ?? 0);
-              onChange(fallback);
-              setInputValue(String(fallback));
-              return;
-            }
-
-            const parsed = parseFloat(raw);
-            if (Number.isNaN(parsed)) {
-              const fallback = clampValue(value);
-              onChange(fallback);
-              setInputValue(String(fallback));
-              return;
-            }
-
-            const nextValue = clampValue(parsed);
-            onChange(nextValue);
-            setInputValue(String(nextValue));
-          }}
-          onChange={(e) => {
-            const raw = e.target.value;
-            setInputValue(raw);
-
-            if (raw.trim() === "") {
-              return;
-            }
-
-            const parsed = parseFloat(raw);
-            if (Number.isNaN(parsed)) {
-              return;
-            }
-
-            const nextValue = clampValue(parsed);
-            onChange(nextValue);
-            setInputValue(String(nextValue));
-          }}
+          value={text}
           min={min}
           max={max}
           step={step}
-          style={{ flex: 1, border: "none", background: "transparent", fontSize: 15, fontWeight: 600, color: C.white, outline: "none", fontFamily: FONT, width: "100%" }}
+          onChange={(e) => {
+            setText(e.target.value);
+            const parsed = parseFloat(e.target.value);
+            if (!Number.isNaN(parsed)) {
+              onChange(parsed);
+            }
+          }}
+          onBlur={() => {
+            const parsed = parseFloat(text);
+            if (Number.isNaN(parsed)) {
+              const fallback = min ?? 0;
+              onChange(fallback);
+              setText(String(fallback));
+            } else {
+              let next = parsed;
+              if (min !== undefined) next = Math.max(min, next);
+              if (max !== undefined) next = Math.min(max, next);
+              onChange(next);
+              setText(String(next));
+            }
+          }}
         />
         {suffix && (
-          <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 13, fontWeight: 600, marginLeft: 6, fontFamily: FONT }}>
+          <span
+            style={{
+              position: "absolute",
+              right: 14,
+              color: "var(--accent)",
+              fontWeight: 600,
+              fontSize: 16,
+              pointerEvents: "none",
+            }}
+          >
             {suffix}
           </span>
         )}
@@ -180,830 +1652,218 @@ function Field({ label, sub, prefix, suffix, value, onChange, min, max, step = 1
   );
 }
 
-/* ─── BAR ─── */
-interface BarProps {
-  label: string;
-  value: number;
-  total: number;
-  color: string;
-  detail?: string;
+interface BreakdownTableProps {
+  hire: number;
+  cal: number;
+  comp: number;
+  val: number;
 }
 
-function Bar({ label, value, total, color, detail }: BarProps) {
-  const pct = total > 0 ? (value / total) * 100 : 0;
+function BreakdownTable({ hire, cal, comp, val }: BreakdownTableProps) {
+  const rows = [
+    {
+      name: "The Hiring Loop Tax",
+      desc: (
+        <>
+          Cumulative spend on failed sales hires. 70% of first sales hires fail
+          in year one; $150K–$250K per failed cycle.{" "}
+          <strong style={{ color: "var(--ink-dim)" }}>
+            (SaaStr, Brooks Group)
+          </strong>
+        </>
+      ),
+      amt: hire,
+    },
+    {
+      name: "The Calendar Tax",
+      desc:
+        "Annual value of founder time spent doing the team's job. Hours per week × 48 working weeks × your hourly value.",
+      amt: cal,
+    },
+    {
+      name: "The Compounding Tax",
+      desc: (
+        <>
+          One year of forgone growth at 15% on current ARR. A conservative proxy
+          for the multi-year revenue surface lost while the loop runs.{" "}
+          <strong style={{ color: "var(--ink-dim)" }}>(ProductLed)</strong>
+        </>
+      ),
+      amt: comp,
+    },
+    {
+      name: "The Valuation Tax",
+      desc: (
+        <>
+          Founder-dependent businesses sell at a 40–60% discount to comparable
+          independent operations at exit. Mid-point applied to current ARR ×
+          exit multiple.{" "}
+          <strong style={{ color: "var(--ink-dim)" }}>(Bain)</strong>
+        </>
+      ),
+      amt: val,
+    },
+  ];
+
   return (
-    <div style={{ marginBottom: 16 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 5 }}>
-        <span style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.75)", fontFamily: FONT }}>{label}</span>
-        <span style={{ fontSize: 13, fontWeight: 700, color, fontFamily: FONT }}>{fmt(value)}</span>
-      </div>
-      <div style={{ height: 5, background: "rgba(255,255,255,0.08)", borderRadius: 3, overflow: "hidden" }}>
-        <div style={{ height: "100%", width: `${pct}%`, background: `linear-gradient(90deg, ${color}, ${color}88)`, borderRadius: 3, transition: "width 0.6s cubic-bezier(0.22,1,0.36,1)" }} />
-      </div>
-      {detail && (
-        <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", marginTop: 3, fontFamily: FONT }}>{detail}</div>
-      )}
+    <div
+      style={{
+        background: "var(--surface)",
+        border: "1px solid var(--border)",
+        borderRadius: 12,
+        overflow: "hidden",
+      }}
+    >
+      {rows.map((r, i) => (
+        <div
+          key={r.name}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr auto",
+            gap: 18,
+            padding: "22px 28px",
+            borderBottom:
+              i < rows.length - 1 ? "1px solid var(--border-soft)" : "none",
+            alignItems: "start",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: 15,
+                fontWeight: 700,
+                color: "var(--ink)",
+                marginBottom: 6,
+              }}
+            >
+              {r.name}
+            </div>
+            <div
+              style={{
+                fontSize: 12,
+                color: "var(--ink-dim)",
+                lineHeight: 1.5,
+                maxWidth: 460,
+              }}
+            >
+              {r.desc}
+            </div>
+          </div>
+          <div
+            style={{
+              fontSize: 22,
+              fontWeight: 700,
+              color: "var(--accent)",
+              fontVariantNumeric: "tabular-nums",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {fmt(r.amt)}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
-/* ─── CASE STUDIES ─── */
-const CASES = [
-  { co: "Accenture Interactive", industry: "Enterprise / Consulting", result: "$1B+ attributed revenue", sub: "Win rate 54% → 88% · #1 ranked digital agency globally", fromLevel: 1, toLevel: 4, color: C.orange },
-  { co: "BetterCloud", industry: "B2B SaaS / IT Management", result: "25% market share regained", sub: "Gartner Visionary → Gartner Leader", fromLevel: 1, toLevel: 3, color: C.purple },
-  { co: "Apto Solutions", industry: "B2B Technology", result: "+41% revenue YoY", sub: "Founder narrative extracted and deployed org-wide", fromLevel: 1, toLevel: 3, color: C.green },
-  { co: "Ledger", industry: "Crypto / Web3", result: "+20% YoY sales during crypto winter", sub: "20+ stakeholders aligned · 2 new sub-brands built", fromLevel: 1, toLevel: 3, color: C.cyan },
-  { co: "Remark Growth Marketing", industry: "Agency / B2B", result: "+64% YoY revenue", sub: "+87% page views · +44% lead conversions", fromLevel: 1, toLevel: 3, color: C.purpleMid },
-  { co: "Tria Beauty", industry: "eCommerce / DTC", result: "+63% YoY website revenue", sub: "Mechanism → transformation repositioning", fromLevel: 1, toLevel: 3, color: C.orangeGlow },
-  { co: "EdTech SMB", industry: "EdTech / Education", result: "+78% product sales", sub: "+91% email signups · Founder extraction to AI content", fromLevel: 1, toLevel: 3, color: C.greenLight },
-  { co: "FinTech Platform", industry: "FinTech / B2B SaaS", result: "+18% trial-to-paid conversion", sub: "Category identity crisis resolved", fromLevel: 1, toLevel: 3, color: C.cyanLight },
-];
-
-/* ─── LEVEL DATA ─── */
-const LEVELS = [
-  {
-    n: 1, label: "Founder-Locked", tag: "WHERE MOST START",
-    costRange: "$360K–$960K/yr opportunity cost", revCeiling: "Capped at $7–12M ARR",
-    founderHrs: "60–80 hrs/mo", teamEff: "N/A — founder does it all",
-    desc: "The founder IS the narrative engine. Every complex deal requires their presence. Growth is capped at their calendar capacity.",
-    color: C.red, bgAlpha: "rgba(239,68,68,0.12)", trap: false,
-  },
-  {
-    n: 2, label: "Agency-Outsourced", tag: "THE TRAP",
-    costRange: "$15K–$50K + founder time still required", revCeiling: "Often LOWER than L1",
-    founderHrs: "Still 40–60 hrs/mo", teamEff: "Worse — using materials that don't convert",
-    desc: "Agencies capture information but miss conviction. You spend more AND earn less. This is why you've been burned before.",
-    color: C.gray400, bgAlpha: "rgba(156,163,175,0.12)", trap: true,
-  },
-  {
-    n: 3, label: "NOS-Enabled", tag: "THE STRUCTURAL FIX",
-    costRange: "$7.5K–$25K/mo (amortizing)", revCeiling: "Team-capacity-dependent",
-    founderHrs: "<15 hrs/mo", teamEff: "Close rate gap <15% vs. founder",
-    desc: "Founder narrative extracted, codified into architecture, installed with Voice Fidelity Gates. The team sells at founder-level conviction.",
-    color: C.green, bgAlpha: "rgba(16,185,129,0.12)", trap: false,
-  },
-  {
-    n: 4, label: "NOS + AI Amplification", tag: "SCALE WITHOUT HEADCOUNT",
-    costRange: "Fraction of L3 per asset", revCeiling: "GTM-capacity-dependent",
-    founderHrs: "<5 hrs/mo", teamEff: "AI-amplified at founder quality",
-    desc: "Voice-calibrated AI agents produce founder-quality output across channels simultaneously. The NOS becomes the training data that makes AI work.",
-    color: C.purple, bgAlpha: "rgba(73,64,198,0.12)", trap: false,
-  },
-  {
-    n: 5, label: "Self-Compounding", tag: "THE ENDGAME",
-    costRange: "Maintenance only", revCeiling: "Market-dependent — no resource ceiling",
-    founderHrs: "Strategic inflection points only", teamEff: "System-driven",
-    desc: "The NOS runs its own measurement, optimization, and expansion cycles. Enterprise value premium replaces the 40–60% founder-dependency discount.",
-    color: C.orange, bgAlpha: "rgba(243,105,1,0.12)", trap: false,
-  },
-];
-
-/* ─── MAIN COMPONENT ─── */
-export default function NarrativeLeverageModel() {
-  const [view, setView] = useState<"calc" | "model" | "proof">("calc");
-  const [yourRate, setYourRate] = useState(45);
-  const [teamRate, setTeamRate] = useState(18);
-  const [dealSize, setDealSize] = useState(75000);
-  const [dealsQ, setDealsQ] = useState(12);
-  const [hireCost, setHireCost] = useState(120000);
-  const [hrsWeek, setHrsWeek] = useState(15);
-  const [showResult, setShowResult] = useState(false);
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const [captureEmail, setCaptureEmail] = useState("");
-  const [captureName, setCaptureName] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
-  const [visitedTabs, setVisitedTabs] = useState<Set<"calc" | "model" | "proof">>(
-    new Set(["calc"]),
-  );
-  const [expandedLevel, setExpandedLevel] = useState<number | null>(null);
-
-  const rateGap = Math.max(0, (yourRate - teamRate) / 100);
-  const revLeak = rateGap * dealsQ * 4 * dealSize;
-  const payrollWaste = yourRate > 0 ? Math.max(0, hireCost * (1 - teamRate / yourRate)) : 0;
-  const founderTime = hrsWeek * WORK_WEEKS * FOUNDER_HOURLY;
-  const total = revLeak + payrollWaste + founderTime;
-
-  useEffect(() => {
-    if (total > 0) setShowResult(true);
-  }, [total]);
-
-  const fireGtagEvent = (
-    eventName: string,
-    params: Record<string, string | number>,
-  ) => {
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", eventName, params);
-    }
-  };
-
-  const handleEmailSubmit = async () => {
-    if (!captureEmail || !captureName) return;
-    if (!isBusinessEmail(captureEmail)) {
-      setSubmitError(BUSINESS_EMAIL_REQUIRED_MESSAGE);
-      return;
-    }
-    setIsSubmitting(true);
-    setSubmitError("");
-
-    try {
-      const response = await fetch("/api/storylock-tax-capture", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // User details
-          name: captureName,
-          email: captureEmail,
-
-          // Meta
-          source: "storylock-tax-calculator",
-          submitted_from_tab: view,
-          submitted_at: new Date().toISOString(),
-
-          // Calculator inputs (Tab 1)
-          your_close_rate: yourRate,
-          team_close_rate: teamRate,
-          close_rate_gap: yourRate - teamRate,
-          average_deal_size: dealSize,
-          deals_per_quarter: dealsQ,
-          deals_per_year: dealsQ * 4,
-          annual_sales_hire_cost: hireCost,
-          hours_per_week_selling: hrsWeek,
-
-          // Calculated results (Tab 1)
-          storylock_tax_total: Math.round(total),
-          revenue_leakage: Math.round(revLeak),
-          payroll_waste: Math.round(payrollWaste),
-          founder_time_tax: Math.round(founderTime),
-
-          // Derived insights
-          revenue_leakage_pct: total > 0 ? Math.round((revLeak / total) * 100) : 0,
-          payroll_waste_pct: total > 0 ? Math.round((payrollWaste / total) * 100) : 0,
-          founder_time_pct: total > 0 ? Math.round((founderTime / total) * 100) : 0,
-
-          // Behavioral data
-          fields_touched: Array.from(visitedTabs),
-          fields_touched_count: visitedTabs.size,
-          viewed_all_tabs: visitedTabs.size === 3,
-          current_tab_when_submitted: view,
-        }),
-      });
-
-      if (!response.ok) {
-        if (response.status === 400) {
-          const data = (await response.json()) as { error?: string };
-          setSubmitError(data.error ?? BUSINESS_EMAIL_REQUIRED_MESSAGE);
-          return;
-        }
-        throw new Error("Request failed");
-      }
-
-      setEmailSubmitted(true);
-      fireGtagEvent("storylock_tax_email_captured", {
-        event_category: "StoryLock Tax",
-        storylock_tax_total: Math.round(total),
-        event_label: "email_submitted",
-      });
-    } catch {
-      setSubmitError("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const setViewWithTracking = (tab: "calc" | "model" | "proof") => {
-    setView(tab);
-    setVisitedTabs((prev) => new Set(prev).add(tab));
-  };
-
-  const handleCalculatorFieldChange = (
-    setter: (value: number) => void,
-    value: number,
-  ) => {
-    setter(value);
-  };
-
-  const tabsLocked = !emailSubmitted;
-  const detailsLocked = showResult && !emailSubmitted;
-
-  const navStyle = (v: string): CSSProperties => ({
-    padding: "10px 0",
-    fontSize: 12,
-    fontWeight: 700,
-    fontFamily: FONT,
-    letterSpacing: "0.06em",
-    textTransform: "uppercase",
-    color: view === v ? C.orange : "rgba(255,255,255,0.35)",
-    background: "none",
-    border: "none",
-    borderBottom: view === v ? `2px solid ${C.orange}` : "2px solid transparent",
-    cursor: "pointer",
-    transition: "all 0.2s",
-    flex: 1,
-    textAlign: "center",
-  });
-
+function QuoteCard({ text, cite }: { text: string; cite: string }) {
   return (
-    <>
-      <style>{`
-        .sl-wrap { max-width: 480px; margin: 0 auto; }
-        @media (min-width: 768px) { .sl-wrap { max-width: 720px; } }
-        @media (min-width: 1200px) { .sl-wrap { max-width: 960px; } }
-
-        .sl-sticky-cta { display: none; }
-        @media (max-width: 768px) {
-          body { padding-bottom: 76px; }
-          .sl-sticky-cta {
-            display: flex;
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 50;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 11px 16px;
-            background: rgba(15, 14, 26, 0.96);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-family: 'Arial', 'Helvetica Neue', sans-serif;
-          }
-          .sl-sticky-cta__meta { flex: 1; min-width: 0; }
-          .sl-sticky-cta__label {
-            font-size: 9px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.4);
-            line-height: 1;
-            margin-bottom: 5px;
-            font-weight: 700;
-          }
-          .sl-sticky-cta__value {
-            font-size: 18px;
-            font-weight: 800;
-            color: #F36901;
-            line-height: 1;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: -0.01em;
-          }
-          .sl-sticky-cta__btn {
-            background: #F36901;
-            color: #ffffff;
-            border: none;
-            padding: 11px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            font-family: inherit;
-            cursor: pointer;
-            white-space: nowrap;
-            flex-shrink: 0;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            line-height: 1;
-            letter-spacing: 0.02em;
-          }
-        }
-      `}</style>
-      <div
+    <div
+      style={{
+        background: "var(--surface)",
+        border: "1px solid var(--border)",
+        borderLeft: "3px solid var(--accent)",
+        borderRadius: 12,
+        padding: "24px 28px",
+        marginBottom: 14,
+      }}
+    >
+      <blockquote
         style={{
-          minHeight: "100vh",
-          background: C.dark,
-          fontFamily: FONT,
-          color: C.white,
-          paddingBottom: 48,
+          fontSize: 16,
+          color: "var(--ink)",
+          lineHeight: 1.55,
+          margin: "0 0 14px",
         }}
       >
-      {/* ─── HEADER ─── */}
-      <div style={{ padding: "32px 20px 0", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: -80, right: -80, width: 240, height: 240, borderRadius: "50%", background: `radial-gradient(circle, ${C.orange}15, transparent 70%)` }} />
-        <div style={{ position: "absolute", bottom: -60, left: -60, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${C.purple}20, transparent 70%)` }} />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <img
-            src="/brandmultiplier-logo.png"
-            alt="BrandMultiplier"
-            style={{ height: 44, width: "auto", display: "block", margin: "0 auto 14px", borderRadius: 8 }}
-          />
-          <h1 style={{ fontSize: 26, fontWeight: 800, color: C.white, margin: "0 0 6px", lineHeight: 1.15, letterSpacing: "-0.02em" }}>
-            What StoryLock is Costing Your Business<br />
-            this Year
-          </h1>
-          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", margin: "0 auto 20px", maxWidth: 360, lineHeight: 1.5 }}>
-            Two axes: what it costs you and what it caps your revenue at.
-          </p>
-        </div>
+        {text}
+      </blockquote>
+      <cite
+        style={{
+          fontSize: 12,
+          color: "var(--ink-dim)",
+          fontStyle: "normal",
+          letterSpacing: "0.04em",
+        }}
+      >
+        {cite}
+      </cite>
+    </div>
+  );
+}
+
+function CTABlock() {
+  return (
+    <div
+      style={{
+        marginTop: 32,
+        textAlign: "center",
+        padding: 32,
+        background: "var(--surface)",
+        border: "1px solid var(--border)",
+        borderRadius: 12,
+      }}
+    >
+      <div
+        style={{
+          fontSize: 11,
+          letterSpacing: "0.14em",
+          textTransform: "uppercase",
+          color: "var(--accent)",
+          fontWeight: 700,
+          marginBottom: 12,
+        }}
+      >
+        Next Step
       </div>
-
-      {/* ─── NAV ─── */}
-      <div className="sl-wrap" style={{ display: "flex", padding: "0 20px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <button type="button" onClick={() => setViewWithTracking("calc")} style={navStyle("calc")}>Calculator</button>
-        <button
-          type="button"
-          onClick={() => {
-            if (!tabsLocked) setViewWithTracking("model");
-          }}
-          style={{
-            ...navStyle("model"),
-            opacity: tabsLocked ? 0.6 : 1,
-            cursor: tabsLocked ? "not-allowed" : "pointer",
-          }}
-        >
-          The 5 Levels {tabsLocked ? "🔒" : ""}
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            if (!tabsLocked) setViewWithTracking("proof");
-          }}
-          style={{
-            ...navStyle("proof"),
-            opacity: tabsLocked ? 0.6 : 1,
-            cursor: tabsLocked ? "not-allowed" : "pointer",
-          }}
-        >
-          Proof {tabsLocked ? "🔒" : ""}
-        </button>
-      </div>
-
-      {/* ─── CONTENT ─── */}
-      <div className="sl-wrap" style={{ padding: "20px 20px 72px" }}>
-
-        {/* ═══ CALCULATOR TAB ═══ */}
-        {view === "calc" && (
-          <div>
-            <div style={{ background: C.darkCard, borderRadius: 14, padding: "24px 20px", border: "1px solid rgba(255,255,255,0.06)", marginBottom: 16 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: C.purple, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 18 }}>YOUR NUMBERS</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 14px" }}>
-                <Field
-                  label="Your Close Rate"
-                  sub="Deals you personally close"
-                  value={yourRate}
-                  onChange={(v) => handleCalculatorFieldChange(setYourRate, v)}
-                  suffix="%"
-                  min={0}
-                  max={100}
-                />
-                <Field
-                  label="Team Close Rate"
-                  sub="Without your involvement"
-                  value={teamRate}
-                  onChange={(v) => handleCalculatorFieldChange(setTeamRate, v)}
-                  suffix="%"
-                  min={0}
-                  max={100}
-                />
-              </div>
-              <Field
-                label="Average Deal Size"
-                prefix="$"
-                value={dealSize}
-                onChange={(v) => handleCalculatorFieldChange(setDealSize, v)}
-                min={0}
-                step={1000}
-              />
-              <Field
-                label="Deals Per Quarter Requiring You"
-                sub="Deals where you&apos;re in the room to close"
-                value={dealsQ}
-                onChange={(v) => handleCalculatorFieldChange(setDealsQ, v)}
-                min={0}
-              />
-              <Field
-                label="Annual Sales Hire Cost"
-                sub="Base + commission for your best rep"
-                prefix="$"
-                value={hireCost}
-                onChange={(v) => handleCalculatorFieldChange(setHireCost, v)}
-                min={0}
-                step={5000}
-              />
-              <Field
-                label="Hours / Week You Spend Selling"
-                sub="Calls, demos, proposals, follow-ups"
-                value={hrsWeek}
-                onChange={(v) => handleCalculatorFieldChange(setHrsWeek, v)}
-                suffix="hrs"
-                min={0}
-                max={80}
-              />
-            </div>
-
-            {showResult && (
-              <div style={{ background: `linear-gradient(135deg, ${C.darkMid}, ${C.darkCard})`, borderRadius: 14, padding: "28px 20px", textAlign: "center", border: `1px solid ${C.orange}20`, position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 0, right: 0, width: 140, height: 140, borderRadius: "50%", background: `radial-gradient(circle, ${C.orange}10, transparent 70%)` }} />
-                <div style={{ position: "relative", zIndex: 1 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>YOUR ANNUAL STORYLOCK TAX</div>
-                  <div style={{ fontSize: 40, fontWeight: 800, color: C.orange, letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 4 }}>
-                    <Anim value={total} />
-                  </div>
-                  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginBottom: 24 }}>per year in lost revenue, wasted payroll & founder time</div>
-                  <div style={{ position: "relative" }}>
-                    <div
-                      style={{
-                        filter: detailsLocked ? "blur(6px)" : "none",
-                        opacity: detailsLocked ? 0.55 : 1,
-                        pointerEvents: detailsLocked ? "none" : "auto",
-                        userSelect: detailsLocked ? "none" : "auto",
-                        transition: "filter 0.25s ease, opacity 0.25s ease",
-                      }}
-                    >
-                      <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "16px 16px 4px", textAlign: "left" }}>
-                        <Bar label="Revenue Leakage" value={revLeak} total={total} color={C.orange} detail={`${yourRate - teamRate}pt gap × ${dealsQ * 4} annual deals × ${fmtShort(dealSize)}`} />
-                        <Bar label="Underperforming Payroll" value={payrollWaste} total={total} color={C.purpleMid} detail={`${fmtShort(hireCost)} hire closing at ${teamRate}% vs. your ${yourRate}%`} />
-                        <Bar label="Founder Time Tax" value={founderTime} total={total} color={C.cyan} detail={`${hrsWeek}hrs/wk × 50 weeks × $500 implied rate`} />
-                      </div>
-                      <div style={{ marginTop: 20, padding: "14px 16px", background: `${C.purple}12`, borderRadius: 10, border: `1px solid ${C.purple}25` }}>
-                        <div style={{ fontSize: 12, fontWeight: 700, color: C.purple, marginBottom: 4 }}>THIS IS LEVEL 1: FOUNDER-LOCKED</div>
-                        <div style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>
-                          Your story is trapped in your head. Every number above is a symptom of missing narrative infrastructure — not a marketing problem.
-                        </div>
-                        <button
-                          onClick={() => {
-                            if (!tabsLocked) {
-                              setViewWithTracking("model");
-                            }
-                          }}
-                          style={{
-                            marginTop: 10,
-                            background: C.purple,
-                            color: C.white,
-                            border: "none",
-                            borderRadius: 8,
-                            padding: "10px 20px",
-                            fontSize: 12,
-                            fontWeight: 700,
-                            cursor: tabsLocked ? "not-allowed" : "pointer",
-                            opacity: tabsLocked ? 0.55 : 1,
-                            fontFamily: FONT,
-                            letterSpacing: "0.02em",
-                            transition: "opacity 0.2s",
-                          }}
-                          onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.opacity = tabsLocked ? "0.55" : "0.85")}
-                          onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.opacity = tabsLocked ? "0.55" : "1")}
-                          type="button"
-                        >
-                          See the 5 Levels {tabsLocked ? "🔒" : "→"}
-                        </button>
-                      </div>
-                    </div>
-
-                    {detailsLocked && (
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          padding: 12,
-                          background: "rgba(10,10,10,0.34)",
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: "100%",
-                            maxWidth: 360,
-                            background: "linear-gradient(135deg, #16152a, #1a1a2e)",
-                            border: "1px solid rgba(243,105,1,0.25)",
-                            borderRadius: 12,
-                            padding: "16px 14px",
-                            textAlign: "left",
-                          }}
-                        >
-                          <div style={{ fontSize: 10, fontWeight: 700, color: C.orange, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>
-                            UNLOCK FULL BREAKDOWN
-                          </div>
-                          <div style={{ fontSize: 13, fontWeight: 700, color: C.white, lineHeight: 1.4, marginBottom: 4 }}>
-                            Fill out this form to see the full breakdown.
-                          </div>
-                          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.55)", marginBottom: 10 }}>
-                            We&apos;ll send your detailed report to your inbox.
-                          </div>
-
-                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
-                            <input
-                              type="text"
-                              placeholder="Your name"
-                              value={captureName}
-                              onChange={(e) => setCaptureName(e.target.value)}
-                              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "8px 10px", fontSize: 13, color: "#ffffff", fontFamily: FONT, outline: "none", width: "100%" }}
-                            />
-                            <input
-                              type="email"
-                              placeholder="Your work email"
-                              value={captureEmail}
-                              onChange={(e) => setCaptureEmail(e.target.value)}
-                              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "8px 10px", fontSize: 13, color: "#ffffff", fontFamily: FONT, outline: "none", width: "100%" }}
-                            />
-                          </div>
-
-                          <button
-                            onClick={handleEmailSubmit}
-                            disabled={isSubmitting || !captureEmail || !captureName}
-                            style={{ width: "100%", background: isSubmitting ? "rgba(243,105,1,0.5)" : "#F36901", color: "#ffffff", border: "none", borderRadius: 8, padding: "9px 20px", fontSize: 12, fontWeight: 700, cursor: isSubmitting ? "not-allowed" : "pointer", fontFamily: FONT, letterSpacing: "0.02em", transition: "opacity 0.2s" }}
-                            type="button"
-                          >
-                            {isSubmitting ? "Sending..." : "Send My Report →"}
-                          </button>
-
-                          {submitError && (
-                            <div style={{ fontSize: 12, color: "#ef4444", textAlign: "center", marginTop: 8 }}>
-                              {submitError}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: 14,
-                fontSize: 10,
-                color: "rgba(255,255,255,0.25)",
-                lineHeight: 1.5,
-                filter: detailsLocked ? "blur(4px)" : "none",
-                opacity: detailsLocked ? 0.6 : 1,
-                transition: "filter 0.25s ease, opacity 0.25s ease",
-              }}
-            >
-              Uses $500/hr implied founder rate based on median for B2B founders at $3M–$50M ARR.
-              <br />Revenue leakage = close rate gap × annual deal volume × deal size.
-            </div>
-          </div>
-        )}
-
-        {/* ═══ MODEL TAB ═══ */}
-        {view === "model" && (
-          <div>
-            <div style={{ background: `${C.red}10`, border: `1px solid ${C.red}30`, borderRadius: 12, padding: "14px 16px", marginBottom: 20 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: C.red, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 4 }}>THE L2 TRAP</div>
-              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>
-                Most founders try to solve Level 1 by hiring an agency (Level 2). The result: you spend more AND your revenue quality drops. Agencies capture information but miss conviction. That&apos;s not a vendor problem — it&apos;s an architecture problem. Level 3 solves it through extraction, not guessing.
-              </div>
-            </div>
-
-            <div style={{ display: "flex", gap: 12, marginBottom: 18 }}>
-              <div style={{ flex: 1, background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "10px 12px" }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: C.orange, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 2 }}>COST AXIS</div>
-                <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", lineHeight: 1.4 }}>What narrative work costs you</div>
-              </div>
-              <div style={{ flex: 1, background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "10px 12px" }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: C.green, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 2 }}>REVENUE AXIS</div>
-                <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", lineHeight: 1.4 }}>What it caps your revenue at</div>
-              </div>
-            </div>
-
-            {LEVELS.map((lv) => {
-              const isOpen = expandedLevel === lv.n;
-              return (
-                <div
-                  key={lv.n}
-                  onClick={() => setExpandedLevel(isOpen ? null : lv.n)}
-                  style={{ background: C.darkCard, borderRadius: 12, padding: "16px", marginBottom: 10, border: `1px solid ${isOpen ? lv.color + "50" : "rgba(255,255,255,0.06)"}`, cursor: "pointer", transition: "border-color 0.2s, transform 0.15s", position: "relative", overflow: "hidden" }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.transform = "translateY(-1px)")}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.transform = "translateY(0)")}
-                >
-                  {lv.trap && (
-                    <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `repeating-linear-gradient(90deg, ${C.red}, ${C.red} 8px, transparent 8px, transparent 16px)` }} />
-                  )}
-                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: 8, background: lv.bgAlpha, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      <span style={{ fontSize: 16, fontWeight: 800, color: lv.color, fontFamily: FONT }}>L{lv.n}</span>
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: C.white, fontFamily: FONT }}>{lv.label}</div>
-                      <div style={{ fontSize: 10, fontWeight: 600, color: lv.color, letterSpacing: "0.04em", textTransform: "uppercase", marginTop: 1 }}>{lv.tag}</div>
-                    </div>
-                    <div style={{ fontSize: 18, color: "rgba(255,255,255,0.3)", transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}>▾</div>
-                  </div>
-
-                  {!isOpen && (
-                    <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
-                      <div style={{ flex: 1, background: "rgba(255,255,255,0.04)", borderRadius: 6, padding: "6px 8px" }}>
-                        <div style={{ fontSize: 9, fontWeight: 700, color: C.orange, letterSpacing: "0.05em", textTransform: "uppercase" }}>COST</div>
-                        <div style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", marginTop: 2, lineHeight: 1.3 }}>{lv.costRange}</div>
-                      </div>
-                      <div style={{ flex: 1, background: "rgba(255,255,255,0.04)", borderRadius: 6, padding: "6px 8px" }}>
-                        <div style={{ fontSize: 9, fontWeight: 700, color: C.green, letterSpacing: "0.05em", textTransform: "uppercase" }}>CEILING</div>
-                        <div style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", marginTop: 2, lineHeight: 1.3 }}>{lv.revCeiling}</div>
-                      </div>
-                    </div>
-                  )}
-
-                  {isOpen && (
-                    <div style={{ marginTop: 14 }}>
-                      <div style={{ fontSize: 12, color: "rgba(255,255,255,0.65)", lineHeight: 1.65, marginBottom: 14 }}>{lv.desc}</div>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                        <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "10px 12px" }}>
-                          <div style={{ fontSize: 9, fontWeight: 700, color: C.orange, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 3 }}>NARRATIVE COST</div>
-                          <div style={{ fontSize: 12, color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>{lv.costRange}</div>
-                        </div>
-                        <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "10px 12px" }}>
-                          <div style={{ fontSize: 9, fontWeight: 700, color: C.green, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 3 }}>REVENUE CEILING</div>
-                          <div style={{ fontSize: 12, color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>{lv.revCeiling}</div>
-                        </div>
-                        <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "10px 12px" }}>
-                          <div style={{ fontSize: 9, fontWeight: 700, color: C.cyan, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 3 }}>FOUNDER TIME</div>
-                          <div style={{ fontSize: 12, color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>{lv.founderHrs}</div>
-                        </div>
-                        <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "10px 12px" }}>
-                          <div style={{ fontSize: 9, fontWeight: 700, color: C.purpleMid, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 3 }}>TEAM EFFECTIVENESS</div>
-                          <div style={{ fontSize: 12, color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>{lv.teamEff}</div>
-                        </div>
-                      </div>
-
-                      {lv.n === 2 && (
-                        <div style={{ marginTop: 12, padding: "10px 12px", background: `${C.red}10`, borderRadius: 8, border: `1px solid ${C.red}20` }}>
-                          <div style={{ fontSize: 11, fontWeight: 700, color: C.red, marginBottom: 3 }}>Why L2 fails structurally</div>
-                          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>
-                            Agencies don&apos;t extract — they guess. They interview you for 1–2 hours, interpret through their frameworks, and produce output that captures 20–30% of what makes you effective. Your conviction, your stories, your timing — none of it transfers.
-                          </div>
-                        </div>
-                      )}
-
-                      {lv.n === 3 && (
-                        <div style={{ marginTop: 12, padding: "10px 12px", background: `${C.green}10`, borderRadius: 8, border: `1px solid ${C.green}20` }}>
-                          <div style={{ fontSize: 11, fontWeight: 700, color: C.green, marginBottom: 3 }}>The structural difference</div>
-                          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>
-                            The Rumble extracts your tacit knowledge in 3 structured hours. Storyline codifies it using neuroscience-backed architecture (38 peer-reviewed studies). Voice Fidelity Gates ensure &quot;sounds like me&quot; at every checkpoint. Your team doesn&apos;t learn someone else&apos;s framework — they learn yours.
-                          </div>
-                        </div>
-                      )}
-
-                      {lv.n === 4 && (
-                        <div style={{ marginTop: 12, padding: "10px 12px", background: `${C.purple}10`, borderRadius: 8, border: `1px solid ${C.purple}20` }}>
-                          <div style={{ fontSize: 11, fontWeight: 700, color: C.purple, marginBottom: 3 }}>Why L4 requires L3</div>
-                          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>
-                            AI without extraction amplifies noise. AI with extraction amplifies conviction. The NOS IS the training data. Every failed AI content initiative in the market skipped L3. We build custom NOS implementations that make AI production founder-quality by design.
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-
-            <div style={{ marginTop: 16, background: C.darkCard, borderRadius: 12, padding: "16px", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}>L1 → L3 LIBERATION METRICS (PORTFOLIO AVERAGES)</div>
-              {[
-                { label: "Founder deal involvement", from: "80%+", to: "<30%", color: C.orange },
-                { label: "Team-vs-founder close rate gap", from: ">40%", to: "<15%", color: C.green },
-                { label: "Narrative-fluent team members", from: "1 (founder)", to: "5+", color: C.purple },
-                { label: "New hire ramp time", from: "6+ months", to: "<30 days", color: C.cyan },
-                { label: "Content first-pass approval", from: "Multiple revisions", to: ">70%", color: C.purpleMid },
-              ].map((m, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", marginBottom: i < 4 ? 10 : 0, gap: 8 }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", fontFamily: FONT }}>{m.label}</div>
-                  </div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.35)", fontFamily: FONT, textAlign: "right", minWidth: 70 }}>{m.from}</div>
-                  <div style={{ fontSize: 12, color: m.color, fontWeight: 700 }}>→</div>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: m.color, fontFamily: FONT, textAlign: "left", minWidth: 60 }}>{m.to}</div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ marginTop: 16, textAlign: "center" }}>
-              <button
-                onClick={() => {
-                  if (!tabsLocked) {
-                    setViewWithTracking("proof");
-                  }
-                }}
-                style={{ background: C.orange, color: C.white, border: "none", borderRadius: 8, padding: "12px 24px", fontSize: 13, fontWeight: 700, cursor: tabsLocked ? "not-allowed" : "pointer", opacity: tabsLocked ? 0.55 : 1, fontFamily: FONT, letterSpacing: "0.02em", boxShadow: `0 4px 16px ${C.orange}30`, transition: "opacity 0.2s" }}
-                onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.opacity = tabsLocked ? "0.55" : "0.85")}
-                onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.opacity = tabsLocked ? "0.55" : "1")}
-                type="button"
-              >
-                See the Evidence {tabsLocked ? "🔒" : "→"}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* ═══ PROOF TAB ═══ */}
-        {view === "proof" && (
-          <div>
-            <div style={{ marginBottom: 18 }}>
-              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>
-                Every result below came from the same methodology: Rumble extraction → Storyline codification → NOS deployment. Different industries, different stages, same structural fix.
-              </div>
-            </div>
-
-            <div style={{ background: `linear-gradient(135deg, ${C.darkCard}, ${C.darkMid})`, borderRadius: 14, padding: "20px 16px", marginBottom: 16, border: `1px solid ${C.orange}20`, textAlign: "center" }}>
-              <div style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 }}>AGGREGATE ACROSS 120+ ENGAGEMENTS</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
-                {[
-                  { n: "$78M+", l: "Client revenue generated" },
-                  { n: "30%+", l: "Avg CAC reduction" },
-                  { n: "35%+", l: "Faster deal cycles" },
-                ].map((s, i) => (
-                  <div key={i} style={{ padding: "8px 4px" }}>
-                    <div style={{ fontSize: 20, fontWeight: 800, color: C.orange, fontFamily: FONT }}>{s.n}</div>
-                    <div style={{ fontSize: 10, color: "rgba(255,255,255,0.45)", marginTop: 2, lineHeight: 1.3 }}>{s.l}</div>
-                  </div>
-                ))}
-              </div>
-              <div style={{ marginTop: 8, fontSize: 10, color: "rgba(255,255,255,0.3)" }}>75%+ pilot-to-retainer conversion · Methodology backed by 38 peer-reviewed studies</div>
-            </div>
-
-            {CASES.map((c, i) => (
-              <div key={i} style={{ background: C.darkCard, borderRadius: 12, padding: "14px 16px", marginBottom: 8, border: "1px solid rgba(255,255,255,0.06)", position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 0, left: 0, width: 3, height: "100%", background: c.color }} />
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,0.35)", letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 3 }}>{c.industry}</div>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: C.white, fontFamily: FONT }}>{c.co}</div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: c.color, marginTop: 4 }}>{c.result}</div>
-                    <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", marginTop: 2, lineHeight: 1.4 }}>{c.sub}</div>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 4, background: "rgba(255,255,255,0.04)", borderRadius: 6, padding: "4px 8px", flexShrink: 0, marginTop: 2 }}>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.4)", fontFamily: FONT }}>L{c.fromLevel}</span>
-                    <span style={{ fontSize: 10, color: c.color }}>→</span>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: c.color, fontFamily: FONT }}>L{c.toLevel}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            <div style={{ marginTop: 14, padding: "12px 14px", background: "rgba(255,255,255,0.03)", borderRadius: 10, border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>METHODOLOGY PEDIGREE</div>
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>
-                The Rumble extraction process was forged across 20+ enterprise pitches at Accenture Interactive — driving $1B+ in attributed revenue, a win rate transformation from 54% to 88%, and #1 global ranking. That same methodology is now systematized into every NOS engagement.
-              </div>
-            </div>
-
-            <div style={{ marginTop: 20, textAlign: "center", background: `linear-gradient(135deg, ${C.darkMid}, ${C.darkCard})`, borderRadius: 14, padding: "24px 16px", border: `1px solid ${C.orange}20` }}>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", lineHeight: 1.6, marginBottom: 14 }}>
-                This isn&apos;t a marketing problem.<br />
-                It&apos;s a structural one. Your story is locked in your head.<br />
-                <span style={{ color: C.orange, fontWeight: 600 }}>The Rumble is 3 hours. The results are permanent.</span>
-              </div>
-              <a
-                href="https://calendly.com/book-crc/storyline/?utm_source=linkedin&utm_medium=social&utm_campaign=personal_profile_chris&utm_content=profile_cta&month=2026-04"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ display: "inline-block", background: C.orange, color: C.white, fontWeight: 700, fontSize: 13, padding: "12px 24px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.02em", boxShadow: `0 4px 16px ${C.orange}30`, fontFamily: FONT, transition: "transform 0.15s" }}
-                onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.transform = "translateY(-1px)")}
-                onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.transform = "translateY(0)")}
-              >
-                Book a Free Diagnostic →
-              </a>
-            </div>
-          </div>
-        )}
-      </div>
-      </div>
-
-      {/* Mobile sticky CTA — total tax + primary action */}
-      {showResult && (
-        <div className="sl-sticky-cta">
-          <div className="sl-sticky-cta__meta">
-            <div className="sl-sticky-cta__label">Your Annual StoryLock Tax</div>
-            <div className="sl-sticky-cta__value">{fmt(total)}</div>
-          </div>
-          {emailSubmitted ? (
-            <a
-              href="https://calendly.com/book-crc/storyline/?utm_source=linkedin&utm_medium=social&utm_campaign=personal_profile_chris&utm_content=storylock_tax_sticky&month=2026-04"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sl-sticky-cta__btn"
-            >
-              Book Diagnostic →
-            </a>
-          ) : (
-            <button
-              type="button"
-              className="sl-sticky-cta__btn"
-              onClick={() => {
-                if (view !== "calc") setViewWithTracking("calc");
-                setTimeout(() => {
-                  const target = document.querySelector(
-                    'input[placeholder="Your work email"]',
-                  );
-                  if (target instanceof HTMLElement) {
-                    target.scrollIntoView({ behavior: "smooth", block: "center" });
-                    target.focus({ preventScroll: true });
-                  }
-                }, 60);
-              }}
-            >
-              Unlock Report →
-            </button>
-          )}
-        </div>
-      )}
-    </>
+      <h3
+        style={{
+          fontSize: 22,
+          fontWeight: 700,
+          margin: "0 0 8px",
+          letterSpacing: "-0.01em",
+        }}
+      >
+        The Diagnostic
+      </h3>
+      <p
+        style={{
+          fontSize: 14,
+          color: "var(--ink-dim)",
+          margin: "0 0 22px",
+        }}
+      >
+        Thirty minutes or less. Zero pressure. Purely diagnostic.
+      </p>
+      <a
+        href={CTA_HREF}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: "inline-block",
+          padding: "14px 28px",
+          background: "var(--accent)",
+          color: "white",
+          borderRadius: 8,
+          fontSize: 15,
+          fontWeight: 600,
+          fontFamily: "inherit",
+          letterSpacing: "0.01em",
+          textDecoration: "none",
+        }}
+      >
+        Book The Diagnostic →
+      </a>
+    </div>
   );
 }

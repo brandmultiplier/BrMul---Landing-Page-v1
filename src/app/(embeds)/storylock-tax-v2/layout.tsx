@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "The StoryLock Tax Calculator | BrandMultiplier",
 };
 
-export default function StoryLockTaxV2Layout({
+export default function StoryLockTaxAliasLayout({
   children,
 }: {
   children: React.ReactNode;
