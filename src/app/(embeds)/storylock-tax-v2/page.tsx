@@ -547,15 +547,110 @@ export default function StoryLockTaxV2Page() {
           .slv2-research-grid {
             grid-template-columns: 1fr;
           }
+          .slv2-h1 {
+            font-size: 26px !important;
+            line-height: 1.2 !important;
+            margin-bottom: 12px !important;
+          }
+          .slv2-hero-sub {
+            font-size: 14px !important;
+            line-height: 1.55 !important;
+          }
+          .slv2-header {
+            margin-bottom: 20px !important;
+          }
+          .slv2-logo {
+            height: 36px !important;
+            margin-bottom: 16px !important;
+          }
+          .slv2-tabs {
+            margin: 20px 0 18px !important;
+          }
+          .slv2-tab {
+            padding: 12px 14px !important;
+            font-size: 12px !important;
+          }
+          .slv2-calc-section {
+            padding: 22px 18px !important;
+          }
+          .slv2-total-card {
+            padding: 28px 18px 24px !important;
+          }
+          .slv2-total-value {
+            font-size: 44px !important;
+          }
+        }
+        .slv2-sticky-cta {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          body {
+            padding-bottom: 76px;
+          }
+          .slv2-sticky-cta {
+            display: flex;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(14, 8, 34, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+          }
+          .slv2-sticky-cta__meta {
+            flex: 1;
+            min-width: 0;
+          }
+          .slv2-sticky-cta__label {
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            line-height: 1;
+            margin-bottom: 5px;
+            font-weight: 700;
+          }
+          .slv2-sticky-cta__value {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.01em;
+          }
+          .slv2-sticky-cta__btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
+          }
         }
       `}</style>
 
       <div className="slv2-wrap">
         {/* Header */}
-        <header style={{ marginBottom: 36 }}>
+        <header className="slv2-header" style={{ marginBottom: 36 }}>
           <img
             src="/brandmultiplier-logo.png"
             alt="BrandMultiplier"
+            className="slv2-logo"
             style={{
               height: 44,
               width: "auto",
@@ -577,6 +672,7 @@ export default function StoryLockTaxV2Page() {
             The StoryLock Tax Calculator
           </div>
           <h1
+            className="slv2-h1"
             style={{
               fontSize: 38,
               lineHeight: 1.18,
@@ -589,6 +685,7 @@ export default function StoryLockTaxV2Page() {
             dollars, hours, and exit multiples.
           </h1>
           <p
+            className="slv2-hero-sub"
             style={{
               fontSize: 17,
               color: "var(--ink-dim)",
@@ -610,6 +707,7 @@ export default function StoryLockTaxV2Page() {
 
         {/* Tabs */}
         <div
+          className="slv2-tabs"
           style={{
             display: "flex",
             justifyContent: "center",
@@ -618,16 +716,18 @@ export default function StoryLockTaxV2Page() {
             borderBottom: "1px solid var(--border)",
           }}
         >
-          <div style={tabStyle("calc")} onClick={() => handleTabClick("calc")}>
+          <div className="slv2-tab" style={tabStyle("calc")} onClick={() => handleTabClick("calc")}>
             Calculator
           </div>
           <div
+            className="slv2-tab"
             style={tabStyle("levels")}
             onClick={() => handleTabClick("levels")}
           >
             The 5 Levels{!unlocked ? " 🔒" : ""}
           </div>
           <div
+            className="slv2-tab"
             style={tabStyle("proof")}
             onClick={() => handleTabClick("proof")}
           >
@@ -639,6 +739,7 @@ export default function StoryLockTaxV2Page() {
         {tab === "calc" && (
           <div>
             <section
+              className="slv2-calc-section"
               style={{
                 background: "var(--surface)",
                 border: "1px solid var(--border)",
@@ -740,6 +841,7 @@ export default function StoryLockTaxV2Page() {
             </section>
 
             <div
+              className="slv2-total-card"
               style={{
                 background: "var(--surface)",
                 border: "1px solid var(--border)",
@@ -762,6 +864,7 @@ export default function StoryLockTaxV2Page() {
                 Your Total StoryLock Tax
               </div>
               <div
+                className="slv2-total-value"
                 style={{
                   fontSize: 64,
                   fontWeight: 800,
@@ -1372,6 +1475,38 @@ export default function StoryLockTaxV2Page() {
             © BrandMultiplier · brandmultiplier.ai
           </p>
         </div>
+      </div>
+
+      {/* Mobile sticky CTA — total tax + primary action */}
+      <div className="slv2-sticky-cta">
+        <div className="slv2-sticky-cta__meta">
+          <div className="slv2-sticky-cta__label">Your StoryLock Tax</div>
+          <div className="slv2-sticky-cta__value">{fmt(total)}</div>
+        </div>
+        {unlocked ? (
+          <a
+            href={CTA_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="slv2-sticky-cta__btn"
+          >
+            Book Diagnostic →
+          </a>
+        ) : (
+          <button
+            type="button"
+            className="slv2-sticky-cta__btn"
+            onClick={() => {
+              if (tab !== "calc") setTab("calc");
+              setTimeout(() => {
+                const el = document.getElementById("gateCard");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+              }, 60);
+            }}
+          >
+            Unlock Report →
+          </button>
+        )}
       </div>
     </>
   );

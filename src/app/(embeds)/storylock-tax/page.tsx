@@ -411,6 +411,64 @@ export default function NarrativeLeverageModel() {
         .sl-wrap { max-width: 480px; margin: 0 auto; }
         @media (min-width: 768px) { .sl-wrap { max-width: 720px; } }
         @media (min-width: 1200px) { .sl-wrap { max-width: 960px; } }
+
+        .sl-sticky-cta { display: none; }
+        @media (max-width: 768px) {
+          body { padding-bottom: 76px; }
+          .sl-sticky-cta {
+            display: flex;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 11px 16px;
+            background: rgba(15, 14, 26, 0.96);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+          }
+          .sl-sticky-cta__meta { flex: 1; min-width: 0; }
+          .sl-sticky-cta__label {
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1;
+            margin-bottom: 5px;
+            font-weight: 700;
+          }
+          .sl-sticky-cta__value {
+            font-size: 18px;
+            font-weight: 800;
+            color: #F36901;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.01em;
+          }
+          .sl-sticky-cta__btn {
+            background: #F36901;
+            color: #ffffff;
+            border: none;
+            padding: 11px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
+            letter-spacing: 0.02em;
+          }
+        }
       `}</style>
       <div
         style={{
@@ -908,6 +966,44 @@ export default function NarrativeLeverageModel() {
       </div>
       </div>
 
+      {/* Mobile sticky CTA — total tax + primary action */}
+      {showResult && (
+        <div className="sl-sticky-cta">
+          <div className="sl-sticky-cta__meta">
+            <div className="sl-sticky-cta__label">Your Annual StoryLock Tax</div>
+            <div className="sl-sticky-cta__value">{fmt(total)}</div>
+          </div>
+          {emailSubmitted ? (
+            <a
+              href="https://calendly.com/book-crc/storyline/?utm_source=linkedin&utm_medium=social&utm_campaign=personal_profile_chris&utm_content=storylock_tax_sticky&month=2026-04"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sl-sticky-cta__btn"
+            >
+              Book Diagnostic →
+            </a>
+          ) : (
+            <button
+              type="button"
+              className="sl-sticky-cta__btn"
+              onClick={() => {
+                if (view !== "calc") setViewWithTracking("calc");
+                setTimeout(() => {
+                  const target = document.querySelector(
+                    'input[placeholder="Your work email"]',
+                  );
+                  if (target instanceof HTMLElement) {
+                    target.scrollIntoView({ behavior: "smooth", block: "center" });
+                    target.focus({ preventScroll: true });
+                  }
+                }, 60);
+              }}
+            >
+              Unlock Report →
+            </button>
+          )}
+        </div>
+      )}
     </>
   );
 }
