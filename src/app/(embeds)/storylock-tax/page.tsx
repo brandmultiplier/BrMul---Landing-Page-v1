@@ -38,7 +38,7 @@ type TabKey = "calc" | "levels" | "proof";
 
 type Verdict = {
   tier: string;
-  levelMatch: 1 | 2 | 3 | 4;
+  levelMatch: 1 | 2 | 3 | 4 | 5;
   body: string;
   action: string;
 };
@@ -54,8 +54,22 @@ const computeVerdict = (
   closePct: number,
   fails: number,
   hours: number,
+  operatingTaxRatio: number,
 ): Verdict => {
-  if (closePct >= 80 || (fails >= 2 && hours >= 25)) {
+  const severeSignalCount = [
+    closePct >= 65,
+    fails >= 2,
+    hours >= 15,
+    operatingTaxRatio >= 0.2,
+  ].filter(Boolean).length;
+
+  if (
+    closePct >= 80 ||
+    fails >= 3 ||
+    hours >= 30 ||
+    operatingTaxRatio >= 0.35 ||
+    severeSignalCount >= 3
+  ) {
     return {
       tier: "Critical StoryLock",
       levelMatch: 1,
@@ -65,7 +79,13 @@ const computeVerdict = (
         "The work that fixes this takes about ten hours of your time over seventy-five days. You spend that much in a slow week of sales calls your team should be handling.",
     };
   }
-  if (closePct >= 60 || (fails >= 1 && hours >= 15)) {
+  if (
+    closePct >= 60 ||
+    fails >= 2 ||
+    hours >= 15 ||
+    operatingTaxRatio >= 0.18 ||
+    (fails >= 1 && hours >= 10)
+  ) {
     return {
       tier: "Significant StoryLock",
       levelMatch: 2,
@@ -75,7 +95,7 @@ const computeVerdict = (
         "The window where this is fixable in one quarter is open. It does not stay open. The fix is finite. Postponement is not.",
     };
   }
-  if (closePct >= 40 || fails >= 1) {
+  if (closePct >= 40 || fails >= 1 || hours >= 8 || operatingTaxRatio >= 0.08) {
     return {
       tier: "Moderate StoryLock",
       levelMatch: 3,
@@ -85,14 +105,39 @@ const computeVerdict = (
         "Closing the last twenty percent of the gap is what separates a company that scales from one that plateaus. The work compounds.",
     };
   }
+  if (closePct >= 20 || hours >= 3 || operatingTaxRatio >= 0.03) {
+    return {
+      tier: "Light StoryLock",
+      levelMatch: 4,
+      body:
+        "The system is largely in place. The team carries weight. The remaining drift is operational, not structural. You are in a rarer category than the data on this page assumes.",
+      action:
+        "From here, the work is maintenance and amplification rather than extraction. Worth confirming the system is genuinely codified rather than reliant on the current people who happen to be carrying it.",
+    };
+  }
   return {
-    tier: "Light StoryLock",
-    levelMatch: 4,
+    tier: "Compounding StoryLock",
+    levelMatch: 5,
     body:
-      "The system is largely in place. The team carries weight. The remaining drift is operational, not structural. You are in a rarer category than the data on this page assumes.",
+      "The story is no longer trapped in founder performance. The team can carry the message, adapt it in live conversations, and improve it from market feedback without routing every important judgment back through you.",
     action:
-      "From here, the work is maintenance and amplification rather than extraction. Worth confirming the system is genuinely codified rather than reliant on the current people who happen to be carrying it.",
+      "The work now is not rescue. It is governance: keep the system current, keep the signal clean, and make sure new hires inherit the operating logic instead of reverse-engineering it from artifacts.",
   };
+};
+
+const valuationDiscountFor = (levelMatch: Verdict["levelMatch"]): number => {
+  switch (levelMatch) {
+    case 1:
+      return 0.6;
+    case 2:
+      return 0.4;
+    case 3:
+      return 0.25;
+    case 4:
+      return 0.1;
+    case 5:
+      return 0;
+  }
 };
 
 type LevelDef = {
@@ -310,14 +355,17 @@ export default function StoryLockTaxPage() {
     }
   }, []);
 
-  // Math—exact formulas from the HTML source.
+  // Math model: operating drag determines severity; severity determines valuation drag.
   const hireTax = fails * Math.max(150_000, Math.min(aecost, 250_000));
   const calTax = hours * 48 * rate;
   // Compounding drag scales with founder close-rate dominance (baseline 70% = 0.15).
   const compTax = arr * 0.15 * (closePct / 70);
-  const valTax = arr * mult * 0.5;
+  const operatingTax = hireTax + calTax + compTax;
+  const operatingTaxRatio = arr > 0 ? operatingTax / arr : 0;
+  const verdict = computeVerdict(closePct, fails, hours, operatingTaxRatio);
+  const valuationDiscount = valuationDiscountFor(verdict.levelMatch);
+  const valTax = arr * mult * valuationDiscount;
   const total = hireTax + calTax + compTax + valTax;
-  const verdict = computeVerdict(closePct, fails, hours);
 
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
@@ -360,6 +408,8 @@ export default function StoryLockTaxPage() {
             compounding_tax: Math.round(compTax),
             valuation_tax: Math.round(valTax),
             storylock_tax_total: Math.round(total),
+            operating_tax_ratio: Math.round(operatingTaxRatio * 1000) / 10,
+            valuation_discount_pct: Math.round(valuationDiscount * 100),
 
             // Severity
             tier: verdict.tier,
@@ -415,6 +465,8 @@ export default function StoryLockTaxPage() {
       compTax,
       valTax,
       total,
+      operatingTaxRatio,
+      valuationDiscount,
       verdict.tier,
       verdict.levelMatch,
     ],
@@ -878,7 +930,7 @@ export default function StoryLockTaxPage() {
                 {fmt(total)}
               </div>
               <div style={{ fontSize: 14, color: "var(--ink-dim)" }}>
-                Through your next exit window. Conservatively calculated.
+                Through your next exit window. Modeled from founder-dependency risk.
               </div>
             </div>
 
@@ -896,6 +948,7 @@ export default function StoryLockTaxPage() {
                   cal={calTax}
                   comp={compTax}
                   val={valTax}
+                  valDiscount={valuationDiscount}
                 />
               </div>
 
@@ -1445,9 +1498,9 @@ export default function StoryLockTaxPage() {
               forgone growth at 15% applied to current ARR… a conservative
               proxy for the multi-year revenue surface lost while the hiring
               loop runs (ProductLed). Valuation Tax = ARR × revenue multiple ×
-              50% mid-point of the Bain founder-dependency discount range.
-              Each number is independently sourced and deliberately
-              under-stated.
+              the founder-dependency discount implied by your severity level.
+              The model now lets clean systems escape the discount and makes
+              severe founder dependency more expensive.
             </p>
           </div>
 
@@ -1657,9 +1710,16 @@ interface BreakdownTableProps {
   cal: number;
   comp: number;
   val: number;
+  valDiscount: number;
 }
 
-function BreakdownTable({ hire, cal, comp, val }: BreakdownTableProps) {
+function BreakdownTable({
+  hire,
+  cal,
+  comp,
+  val,
+  valDiscount,
+}: BreakdownTableProps) {
   const rows = [
     {
       name: "The Hiring Loop Tax",
@@ -1695,9 +1755,10 @@ function BreakdownTable({ hire, cal, comp, val }: BreakdownTableProps) {
       name: "The Valuation Tax",
       desc: (
         <>
-          Founder-dependent businesses sell at a 40–60% discount to comparable
-          independent operations at exit. Mid-point applied to current ARR ×
-          exit multiple.{" "}
+          Founder-dependent businesses can sell at a steep discount to
+          comparable independent operations at exit. This run applies a{" "}
+          {Math.round(valDiscount * 100)}% severity-weighted discount to
+          current ARR × exit multiple.{" "}
           <strong style={{ color: "var(--ink-dim)" }}>(Bain)</strong>
         </>
       ),
