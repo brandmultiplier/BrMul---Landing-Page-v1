@@ -14,33 +14,33 @@ const TOUR_STEPS: TourStep[] = [
   {
     selectors: ['[data-tour="l04"]', '[data-tour="l03"]', '[data-tour="l02"]', '[data-tour="l01"]', '[data-tour="operate"]'],
     step: 'The system',
-    html: 'Meet <b>NOS</b> — the container. Not one layer, not two. The whole operating system, built for founder-led B2B at your size, not the Fortune 500.',
+    html: 'Meet <b>NOS</b>\u2014a narrative operating system we\u2019ve been building since 2023. Not one or two layers: the whole system, grounded in cognitive science and built for founder-led B2B, not the Fortune 500.',
   },
   {
     selectors: ['[data-tour="l01"]'],
     step: 'The foundation',
-    html: 'Start at the bottom. The <b>Encoded Brand Code</b> is your strategic narrative, customer insight and rules — made machine-readable, so your people and your agents work from the same source. It\u2019s one of several outputs of the Storyline method.',
+    html: 'Start at the bottom. We <b>extract</b> your story\u2014founder conviction, customer reality, the movement you lead\u2014and encode it so people and agents work from one source of truth. The brand code is just the part the agents read.',
   },
   {
     selectors: ['[data-tour="l04"]', '[data-tour="l03"]', '[data-tour="l02"]'],
-    step: 'The operational layers',
-    html: 'Three layers run on top of it: <b>Execution</b> (five specialized agents), <b>Orchestration</b> (routing, rules, escalation), and <b>Interface</b> (where your team directs everything, inside tools you already use).',
+    step: 'The working layers',
+    html: 'Above it, a <b>coordinated team of agents</b> produces the work, an orchestration layer runs the methodology and gates quality, and the interface is where your team steers\u2014inside tools you already use.',
   },
   {
     selectors: ['[data-tour="conn"]'],
     step: 'Always tuning',
-    html: 'These layers never sit still. They <b>iterate and optimize across one another, continuously</b> — the system is always tuning itself, in both directions.',
+    html: 'These layers never sit still. They <b>iterate and optimize across one another, continuously</b>\u2014the system is always tuning itself, in both directions.',
   },
   {
     selectors: ['[data-tour="timeline"]'],
     step: 'How it\u2019s delivered',
-    html: 'Delivery is two phases. <b>Installation</b> runs 75 days, services and system concurrent — by Day 75 it\u2019s producing. Then <b>Operate</b>, ongoing. The team that builds it is the team that runs it.',
+    html: 'Delivery is two phases. <b>Installation</b> runs 75 days, services and system concurrent\u2014by Day 75 it\u2019s producing. Then <b>Operate</b>, ongoing. The team that builds it is the team that runs it.',
   },
   {
     selectors: ['[data-tour="operate"]'],
     step: 'Who runs it',
     cta: true,
-    html: 'Which leaves the question every founder asks: <b>who runs this after install?</b> That\u2019s Operate — DIY, DWY, or DFY. Step up or down as your team changes. This is the part an internal hire can\u2019t simply pick up.',
+    html: 'Which leaves the question every founder asks: <b>who runs this after install?</b> That\u2019s Operate\u2014DIY, DWY, or DFY. Step up or down as your team changes. This is the part an internal hire can\u2019t simply pick up.',
   },
 ];
 
@@ -161,9 +161,9 @@ export default function NosArchitectureClient() {
         <header>
           <div className="eyebrow">NOS Architecture &nbsp;·&nbsp; Founder-led B2B, $3–50M ARR</div>
           <h1>The Narrative Operating System</h1>
-          <p className="deck">The agentic marketing machine for founder-led B2B — built as a system, not a project.</p>
+          <p className="deck">A narrative operating system for founder-led B2B—grounded in cognitive science, in development since 2023.</p>
           <p className="caption">
-            It maps to the four-layer agentic model named in <i>Harvard Business Review</i> (May 2026) — with two structural additions the category misses: the <b>upstream Storyline methodology</b> that produces the brand code, and the <span className="o">comprehensive Operate layer</span> that runs and tunes the system after install.
+            We&apos;ve been building NOS—and quietly defining its category—since 2023: a system grounded in cognitive science and built for the way B2B deals actually work—many stakeholders, many arcs, one story. When <i>Harvard Business Review</i> named the agentic-marketing category in May 2026, it described the <b>middle</b> of what we&apos;d already built. It doesn&apos;t name the foundation beneath it, or the <span className="o">Operate layer</span> that runs and tunes the whole system. That part is ours.
           </p>
           <div className="controls">
             <button className="btn btn-primary" onClick={startTour}>▶&nbsp; Take the guided tour</button>
@@ -173,6 +173,50 @@ export default function NosArchitectureClient() {
             }}>Explore freely</button>
           </div>
         </header>
+
+        {/* WHY NOW */}
+        <section className="whynow">
+          <div className="wn-h">Why now — the Post-Code Economy</div>
+          <div className="wn-thesis">As AI commoditizes execution, <em>story becomes the last defensible advantage.</em></div>
+          <div className="stats">
+            <div className="stat">
+              <div className="fig">30%+</div>
+              <div className="lab">of new code is now AI-written</div>
+              <div className="src">GitHub, 2024</div>
+            </div>
+            <div className="stat">
+              <div className="fig">300M</div>
+              <div className="lab">jobs projected to be disrupted by AI</div>
+              <div className="src">Goldman Sachs</div>
+            </div>
+            <div className="stat">
+              <div className="fig">−27.5%</div>
+              <div className="lab">decline in programming job postings</div>
+              <div className="src">Indeed</div>
+            </div>
+          </div>
+          <div className="wn-foot">And creative thinking now outranks technical AI skill in employer demand—World Economic Forum, Future of Jobs 2025. When the work gets automated, the story is what&apos;s left to compete on.</div>
+        </section>
+
+        {/* GROUNDWORK */}
+        <section className="ground">
+          <div className="section-h">The Groundwork · Building Since 2023</div>
+          <p className="g-lead">NOS didn&apos;t start with the category. We&apos;ve been building it since 2023—on three things the agentic-marketing conversation still skips:</p>
+          <div className="cols">
+            <div className="col">
+              <div className="c-h">Grounded in cognitive science</div>
+              <div className="c-b">A five-phase model of how attention, memory and decision actually work—backed by 38+ peer-reviewed studies, not a content calendar.</div>
+            </div>
+            <div className="col">
+              <div className="c-h">Built for B2B&apos;s real complexity</div>
+              <div className="c-b">Every deal has many stakeholders, each needing their own arc. NOS treats the buying committee as first-class, not an afterthought.</div>
+            </div>
+            <div className="col">
+              <div className="c-h">A methodology, not a template</div>
+              <div className="c-b">We extract your story through a proprietary process. Most tools hand you a blank form. We don&apos;t.</div>
+            </div>
+          </div>
+        </section>
 
         {/* SYSTEM */}
         <div className="system" ref={systemRef}>
@@ -194,9 +238,9 @@ export default function NosArchitectureClient() {
                 <div className="layer-head">
                   <div className="lnum">04</div>
                   <div className="lmeta">
-                    <div className="lidx">Interface</div>
+                    <div className="lidx">Control</div>
                     <div className="ltitle">Interface</div>
-                    <div className="lsub">Where your team directs the system — inside the tools you already use.</div>
+                    <div className="lsub">Where your team directs the system—inside the tools you already use.</div>
                   </div>
                   <div className="chev">▾</div>
                 </div>
@@ -235,18 +279,19 @@ export default function NosArchitectureClient() {
                 <div className="layer-head">
                   <div className="lnum">03</div>
                   <div className="lmeta">
-                    <div className="lidx">Orchestration</div>
+                    <div className="lidx">Coordination</div>
                     <div className="ltitle">Orchestration</div>
-                    <div className="lsub">Routes work between agents, enforces rules, escalates to humans for judgment calls.</div>
+                    <div className="lsub">Runs the methodology, routes the agents, and gates quality before anything ships.</div>
                   </div>
                   <div className="chev">▾</div>
                 </div>
                 <div className="detail">
-                  <p>The coordination layer. It decides what runs where, keeps every agent inside your business rules, and pulls a human in the moment real judgment is required.</p>
+                  <p>The orchestration layer runs our build-and-operate methodology end to end—routing work across the agent team, enforcing your business rules, escalating to a human the moment judgment is required, and holding every piece to a quality bar before it leaves the building.</p>
                   <div className="chips">
                     <span className="chip">Routing</span>
                     <span className="chip">Governance</span>
                     <span className="chip">Escalation</span>
+                    <span className="chip">Quality gates</span>
                   </div>
                 </div>
               </div>
@@ -272,14 +317,14 @@ export default function NosArchitectureClient() {
                 <div className="layer-head">
                   <div className="lnum">02</div>
                   <div className="lmeta">
-                    <div className="lidx">Execution</div>
+                    <div className="lidx">Production</div>
                     <div className="ltitle">Execution</div>
-                    <div className="lsub">Five specialized agent workstreams — on-brand from the first draft.</div>
+                    <div className="lsub">A coordinated team of specialized agents—on-brand from the first draft.</div>
                   </div>
                   <div className="chev">▾</div>
                 </div>
                 <div className="detail">
-                  <p>The work layer. Five purpose-built agents draw straight from the encoded brand code below, so output is on-brief before a human ever touches it.</p>
+                  <p>Not one general-purpose model doing everything. A team of purpose-built agents, each owning a workstream and drawing from your encoded story, coordinated by the orchestrator above. They produce on-brief before a human ever touches the work.</p>
                   <div className="chips">
                     <span className="chip">Intelligence &amp; Ideation</span>
                     <span className="chip">Content Creation</span>
@@ -287,7 +332,7 @@ export default function NosArchitectureClient() {
                     <span className="chip">Distribution</span>
                     <span className="chip">Performance &amp; Reporting</span>
                   </div>
-                  <div className="xlink">Maps 1:1 to HBR&apos;s five agentic workstreams.</div>
+                  <span className="note">A coordinated agent team under one orchestrator—a team, not a tool.</span>
                 </div>
               </div>
 
@@ -312,15 +357,15 @@ export default function NosArchitectureClient() {
                 <div className="layer-head">
                   <div className="lnum">01</div>
                   <div className="lmeta">
-                    <div className="lidx">Encoded Brand Code</div>
+                    <div className="lidx">Foundation</div>
                     <div className="ltitle">Encoded Brand Code</div>
-                    <div className="lsub">The machine-readable narrative everything else runs on.</div>
+                    <div className="lsub">The machine-readable story everything else runs on—the output of a deep extraction, not a template.</div>
                   </div>
                   <div className="chev">▾</div>
                 </div>
                 <div className="detail">
-                  <p>Your strategic narrative, customer insight and business rules, captured in a form humans and agents can both act on. It&apos;s the source of truth the three layers above draw from.</p>
-                  <div className="tagline">One of several outputs of the Storyline method — see the engagement model below.</div>
+                  <p>We extract the founder&apos;s conviction, the customer&apos;s reality, and the movement the company is leading, then encode it so people and agents act from one source of truth. The same extraction produces your sales narrative, your team&apos;s enablement, and a closed measurement loop that scores every piece before it ships and tracks how far your story travels in the market—the brand code is just the part the agents read.</p>
+                  <div className="tagline">One of several outputs of the Storyline method—our extraction process, not a fill-in-the-blanks form.</div>
                 </div>
               </div>
             </div>
@@ -368,7 +413,7 @@ export default function NosArchitectureClient() {
         {/* TIMELINE */}
         <section className={`timeline${isSpotlit('timeline') ? ' spot' : ''}`} data-tour="timeline" ref={timelineRef}>
           <div className="section-h">
-            Engagement Model — The Storyline Method <span className="muted">· upstream methodology, rooted in 38+ peer-reviewed studies</span>
+            Engagement Model—The Storyline Method <span className="muted">· our extraction methodology, grounded in cognitive science (38+ peer-reviewed studies)</span>
           </div>
           <div className="track">
             <div className="phase p1">
@@ -377,9 +422,9 @@ export default function NosArchitectureClient() {
               <div className="steps">
                 {[
                   { name: 'UNLOCK', def: 'Discovery, qualification, and the free diagnostic.' },
-                  { name: 'RUMBLE', def: 'The 3-hour design-thinking workshop with founders in the room — the extraction event.' },
+                  { name: 'RUMBLE', def: 'The 3-hour design-thinking workshop with founders in the room—the extraction event.' },
                   { name: 'ARCHITECT', def: 'Distillation and codification of what the Rumble surfaced.' },
-                  { name: 'INSTALL', def: 'Encoding the codified narrative into the systems, agents, and interfaces.' },
+                  { name: 'INSTALL', def: 'Encoding the codified story into the systems, agents, and interfaces.' },
                 ].map((s, i) => (
                   <span key={s.name} style={{ display: 'contents' }}>
                     {i > 0 && <span className="arrow">→</span>}
@@ -404,7 +449,7 @@ export default function NosArchitectureClient() {
               <div className="steps">
                 <button
                   className={`step tune${activeStep === 'TUNE' ? ' active' : ''}`}
-                  onClick={() => handleStepClick('Post-install operation, iteration, and optimization — monthly runs, quarterly recalibration.', 'TUNE')}
+                  onClick={() => handleStepClick('Post-install operation and optimization—monthly runs, quarterly recalibration. We measure both the quality of every piece before it ships and how far your story travels in the market.', 'TUNE')}
                 >
                   TUNE
                 </button>
@@ -431,24 +476,25 @@ export default function NosArchitectureClient() {
           </div>
 
           <div>
-            <div className="section-h">How It Maps to the Category</div>
+            <div className="section-h">Before the Category Had a Name</div>
             <button className={`hbr-toggle${hbrOpen ? ' open' : ''}`} onClick={() => setHbrOpen(!hbrOpen)}>
-              <span>How NOS maps to HBR&apos;s agentic model (May 2026)</span>
+              <span>Where NOS and HBR&apos;s agentic model (May 2026) line up—and where they don&apos;t</span>
               <span className="chev">▾</span>
             </button>
             <div className="hbr-body">
+              <p className="map-intro">A category isn&apos;t named into existence—it&apos;s <b>built</b> into existence. HBR named the agentic-marketing category in 2026; we&apos;d been building it, narrative-first and for founder-led B2B, since 2023. The middle three layers line up because we were solving this before the market had words for it—the foundation beneath and the Operate layer above are the parts the words still don&apos;t reach.</p>
               <div className="map-row"><span className="map-nos">04 Interface</span><span className="map-eq">↔</span><span className="map-hbr">Interface layer <i>(NOS adds operator-by-tier)</i></span></div>
               <div className="map-row"><span className="map-nos">03 Orchestration</span><span className="map-eq">↔</span><span className="map-hbr">Orchestration layer</span></div>
               <div className="map-row"><span className="map-nos">02 Execution</span><span className="map-eq">↔</span><span className="map-hbr">Execution · five workstreams</span></div>
-              <div className="map-row"><span className="map-nos">01 Encoded Brand Code</span><span className="map-eq">↔</span><span className="map-hbr">Brand code <i>(NOS treats as one of several outputs)</i></span></div>
-              <div className="map-diff"><b>Not in HBR&apos;s model:</b> the upstream <b>Storyline</b> methodology that produces the brand code, and the <b>Operate</b> layer that runs and tunes the system after install. Same architecture — redesigned for an ICP no one in the category serves.</div>
+              <div className="map-row"><span className="map-nos">01 Encoded Brand Code</span><span className="map-eq">↔</span><span className="map-hbr">Brand code <i>(HBR&apos;s deliverable; for us, one encoded output of a deeper methodology)</i></span></div>
+              <div className="map-diff"><b>What the category doesn&apos;t describe:</b> the cognitive-science foundation and extraction methodology beneath the stack, the Operate layer that runs and tunes the whole system, and a closed measurement loop—scoring quality before anything ships, tracking how far the story travels after—that most stacks never build. HBR describes an agentic marketing <i>organization</i> built for the enterprise. NOS is the <i>machine</i> for founder-led B2B—and it predates the article.</div>
             </div>
           </div>
         </section>
 
         {/* FOOTER */}
         <footer>
-          <div className="foot-l">© 2026 BrandMultiplier · The Narrative Operating System — built for founder-led B2B.</div>
+          <div className="foot-l">© 2026 BrandMultiplier · The Narrative Operating System—in development since 2023, built for founder-led B2B.</div>
           <div className="foot-r">
             BRANDMULTIPLIER &nbsp;{' '}
             <a href="https://brandmultiplier.ai" target="_blank" rel="noopener noreferrer">brandmultiplier.ai</a>
@@ -463,7 +509,7 @@ export default function NosArchitectureClient() {
         <div className="tc-text" dangerouslySetInnerHTML={{ __html: currentStep.html }} />
         <div className={`tc-cta${currentStep.cta ? ' visible' : ''}`}>
           <a href="https://calendly.com/book-crc/storyline/" target="_blank" rel="noopener noreferrer">
-            Book a walkthrough — see which Operate tier fits →
+            Book a walkthrough →
           </a>
         </div>
         <div className="tc-bottom">
