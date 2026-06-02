@@ -25,6 +25,10 @@ const MINIMAL_HEADER_ROUTES = [
     '/storylock-tax',
 ];
 
+const LOGO_ONLY_HEADER_ROUTES = [
+    '/NOS-architecture',
+];
+
 export default function Navbar() {
     const pathname = usePathname();
     const [scrolled, setScrolled] = useState(false);
@@ -33,6 +37,7 @@ export default function Navbar() {
     // Hide navbar on embed pages
     const isEmbedPage = EMBED_ROUTES.includes(pathname);
     const isMinimalHeaderRoute = MINIMAL_HEADER_ROUTES.includes(pathname);
+    const isLogoOnlyHeaderRoute = LOGO_ONLY_HEADER_ROUTES.includes(pathname);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -41,6 +46,28 @@ export default function Navbar() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Logo-only header for standalone content pages
+    if (isLogoOnlyHeaderRoute) {
+        return (
+            <header className="fixed top-0 left-0 right-0 z-50 py-4 bg-white/95 backdrop-blur-md border-b border-black/5">
+                <div className="container-width">
+                    <Link href="/" className="group inline-flex items-center gap-3">
+                        <div className="relative h-10 w-auto">
+                            <img
+                                src="/brandmultiplier-logo.png"
+                                alt="BrandMultiplier"
+                                className="h-full w-auto object-contain rounded-lg"
+                            />
+                        </div>
+                        <span className="font-bold text-lg tracking-tight text-[#111114] group-hover:text-[#4940C6] transition-colors">
+                            BrandMultiplier
+                        </span>
+                    </Link>
+                </div>
+            </header>
+        );
+    }
 
     // Render minimal header for selected embed pages
     if (isMinimalHeaderRoute) {

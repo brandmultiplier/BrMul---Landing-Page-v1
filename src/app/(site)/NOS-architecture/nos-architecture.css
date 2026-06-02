@@ -27,7 +27,7 @@
 
 .nos-page * { box-sizing: border-box; }
 
-.nos-wrap { max-width: 1180px; margin: 0 auto; padding: 48px 28px 64px; }
+.nos-wrap { max-width: 1180px; margin: 0 auto; padding: 96px 28px 64px; }
 
 /* HERO */
 .nos-page .eyebrow { font-size: 11.5px; font-weight: bold; color: var(--purple); letter-spacing: 3px; text-transform: uppercase; }
