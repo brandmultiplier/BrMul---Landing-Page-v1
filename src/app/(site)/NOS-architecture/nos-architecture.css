@@ -168,7 +168,15 @@
 /* GUIDED TOUR */
 .nos-page .scrim { position: fixed; inset: 0; background: rgba(255, 255, 255, 0.74); backdrop-filter: saturate(0.7) blur(0.5px); z-index: 800; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
 .nos-page.touring .scrim { opacity: 1; pointer-events: auto; }
-.nos-page .spot { position: relative; z-index: 850; box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--purple), 0 18px 40px rgba(73, 64, 198, 0.28) !important; border-radius: var(--r); }
+.nos-page .spot {
+  position: relative;
+  z-index: 850;
+  box-shadow:
+    0 0 0 5px #fff,
+    0 0 0 11px var(--purple),
+    0 22px 48px rgba(73, 64, 198, 0.28) !important;
+  border-radius: var(--r);
+}
 .nos-page .conn.spot { box-shadow: none !important; }
 .nos-page .conn.spot svg { filter: drop-shadow(0 0 8px rgba(73, 64, 198, 0.6)); animation: none; opacity: 1; }
 .nos-page .tourcard { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%); width: min(560px, calc(100vw - 36px)); background: var(--ink); color: #fff; border-radius: 18px; padding: 22px 24px; z-index: 900; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4); opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; transform: translate(-50%, 12px); }
