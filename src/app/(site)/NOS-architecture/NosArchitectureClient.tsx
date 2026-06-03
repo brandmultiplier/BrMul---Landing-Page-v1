@@ -3,6 +3,9 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import './nos-architecture.css';
 
+const BOOKING_URL =
+  'https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=nos-architecture';
+
 interface TourStep {
   selectors: string[];
   step: string;
@@ -508,7 +511,7 @@ export default function NosArchitectureClient() {
         <div className="tc-step">Step {tourIdx + 1} of {TOUR_STEPS.length}</div>
         <div className="tc-text" dangerouslySetInnerHTML={{ __html: currentStep.html }} />
         <div className={`tc-cta${currentStep.cta ? ' visible' : ''}`}>
-          <a href="https://calendly.com/book-crc/storyline/" target="_blank" rel="noopener noreferrer">
+          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
             Book a walkthrough →
           </a>
         </div>
@@ -539,7 +542,7 @@ export default function NosArchitectureClient() {
       </button>
 
       {/* Booking CTA */}
-      <a className="book-cta" href="https://calendly.com/book-crc/storyline/" target="_blank" rel="noopener noreferrer">
+      <a className="book-cta" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="4.5" width="18" height="16" rx="2.5" />
           <line x1="3" y1="9.5" x2="21" y2="9.5" />
