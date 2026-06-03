@@ -45,35 +45,9 @@ const nextConfig: NextConfig = {
       {
         source: '/(.*)',
         headers: [
-          // Force HTTPS for 1 year across all subdomains; preload enables HSTS list inclusion
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains; preload',
-          },
-          // Restrict resource loading to trusted origins; blocks framing via frame-ancestors
-          {
-            key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https:; frame-ancestors 'none'",
-          },
-          // Prevent the site from being embedded in iframes (clickjacking protection)
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          // Stop browsers from MIME-sniffing responses away from declared Content-Type
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          // Send full referrer on same-origin; origin only on cross-origin HTTPS downgrade
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          // Disable access to sensitive device APIs by default
-          {
-            key: 'Permissions-Policy',
-            value: 'geolocation=(), microphone=(), camera=()',
+            value: 'max-age=31536000; includeSubDomains',
           },
         ],
       },

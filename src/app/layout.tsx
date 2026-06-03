@@ -1,7 +1,17 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import Script from "next/script";
+import { Suspense } from "react";
+import GtmPageViewTracker from "@/components/analytics/GtmPageViewTracker";
 import "./globals.css";
+
+const GTM_ID = "GTM-KS2JZD8Z";
+
+const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -46,14 +56,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <Script id="rb2b-loader" strategy="afterInteractive">
-        {`!function(key) {if (window.reb2b) return;window.reb2b = {loaded: true};var s = document.createElement("script");s.async = true;s.src = "https://b2bjsstore.s3.us-west-2.amazonaws.com/b/" + key + "/" + key + ".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);}("ZQ6J2RH73W6D");`}
-      </Script>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: GTM_SCRIPT }} />
+      </head>
       <body
         className={`${inter.variable} ${outfit.variable} antialiased bg-black`}
         style={{ fontFamily: "var(--font-inter), sans-serif" }}
         suppressHydrationWarning
       >
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        <Script id="rb2b-loader" strategy="afterInteractive">
+          {`!function(key) {if (window.reb2b) return;window.reb2b = {loaded: true};var s = document.createElement("script");s.async = true;s.src = "https://b2bjsstore.s3.us-west-2.amazonaws.com/b/" + key + "/" + key + ".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);}("ZQ6J2RH73W6D");`}
+        </Script>
+        <Suspense fallback={null}>
+          <GtmPageViewTracker />
+        </Suspense>
         {children}
       </body>
     </html>
