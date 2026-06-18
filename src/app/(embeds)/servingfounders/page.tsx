@@ -321,13 +321,12 @@ export default function ServingFoundersPage() {
               <div className="rstep"><span className="n">2</span><p><b>You introduce us, CC&rsquo;d.</b> A short, warm intro in your voice. No booking link to manage.</p></div>
               <div className="rstep"><span className="n">3</span><p><b>We take it from there.</b> We reply within a business day, handle scheduling, and keep you looped.</p></div>
               <div className="rcta">
-                <a className="btn" href="#fitcall-book">See if you qualify&mdash;book a 25-min call</a>
+                <a className="btn" href="https://calendly.com/book-crc/connector-call" target="_blank" rel="noopener">See if you qualify&mdash;book a 25-min call</a>
                 <p className="fine">A conversation, not a pitch. Selective by design. If it isn&rsquo;t a fit, we&rsquo;ll say so on the call.</p>
-                {/* TODO: replace data-url with the real Calendly scheduling link before launch */}
                 <div className="booking" id="fitcall-book">
                   <div
                     className="calendly-inline-widget"
-                    data-url="TODO_REPLACE_WITH_REAL_CALENDLY_LINK"
+                    data-url="https://calendly.com/book-crc/connector-call"
                     style={{ minWidth: "320px", height: "630px" }}
                   />
                 </div>
