@@ -333,7 +333,6 @@ export default function ServingFoundersPage() {
             <p>Operators only. One email a month. Unsubscribe whenever.</p>
             <SignupForm />
           </div>
-          <p className="muted">Hosted in Kit. Replace this form&rsquo;s action with your Kit (ConvertKit) embed before launch.</p>
         </div>
       </section>
 

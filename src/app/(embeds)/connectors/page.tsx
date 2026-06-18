@@ -285,8 +285,7 @@ export default function ConnectorsPage() {
             </div>
             <div className="rescard">
               <div className="rinfo"><h3>Narrative ROI Audit</h3><p>A five-dimension diagnostic your client can run themselves.</p></div>
-              {/* TODO: replace href="#" with real file URL for Narrative ROI Audit */}
-              <a className="dl" href="#" data-asset="narrative-roi-audit">Download</a>
+              <a className="dl" href="https://drive.google.com/uc?export=download&id=1VtOy_Fkv6JAc3ix3nBuhwjcTegAhzg56" target="_blank" rel="noopener" data-asset="narrative-roi-audit">Download</a>
             </div>
             <div className="rescard">
               <div className="rinfo"><h3>Case studies</h3><p>BetterCloud, Apto, and more&mdash;proof, not promises.</p></div>
@@ -294,7 +293,7 @@ export default function ConnectorsPage() {
             </div>
             <div className="rescard">
               <div className="rinfo"><h3>Sample StoryLock deliverable</h3><p>Early-stage output, from just after the Rumble.</p></div>
-              <a className="dl" href="Sample Deliverables - Connector.pdf" data-asset="sample-storylock">Download</a>
+              <a className="dl" href="https://drive.google.com/uc?export=download&id=1iiAjVtPIMywkG0Vy97qriiZhhdp9wkhL" target="_blank" rel="noopener" data-asset="sample-storylock">Download</a>
             </div>
             <div className="rescard">
               <div className="rinfo"><h3>StoryLock Tax Calculator</h3><p>A free tool your client can use to size the cost of the gap.</p></div>
