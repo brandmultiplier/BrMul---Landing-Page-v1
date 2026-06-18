@@ -18,7 +18,7 @@ export default function SignupForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Kit-Api-Key": "t7pmBvnFrUG_FfDUYAsYTw",
+          "X-Kit-Api-Key": process.env.NEXT_PUBLIC_KIT_API_KEY ?? "",
         },
         body: JSON.stringify({ email_address: email, first_name: name }),
       });
