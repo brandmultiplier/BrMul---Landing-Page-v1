@@ -425,7 +425,7 @@ export default function ConnectorsPage() {
           <div>
             <span className="mark">SERVING&nbsp;FOUNDERS</span>
             <p>Private Connector hub. Built by BrandMultiplier&mdash;we install Narrative Operating Systems for founder-led B2B companies, so the team can tell the story without the founder in the room.</p>
-            <p style={{ marginTop: "12px" }}>brandmultiplier.ai &middot; weservefounders.com</p>
+            <p style={{ marginTop: "12px" }}><a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a> &middot; <a href="https://weservefounders.com">weservefounders.com</a></p>
           </div>
           <div className="links">
             <a href="#move">The one move</a>

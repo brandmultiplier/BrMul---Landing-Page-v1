@@ -259,7 +259,7 @@ export default function LinkedInLibraryPage() {
           <div>
             <span className="mark">SERVING&nbsp;FOUNDERS</span>
             <p>Private Connector library. Built by BrandMultiplier&mdash;we install Narrative Operating Systems for founder-led B2B companies, so the team can tell the story without the founder in the room.</p>
-            <p style={{ marginTop: "12px" }}>brandmultiplier.ai &middot; weservefounders.com</p>
+            <p style={{ marginTop: "12px" }}><a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a> &middot; <a href="https://weservefounders.com">weservefounders.com</a></p>
           </div>
           <div className="links">
             <a className="backlink" href="/connectors">&larr; Back to the Connector Hub</a>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import SignupForm from "./SignupForm";
 
 // TODO: confirm a real 1200×630 share image exists at weservefounders.com/share.png
@@ -175,12 +174,6 @@ export default function ServingFoundersPage() {
   }
       `}</style>
 
-      {/* Calendly widget script — loaded once, after page is interactive */}
-      <Script
-        src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="afterInteractive"
-      />
-
       {/* TOP BAR */}
       <div className="topbar">
         <div className="wrap">
@@ -323,13 +316,6 @@ export default function ServingFoundersPage() {
               <div className="rcta">
                 <a className="btn" href="https://calendly.com/book-crc/connector-call" target="_blank" rel="noopener">See if you qualify&mdash;book a 25-min call</a>
                 <p className="fine">A conversation, not a pitch. Selective by design. If it isn&rsquo;t a fit, we&rsquo;ll say so on the call.</p>
-                <div className="booking" id="fitcall-book">
-                  <div
-                    className="calendly-inline-widget"
-                    data-url="https://calendly.com/book-crc/connector-call"
-                    style={{ minWidth: "320px", height: "630px" }}
-                  />
-                </div>
               </div>
             </div>
           </div>
@@ -357,7 +343,7 @@ export default function ServingFoundersPage() {
           <div>
             <span className="mark">SERVING&nbsp;FOUNDERS</span>
             <p>Built by BrandMultiplier. We install Narrative Operating Systems for founder-led B2B companies, so the team can tell the story without the founder in the room.</p>
-            <p style={{ marginTop: "12px" }}>brandmultiplier.ai &middot; weservefounders.com</p>
+            <p style={{ marginTop: "12px" }}><a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a> &middot; <a href="https://weservefounders.com">weservefounders.com</a></p>
           </div>
           <div className="links">
             <a href="#join">Join the community</a>
