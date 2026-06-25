@@ -23,6 +23,13 @@ export default function SignupForm() {
         body: JSON.stringify({ email_address: email, first_name: name }),
       });
       if (res.status !== 200 && res.status !== 201) throw new Error();
+      if (typeof window !== "undefined") {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "serving_founders_signup",
+          form_name: "serving_founders_newsletter",
+        });
+      }
       setStatus("success");
     } catch {
       setStatus("error");

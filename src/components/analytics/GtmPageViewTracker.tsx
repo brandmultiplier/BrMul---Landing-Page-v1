@@ -4,10 +4,8 @@ import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 type DataLayerEvent = {
-  event: "page_view";
-  page_path: string;
-  page_location: string;
-  page_title: string;
+  event: string;
+  [key: string]: unknown;
 };
 
 declare global {
@@ -24,9 +22,8 @@ export default function GtmPageViewTracker() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const query = searchParams?.toString();
-    const pagePath = query ? `${pathname}?${query}` : pathname || "/";
-    const pageLocation = `${window.location.origin}${pagePath}`;
+    const pagePath = `${window.location.pathname}${window.location.search}`;
+    const pageLocation = window.location.href;
 
     if (lastTrackedUrlRef.current === pageLocation) return;
     lastTrackedUrlRef.current = pageLocation;
