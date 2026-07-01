@@ -6,7 +6,6 @@ import { motion, useSpring, useMotionValue } from "framer-motion";
 
 const EMBED_ROUTES = [
     '/mtg-interview',
-    '/storylock-assessment',
     '/mtg-deal-win',
     '/mtg-go-live',
 ];

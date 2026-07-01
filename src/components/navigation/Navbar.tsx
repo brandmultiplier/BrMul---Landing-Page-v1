@@ -15,7 +15,6 @@ const navItems = [
 
 const EMBED_ROUTES = [
     '/mtg-interview',
-    '/storylock-assessment',
     '/mtg-deal-win',
     '/mtg-go-live',
     '/storylock-tax',
