@@ -9,8 +9,8 @@ import Button from "@/components/ui/Button";
 const tiers = [
     {
         name: "TRANSFORMATION",
-        price: "$20-25K",
-        period: "/month",
+        price: "Custom",
+        period: "",
         duration: "75 days",
         features: [
             "Full leadership team involvement",
@@ -103,7 +103,7 @@ export default function Pricing() {
 
                                             <div className="mb-2 flex items-baseline justify-center gap-1">
                                                 <span className="text-2xl sm:text-3xl lg:text-4xl font-light text-white tracking-tight">{tier.price}</span>
-                                                <span className="text-text-tertiary text-xs sm:text-sm">{tier.period}</span>
+                                                {tier.period && <span className="text-text-tertiary text-xs sm:text-sm">{tier.period}</span>}
                                             </div>
                                             <div className="text-xs sm:text-sm text-text-tertiary mb-6 sm:mb-8 font-mono text-center">{tier.duration}</div>
 
@@ -140,7 +140,7 @@ export default function Pricing() {
 
                                     <div className="mb-2 flex items-baseline gap-1">
                                         <span className="text-2xl sm:text-3xl lg:text-4xl font-light text-white tracking-tight">{tier.price}</span>
-                                        <span className="text-text-tertiary text-xs sm:text-sm">{tier.period}</span>
+                                        {tier.period && <span className="text-text-tertiary text-xs sm:text-sm">{tier.period}</span>}
                                     </div>
                                     <div className="text-xs sm:text-sm text-text-tertiary mb-6 sm:mb-8 font-mono">{tier.duration}</div>
 

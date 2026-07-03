@@ -143,6 +143,8 @@ export default function ConnectorsPage() {
   .pstep.tune{background:rgba(243,105,1,.16);border-color:rgba(243,105,1,.5);color:#ffcaa0}
   .arr{color:#6f6c8c;font-size:14px}
   .flowcap{margin-top:26px;font-family:var(--serif);font-style:italic;font-size:16px;color:#e9e8ef}
+  .archlink{color:#fff;font-weight:600;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px;transition:.16s}
+  .archlink:hover{color:#ffd2ad;border-color:var(--orange)}
 
   /* ladder */
   .ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -196,8 +198,8 @@ export default function ConnectorsPage() {
         <div className="wrap">
           <span className="kicker">Private hub for inducted Connectors</span>
           <h1>Welcome. Everything you need to refer effortlessly is here.</h1>
-          <p>You&rsquo;re in. This is your kit: the one move to make, the signals to listen for, the assets to hand your clients, and how the system works under the hood. Bookmark it.</p>
-          <span className="pill">Unlisted link &middot; for you, not for forwarding</span>
+          <p>You&rsquo;re in. This is your kit: the one move to make, the signals to listen for, the assets to hand your clients, and how the system works under the hood. <b>Bookmark it.</b></p>
+          <span className="pill">This is your private space, Connectors only. Not for forwarding, period.</span>
           <div className="toc">
             <a href="#move">The one move &rarr;</a>
             <a href="#signals">The signal bank &rarr;</a>
@@ -233,7 +235,7 @@ export default function ConnectorsPage() {
             <div className="line">I&rsquo;ve CC&rsquo;d <span className="field">[Chris / Sapir]</span>. I&rsquo;ll let you two take it from here. No pitch, no obligation, just worth a conversation.</div>
             <div className="line"><span className="field">[Your name]</span></div>
           </div>
-          <p className="tplnote"><span className="tnlabel">Why no booking link</span> Two flows, never crossed. Your client intro is a warm email with us CC&rsquo;d and <b>no booking link</b>&mdash;we reply and schedule, which keeps the first touch warm and lets you watch it move. The booking link is only ever for partners qualifying themselves into the program.</p>
+          <p className="tplnote"><span className="tnlabel" style={{ display: "block", marginBottom: "10px" }}>Why no booking link?</span>Two flows, never crossed. Your client intro is a warm email with us CC&rsquo;d and <b>no booking link</b>&mdash;we reply and schedule, which keeps the first touch warm and lets you watch it move. The booking link is only ever for partners qualifying themselves into the program.</p>
         </div>
       </section>
 
@@ -281,7 +283,7 @@ export default function ConnectorsPage() {
           <div className="res">
             <div className="rescard">
               <div className="rinfo"><h3>The NOS one-pager</h3><p>The hand-this-to-your-client overview of what we do.</p></div>
-              <a className="dl" href="https://drive.google.com/file/d/1Cu9CIx--GZlg7Y2R26Lq5Tltb8kcYP3Q/view?usp=sharing" target="_blank" rel="noopener" data-asset="nos-one-pager">Download</a>
+              <a className="dl" href="https://drive.google.com/uc?export=download&id=1Cu9CIx--GZlg7Y2R26Lq5Tltb8kcYP3Q" target="_blank" rel="noopener" data-asset="nos-one-pager">Download</a>
             </div>
             <div className="rescard">
               <div className="rinfo"><h3>Narrative ROI Audit</h3><p>A five-dimension diagnostic your client can run themselves.</p></div>
@@ -289,7 +291,7 @@ export default function ConnectorsPage() {
             </div>
             <div className="rescard">
               <div className="rinfo"><h3>Case studies</h3><p>BetterCloud, Apto, and more&mdash;proof, not promises.</p></div>
-              <a className="dl" href="https://drive.google.com/file/d/1SUV9jds-ceav1kx7iBsQ3gNptEcDiAoT/view?usp=sharing" target="_blank" rel="noopener" data-asset="case-studies">Download</a>
+              <a className="dl" href="https://drive.google.com/uc?export=download&id=1SUV9jds-ceav1kx7iBsQ3gNptEcDiAoT" target="_blank" rel="noopener" data-asset="case-studies">Download</a>
             </div>
             <div className="rescard">
               <div className="rinfo"><h3>Sample StoryLock deliverable</h3><p>Early-stage output, from just after the Rumble.</p></div>
@@ -363,15 +365,16 @@ export default function ConnectorsPage() {
                 <span className="pstep">Architect</span><span className="arr">&rarr;</span>
                 <span className="pstep">Install</span>
               </div>
+              <p className="flowcap">The team that builds it is the team that runs it.</p>
             </div>
             <div className="pgroup">
               <span className="pglabel">Phase 2 &middot; Operate <em>&middot; ongoing</em></span>
               <div className="steps2">
                 <span className="pstep tune">Tune</span>
               </div>
+              <p className="flowcap">Explore the full architecture <a className="archlink" href="https://www.brandmultiplier.ai/NOS-architecture">here</a>.</p>
             </div>
           </div>
-          <p className="flowcap">The team that builds it is the team that runs it.</p>
         </div>
       </section>
 
@@ -385,7 +388,7 @@ export default function ConnectorsPage() {
             <div className="tier"><div className="name">StoryLock Diagnostic</div><div className="price">$5K &middot; 14 days</div><p>A fast read on where the story is trapped and what it&rsquo;s costing. The lowest-risk first step.</p></div>
             <div className="tier"><div className="name">Foundation</div><div className="price">$7.5K / mo &middot; 75-day pilot</div><p>Core story extraction and codification for a single motion.</p></div>
             <div className="tier"><div className="name">Signature</div><div className="price">$12.5K&ndash;$15K / mo</div><p>The full system, deployed across multiple stakeholders.</p></div>
-            <div className="tier"><div className="name">Transformation</div><div className="price">$20K&ndash;$25K / mo</div><p>Enterprise-grade install with comprehensive team enablement.</p></div>
+            <div className="tier"><div className="name">Transformation</div><div className="price">Custom</div><p>Enterprise-grade install with comprehensive team enablement.</p></div>
           </div>
         </div>
       </section>

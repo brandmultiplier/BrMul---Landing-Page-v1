@@ -256,7 +256,7 @@ export default function NosArchitectureClient() {
                     <span className="chip">CRM</span>
                   </div>
                   <button type="button" className="deeplink" onClick={handleDeeplink}>
-                    Who operates it depends on your Operate tier → see the pricing logic. The real answer to &quot;we&apos;ll just hire someone internal.&quot;
+                    Who operates it depends on your Operate tier → see the Operate options. The real answer to &quot;we&apos;ll just hire someone internal.&quot;
                   </button>
                 </div>
               </div>
@@ -386,9 +386,9 @@ export default function NosArchitectureClient() {
               <div className="op-rule" />
 
               {[
-                { name: 'DIY', price: '$2.5–5K /mo', line: 'You operate. We run quarterly tune-ups & audits.', detail: 'Your team holds the day-to-day; we keep the system sharp on a quarterly cadence and refresh the methodology.', fit: 'Best fit: teams with in-house capacity.' },
-                { name: 'DWY', price: '$7.5–12.5K /mo', line: 'Shared. We run the agents; you steer.', detail: 'We operate the multi-agent layer and continuous production; you keep strategic direction. Quarterly recalibration built in.', fit: 'Best fit: execution muscle, no AI infrastructure.' },
-                { name: 'DFY', price: '$15–30K /mo', line: 'We run it all. You close deals.', detail: 'Full operation — content engine, signal scanning, outcome tuning, voice production. The system runs; you don\u2019t.', fit: 'Best fit: founders who want the system, not the maintenance.' },
+                { name: 'DIY', line: 'You operate. We run quarterly tune-ups & audits.', detail: 'Your team holds the day-to-day; we keep the system sharp on a quarterly cadence and refresh the methodology.', fit: 'Best fit: teams with in-house capacity.' },
+                { name: 'DWY', line: 'Shared. We run the agents; you steer.', detail: 'We operate the multi-agent layer and continuous production; you keep strategic direction. Quarterly recalibration built in.', fit: 'Best fit: execution muscle, no AI infrastructure.' },
+                { name: 'DFY', line: 'We run it all. You close deals.', detail: 'Full operation — content engine, signal scanning, outcome tuning, voice production. The system runs; you don\u2019t.', fit: 'Best fit: founders who want the system, not the maintenance.' },
               ].map((t, i) => (
                 <div
                   key={t.name}
@@ -397,7 +397,6 @@ export default function NosArchitectureClient() {
                 >
                   <div className="tier-top">
                     <span className="tier-name">{t.name}</span>
-                    <span className="tier-price">{t.price}</span>
                   </div>
                   <div className="tier-line">{t.line}</div>
                   <div className="tier-more">

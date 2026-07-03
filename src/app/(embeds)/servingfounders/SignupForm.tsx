@@ -14,15 +14,14 @@ export default function SignupForm() {
     const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
 
     try {
-      const res = await fetch("https://api.kit.com/v4/subscribers", {
+      const res = await fetch("/api/serving-founders-subscribe", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Kit-Api-Key": process.env.NEXT_PUBLIC_KIT_API_KEY ?? "",
-        },
-        body: JSON.stringify({ email_address: email, first_name: name }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email }),
       });
-      if (res.status !== 200 && res.status !== 201) throw new Error();
+
+      if (!res.ok) throw new Error();
+
       if (typeof window !== "undefined") {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -39,7 +38,7 @@ export default function SignupForm() {
   if (status === "success") {
     return (
       <p style={{ fontSize: "16px", color: "#4940C6", fontWeight: 600, marginTop: "4px" }}>
-        You&rsquo;re in — check your inbox.
+        You&rsquo;re in&mdash;check your inbox.
       </p>
     );
   }
