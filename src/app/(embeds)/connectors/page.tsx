@@ -199,7 +199,7 @@ export default function ConnectorsPage() {
           <span className="kicker">Private hub for inducted Connectors</span>
           <h1>Welcome. Everything you need to refer effortlessly is here.</h1>
           <p>You&rsquo;re in. This is your kit: the one move to make, the signals to listen for, the assets to hand your clients, and how the system works under the hood. <b>Bookmark it.</b></p>
-          <span className="pill">This is your private space, Connectors only. Not for forwarding, period.</span>
+          <span className="pill">This is your private space, Connectors only. Not for forwarding.</span>
           <div className="toc">
             <a href="#move">The one move &rarr;</a>
             <a href="#signals">The signal bank &rarr;</a>

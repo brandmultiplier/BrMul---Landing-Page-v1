@@ -9,8 +9,8 @@ import Button from "@/components/ui/Button";
 const tiers = [
     {
         name: "TRANSFORMATION",
-        price: "Custom",
-        period: "",
+        price: "$20K+",
+        period: "/month",
         duration: "75 days",
         features: [
             "Full leadership team involvement",
