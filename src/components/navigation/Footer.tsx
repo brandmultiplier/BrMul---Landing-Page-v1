@@ -33,19 +33,19 @@ export default function Footer() {
                             <h4 className="text-white font-medium mb-4">Navigation</h4>
                             <ul className="space-y-3 text-sm sm:text-base">
                                 <li>
-                                    <Link href="#trap" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Founder&apos;s Trap</Link>
+                                    <Link href="/#trap" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Founder&apos;s Trap</Link>
                                 </li>
                                 <li>
-                                    <Link href="#system" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">The System</Link>
+                                    <Link href="/#system" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">The System</Link>
                                 </li>
                                 <li>
-                                    <Link href="#case-studies" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Case Studies</Link>
+                                    <Link href="/#case-studies" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Case Studies</Link>
                                 </li>
                                 <li>
-                                    <Link href="#pricing" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Pricing Plan</Link>
+                                    <Link href="/#pricing" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Pricing Plan</Link>
                                 </li>
                                 <li>
-                                    <Link href="#cta" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Schedule The Diagnostic</Link>
+                                    <Link href="/#cta" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Schedule The Diagnostic</Link>
                                 </li>
                                 <li>
                                     <Link href="/what-is-a-narrative-operating-system" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">What is a NarrativeOS&#8482;</Link>
