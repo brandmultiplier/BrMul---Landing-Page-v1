@@ -26,7 +26,7 @@ const jsonLd = {
       name: "BrandMultiplier",
       url: "https://brandmultiplier.ai",
       sameAs: [
-        "https://www.linkedin.com/in/chrisrubin/",
+        "https://www.linkedin.com/in/chrisrubin",
         "https://www.linkedin.com/company/brandmultiplier/",
       ],
     },
@@ -37,7 +37,7 @@ const jsonLd = {
       author: {
         "@type": "Person",
         name: "Chris Rubin",
-        url: "https://www.linkedin.com/in/chrisrubin/",
+        url: "https://www.linkedin.com/in/chrisrubin",
         jobTitle: "Founder & CEO",
         worksFor: { "@id": "https://brandmultiplier.ai/#org" },
       },
@@ -91,7 +91,7 @@ const jsonLd = {
           name: "What is a Narrative Operating System?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "A Narrative Operating System (NarrativeOS, or NOS) is the business infrastructure that gets a company's story, selling logic, and conviction out of the founder's head and into the hands of the team: documented, installed into daily workflows, and measured against revenue outcomes.",
+            text: "A Narrative Operating System (NarrativeOS, or NOS) is the business infrastructure that gets a company's story, selling logic, and conviction out of the founder's head and into the hands of the team: documented, installed into daily workflows, and measured against revenue outcomes. Built for founder-led B2B companies, a NOS resolves StoryLock, the structural condition where the story that closes deals lives only in the founder.",
           },
         },
         {
@@ -107,7 +107,7 @@ const jsonLd = {
           name: "Is a Narrative Operating System the same as storyOS?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "No. storyOS is Istoria Collective's story-based leadership development methodology. A Narrative Operating System (NarrativeOS) is BrandMultiplier's revenue infrastructure for founder-led B2B companies.",
+            text: "No. storyOS is Istoria Collective's story-based leadership development methodology. A Narrative Operating System (NarrativeOS) is BrandMultiplier's revenue infrastructure for founder-led B2B companies: extracted from the founder, installed across the team, and measured against CAC, deal velocity, and win rate.",
           },
         },
         {
@@ -128,10 +128,18 @@ const jsonLd = {
         },
         {
           "@type": "Question",
+          name: "What is narrative intelligence for B2B go-to-market?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The capability, inside a Narrative Operating System, to read which stories move a specific buying committee and deploy the right narrative arc per stakeholder. It is a component of the system, not a standalone product.",
+          },
+        },
+        {
+          "@type": "Question",
           name: "What does a Narrative Operating System cost?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "B2B positioning and messaging engagements range from roughly $5,000 for basic messaging projects to $75,000 or more for full brand strategy. A BrandMultiplier NOS installation runs as a 75-day pilot with tiered monthly fees.",
+            text: "B2B positioning and messaging engagements range from roughly $5,000 for basic messaging projects to $75,000 or more for full brand strategy. A BrandMultiplier NOS installation runs as a 75-day pilot with tiered monthly fees; most companies between $3M and $50M ARR invest in the low-to-mid five figures over the pilot.",
           },
         },
       ],
@@ -613,9 +621,9 @@ export default function WhatIsNarrativeOSPage() {
           <section id="storylock" className="container-narrow">
             <h3>The Problem It Solves</h3>
             <h2>StoryLock</h2>
-            <p className="body">Most founder-led B2B companies between $3M and $50M in revenue hit the same wall. The founder closes at two or three times the team&apos;s rate. New hires take six months or longer to sound credible. Sales, marketing, and product each tell a different version of the company story. None of this is a talent problem. It&apos;s a structural condition: the story, the selling logic, and the conviction are trapped in the founder&apos;s head.</p>
+            <p className="body">Most founder-led B2B companies between $3M and $50M in revenue hit the same wall. The founder closes at rates the team can&apos;t reproduce: the measured gap runs about 50% above their best hires (Eyal Worthalter, Marvell). New hires take 9 to 12 months to carry full quota (Brooks Group). Sales, marketing, and product each tell a different version of the company story. None of this is a talent problem. It&apos;s a structural condition: the story, the selling logic, and the conviction are trapped in the founder&apos;s head.</p>
             <ol className="signatures">
-              <li>Founder close rate at two to three times the team&apos;s rate</li>
+              <li>A founder close rate your best hires can&apos;t reproduce</li>
               <li>New-hire ramp measured in quarters, not weeks</li>
               <li>Decks rebuilt per deal because the official one doesn&apos;t match real buyer conversations</li>
               <li>Content the founder rejects as &ldquo;not how I&apos;d say it&rdquo;</li>
@@ -701,26 +709,27 @@ export default function WhatIsNarrativeOSPage() {
           <section id="evidence">
             <h3>Why Narrative Infrastructure Works</h3>
             <h2>The evidence, named</h2>
+            <p className="body">Two kinds of proof matter here: the mechanism (why story transfers conviction when documents don&apos;t) and the market math (what it costs when the story lives in one head).</p>
             <div className="evidence">
               <div className="card">
                 <p className="stat"><span>22x</span></p>
-                <p>Stories are up to 22 times more memorable than facts alone.</p>
+                <p>Facts embedded in story are up to 22 times more memorable than facts presented alone.</p>
                 <cite>Jennifer Aaker, Stanford Graduate School of Business</cite>
               </div>
               <div className="card">
-                <p className="stat"><span>Neural coupling</span></p>
-                <p>Effective storytelling measurably synchronizes the listener&apos;s brain activity with the teller&apos;s.</p>
+                <p className="stat"><span>85%</span></p>
+                <p>Effective storytelling synchronizes the listener&apos;s brain activity with the teller&apos;s; neural coupling predicts how a listener will interpret a story with 85% accuracy. Conviction transfers biologically, not by memo.</p>
                 <cite>Stephens, Silbert &amp; Hasson, Princeton University, PNAS 2010</cite>
               </div>
               <div className="card">
-                <p className="stat">$1.25 &rarr; <span>$128.74</span></p>
-                <p>Identical objects sold with stories attached commanded dramatically higher prices in the Significant Objects experiment.</p>
-                <cite>Rob Walker &amp; Joshua Glenn</cite>
+                <p className="stat"><span>11&ndash;13</span></p>
+                <p>Stakeholders in the average B2B buying committee, up from 5 a decade ago. One founder cannot be in every room; the story has to travel without them.</p>
+                <cite>Gartner &amp; Forrester, 2024</cite>
               </div>
               <div className="card">
-                <p className="stat"><span>Narratives move markets</span></p>
-                <p>Stories spread like epidemics and drive economic behavior at scale.</p>
-                <cite>Robert Shiller, Narrative Economics, Yale University</cite>
+                <p className="stat"><span>40&ndash;60%</span></p>
+                <p>Valuation discount applied to founder-dependent businesses at exit. A story that lives in one head is a priced risk.</p>
+                <cite>Bain</cite>
               </div>
             </div>
           </section>
