@@ -48,7 +48,7 @@ export default function Footer() {
                                     <Link href="#cta" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Schedule The Diagnostic</Link>
                                 </li>
                                 <li>
-                                    <Link href="/what-is-a-narrative-operating-system" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">NarrativeOS&#8482;</Link>
+                                    <Link href="/what-is-a-narrative-operating-system" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">What is a NarrativeOS&#8482;</Link>
                                 </li>
                                 <li>
                                     <Link href="/compare/nos-vs-hiring" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">NOS vs. Hiring</Link>

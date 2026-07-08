@@ -9,7 +9,6 @@ const navItems = [
     { name: "Founder's Trap", href: "/#trap" },
     { name: "NarrativeOS™", href: "/what-is-a-narrative-operating-system" },
     { name: "Compare", href: "/compare/nos-vs-hiring" },
-    { name: "Narrative OS", href: "/#system" },
     { name: "Case Studies", href: "/#case-studies" },
     { name: "Pricing Plan", href: "/#pricing" },
     { name: "Testimonials", href: "/#testimonials" },
