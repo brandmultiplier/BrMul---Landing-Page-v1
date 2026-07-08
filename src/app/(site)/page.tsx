@@ -123,6 +123,22 @@ export default function Home() {
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": "https://brandmultiplier.ai/#org",
+            name: "BrandMultiplier",
+            url: "https://brandmultiplier.ai",
+            sameAs: [
+              "https://www.linkedin.com/in/chrisrubin/",
+              "https://www.linkedin.com/company/brandmultiplier/",
+            ],
+          }),
+        }}
+      />
       {/* Section 1: Hero - Dark theme, WebGL gradient, main value prop */}
       <Hero />
 
@@ -152,6 +168,29 @@ export default function Home() {
 
       {/* Section 11: Pricing */}
       <Pricing />
+
+      {/* Content card: The Alternative You're Weighing */}
+      <section className="py-16 sm:py-20">
+        <div className="container-width">
+          <div className="bg-[#080808] border border-[rgba(255,255,255,0.08)] rounded-sm p-10">
+            <p className="text-[#F97316] uppercase text-base font-medium tracking-[0.12em] mb-4">
+              THE ALTERNATIVE YOU&apos;RE WEIGHING
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-4">
+              Or you could just hire someone.
+            </h2>
+            <p className="text-[rgba(255,255,255,0.6)] font-light leading-relaxed mb-6">
+              A VP of Marketing runs $180K–$250K per year before benefits, equity, or ramp time. A fractional CMO runs $8K–$15K per month with no system left behind when they leave. Most founders we talk to have already spent $100K–$500K on solutions that didn&apos;t work — brand agencies, failed sales hires, enablement tools nobody uses. The question isn&apos;t whether you can afford the NarrativeOS™. It&apos;s how much longer you can afford not to have it.
+            </p>
+            <a
+              href="/compare/nos-vs-hiring"
+              className="text-[#F97316] font-semibold hover:opacity-80 transition-opacity"
+            >
+              See the comparison →
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Social Proof - Testimonials */}
       <Testimonials />

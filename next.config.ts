@@ -40,6 +40,25 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/what-is-narrativeos',
+        destination: '/what-is-a-narrative-operating-system',
+        permanent: true,
+      },
+      {
+        source: '/nos-vs-hiring',
+        destination: '/compare/nos-vs-hiring',
+        permanent: true,
+      },
+      {
+        source: '/compare/nos-vs-hiring/',
+        destination: '/compare/nos-vs-hiring',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
