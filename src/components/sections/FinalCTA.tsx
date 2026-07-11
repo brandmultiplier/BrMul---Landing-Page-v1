@@ -104,12 +104,12 @@ export default function FinalCTA() {
                     className="max-w-3xl mx-auto text-center mb-12 sm:mb-16"
                 >
                     <h2 className="text-4xl sm:text-5xl md:text-6xl text-white font-medium tracking-tighter leading-tight mb-6 sm:mb-8">
-                        <span className="text-[#F36901]">Stop</span> being <br />
-                        the bottleneck.
+                        <span className="text-[#F36901]">Keep</span> the story. <br />
+                        Lose the dependency.
                     </h2>
                     <p className="text-base sm:text-lg md:text-xl text-text-secondary mb-8 sm:mb-10 leading-relaxed">
                         We extract the story. We deploy the system. <br />
-                        <span className="text-white">Your team sells like you do.</span>
+                        <span className="text-white">Your team sells like you do—and you take the bigger rooms.</span>
                     </p>
                 </motion.div>
 

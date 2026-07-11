@@ -41,16 +41,25 @@ export default function Science() {
                         {/* Subtle glowing backdrop for the quote */}
                         <div className="absolute inset-0 bg-accent-purple/10 blur-[60px] rounded-full pointer-events-none" />
 
-                        <blockquote className="relative space-y-4 sm:space-y-0">
-                            <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl text-white leading-snug sm:leading-tight font-light max-w-5xl mx-auto tracking-tight">
-                                &ldquo;Oxytocin release during narrative increases trust and cooperation.&rdquo;
-                            </p>
-                            <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl text-white/70 leading-snug sm:leading-tight font-light max-w-5xl mx-auto tracking-tight">
-                                &ldquo;Neural coupling synchronizes the listener's brain with the speaker's.&rdquo;
-                            </p>
-                            <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl text-white leading-snug sm:leading-tight font-light max-w-5xl mx-auto tracking-tight">
-                                &ldquo;Cortisol-to-dopamine sequence creates memory encoding <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1] font-normal">22x stronger</span> than facts alone.&rdquo;
-                            </p>
+                        <blockquote className="relative space-y-8 sm:space-y-10">
+                            <div>
+                                <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl text-white leading-snug sm:leading-tight font-light max-w-5xl mx-auto tracking-tight">
+                                    &ldquo;Oxytocin release during narrative increases trust and cooperation.&rdquo;
+                                </p>
+                                <span className="block text-sm text-text-tertiary mt-2">—Paul Zak, Cerebrum, 2015</span>
+                            </div>
+                            <div>
+                                <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl text-white/70 leading-snug sm:leading-tight font-light max-w-5xl mx-auto tracking-tight">
+                                    &ldquo;Neural coupling synchronizes the listener&apos;s brain with the speaker&apos;s—predicting how a listener will interpret a story with 85% accuracy.&rdquo;
+                                </p>
+                                <span className="block text-sm text-text-tertiary mt-2">—Stephens, Silbert &amp; Hasson, Princeton, PNAS 2010</span>
+                            </div>
+                            <div>
+                                <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl text-white leading-snug sm:leading-tight font-light max-w-5xl mx-auto tracking-tight">
+                                    &ldquo;Facts embedded in story are up to <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1] font-normal">22x</span> more memorable than facts presented alone.&rdquo;
+                                </p>
+                                <span className="block text-sm text-text-tertiary mt-2">—Jennifer Aaker, Stanford Graduate School of Business</span>
+                            </div>
                         </blockquote>
                         <div className="mt-6 sm:mt-8 flex items-center justify-center gap-3 sm:gap-4">
                             <div className="h-[1px] w-8 sm:w-12 bg-white/20" />

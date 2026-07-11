@@ -177,7 +177,7 @@ export default function Pricing() {
                     className="mt-16 sm:mt-20 mb-10 sm:mb-12 text-center max-w-3xl mx-auto"
                 >
                     <p className="text-base sm:text-lg md:text-2xl text-white font-light leading-relaxed">
-                        “The average founder-led company has already spent <span className="text-red-400 font-normal">$100K-$500K</span> on solutions that didn’t work.”
+                        “Most founders we work with have already spent <span className="text-red-400 font-normal">$100K-$500K</span> on solutions that didn’t work.”
                     </p>
                 </motion.div>
 

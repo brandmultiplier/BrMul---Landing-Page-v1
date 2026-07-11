@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿﻿import type { Metadata } from "next";
 import Hero from "@/components/sections/Hero";
 import Problem from "@/components/sections/Problem";
 import FounderLoop from "@/components/sections/FounderLoop";
@@ -19,7 +19,7 @@ import Footer from "@/components/navigation/Footer";
 export const metadata: Metadata = {
   title: "B2B Narrative Infrastructure | BrandMultiplier.ai",
   description:
-    "B2B narrative infrastructure that scales your founder story into a system your team deploys. CAC down 30%, deal cycles 35% faster — without you in every room.",
+    "B2B narrative infrastructure that scales your founder story into a system your team deploys. CAC down 30%, deal cycles 35% faster—founder-level conviction in every room.",
   alternates: {
     canonical: "https://www.brandmultiplier.ai/",
   },
@@ -84,7 +84,7 @@ export default function Home() {
                 name: "We already have a brand strategy.",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Brand strategy tells your team what to say. What we install teaches your team how to think. You don’t need another PDF of guidelines. You need a system that extracts what’s in your head and deploys it across every conversation your team has—without you in the room. That’s not brand strategy. That’s narrative infrastructure.",
+                  text: "Brand strategy tells your team what to say. What we install teaches your team how to think. You don’t need another PDF of guidelines. You need a system that extracts what’s in your head and deploys it across every conversation your team has—at full fidelity, whether you’re in the room or not. That’s not brand strategy. That’s narrative infrastructure.",
                 },
               },
               {
@@ -100,7 +100,7 @@ export default function Home() {
                 name: "We've been burned by agencies before.",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Every founder we work with has been burned before. You’ve watched consultants present your own ideas back in a different font. That’s not what this is. A brand agency gives you a PDF. We build a system. Brand guidelines sit in a drawer. What we install lives in how your team actually sells. The output isn’t a document—it’s your team closing deals without you in the room.",
+                  text: "Every founder we work with has been burned before. You’ve watched consultants present your own ideas back in a different font. That’s not what this is. A brand agency gives you a PDF. We build a system. Brand guidelines sit in a drawer. What we install lives in how your team actually sells. The output isn’t a document—it’s your team closing deals while you take the ones only you can.",
                 },
               },
               {
@@ -108,7 +108,7 @@ export default function Home() {
                 name: "AI tools can do this cheaper.",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "AI is incredibly powerful for scaling content once you know what to say. But it cannot figure out what to say. Every competitor using the same AI tools is producing the same output. The companies that will differentiate are the ones with human-extracted, codified story that no AI can replicate. AI is the amplifier. Without a signal to amplify, you’re broadcasting noise at scale.",
+                  text: "AI is incredibly powerful for scaling content once you know what to say. But it cannot figure out what to say. MIT's NANDA initiative found 95% of enterprise GenAI pilots returned zero measurable ROI (Fortune, August 2025)—they tried to scale expertise nobody had extracted. Every competitor using the same AI tools is producing the same output. The companies that will differentiate are the ones with human-extracted, codified story that no AI can replicate. AI is the amplifier. Without a signal to amplify, you’re broadcasting noise at scale.",
                 },
               },
               {
@@ -116,7 +116,7 @@ export default function Home() {
                 name: "Our founder doesn't have time.",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "That’s the paradox: you don’t have time BECAUSE you haven’t done this. You’re spending 60–80 hours per month on sales calls your team should be handling. Our process requires roughly 10 hours of your time over 75 days. The return is 50+ hours per month back. The math is simple: invest 10 hours once, get 50+ hours back every month.",
+                  text: "That’s the paradox: you don’t have time BECAUSE you haven’t done this. Founders we work with are spending 60–80 hours a month on sales calls their team should be handling. Our process requires roughly 10 hours of your time over 75 days. The return is 50+ hours per month back. The math is simple: invest 10 hours once, get 50+ hours back every month.",
                 },
               },
             ],

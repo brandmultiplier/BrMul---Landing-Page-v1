@@ -11,6 +11,11 @@ export default function Solution() {
 
     const steps = [
         {
+            num: "00",
+            title: "Unlock",
+            desc: "The Diagnostic. Before the call, we've already run your public content through our tooling—your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural."
+        },
+        {
             num: "01",
             title: "Rumble",
             desc: "3 hours. One session. We excavate what makes you close deals when you're in the room—including the parts you've never articulated. The same methodology that generated $1B+ for Accenture."
@@ -47,7 +52,7 @@ export default function Solution() {
                         <span className="text-white/40">We Install <span className="text-[#F36901]">Systems</span>.</span>
                     </h2>
                     <p className="text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed max-w-3xl mx-auto">
-                        A Narrative Operating System extracts what&apos;s in your head, codifies it into architecture, and deploys it across your team. <br className="hidden sm:block" /> The system stays. We don&apos;t have to.
+                        A Narrative Operating System isn&apos;t a new process your team has to adopt. Your story is the process—we extract the one that already closes rooms, codify it into architecture, and deploy it across your team. <br className="hidden sm:block" /> The system stays. We don&apos;t have to.
                     </p>
                 </div>
 

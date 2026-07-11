@@ -145,7 +145,7 @@ export default function Alternatives() {
                                 The Hidden Cost
                             </div>
                             <div className="text-text-secondary leading-relaxed text-base sm:text-lg">
-                                <span className="text-white font-medium">First Sales Hire:</span> $150K-$250K per failed attempt. 70% fail within a year. Average company spends <span className="text-white font-medium">$300K-$750K</span> and 18-36 months before realizing the problem was never people.
+                                <span className="text-white font-medium">First sales leader:</span> $150K-$250K per failed attempt. 70% don&apos;t make it a year (SaaStr). Average company spends <span className="text-white font-medium">$300K-$750K</span> and 18-36 months before realizing the problem was never people.
                             </div>
                         </div>
                     </motion.div>
