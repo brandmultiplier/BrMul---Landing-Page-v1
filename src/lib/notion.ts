@@ -50,10 +50,30 @@ function isFullBlock(block: BlockObjectResponse | PartialBlockObjectResponse): b
   return 'type' in block;
 }
 
-function blockToHtml(block: BlockObjectResponse): string {
+async function fetchAllBlockChildren(
+  client: Client,
+  blockId: string
+): Promise<Array<BlockObjectResponse | PartialBlockObjectResponse>> {
+  const blocks: Array<BlockObjectResponse | PartialBlockObjectResponse> = [];
+  let cursor: string | undefined;
+
+  do {
+    const response = await client.blocks.children.list({
+      block_id: blockId,
+      page_size: 100,
+      start_cursor: cursor,
+    });
+    blocks.push(...response.results);
+    cursor = response.has_more ? response.next_cursor ?? undefined : undefined;
+  } while (cursor);
+
+  return blocks;
+}
+
+function blockToHtml(block: BlockObjectResponse, childrenHtml = ''): string {
   switch (block.type) {
     case 'paragraph':
-      return '<p>' + richTextToHtml(block.paragraph.rich_text) + '</p>';
+      return '<p>' + richTextToHtml(block.paragraph.rich_text) + childrenHtml + '</p>';
     case 'heading_1':
       return '<h1>' + richTextToHtml(block.heading_1.rich_text) + '</h1>';
     case 'heading_2':
@@ -61,11 +81,11 @@ function blockToHtml(block: BlockObjectResponse): string {
     case 'heading_3':
       return '<h3>' + richTextToHtml(block.heading_3.rich_text) + '</h3>';
     case 'bulleted_list_item':
-      return '<li>' + richTextToHtml(block.bulleted_list_item.rich_text) + '</li>';
+      return '<li>' + richTextToHtml(block.bulleted_list_item.rich_text) + childrenHtml + '</li>';
     case 'numbered_list_item':
-      return '<li>' + richTextToHtml(block.numbered_list_item.rich_text) + '</li>';
+      return '<li>' + richTextToHtml(block.numbered_list_item.rich_text) + childrenHtml + '</li>';
     case 'quote':
-      return '<blockquote>' + richTextToHtml(block.quote.rich_text) + '</blockquote>';
+      return '<blockquote>' + richTextToHtml(block.quote.rich_text) + childrenHtml + '</blockquote>';
     case 'code': {
       const lang = block.code.language || 'plaintext';
       return '<pre><code class="language-' + lang + '">' + richTextToHtml(block.code.rich_text) + '</code></pre>';
@@ -100,23 +120,29 @@ function blockToHtml(block: BlockObjectResponse): string {
     }
     case 'callout': {
       const icon = block.callout.icon?.type === 'emoji' ? block.callout.icon.emoji : '';
-      return '<div class="callout">' + icon + ' ' + richTextToHtml(block.callout.rich_text) + '</div>';
+      return '<div class="callout">' + icon + ' ' + richTextToHtml(block.callout.rich_text) + childrenHtml + '</div>';
     }
     case 'toggle': {
-      return '<details><summary>' + richTextToHtml(block.toggle.rich_text) + '</summary></details>';
+      return '<details><summary>' + richTextToHtml(block.toggle.rich_text) + '</summary>' + childrenHtml + '</details>';
     }
     default:
-      return '';
+      return childrenHtml;
   }
 }
 
-async function blocksToHtml(blocks: Array<BlockObjectResponse | PartialBlockObjectResponse>): Promise<string> {
+async function blocksToHtml(
+  client: Client,
+  blocks: Array<BlockObjectResponse | PartialBlockObjectResponse>
+): Promise<string> {
   const htmlParts: string[] = [];
   let currentListType: 'ul' | 'ol' | null = null;
+
   for (const block of blocks) {
     if (!isFullBlock(block)) continue;
+
     const isBullet = block.type === 'bulleted_list_item';
     const isNumbered = block.type === 'numbered_list_item';
+
     if (isBullet && currentListType !== 'ul') {
       if (currentListType) htmlParts.push('</' + currentListType + '>');
       htmlParts.push('<ul>');
@@ -129,11 +155,20 @@ async function blocksToHtml(blocks: Array<BlockObjectResponse | PartialBlockObje
       htmlParts.push('</' + currentListType + '>');
       currentListType = null;
     }
-    htmlParts.push(blockToHtml(block));
+
+    let childrenHtml = '';
+    if (block.has_children) {
+      const childBlocks = await fetchAllBlockChildren(client, block.id);
+      childrenHtml = await blocksToHtml(client, childBlocks);
+    }
+
+    htmlParts.push(blockToHtml(block, childrenHtml));
   }
+
   if (currentListType) {
     htmlParts.push('</' + currentListType + '>');
   }
+
   return htmlParts.join('\n');
 }
 
@@ -272,8 +307,8 @@ export async function getNotionPosts(options: GetNotionPostsOptions = {}): Promi
 
       let content = '';
       if (includeContent) {
-        const blocksResponse = await client.blocks.children.list({ block_id: page.id, page_size: 100 });
-        content = await blocksToHtml(blocksResponse.results);
+        const blocks = await fetchAllBlockChildren(client, page.id);
+        content = await blocksToHtml(client, blocks);
       }
       posts.push({ ...pageData, content });
     }
@@ -299,8 +334,8 @@ export async function getNotionPostBySlug(slug: string): Promise<NotionBlogPost 
     if (!matchingPost) return null;
 
     try {
-      const blocksResponse = await client.blocks.children.list({ block_id: matchingPost.id, page_size: 100 });
-      const content = await blocksToHtml(blocksResponse.results);
+      const blocks = await fetchAllBlockChildren(client, matchingPost.id);
+      const content = await blocksToHtml(client, blocks);
       if (content && content.trim()) {
         return { ...matchingPost, content };
       }
