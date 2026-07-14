@@ -115,17 +115,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <p className="text-text-secondary mb-6">
                 15 minutes, scored live, and the scorecard is yours either way.
               </p>
-              <div className="flex flex-col items-center gap-2">
-                <Link
-                  href="/#cta"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#A855F7] to-[#6366F1] text-white font-medium rounded-full hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] transition-shadow"
-                >
-                  Book Your Free Diagnostic
-                </Link>
-                <span className="text-xs text-text-tertiary uppercase tracking-wider">
-                  (Free)
-                </span>
-              </div>
+              <Link
+                href="/#cta"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#A855F7] to-[#6366F1] text-white font-medium rounded-full hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] transition-shadow"
+              >
+                Book Your Free Diagnostic
+              </Link>
             </div>
           </div>
         </div>
