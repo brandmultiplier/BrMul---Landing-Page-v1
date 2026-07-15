@@ -108,17 +108,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="max-w-3xl mx-auto mt-16 pt-12 border-t border-white/10">
             <div className="text-center">
               <h3 className="text-2xl font-medium text-white mb-4">
-                Ready to transform your brand story?
+                Your site says one thing.
+                <br />
+                You say another.
               </h3>
               <p className="text-text-secondary mb-6">
-                Schedule a free diagnostic to see how we can help.
+                15 minutes, scored live, and the scorecard is yours either way.
               </p>
-              <Link
-                href="/#cta"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#A855F7] to-[#6366F1] text-white font-medium rounded-full hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] transition-shadow"
-              >
-                Schedule The Diagnostic
-              </Link>
+              <div className="flex flex-col items-center gap-2">
+                <Link
+                  href="/#cta"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#A855F7] to-[#6366F1] text-white font-medium rounded-full hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] transition-shadow"
+                >
+                  Book Your Free Diagnostic
+                </Link>
+                <span className="text-xs text-text-tertiary uppercase tracking-wider">
+                  (Free)
+                </span>
+              </div>
             </div>
           </div>
         </div>
