@@ -14,25 +14,26 @@ const SCRIPT_JS = "/* ==========================================================
 export default function ProtagonistMapWidget() {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // CSS is rendered directly in JSX (not injected via useEffect) so it's part
+  // of the server-rendered HTML and applies on first paint — avoids a flash
+  // of unstyled content while the client JS hydrates.
   useEffect(() => {
-    const styleEl = document.createElement("style");
-    styleEl.textContent = CSS;
-    document.head.appendChild(styleEl);
-
     const scriptEl = document.createElement("script");
     scriptEl.textContent = SCRIPT_JS;
     document.body.appendChild(scriptEl);
 
     return () => {
-      styleEl.remove();
       scriptEl.remove();
     };
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      dangerouslySetInnerHTML={{ __html: BODY_HTML }}
-    />
+    <>
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <div
+        ref={containerRef}
+        dangerouslySetInnerHTML={{ __html: BODY_HTML }}
+      />
+    </>
   );
 }
