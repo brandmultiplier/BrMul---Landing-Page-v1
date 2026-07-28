@@ -3,7 +3,7 @@ import Link from "next/link";
 import { RESOURCE_CSS, RESOURCE_LOGO } from "./_shared";
 
 export const metadata: Metadata = {
-  title: "Resources—BrandMultiplier",
+  title: "Resources - BrandMultiplier",
   description:
     "The BrandMultiplier resource library: narrative infrastructure diagnostics for founder-led B2B companies between $3M and $50M ARR.",
 };
@@ -26,20 +26,20 @@ const ARTICLES = [
     eyebrow: "Stop Posting Content",
     title: "Stop Posting Content. Start Building Narrative Infrastructure.",
     description:
-      "Your marketing agency is turning you into a LinkedIn influencer — and it’s the fastest way to stay trapped in every sales call.",
+      "Your marketing agency is turning you into a LinkedIn influencer - and it's the fastest way to stay trapped in every sales call.",
   },
   {
     slug: "the-3-9m-leak",
     eyebrow: "The $3.9M Leak",
-    title: "The Death of the “Magic Touch”",
+    title: 'The Death of the "Magic Touch"',
     description:
-      "Your “magic touch” in the sales process isn’t a competitive advantage—it’s a $3.9M structural tax on your growth.",
+      'Your "magic touch" in the sales process isn\'t a competitive advantage - it\'s a $3.9M structural tax on your growth.',
   },
   {
     slug: "the-3m-15m-death-valley",
-    eyebrow: "The $3M–$15M Death Valley",
+    eyebrow: "The $3M-$15M Death Valley",
     title:
-      "Seven Decisions That Look Like Progress — and Fail for One Structural Reason",
+      "Seven Decisions That Look Like Progress - and Fail for One Structural Reason",
     description:
       "Between $3M and $15M ARR, every logical next move quietly deepens the same trap.",
   },
@@ -49,50 +49,50 @@ const ARTICLES = [
     title:
       "Why Narrative Infrastructure, Not Software, Is the Final Lever for B2B ROI",
     description:
-      "The industry spent $450B on AI infrastructure. The returns aren’t showing up where everyone promised.",
+      "The industry spent $450B on AI infrastructure. The returns aren't showing up where everyone promised.",
   },
   {
     slug: "the-500k-dead-weight",
     eyebrow: "The $500k Dead Weight",
     title: "A Forensic Audit of the 5 Hires That Bankrupt Founder-Led Sales",
     description:
-      "Your $250k “Senior AE” isn’t failing because they lack talent—they’re failing because you’re asking a pilot to fly a plane that doesn’t have an engine.",
+      'Your $250k "Senior AE" isn\'t failing because they lack talent - they\'re failing because you\'re asking a pilot to fly a plane that doesn\'t have an engine.',
   },
   {
     slug: "the-extraction-economy",
     eyebrow: "The Extraction Economy",
-    title: "How AI Made Every Competitor Sound Identical — and What’s Still Yours",
+    title: "How AI Made Every Competitor Sound Identical - and What's Still Yours",
     description:
-      "When everyone prompts the same models on the same public corpus, the output converges. Your extracted logic is the one thing that can’t be copied.",
+      "When everyone prompts the same models on the same public corpus, the output converges. Your extracted logic is the one thing that can't be copied.",
   },
   {
     slug: "the-multi-protagonist-map",
     eyebrow: "The Multi-Protagonist Map",
     title:
-      "Why Your Deal Is Stalling With 8–13 People You’ve Never Individually Convinced",
+      "Why Your Deal Is Stalling With 8-13 People You've Never Individually Convinced",
     description:
-      "It’s stalling because 8 to 13 people need to say yes, each needs a different version of the story, and your team is telling all of them the same one.",
+      "It's stalling because 8 to 13 people need to say yes, each needs a different version of the story, and your team is telling all of them the same one.",
   },
   {
     slug: "the-solution-graveyard",
     eyebrow: "The Solution Graveyard",
-    title: "Why Eight Fixes Couldn’t Solve One Problem",
+    title: "Why Eight Fixes Couldn't Solve One Problem",
     description:
       "Every founder-led company buys the same eight fixes in the same order. None of them reach the layer underneath.",
   },
   {
     slug: "the-unicorn-fallacy",
     eyebrow: "The Unicorn Fallacy",
-    title: "Why Your Sales Hires Fail — and How to Fix the Narrative Debt",
+    title: "Why Your Sales Hires Fail - and How to Fix the Narrative Debt",
     description:
-      "The “unicorn closer” you’re hunting doesn’t exist. The problem was never the talent — it’s the debt underneath it.",
+      'The "unicorn closer" you\'re hunting doesn\'t exist. The problem was never the talent - it\'s the debt underneath it.',
   },
   {
     slug: "the-valuation-killer",
     eyebrow: "The Valuation Killer",
-    title: "Why Your “Founder Magic” Is a Series B Liability",
+    title: 'Why Your "Founder Magic" Is a Series B Liability',
     description:
-      "Your “founder magic” isn’t a competitive advantage. To a Series B investor, it’s a single point of failure that can carve more than a third off your valuation.",
+      'Your "founder magic" isn\'t a competitive advantage. To a Series B investor, it\'s a single point of failure that can carve more than a third off your valuation.',
   },
   {
     slug: "what-founders-crossed-50m",
@@ -100,7 +100,7 @@ const ARTICLES = [
     title:
       "What Founders Who Crossed $50M Did at $10M That Almost Nobody Does",
     description:
-      "Pattern analysis across 12 founder-led B2B companies that broke the $7M–$12M ceiling — and the four traps that catch the ones that don’t.",
+      "Pattern analysis across 12 founder-led B2B companies that broke the $7M-$12M ceiling - and the four traps that catch the ones that don't.",
   },
   {
     slug: "cac-killer",
@@ -149,7 +149,7 @@ export default function Page() {
       </main>
       <footer className="site-foot">
         <p>
-          <strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for
+          <strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for
           Founder-Led Companies.{" "}
           <a href="https://brandmultiplier.ai">brandmultiplier.ai</a>
         </p>
