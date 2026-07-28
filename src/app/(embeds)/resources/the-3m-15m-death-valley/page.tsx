@@ -27,7 +27,7 @@ const BODY_HTML = `
 <p>Between $3M and $15M ARR, founder-led B2B companies face a specific set of decisions. Each one looks like the responsible next step. Each one feels like progress. Each one fails for the same structural reason: the logic that closes deals lives in the founder's head and has never been extracted into a system anyone else can run.</p>
 <p>This is <a class="inline-link" href="/storylock-tax"><strong>StoryLock</strong></a>. And the decisions below do not solve it. They compound it.</p>
 
-<h3>This page is a <span class="hl">diagnostic</span>.</h3>
+<h3>This page is a diagnostic.</h3>
 <p>Find the <strong>decision</strong> you are about to make… Then read the <span class="c-orange"><strong>inversion</strong></span> before you write the check.</p>
 <hr>
 
