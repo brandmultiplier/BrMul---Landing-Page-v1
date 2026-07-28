@@ -15,11 +15,15 @@ h1{font-size:40px;line-height:1.14;margin:0 0 14px;letter-spacing:-.01em;font-we
 .lead{font-size:21px;color:#33333a;margin:0 0 16px}
 .byline{color:var(--gray);font-size:14px;margin:0 0 26px;font-family:Georgia,serif;font-style:italic}
 .hero{margin:0 0 34px}
+.hero img{width:100%;height:auto;border-radius:14px;display:block;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line)}
 .hero-ph{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
 background:linear-gradient(120deg,#2b2470 0%,var(--purple) 52%,#7a3bd0 74%,var(--orange) 128%);
 display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
 .hero-ph span{color:#fff;font-size:13px;letter-spacing:.16em;text-transform:uppercase;opacity:.9;border:1px dashed rgba(255,255,255,.6);padding:8px 14px;border-radius:6px}
 .hero figcaption{color:var(--gray);font-size:14px;margin-top:10px;font-style:italic}
+.h1-sub{font-size:28px;line-height:1.2;margin:0 0 14px;font-weight:700;letter-spacing:-.01em}
+.body a.inline-link{color:var(--orange);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.body a.inline-link:hover{filter:brightness(1.05)}
 .body h2{font-size:26px;line-height:1.2;color:var(--purple);margin:40px 0 12px;font-weight:800;letter-spacing:-.01em}
 .body h3{font-size:20px;line-height:1.25;color:#1F2A5A;margin:28px 0 8px;font-weight:700}
 .body h4{font-size:17px;margin:22px 0 6px;font-weight:700}
