@@ -63,7 +63,7 @@ const jsonLd = {
           name: "What does a failed sales hire really cost?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "A senior B2B sales hire runs $150,000 to $200,000 base with OTE of $250,000 to $350,000. Fully loaded cost runs 1.25 to 1.4 times base, plus a recruiting fee of 20 to 30%. New hires take 9 to 12 months to carry full quota and average VP of Sales tenure is roughly 19 months. A failed cycle costs $300,000 or more.",
+            text: "A senior B2B sales hire runs $150,000 to $200,000 base with OTE of $250,000 to $350,000. Fully loaded cost runs 1.25 to 1.4 times base, plus a recruiting fee of 20 to 30%. New hires take 9 to 12 months to carry full quota and average VP of Sales tenure is roughly 19 months (Gong). A failed cycle costs $300,000 or more.",
           },
         },
         {
@@ -71,7 +71,7 @@ const jsonLd = {
           name: "Why not hire a VP of Sales who builds the playbook?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The playbook a VP of Sales brings is theirs. Average sales-leader tenure is roughly 19 months, and when they leave, their playbook leaves with them. A Narrative Operating System extracts your selling logic into infrastructure the company owns.",
+            text: "The playbook a VP of Sales brings is theirs. Average sales-leader tenure is roughly 19 months (Gong), and when they leave, their playbook leaves with them. A Narrative Operating System extracts your selling logic into infrastructure the company owns.",
           },
         },
         {
@@ -688,7 +688,7 @@ export default function NosVsHiringPage() {
                   <tr>
                     <td className="ndh-line">Tenure risk</td>
                     <td>~19 months average VP of Sales tenure</td>
-                    <td className="ndh-src">The Bridge Group</td>
+                    <td className="ndh-src">Gong</td>
                   </tr>
                   <tr className="ndh-total">
                     <td className="ndh-line">One failed cycle</td>
@@ -708,7 +708,7 @@ export default function NosVsHiringPage() {
               <div className="ndh-card">
                 <p className="ndh-stat"><span>19</span> months</p>
                 <p>average tenure of a VP of Sales. When they leave, the playbook they brought leaves with them.</p>
-                <cite>The Bridge Group</cite>
+                <cite>Gong</cite>
               </div>
               <div className="ndh-card">
                 <p className="ndh-stat"><span>40–60%</span></p>
@@ -759,7 +759,7 @@ export default function NosVsHiringPage() {
             <h2>&ldquo;Why not hire a VP of Sales who builds the playbook?&rdquo;</h2>
             <p className="ndh-body">It&apos;s the right question, and it deserves a straight answer.</p>
             <p className="ndh-body">A great sales leader arrives with a playbook. But the playbook they bring is theirs: pattern-matching from their last company, their last market, their last product. The playbook that closes your deals is yours: the selling logic that already wins at founder-level rates when you&apos;re in the room. Those are different assets, and the second one doesn&apos;t exist on paper anywhere. It exists in your head.</p>
-            <p className="ndh-body">So the VP spends their first two quarters doing amateur extraction: shadowing your calls, interviewing you between meetings, reconstructing your judgment from fragments. Average VP of Sales tenure is roughly 19 months (The Bridge Group). If they leave at the average, the reconstruction leaves with them, and the next VP starts the dig from zero.</p>
+            <p className="ndh-body">So the VP spends their first two quarters doing amateur extraction: shadowing your calls, interviewing you between meetings, reconstructing your judgment from fragments. Average VP of Sales tenure is roughly 19 months (Gong). If they leave at the average, the reconstruction leaves with them, and the next VP starts the dig from zero.</p>
             <p className="ndh-body">Installing the NOS first changes what you&apos;re hiring for. The VP inherits documented selling logic on day one and spends their tenure doing what you actually hired them for: building and running a team against a story that already works.</p>
             <div className="ndh-concession">
               <h4>When hiring first is the right call</h4>
