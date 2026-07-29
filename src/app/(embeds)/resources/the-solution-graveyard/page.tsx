@@ -56,14 +56,14 @@ const BODY_HTML = `
 <p>Go through the eight below and answer honestly, in one line each. Ten minutes.</p>
 </div>
 <ol>
-<li><strong>Brand agency or positioning consultant:</strong> Tried it? What did it cost? What did it actually change on a live call?</li>
-<li><strong>First (or most recent) AE / sales hire:</strong> Tried it? What did it cost? What judgment were they never handed?</li>
-<li><strong>StoryBrand or single-buyer messaging workshop:</strong> Tried it? What did it cost? Did it survive contact with a real multi-stakeholder deal?</li>
-<li><strong>Fractional CMO or marketing agency:</strong> Tried it? What did it cost? Did it touch why buyers choose you over the incumbent?</li>
-<li><strong>Sales enablement software:</strong> Tried it? What did it cost? What was it distributing that was never actually extracted first?</li>
-<li><strong>AI content tools:</strong> Tried it? What did it cost? Does your content sound different from your competitors' content?</li>
-<li><strong>DIY documentation sprint:</strong> Tried it? What week did it die in, and what got produced before it did?</li>
-<li><strong>Doing nothing:</strong> How long has it been? What is your current valuation multiple, and where do you think it would sit if the team could sell without you?</li>
+<li><strong>Brand agency or positioning consultant:</strong><br>Tried it? What did it cost? What did it actually change on a live call?</li>
+<li><strong>First (or most recent) AE / sales hire:</strong><br>Tried it? What did it cost? What judgment were they never handed?</li>
+<li><strong>StoryBrand or single-buyer messaging workshop:</strong><br>Tried it? What did it cost? Did it survive contact with a real multi-stakeholder deal?</li>
+<li><strong>Fractional CMO or marketing agency:</strong><br>Tried it? What did it cost? Did it touch why buyers choose you over the incumbent?</li>
+<li><strong>Sales enablement software:</strong><br>Tried it? What did it cost? What was it distributing that was never actually extracted first?</li>
+<li><strong>AI content tools:</strong><br>Tried it? What did it cost? Does your content sound different from your competitors' content?</li>
+<li><strong>DIY documentation sprint:</strong><br>Tried it? What week did it die in, and what got produced before it did?</li>
+<li><strong>Doing nothing:</strong><br>How long has it been? What is your current valuation multiple, and where do you think it would sit if the team could sell without you?</li>
 </ol>
 <p><span class="c-orange"><strong>Count your marks.</strong></span></p>
 <p>If you are like most founders who run this audit, you have stood in at least three of these graves, spent real money in each one, and are still the senior-most closer in your own company. That is not a talent gap in your team. It is the one purchase you have not made yet—the one that starts by extracting what is currently only in your head. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>

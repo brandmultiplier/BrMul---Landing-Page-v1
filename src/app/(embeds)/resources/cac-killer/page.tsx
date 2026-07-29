@@ -93,27 +93,30 @@ const BODY_HTML = `
 <hr>
 
 <h2>4. Narrative Is Infrastructure, Not Art</h2>
-<p>Think of your narrative like a power grid. Right now, you are the only generator. When you stop spinning, the lights go out. To scale, you need to build the grid—the <a class="inline-link" href="/what-is-a-narrative-operating-system"><strong>Narrative Operating System (NOS)</strong></a>—that lets anyone on the team plug in and deliver founder-level conviction to every prospect, every time. This is the birth of the Narrative Operating System.</p>
+<p>Think of your narrative like a power grid. Right now, you are the only generator. When you stop spinning, the lights go out. To scale, you need to build the grid—the <a class="inline-link" href="/what-is-a-narrative-operating-system"><strong>Narrative Operating System (NOS)</strong></a>—that lets anyone on the team plug in and deliver founder-level conviction to every prospect, every time.</p>
 <p><strong>The shift is binary:</strong></p>
 <ul>
 <li>It is not a brand refresh. It is a system.</li>
 <li>It is not a set of talking points. It is extracted logic.</li>
 <li>It is not a deck. It is a Strategic Sales Narrative.</li>
 </ul>
-<p>When we work with founders through the <strong>Rumble Phase</strong>, we aren't looking for catchy slogans. We are performing a "Narrative Extraction"—pulling the StoryLock out of your head and documenting the logic, the objections, the market shifts, and the "Why Now" into a repeatable framework. Once it exists, your team no longer has to guess. They utilize <em>your</em> voice, backed by a system tested and certified for fluency. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.) The result? Your team closes with founder-level conviction, without the founder dependency.</p>
+<p>When we work with founders through the <strong>Rumble Phase</strong>, we aren't looking for catchy slogans. We are performing a "Narrative Extraction." We are pulling the "StoryLock" out of your head and documenting the logic, the objections, the market shifts, and the "Why Now" into a repeatable framework.</p>
+<p>This is the birth of the Narrative Operating System.</p>
+<p>Once this infrastructure exists, your sales team no longer has to guess. They don't have to "find their voice." They utilize <em>your</em> voice, backed by a system that has been tested and certified for fluency. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>The result? Your team closes with founder-level conviction, without the founder dependency.</p>
 <hr>
 
 <h2>5. The Sunday Night Founder Audit</h2>
-<p>Run your business through four diagnostic tests. Do not look for "good enough" answers. Look for binary failures.</p>
+<p>To determine if you are suffering from StoryLock, you must run your business through these four diagnostic tests. Do not look for "good enough" answers. Look for binary failures.</p>
 
 <h3>Test 1: The Mute Test</h3>
-<p>Imagine you are removed from every sales call for the next thirty days. What percentage of your current pipeline would actually close? If that number is below 20%, you don't have a sales team—you have a group of assistants. Your CAC is high because you are the only one who can justify the price.</p>
+<p>Imagine you are removed from every sales call for the next thirty days. You cannot "jump in" to save a deal. You cannot clarify a point. You cannot handle the "big" objection. What percentage of your current pipeline would actually close? If that number is below 20%, you don't have a sales team. You have a group of assistants. You are the human bottleneck. Your CAC is high because you are the only one who can justify the price.</p>
 
 <h3>Test 2: The New Hire Gap</h3>
-<p>Take your most recent hire—90 days in. Ask them, in three minutes, why a prospect should move budget from a competitor to you <em>right now</em>. If there is a gap between their conviction and yours, you are paying for their "ramp time" while they struggle to decode what's in your head.</p>
+<p>Take your most recent sales hire—someone who has been there for 90 days. Ask them to explain, in three minutes, why a prospect should move their budget from a competitor to you <em>right now</em>. Does their answer sound like yours? Does it carry the same weight? Does it address the tectonic shifts in the market, or does it sound like a list of bullet points from a website? If there is a gap between their conviction and yours, you have a StoryLock problem. You are paying for their "ramp time" while they struggle to decode what's in your head.</p>
 
 <h3>Test 3: The "Three Reps" Consistency Audit</h3>
-<p>Ask three people—Sales, Marketing, Product—separately: "What is the #1 strategic reason we are winning today?" Three different answers means you are paying the Consistency Tax—20-30% in sales velocity. Prospects feel it. Doubt leads to "I need to think about it."</p>
+<p>Pick three different people in your organization—one from Sales, one from Marketing, and one from Product. Ask them separately: "What is the #1 strategic reason we are winning in the market today?" If you get three different answers, you are paying the "Consistency Tax." This misalignment is costing you 20-30% in sales velocity. Prospects can feel when a team isn't aligned. It creates doubt. Doubt leads to "I need to think about it."</p>
 
 <h3>Test 4: The Deck Autopsy</h3>
 <p>Open your sales deck. Scroll to the middle. Is it about <em>you</em>—your features, your team? A high-converting narrative deck is about the <em>change in the world</em> that makes your solution inevitable. A feature-dump forces your reps to build the entire business case from scratch on every single call.</p>
