@@ -711,9 +711,9 @@ export default function NosVsHiringPage() {
                 <cite>Gong</cite>
               </div>
               <div className="ndh-card">
-                <p className="ndh-stat"><span>40–60%</span></p>
-                <p>valuation discount applied to founder-dependent businesses at exit.</p>
-                <cite>Bain &amp; Company</cite>
+                <p className="ndh-stat"><span>10–25%</span></p>
+                <p>key-person valuation discount recognized in appraisal practice and accepted by U.S. Tax Court for businesses overly dependent on one founder.</p>
+                <cite>Damodaran (NYU Stern); U.S. Tax Court</cite>
               </div>
             </div>
 

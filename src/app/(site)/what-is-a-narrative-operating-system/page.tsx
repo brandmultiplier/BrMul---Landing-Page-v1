@@ -629,7 +629,7 @@ export default function WhatIsNarrativeOSPage() {
               <li>Content the founder rejects as &ldquo;not how I&apos;d say it&rdquo;</li>
               <li>Revenue that dips whenever the founder steps out of the pipeline</li>
             </ol>
-            <p className="body">StoryLock carries a measurable price. Founder-dependent revenue is one of the classic valuation killers in M&amp;A: acquirers discount, restructure toward earn-outs, and extend founder lock-in periods when revenue depends on one person (Strategic Exit Advisors).</p>
+            <p className="body">StoryLock carries a measurable price. Founder-dependent revenue is one of the classic valuation killers in M&amp;A: appraisal practice and U.S. Tax Court decisions recognize key-person discounts of 10&ndash;25% for exactly this risk, and acquirers who can&apos;t retain that value instead discount, restructure toward earn-outs, and extend founder lock-in periods.</p>
             <div className="roomtest">
               <p className="q"><span className="accent-o">The Room Test:</span> Can your sales team consistently articulate your value in a way that resonates with buyers, without you in the room?</p>
               <p className="a">If the answer is no, you have StoryLock.</p>
@@ -727,9 +727,9 @@ export default function WhatIsNarrativeOSPage() {
                 <cite>Gartner &amp; Forrester, 2024</cite>
               </div>
               <div className="card">
-                <p className="stat"><span>40&ndash;60%</span></p>
-                <p>Valuation discount applied to founder-dependent businesses at exit. A story that lives in one head is a priced risk.</p>
-                <cite>Bain</cite>
+                <p className="stat"><span>10&ndash;25%</span></p>
+                <p>Key-person valuation discount recognized in appraisal practice and accepted by U.S. Tax Court when a business is overly dependent on one person. A story that lives in one head is a priced risk.</p>
+                <cite>Damodaran (NYU Stern); U.S. Tax Court</cite>
               </div>
             </div>
           </section>
