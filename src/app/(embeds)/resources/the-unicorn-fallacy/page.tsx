@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
 
 export const metadata: Metadata = {
-  title: "The Unicorn Fallacy - BrandMultiplier",
+  title: "The Unicorn Fallacy—BrandMultiplier",
   description:
-    "Why your sales hires fail and how to fix the Narrative Debt. The unicorn closer you're hunting doesn't exist. The problem was never the talent - it's the debt underneath it.",
+    "Why your sales hires fail and how to fix the Narrative Debt. The unicorn closer you're hunting doesn't exist. The problem was never the talent—it's the debt underneath it.",
 };
 
 const BODY_HTML = `
@@ -32,7 +32,7 @@ const BODY_HTML = `
 
 <figure class="fig"><div class="statrow">
 <div class="stat"><div class="n">70%</div><div class="l">First Hires Fail</div><div class="d">of first sales hires fail within the first year (SaaStr)</div></div>
-<div class="stat"><div class="n">40%+</div><div class="l">Close-Rate Gap</div><div class="d">between founder and team - BrandMultiplier's measured range</div></div>
+<div class="stat"><div class="n">40%+</div><div class="l">Close-Rate Gap</div><div class="d">between founder and team—BrandMultiplier's measured range</div></div>
 <div class="stat"><div class="n">x0</div><div class="l">Talent x No System</div><div class="d">hustle multiplied by an unextracted story is still zero</div></div>
 </div><figcaption class="fig-cap">The unicorn isn't the hire. It's the infrastructure they're missing.</figcaption></figure>
 
@@ -82,11 +82,11 @@ const BODY_HTML = `
 <p>Or, if you already know the problem is real and want to talk about what building the infrastructure looks like for your specific situation:</p>
 <p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
 
-<div class="callout note"><span class="ico">📎</span><p><em>Sources: 70% of first VP of Sales hires fail - SaaStr. The technical-debt metaphor - Ward Cunningham (1992). Tacit knowledge, knowing more than we can tell - Michael Polanyi, The Tacit Dimension (1966). The Accenture Interactive win-rate figures, the founder-vs-team close-rate gap, and portfolio outcome metrics are BrandMultiplier's own client and diagnostic data - not third-party-published figures.</em></p></div>
+<div class="callout note"><span class="ico">📎</span><p><em>Sources: 70% of first VP of Sales hires fail—SaaStr. The technical-debt metaphor—Ward Cunningham (1992). Tacit knowledge, knowing more than we can tell—Michael Polanyi, The Tacit Dimension (1966). The Accenture Interactive win-rate figures, the founder-vs-team close-rate gap, and portfolio outcome metrics are BrandMultiplier's own client and diagnostic data—not third-party-published figures.</em></p></div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-500k-dead-weight"><span class="k">The five hires that prove it</span><span class="t">The $500k Dead Weight</span></a><a class="card" href="/resources/the-extraction-economy"><span class="k">Why AI won't save you</span><span class="t">The Extraction Economy</span></a></div></section>
-<footer class="site-foot"><p><strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
+<footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 
 export default function Page() {

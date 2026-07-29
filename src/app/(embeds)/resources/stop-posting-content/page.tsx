@@ -3,9 +3,9 @@ import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
 
 export const metadata: Metadata = {
   title:
-    "Stop Posting Content. Start Building Narrative Infrastructure. - BrandMultiplier",
+    "Stop Posting Content. Start Building Narrative Infrastructure.—BrandMultiplier",
   description:
-    "Your marketing agency is turning you into a LinkedIn influencer - and it's the fastest way to stay trapped in every sales call.",
+    "Your marketing agency is turning you into a LinkedIn influencer—and it's the fastest way to stay trapped in every sales call.",
 };
 
 const BODY_HTML = `
@@ -26,7 +26,7 @@ const BODY_HTML = `
 <h2>Why Your LinkedIn Presence is Killing Your Sales Velocity</h2>
 
 <h2>1. <span class="c-orange">The Influencer Trap</span></h2>
-<p>Your marketing agency is turning you into a LinkedIn influencer - and it's the fastest way to stay trapped in every sales call.</p>
+<p>Your marketing agency is turning you into a LinkedIn influencer—and it's the fastest way to stay trapped in every sales call.</p>
 <p>They celebrate "reach" and "engagement" while your sales team starves. You get high-fives for impressions; they get ghosted on discovery calls. This is the <a class="inline-link" href="/storylock-tax"><strong>StoryLock problem</strong></a>. The narrative logic is trapped in your head, while your team is stuck reading a generic deck that sounds like every other B2B commodity.</p>
 <p>It's not a brand refresh. It's a system.</p>
 <p>Content is noise. Narrative is infrastructure. If your team cannot articulate your value proposition with your level of conviction, your LinkedIn presence is just a vanity project. You are building a personal brand when you should be building a scalable asset.</p>
@@ -67,9 +67,9 @@ const BODY_HTML = `
 <p>Think about your business like a building. Most marketing agencies are focused on the paint and the curtains. They want to talk about "brand colors" and "voice guidelines."</p>
 <p><span class="c-orange">Narrative Infrastructure is the plumbing and the electrical. It is the logic that holds the building up. It is the reason the building exists.</span></p>
 <h3><strong>The Epiphany:</strong> Your value proposition must be able to travel without you.</h3>
-<p>If a prospect sees your post on LinkedIn, talks to your SDR, watches a demo from your AE, and reads your proposal - and the narrative logic changes at every step - you have failed. You have created friction. You have increased the cognitive load on the buyer.</p>
+<p>If a prospect sees your post on LinkedIn, talks to your SDR, watches a demo from your AE, and reads your proposal—and the narrative logic changes at every step—you have failed. You have created friction. You have increased the cognitive load on the buyer.</p>
 <p>When you shift from "Influencer" to "Infrastructure Architect," everything changes.</p>
-<p>You stop caring about "viral" posts and start caring about "conviction" posts. You stop trying to "elevate the brand" and start trying to "certify the team." You realize that the goal of LinkedIn isn't to get a like - it's to pre-wire the prospect's brain with the narrative logic they will hear again in the first five minutes of the discovery call.</p>
+<p>You stop caring about "viral" posts and start caring about "conviction" posts. You stop trying to "elevate the brand" and start trying to "certify the team." You realize that the goal of LinkedIn isn't to get a like—it's to pre-wire the prospect's brain with the narrative logic they will hear again in the first five minutes of the discovery call.</p>
 <p>Not a brand refresh. <span class="c-orange"><strong>A system.</strong></span></p>
 <p>A system where the founder's conviction is extracted, documented, and weaponized so that a 24-year-old SDR can speak with the same authority as the 45-year-old founder. (Start the work with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
 
@@ -131,11 +131,11 @@ const BODY_HTML = `
 </ol>
 <p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
 <p>Stop being an influencer. Start building infrastructure.</p>
-<div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year failure rate for first sales hires at founder-led B2B companies - SaaStr.</em></p></div>
+<div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year failure rate for first sales hires at founder-led B2B companies—SaaStr.</em></p></div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-extraction-economy"><span class="k">The AI sameness problem</span><span class="t">The Extraction Economy</span></a><a class="card" href="/resources/the-unicorn-fallacy"><span class="k">The debt underneath</span><span class="t">The Unicorn Fallacy</span></a></div></section>
-<footer class="site-foot"><p><strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
+<footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 
 export default function Page() {

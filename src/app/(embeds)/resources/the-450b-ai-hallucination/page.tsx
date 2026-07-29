@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
 
 export const metadata: Metadata = {
-  title: "The $450B AI Hallucination - BrandMultiplier",
+  title: "The $450B AI Hallucination—BrandMultiplier",
   description:
     "Why narrative infrastructure, not software, is the final lever for B2B ROI. The industry spent $450B on AI infrastructure. The returns aren't showing up where everyone promised.",
 };
@@ -84,11 +84,11 @@ const BODY_HTML = `
 <p>BrandMultiplier runs a free diagnostic conversation to identify where your narrative is breaking and what building the infrastructure would look like for your specific situation.</p>
 <p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
 
-<div class="callout note"><span class="ico">📎</span><p><em>Sources: The AI-capex-outrunning-returns thesis and 0.9% projected GDP contribution - Goldman Sachs (Jim Covello), 2024; Daron Acemoglu (MIT), 2024. The $448B/$450B hyperscaler AI-infrastructure spend - IEEE ComSoc (December 2025). 70% of first VP of Sales hires fail - SaaStr. Stories produce oxytocin release and build trust - Paul Zak, Harvard Business Review (2014). Speaker-listener neural coupling - Uri Hasson et al., PNAS (2010). Stories up to 22 times more memorable than facts - Jennifer Aaker, Stanford GSB. BetterCloud and Ledger are named BrandMultiplier client outcomes, not independent third-party sources. Portfolio metrics (CAC, deal velocity, and $78M+ incremental revenue) reflect BrandMultiplier's internal diagnostic model - directional, not an audited figure.</em></p></div>
+<div class="callout note"><span class="ico">📎</span><p><em>Sources: The AI-capex-outrunning-returns thesis and 0.9% projected GDP contribution—Goldman Sachs (Jim Covello), 2024; Daron Acemoglu (MIT), 2024. The $448B/$450B hyperscaler AI-infrastructure spend—IEEE ComSoc (December 2025). 70% of first VP of Sales hires fail—SaaStr. Stories produce oxytocin release and build trust—Paul Zak, Harvard Business Review (2014). Speaker-listener neural coupling—Uri Hasson et al., PNAS (2010). Stories up to 22 times more memorable than facts—Jennifer Aaker, Stanford GSB. BetterCloud and Ledger are named BrandMultiplier client outcomes, not independent third-party sources. Portfolio metrics (CAC, deal velocity, and $78M+ incremental revenue) reflect BrandMultiplier's internal diagnostic model—directional, not an audited figure.</em></p></div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-extraction-economy"><span class="k">The commoditization trap</span><span class="t">The Extraction Economy</span></a><a class="card" href="/resources/stop-posting-content"><span class="k">Why more content fails</span><span class="t">Stop Posting Content</span></a></div></section>
-<footer class="site-foot"><p><strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
+<footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 
 export default function Page() {

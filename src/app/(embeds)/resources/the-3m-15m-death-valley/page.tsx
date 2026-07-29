@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
 
 export const metadata: Metadata = {
-  title: "The $3M-$15M Death Valley - BrandMultiplier",
+  title: "The $3M-$15M Death Valley—BrandMultiplier",
   description:
     "7 decisions that look like progress. All 7 fail for the same structural reason.",
 };
@@ -88,15 +88,16 @@ const BODY_HTML = `
 
 <h2>Quantify the damage before making your next decision</h2>
 <p>The <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax Calculator</strong></a> runs the math on what undocumented selling logic has already cost you: the hiring loop, your calendar, compounding forgone growth, and the founder-dependency discount at exit.</p>
+<p>Three minutes. Your specific number.</p>
 <p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your StoryLock Tax</a></p>
 <p>Or, if you already know the problem is structural, and want to talk about what building the infrastructure looks like:</p>
 <p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
 
-<div class="callout note"><span class="ico">📎</span><p><em>Sources: 70% of first VP of Sales hires fail - SaaStr. Tacit knowledge, knowing more than we can tell - Michael Polanyi, The Tacit Dimension (1966). The seven-decision cost figures and portfolio outcome metrics reflect BrandMultiplier's internal diagnostic model - directional, not an audited figure.</em></p></div>
+<div class="callout note"><span class="ico">📎</span><p><em>Sources: 70% of first VP of Sales hires fail—SaaStr. Tacit knowledge, knowing more than we can tell—Michael Polanyi, The Tacit Dimension (1966). The seven-decision cost figures and portfolio outcome metrics reflect BrandMultiplier's internal diagnostic model—directional, not an audited figure.</em></p></div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-solution-graveyard"><span class="k">The fixes that fail</span><span class="t">The Solution Graveyard</span></a><a class="card" href="/resources/the-valuation-killer"><span class="k">What the plateau costs</span><span class="t">The Valuation Killer</span></a></div></section>
-<footer class="site-foot"><p><strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
+<footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 
 export default function Page() {

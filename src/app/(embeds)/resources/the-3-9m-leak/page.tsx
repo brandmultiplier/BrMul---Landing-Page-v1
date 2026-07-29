@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
 
 export const metadata: Metadata = {
-  title: "The $3.9M Leak - BrandMultiplier",
+  title: "The $3.9M Leak—BrandMultiplier",
   description:
-    "A diagnostic report on the Founder's Trap. Your \"magic touch\" in the sales process isn't a competitive advantage - it's a $3.9M structural tax on your growth.",
+    "A diagnostic report on the Founder's Trap. Your \"magic touch\" in the sales process isn't a competitive advantage—it's a $3.9M structural tax on your growth.",
 };
 
 const BODY_HTML = `
@@ -24,17 +24,17 @@ const BODY_HTML = `
   <article class="body">
 
 <h2>The Death of the "Magic Touch"</h2>
-<p>Your "magic touch" in the sales process isn't a competitive advantage - it's a $3.9M structural tax on your growth.</p>
+<p>Your "magic touch" in the sales process isn't a competitive advantage—it's a $3.9M structural tax on your growth.</p>
 <p>If you are a B2B founder between $3M and $50M ARR, you likely pride yourself on your ability to walk into a room and "save" a deal. You believe your deep product knowledge and your "founder energy" are the reasons your company wins.</p>
 <p>You are wrong.</p>
 <p>That "magic" is actually a bottleneck. It is the single greatest inhibitor to your company's valuation. It is the reason your sales team feels like a group of expensive assistants rather than a revenue engine.</p>
-<p>Right now, your competitors sound exactly like you. With the release of Claude Opus 4.7 and Gemma 4, the cost of looking "authoritative" has dropped to near zero. Your "voice" has been commoditized on the front end - but your sales execution is diverging on the back end.</p>
+<p>Right now, your competitors sound exactly like you. With today's frontier AI models, the cost of looking "authoritative" has dropped to near zero. Your "voice" has been commoditized on the front end—but your sales execution is diverging on the back end.</p>
 <p>This is not a marketing problem. It is not a "branding" problem. It is a narrative infrastructure failure.</p>
-<p>You are currently paying the <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax</strong></a> - the annualized cost of your narrative logic being trapped inside your head instead of being encoded into your team. This report will show you exactly how to calculate that tax, why your current sales hires are mathematically destined to fail, and how to install the infrastructure required to scale founder-level conviction without founder dependency.</p>
+<p>You are currently paying the <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax</strong></a>—the annualized cost of your narrative logic being trapped inside your head instead of being encoded into your team. This report will show you exactly how to calculate that tax, why your current sales hires are mathematically destined to fail, and how to install the infrastructure required to scale founder-level conviction without founder dependency.</p>
 
 <h2>The Heroic Founder Fallacy</h2>
 <p>To understand the Tax, we have to look at how you got here.</p>
-<p>In the early days - the $0 to $3M ARR grind - your "magic" was a necessity. You were the product. You were the marketing. You were the closer. You lived in the "Rumble." Every objection a prospect threw at you was met with a narrative logic that you developed in real-time.</p>
+<p>In the early days—the $0 to $3M ARR grind—your "magic" was a necessity. You were the product. You were the marketing. You were the closer. You lived in the "Rumble." Every objection a prospect threw at you was met with a narrative logic that you developed in real-time.</p>
 <p>You didn't need a "sales deck" because you <em>were</em> the deck.</p>
 <p>This is the Heroic Founder phase. It feels good. It's intoxicating to be the only person who can explain <em>why</em> the product matters. You reached $5M or $10M ARR on the back of this individual brilliance.</p>
 <p>But then, the ceiling appeared.</p>
@@ -44,8 +44,8 @@ const BODY_HTML = `
 <h2>The Sales Hire Graveyard</h2>
 <p>The statistics are brutal: 70% of first sales hires at founder-led B2B companies fail within their first year (SaaStr).</p>
 <p>Most founders blame the "talent." They think they hired the wrong person. They think the "culture" wasn't right. Or they blame the marketing agency for delivering "fluff" leads. (Related: <a class="inline-link" href="/resources/the-500k-dead-weight">The $500k Dead Weight</a> and <a class="inline-link" href="/resources/the-unicorn-fallacy">The Unicorn Fallacy</a>.)</p>
-<p>The reality is more clinical. Your sales hires fail because they are fighting a war with a wooden stick while you have a laser-guided missile - and the missile is locked in your brain.</p>
-<p>When a new hire gets on a call, they recite your "value proposition." It sounds generic. It sounds like every other AI-optimized pitch in their inbox. They lack the connective tissue - the narrative logic - that allows you to pivot mid-conversation and close with conviction.</p>
+<p>The reality is more clinical. Your sales hires fail because they are fighting a war with a wooden stick while you have a laser-guided missile—and the missile is locked in your brain.</p>
+<p>When a new hire gets on a call, they recite your "value proposition." It sounds generic. It sounds like every other AI-optimized pitch in their inbox. They lack the connective tissue—the narrative logic—that allows you to pivot mid-conversation and close with conviction.</p>
 <p>So, you do what every founder does. You jump on the "rescue" call.</p>
 <p>You save the deal. The AE watches you in awe. You feel like a hero.</p>
 <p>But you've just reinforced the trap. You've proven that the "system" doesn't work without you. You are now paying for a $200k/year assistant to set up demos for you to finish. This is <strong>Sales Infrastructure Drag</strong>, and it is the first sign that your business is unscalable.</p>
@@ -94,12 +94,12 @@ const BODY_HTML = `
 <div class="seg" style="flex:650000;background:#7a5bd0">16%</div>
 <div class="seg" style="flex:114286;background:#f36901">3%</div></div>
 <ul class="brk-list">
-<li><span class="brk-name"><span class="dot" style="background:#4940C6"></span>Revenue Leakage<span style="color:#888"> - the growth ceiling</span></span><span class="brk-amt">$3,200,000</span></li>
-<li><span class="brk-name"><span class="dot" style="background:#7a5bd0"></span>Founder Time Tax<span style="color:#888"> - the life cost</span></span><span class="brk-amt">$650,000</span></li>
-<li><span class="brk-name"><span class="dot" style="background:#f36901"></span>Sales Infrastructure Drag<span style="color:#888"> - the capital cost</span></span><span class="brk-amt">$114,286</span></li>
+<li><span class="brk-name"><span class="dot" style="background:#4940C6"></span>Revenue Leakage<span style="color:#888">—the growth ceiling</span></span><span class="brk-amt">$3,200,000</span></li>
+<li><span class="brk-name"><span class="dot" style="background:#7a5bd0"></span>Founder Time Tax<span style="color:#888">—the life cost</span></span><span class="brk-amt">$650,000</span></li>
+<li><span class="brk-name"><span class="dot" style="background:#f36901"></span>Sales Infrastructure Drag<span style="color:#888">—the capital cost</span></span><span class="brk-amt">$114,286</span></li>
 </ul>
 <div class="brk-total"><span>Total annual StoryLock Tax</span><span class="brk-amt">$3,964,286</span></div>
-</div><figcaption class="fig-cap">The "$3.9M" isn't one number - it's three structural drains stacked. Worked example; run your own with the calculator.</figcaption></figure>
+</div><figcaption class="fig-cap">The "$3.9M" isn't one number—it's three structural drains stacked. Worked example; run your own with the calculator.</figcaption></figure>
 
 <p>This is the price of "Magic." It is the cost of not having a system that allows your team to close with your conviction.</p>
 
@@ -157,17 +157,17 @@ const BODY_HTML = `
 <p>Once you see the "Tax" on paper, you can never un-see it.</p>
 
 <p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate Your StoryLock Tax Now</a></p>
-<p>Running the number shows you the <em>size of the leak</em>. The next step tells you whether it's <em>structural</em> - and that's a live read, not another download.</p>
+<p>Running the number shows you the <em>size of the leak</em>. The next step tells you whether it's <em>structural</em>—and that's a live read, not another download.</p>
 
 <div class="callout "><span class="ico">💡</span><h3>The Diagnostic</h3>
-<p>Before the call, we've already run your public content through our tooling - your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural.</p>
+<p>Before the call, we've already run your public content through our tooling—your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural.</p>
 <p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p></div>
 
-<div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year sales-hire failure - SaaStr. The three-part StoryLock Tax (revenue leakage, founder time tax, infrastructure drag) is BrandMultiplier's diagnostic model applied to a worked example - directional, not audited.</em></p></div>
+<div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year sales-hire failure—SaaStr. The three-part StoryLock Tax (revenue leakage, founder time tax, infrastructure drag) is BrandMultiplier's diagnostic model applied to a worked example—directional, not audited.</em></p></div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-500k-dead-weight"><span class="k">The hires behind the leak</span><span class="t">The $500k Dead Weight</span></a><a class="card" href="/resources/the-valuation-killer"><span class="k">What it does to your exit</span><span class="t">The Valuation Killer</span></a></div></section>
-<footer class="site-foot"><p><strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
+<footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 
 export default function Page() {

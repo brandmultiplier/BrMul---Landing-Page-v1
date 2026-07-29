@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
 
 export const metadata: Metadata = {
-  title: "The Solution Graveyard - BrandMultiplier",
+  title: "The Solution Graveyard—BrandMultiplier",
   description:
     "Why eight fixes couldn't solve one problem. Every founder-led company buys the same eight fixes in the same order. None of them reach the layer underneath.",
 };
@@ -31,19 +31,19 @@ const BODY_HTML = `
 
 <figure class="fig"><div class="statrow">
 <div class="stat"><div class="n">8</div><div class="l">Fixes Bought</div><div class="d">the same eight purchases, in the same order, across founder-led companies</div></div>
-<div class="stat"><div class="n">1</div><div class="l">Buried Assumption</div><div class="d">that the selling logic was ever extracted - it wasn't</div></div>
+<div class="stat"><div class="n">1</div><div class="l">Buried Assumption</div><div class="d">that the selling logic was ever extracted—it wasn't</div></div>
 <div class="stat"><div class="n">3-4x</div><div class="l">Not 7-8x</div><div class="d">the EBITDA multiple a founder-dependent business settles for</div></div>
 </div><figcaption class="fig-cap">Eight headstones. One cause underneath all of them.</figcaption></figure>
 
 <h2>Eight purchases, one buried assumption</h2>
-<p><strong>1. The brand agency.</strong> $10,000 to $30,000. Delivers a positioning deck and a style guide. The sales team opens it once, in the kickoff call, and never again - because a deck is not something a rep can improvise from under pressure on a live call.</p>
-<p><strong>2. The first AE hire.</strong> $150,000 to $250,000 loaded. Commonly cited SaaS sales benchmarks put the failure rate for early sales hires at roughly 70 percent within the first year (SaaStr), and the reason is rarely talent. It is that the hire was handed a deck, a price sheet, and a lead list, and never handed the judgment that makes a founder close at double the rate - because that judgment was never written down anywhere a new hire could learn it from. (Related: <a class="inline-link" href="/resources/the-500k-dead-weight">The $500k Dead Weight</a>.)</p>
-<p><strong>3. The StoryBrand workshop.</strong> A few thousand dollars. Produces a clean one-buyer narrative. Collapses the first time the actual deal has a CFO, a technical evaluator, and a procurement lead in it, because the framework was built for a single audience and the real sale has committee. (Related: <a class="inline-link" href="/resources/the-multi-protagonist-map">The Multi-Protagonist Map</a>.)</p>
-<p><strong>4. The fractional CMO.</strong> $8,000 to $15,000 a month. Executes campaigns well. Never touches the alignment problem underneath - the fact that nobody in the company, including the founder, has ever written down why a skeptical buyer should choose them over the incumbent.</p>
-<p><strong>5. Sales enablement software.</strong> A few thousand a month. Organizes and distributes whatever narrative you feed it. Systematizes a story that was never extracted in the first place, which means it systematizes the gap, not the fix.</p>
-<p><strong>6. AI content tools.</strong> Variable cost, often near zero per piece. Generate more content, faster, trained on the same public corpus every competitor's tools are trained on - which is a large part of why the content converges toward sameness instead of differentiation. (Related: <a class="inline-link" href="/resources/the-extraction-economy">The Extraction Economy</a> and <a class="inline-link" href="/resources/stop-posting-content">Stop Posting Content</a>.)</p>
-<p><strong>7. The DIY documentation sprint.</strong> No cash cost, real opportunity cost. Dies in week two, most often, because the founder does not have a free week and the output tends to be a feature list rather than the judgment calls that actually win deals.</p>
-<p><strong>8. Doing nothing.</strong> The most expensive option, and the hardest to see, because the bill never arrives as a single invoice. It arrives as a valuation multiple that stays at 3 to 4x EBITDA instead of 7 to 8x, one quarter at a time. (Related: <a class="inline-link" href="/resources/the-valuation-killer">The Valuation Killer</a>.)</p>
+<p><strong>The brand agency.</strong><br>$10,000 to $30,000. Delivers a positioning deck and a style guide. The sales team opens it once, in the kickoff call, and never again—because a deck is not something a rep can improvise from under pressure on a live call.</p>
+<p><strong>The first AE hire.</strong><br>$150,000 to $250,000 loaded. Commonly cited SaaS sales benchmarks put the failure rate for early sales hires at roughly 70 percent within the first year (SaaStr), and the reason is rarely talent. It is that the hire was handed a deck, a price sheet, and a lead list, and never handed the judgment that makes a founder close at double the rate—because that judgment was never written down anywhere a new hire could learn it from. (Related: <a class="inline-link" href="/resources/the-500k-dead-weight">The $500k Dead Weight</a>.)</p>
+<p><strong>The StoryBrand workshop.</strong><br>A few thousand dollars. Produces a clean one-buyer narrative. Collapses the first time the actual deal has a CFO, a technical evaluator, and a procurement lead in it, because the framework was built for a single audience and the real sale has committee. (Related: <a class="inline-link" href="/resources/the-multi-protagonist-map">The Multi-Protagonist Map</a>.)</p>
+<p><strong>The fractional CMO.</strong><br>$8,000 to $15,000 a month. Executes campaigns well. Never touches the alignment problem underneath—the fact that nobody in the company, including the founder, has ever written down why a skeptical buyer should choose them over the incumbent.</p>
+<p><strong>Sales enablement software.</strong><br>A few thousand a month. Organizes and distributes whatever narrative you feed it. Systematizes a story that was never extracted in the first place, which means it systematizes the gap, not the fix.</p>
+<p><strong>AI content tools.</strong><br>Variable cost, often near zero per piece. Generate more content, faster, trained on the same public corpus every competitor's tools are trained on—which is a large part of why the content converges toward sameness instead of differentiation. (Related: <a class="inline-link" href="/resources/the-extraction-economy">The Extraction Economy</a> and <a class="inline-link" href="/resources/stop-posting-content">Stop Posting Content</a>.)</p>
+<p><strong>The DIY documentation sprint.</strong><br>No cash cost, real opportunity cost. Dies in week two, most often, because the founder does not have a free week and the output tends to be a feature list rather than the judgment calls that actually win deals.</p>
+<p><strong>Doing nothing.</strong><br>The most expensive option, and the hardest to see, because the bill never arrives as a single invoice. It arrives as a valuation multiple that stays at 3 to 4x EBITDA instead of 7 to 8x, one quarter at a time. (Related: <a class="inline-link" href="/resources/the-valuation-killer">The Valuation Killer</a>.)</p>
 <hr>
 
 <h2>What all eight have in common</h2>
@@ -66,7 +66,7 @@ const BODY_HTML = `
 <li><strong>Doing nothing:</strong> How long has it been? What is your current valuation multiple, and where do you think it would sit if the team could sell without you?</li>
 </ol>
 <p><span class="c-orange"><strong>Count your marks.</strong></span></p>
-<p>If you are like most founders who run this audit, you have stood in at least three of these graves, spent real money in each one, and are still the senior-most closer in your own company. That is not a talent gap in your team. It is the one purchase you have not made yet - the one that starts by extracting what is currently only in your head. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>If you are like most founders who run this audit, you have stood in at least three of these graves, spent real money in each one, and are still the senior-most closer in your own company. That is not a talent gap in your team. It is the one purchase you have not made yet—the one that starts by extracting what is currently only in your head. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
 <hr>
 
 <h2>The one thing not for sale in any of these eight categories</h2>
@@ -77,11 +77,11 @@ const BODY_HTML = `
 <p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
 <hr>
 
-<div class="callout note"><span class="ico">📎</span><p><em>Cost ranges reflect typical founder-led B2B spend at the $3M-$50M ARR stage, as referenced in the companion LinkedIn post. ~70% first-year failure rate for early sales hires - SaaStr (Jason Lemkin). The founder-dependency valuation gap is documented in John Warrillow's Value Builder analysis of 14,000 businesses - owner-dependent companies draw acquisition offers of 2.93x pre-tax profit versus 4.49x for owner-independent ones - and in the IRS- and ASA-recognized "key person discount"; the specific 3-4x vs 7-8x EBITDA figures reflect BrandMultiplier's diagnostic model.</em></p></div>
+<div class="callout note"><span class="ico">📎</span><p><em>Cost ranges reflect typical founder-led B2B spend at the $3M-$50M ARR stage, as referenced in the companion LinkedIn post. ~70% first-year failure rate for early sales hires—SaaStr (Jason Lemkin). The founder-dependency valuation gap is documented in John Warrillow's Value Builder analysis of 14,000 businesses—owner-dependent companies draw acquisition offers of 2.93x pre-tax profit versus 4.49x for owner-independent ones—and in the IRS- and ASA-recognized "key person discount"; the specific 3-4x vs 7-8x EBITDA figures reflect BrandMultiplier's diagnostic model.</em></p></div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-multi-protagonist-map"><span class="k">Why one story fails</span><span class="t">The Multi-Protagonist Map</span></a><a class="card" href="/resources/the-3m-15m-death-valley"><span class="k">The plateau underneath</span><span class="t">The $3M-$15M Death Valley</span></a></div></section>
-<footer class="site-foot"><p><strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
+<footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 
 export default function Page() {

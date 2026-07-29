@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
 
 export const metadata: Metadata = {
-  title: "The $500k Dead Weight - BrandMultiplier",
+  title: "The $500k Dead Weight—BrandMultiplier",
   description:
-    "A forensic audit of the 5 hires that bankrupt founder-led sales. Your $250k Senior AE isn't failing because they lack talent - they're failing because you're asking a pilot to fly a plane that doesn't have an engine.",
+    "A forensic audit of the 5 hires that bankrupt founder-led sales. Your $250k Senior AE isn't failing because they lack talent—they're failing because you're asking a pilot to fly a plane that doesn't have an engine.",
 };
 
 const BODY_HTML = `
@@ -24,18 +24,18 @@ const BODY_HTML = `
   <article class="body">
 
 <div class="callout"><span class="ico">💡</span>
-<p>Your $250k "Senior AE" isn't failing because they lack talent - they're failing because you're asking a pilot to fly a plane that doesn't have an engine.</p>
+<p>Your $250k "Senior AE" isn't failing because they lack talent—they're failing because you're asking a pilot to fly a plane that doesn't have an engine.</p>
 </div>
 
 <h2>The $500k Autopsy</h2>
 <p>Most founders treat a failed sales hire as a "bad fit." They fire. They re-hire. They pray for a "unicorn closer" who can finally take the burden off their calendar.</p>
-<p>It is a cycle of burning cash and ego - and it's costing you $40k a month in ghost overhead.</p>
+<p>It is a cycle of burning cash and ego—and it's costing you $40k a month in ghost overhead.</p>
 <p>The reality is colder: it's not a talent problem. It's a structural defect.</p>
-<p>Roughly 70% of first sales hires at founder-led B2B companies fail within their first year (SaaStr) - and it is almost never about the caliber of the hire.</p>
+<p>Roughly 70% of first sales hires at founder-led B2B companies fail within their first year (SaaStr)—and it is almost never about the caliber of the hire.</p>
 <p>You've hired the "Big-Logo Veteran" from Salesforce or the "Hungry Closer" from a competitor, but the sales logic is still <a class="inline-link" href="/storylock-tax"><strong>StoryLocked</strong></a> inside your head.</p>
 <p>By the time you realize the hire has failed, you've already lost nine months of market velocity, $200k in salary, and hundreds of hours of your own time "saving" deals that should have been closed by the team.</p>
 <p>Ghost Overhead is an invisible tax. You keep paying it because the failure looks like a people problem.</p>
-<p>This document is not a hiring guide. It is a forensic audit of the five archetypal sales hires that are mathematically guaranteed to fail in a founder-led environment - and the structural cause that ensures their failure before they even sign the offer letter.</p>
+<p>This document is not a hiring guide. It is a forensic audit of the five archetypal sales hires that are mathematically guaranteed to fail in a founder-led environment—and the structural cause that ensures their failure before they even sign the offer letter.</p>
 <hr>
 
 <h2>The Bottleneck Hero</h2>
@@ -51,7 +51,7 @@ const BODY_HTML = `
 <h2>The Hiring Merry-Go-Round</h2>
 <p>You've likely already lived through the cycle.</p>
 <p>The first three months are filled with "ramp-up" optimism. They're learning the product. They're "getting the lay of the land." They're asking for more marketing collateral.</p>
-<p>By month six, the optimism turns to friction. The pipeline is full of "ghosts" - leads that look good on paper but never seem to move. You find yourself jumping on "just one more call" to help them get it over the line.</p>
+<p>By month six, the optimism turns to friction. The pipeline is full of "ghosts"—leads that look good on paper but never seem to move. You find yourself jumping on "just one more call" to help them get it over the line.</p>
 <p>By month nine, you're exhausted. You realize that if you aren't on the call, the deal doesn't close. The hire is frustrated. You're frustrated. You eventually part ways, citing "culture fit" or "market timing."</p>
 <p>Then, you do it again.</p>
 <p>You think the problem was the person. You think you just need to find a "hungrier" version or someone with more "domain expertise."</p>
@@ -62,12 +62,12 @@ const BODY_HTML = `
 
 <h2>The Multiplier Trap</h2>
 <p>Here is the breakthrough: Sales talent is a multiplier.</p>
-<p>If your Narrative Infrastructure is a 10, a great hire makes it a 100. But if your Narrative Infrastructure is a zero - if the logic is trapped in your head and the team is just "winging it" - then "Talent x 0" is always zero.</p>
+<p>If your Narrative Infrastructure is a 10, a great hire makes it a 100. But if your Narrative Infrastructure is a zero—if the logic is trapped in your head and the team is just "winging it"—then "Talent x 0" is always zero.</p>
 <p>You don't have a hiring problem. You have a <strong>Narrative Infrastructure</strong> problem.</p>
 <p>You've been focused on the <em>who</em>, when you should have been focused on the <em>how</em>.</p>
 <p>The reason these five archetypal hires fail is that they are walking into a vacuum where your "founder-intuition" should be. They are trying to articulate a value proposition they don't actually understand, using tools that don't actually work, in a process that isn't actually defined.</p>
 <p>To stop the cycle, you have to move from <strong>Founder-Led Sales to Narrative-Driven Sales</strong>.</p>
-<p>You have to extract the logic, certify the fluency, and build the infrastructure that allows your team to close with your level of conviction - without your presence. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>You have to extract the logic, certify the fluency, and build the infrastructure that allows your team to close with your level of conviction—without your presence. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
 <hr>
 
 <h2>The Forensic Audit (The 5 Archetypes)</h2>
@@ -113,21 +113,21 @@ const BODY_HTML = `
 <ul>
 <li><strong>The Resume:</strong> Often a "Chief of Staff" or a "Right Hand." Smart, adaptable, and highly intuitive. They've worked closely with founders before.</li>
 <li><strong>The Why:</strong> "They just get me. They can finish my sentences. They can go into meetings and say exactly what I would say."</li>
-<li><strong>The Month 3 Reality:</strong> They are a junior version of you. They can close - but only if you're on the 15-minute "founder cameo" at the end. They haven't replaced you; they've just added a layer of administrative overhead to your calendar.</li>
+<li><strong>The Month 3 Reality:</strong> They are a junior version of you. They can close—but only if you're on the 15-minute "founder cameo" at the end. They haven't replaced you; they've just added a layer of administrative overhead to your calendar.</li>
 <li><strong>The Month 9 Coping Mechanism:</strong> "I still have to be involved in the big deals, but they're taking a lot of the 'grunt work' off my plate."</li>
-<li><strong>The Structural Cause: The Mimicry Ceiling.</strong> Mimicry is not infrastructure. You haven't extracted the logic from your head - you've just hired a shadow. Shadows disappear the moment you leave the room. You haven't scaled; you've just duplicated your own bottleneck.</li>
+<li><strong>The Structural Cause: The Mimicry Ceiling.</strong> Mimicry is not infrastructure. You haven't extracted the logic from your head—you've just hired a shadow. Shadows disappear the moment you leave the room. You haven't scaled; you've just duplicated your own bottleneck.</li>
 </ul>
 <hr>
 
 <h2>Closing with Founder-Level Conviction</h2>
 <p>Imagine a world where your sales team doesn't need you.</p>
-<p>Imagine hiring a mid-level AE and having them ramp to full quota in 45 days instead of 9 months. Imagine every member of your team - from marketing to sales to CS - articulating your value proposition with the same logic, the same pacing, and the same conviction that you do.</p>
+<p>Imagine hiring a mid-level AE and having them ramp to full quota in 45 days instead of 9 months. Imagine every member of your team—from marketing to sales to CS—articulating your value proposition with the same logic, the same pacing, and the same conviction that you do.</p>
 <p>This isn't a pipe dream. It's the result of building <strong>Narrative Infrastructure</strong>.</p>
 <p>When you implement a <a class="inline-link" href="/what-is-a-narrative-operating-system"><strong>Narrative Operating System (NOS)</strong></a>, you are doing three things:</p>
 <ol>
 <li><strong>Narrative Extraction:</strong> We take the "StoryLocked" logic in your head and codify it into a Strategic Sales Narrative. Not a "deck." A logic-chain that drives deals.</li>
 <li><strong>Team Fluency:</strong> We move beyond "training" and into "certification." We ensure your team isn't reciting scripts, but possesses the fluency to navigate complex objections with founder-level authority.</li>
-<li><strong>Optimization Dashboards:</strong> We track the metrics that actually matter - CAC, deal velocity, and LTV - to ensure the narrative is performing in the real world. (Related: <a class="inline-link" href="/resources/cac-killer">The CAC Killer</a> and <a class="inline-link" href="/resources/the-3-9m-leak">The $3.9M Leak</a>.)</li>
+<li><strong>Optimization Dashboards:</strong> We track the metrics that actually matter—CAC, deal velocity, and LTV—to ensure the narrative is performing in the real world. (Related: <a class="inline-link" href="/resources/cac-killer">The CAC Killer</a> and <a class="inline-link" href="/resources/the-3-9m-leak">The $3.9M Leak</a>.)</li>
 </ol>
 <p>The result? You stop being a salesperson and start being a CEO. Your team stops being "dead weight" and starts being a revenue engine.</p>
 <hr>
@@ -136,22 +136,22 @@ const BODY_HTML = `
 <p>Every day you operate without Narrative Infrastructure, you are paying the <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax</strong></a>.</p>
 <p>You are paying it in failed hires. You are paying it in high CAC. You are paying it in the 20 hours a week you spend "rescuing" deals that your team should have handled on their own.</p>
 <p>Stop guessing. Start calculating.</p>
-<p>We built a diagnostic tool specifically for founders at the $3M-$50M ARR stage. It will help you see exactly how much your current "Narrative Gap" is costing your bottom line - and which of these five archetypal failures you are currently funding.</p>
+<p>We built a diagnostic tool specifically for founders at the $3M-$50M ARR stage. It will help you see exactly how much your current "Narrative Gap" is costing your bottom line—and which of these five archetypal failures you are currently funding.</p>
 <p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">[RUN YOUR NUMBERS: The StoryLock Tax Calculator]</a></p>
 <p>Don't make the next $500k mistake. Build the infrastructure first. Hire the talent second.</p>
-<p>Running the number shows you the <em>size</em> of the tax. The next step tells you whether it's <em>structural</em> - and that's a live read, not another download.</p>
+<p>Running the number shows you the <em>size</em> of the tax. The next step tells you whether it's <em>structural</em>—and that's a live read, not another download.</p>
 
 <div class="callout"><span class="ico">💡</span>
 <h3>The Diagnostic</h3>
-<p>Before the call, we've already run your public content through our tooling - your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural.</p>
+<p>Before the call, we've already run your public content through our tooling—your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural.</p>
 <p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
 </div>
 
-<div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year failure rate for early sales hires at founder-led B2B companies - SaaStr. The five sales-hire archetypes and the ghost-overhead / cost-per-failed-hire math reflect BrandMultiplier's internal diagnostic model - directional, not an audited figure.</em></p></div>
+<div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year failure rate for early sales hires at founder-led B2B companies—SaaStr. The five sales-hire archetypes and the ghost-overhead / cost-per-failed-hire math reflect BrandMultiplier's internal diagnostic model—directional, not an audited figure.</em></p></div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-unicorn-fallacy"><span class="k">Why they fail = Narrative Debt</span><span class="t">The Unicorn Fallacy</span></a><a class="card" href="/resources/the-3-9m-leak"><span class="k">Put a number on it</span><span class="t">The $3.9M Leak</span></a></div></section>
-<footer class="site-foot"><p><strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
+<footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 
 export default function Page() {
