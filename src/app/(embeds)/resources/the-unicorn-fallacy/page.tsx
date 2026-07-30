@@ -66,9 +66,11 @@ const BODY_HTML = `
 
 <h2>The evidence</h2>
 <p>The results that are most relevant to the hiring problem, measured across 120+ founder-led B2B companies:</p>
-<p><strong>Team close rate gap:</strong> <span class="c-orange"><strong>compressed from &gt;40% to &lt;15%</strong></span>. The gap between what the founder closes and what the team closes shrinks because the team is operating from the same logic chain, not a guessed-at version of it.</p>
-<p><strong>New hire ramp time:</strong> <span class="c-orange"><strong>compressed from 6+ months to under 30 days</strong></span>. New reps do not need to reconstruct the story through trial and error. The infrastructure already exists.</p>
-<p><strong>Founder deal involvement:</strong> <span class="c-orange"><strong>reduced from 80%+ to under 30%</strong></span>. The founder stops being the primary closer and starts being the CEO.</p>
+<ul>
+<li><strong>Team close rate gap:</strong> <span class="c-orange"><strong>compressed from &gt;40% to &lt;15%</strong></span>. The gap between what the founder closes and what the team closes shrinks because the team is operating from the same logic chain, not a guessed-at version of it.</li>
+<li><strong>New hire ramp time:</strong> <span class="c-orange"><strong>compressed from 6+ months to under 30 days</strong></span>. New reps do not need to reconstruct the story through trial and error. The infrastructure already exists.</li>
+<li><strong>Founder deal involvement:</strong> <span class="c-orange"><strong>reduced from 80%+ to under 30%</strong></span>. The founder stops being the primary closer and starts being the CEO.</li>
+</ul>
 <p><span class="c-orange"><strong>30%+ average reduction in customer acquisition cost.</strong></span> Fewer touches, shorter cycles, higher conversion because the value proposition lands before the demo. (Related: <a class="inline-link" href="/resources/cac-killer">The CAC Killer</a>.)</p>
 <p><span style="text-decoration:underline"><strong>One named example at scale:</strong></span></p>
 <p><strong>Accenture Interactive:</strong> After deploying narrative infrastructure with the leadership team using the same extraction methodology now systematized into the NOS, win rates increased from 54% to 88%, with $1B+ in attributed revenue within 12 months. If the methodology moves the needle at enterprise scale, it reaches founder-led companies in weeks, not quarters.</p>

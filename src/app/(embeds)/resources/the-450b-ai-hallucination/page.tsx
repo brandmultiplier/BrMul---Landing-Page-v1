@@ -61,21 +61,27 @@ const BODY_HTML = `
 
 <h2>What a Narrative Operating System does</h2>
 <p>A <a class="inline-link" href="/what-is-a-narrative-operating-system"><strong>Narrative Operating System (NOS)</strong></a> combines structured methodology with intelligent systems to make your story operational. The methodology extracts your conviction. The systems deploy and measure it at scale. The combination is the moat: methodology alone produces shelf-ware, and software alone automates guesswork. (Full blueprint: <a class="inline-link" href="/NOS-architecture">NOS architecture</a>.)</p>
-<p><strong>Extraction.</strong> The process begins with what BrandMultiplier calls The Rumble: a structured, high-intensity session designed to pull the logic chain out of the founder's head. The goal is to identify where the narrative breaks, where the team is guessing, and what specific arguments, framings, and proof points make the founder's version of the story close deals.</p>
-<p><strong>Architecture.</strong> From extraction, the narrative is built into a documented system that any team member can execute. This includes the specific language, the objection-handling logic, the positioning against alternatives, and the emotional architecture that moves a prospect from skepticism to conviction.</p>
-<p><strong>Deployment.</strong> The narrative flows into every customer-facing surface: sales decks, outbound sequences, content, website copy, and AI agent instructions. Every touchpoint tells the same story with the same underlying logic. The AI stops hallucinating because it is operating from a documented, tested, coherent source of truth.</p>
-<p><strong>Measurement.</strong> The system ties narrative to business economics: customer acquisition cost, deal velocity, close rate, lifetime value. When the numbers move, you know the narrative is working. When they stall, the system surfaces where the story is breaking and what needs to change.</p>
+<ul>
+<li><strong>Extraction.</strong> The process begins with what BrandMultiplier calls The Rumble: a structured, high-intensity session designed to pull the logic chain out of the founder's head. The goal is to identify where the narrative breaks, where the team is guessing, and what specific arguments, framings, and proof points make the founder's version of the story close deals.</li>
+<li><strong>Architecture.</strong> From extraction, the narrative is built into a documented system that any team member can execute. This includes the specific language, the objection-handling logic, the positioning against alternatives, and the emotional architecture that moves a prospect from skepticism to conviction.</li>
+<li><strong>Deployment.</strong> The narrative flows into every customer-facing surface: sales decks, outbound sequences, content, website copy, and AI agent instructions. Every touchpoint tells the same story with the same underlying logic. The AI stops hallucinating because it is operating from a documented, tested, coherent source of truth.</li>
+<li><strong>Measurement.</strong> The system ties narrative to business economics: customer acquisition cost, deal velocity, close rate, lifetime value. When the numbers move, you know the narrative is working. When they stall, the system surfaces where the story is breaking and what needs to change.</li>
+</ul>
 <p>This is not a four-month creative project that produces a PDF and gathers dust. It is permanent infrastructure for how your company communicates, sells, and scales.</p>
 <hr>
 
 <h2>The evidence</h2>
 <p>The methodology behind the NOS has been deployed across 120+ founder-led B2B companies. Aggregate results across the portfolio:</p>
-<p><strong>30%+ average reduction in customer acquisition cost.</strong> The narrative reduces friction because prospects understand the value proposition before the demo. Fewer touches. Shorter qualification. (Related: <a class="inline-link" href="/resources/cac-killer">The CAC Killer</a>.)</p>
-<p><strong>35%+ average acceleration in deal velocity.</strong> Deals move faster because the team leads conversations with the same logic the founder uses, handling objections before they surface.</p>
-<p><strong>$78M+ in incremental client revenue generated across the portfolio.</strong> Results typically become visible within 60 to 90 days of deployment.</p>
+<ul>
+<li><strong>30%+ average reduction in customer acquisition cost.</strong> The narrative reduces friction because prospects understand the value proposition before the demo. Fewer touches. Shorter qualification. (Related: <a class="inline-link" href="/resources/cac-killer">The CAC Killer</a>.)</li>
+<li><strong>35%+ average acceleration in deal velocity.</strong> Deals move faster because the team leads conversations with the same logic the founder uses, handling objections before they surface.</li>
+<li><strong>$78M+ in incremental client revenue generated across the portfolio.</strong> Results typically become visible within 60 to 90 days of deployment.</li>
+</ul>
 <p><span style="text-decoration:underline"><strong>Two named examples that illustrate the pattern:</strong></span></p>
-<p><strong>BetterCloud (B2B SaaS):</strong> The CEO needed a narrative architecture that matched their evolved product. After a complete narrative redesign working directly with the CEO, BetterCloud recaptured 25% market share and moved from Gartner Visionary to Gartner Leader in their category.</p>
-<p><strong>Ledger (crypto/hardware, global):</strong> Ledger had outgrown its story. Rapid growth from startup to global company meant internal teams were operating with fragmented, inconsistent messaging. After a comprehensive narrative extraction with 20+ stakeholders across multiple countries, Ledger achieved a 20% increase in sales year-over-year, during the crypto winter, when the broader market was contracting.</p>
+<ul>
+<li><strong>BetterCloud (B2B SaaS):</strong> The CEO needed a narrative architecture that matched their evolved product. After a complete narrative redesign working directly with the CEO, BetterCloud recaptured 25% market share and moved from Gartner Visionary to Gartner Leader in their category.</li>
+<li><strong>Ledger (crypto/hardware, global):</strong> Ledger had outgrown its story. Rapid growth from startup to global company meant internal teams were operating with fragmented, inconsistent messaging. After a comprehensive narrative extraction with 20+ stakeholders across multiple countries, Ledger achieved a 20% increase in sales year-over-year, during the crypto winter, when the broader market was contracting.</li>
+</ul>
 <p><span class="c-orange"><strong>The pattern is consistent:</strong></span> narrative infrastructure was built before automation was deployed. The AI, the sales team, and the marketing worked because they had a coherent operating system underneath.</p>
 <hr>
 

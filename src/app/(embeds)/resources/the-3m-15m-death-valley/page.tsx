@@ -38,45 +38,59 @@ const BODY_HTML = `
 </div><figcaption class="fig-cap">Seven reasonable moves. One trap they all deepen.</figcaption></figure>
 
 <h2>1. The VP of Sales hire</h2>
-<p><strong>The logic:</strong> You are spending too much time in sales. You need a leader to build the team and take this off your plate.</p>
-<p><strong>Why it fails:</strong> You are hiring a manager for a system that does not exist. The selling logic is not documented. The VP spends the first six months learning the product, the next six building their own deck, and the final months getting fired because they could not replicate your close rate. SaaStr's Jason Lemkin has tracked this pattern: 70% of first VP of Sales hires at startups do not survive the first year (SaaStr, 2024). The person is not the problem. The absence of transferable infrastructure is. (Related: <a class="inline-link" href="/resources/the-unicorn-fallacy">The Unicorn Fallacy</a> and <a class="inline-link" href="/resources/the-500k-dead-weight">The $500k Dead Weight</a>.)</p>
-<p><strong>The <span class="c-orange">inversion</span>:</strong> Build the narrative infrastructure first. Document the logic chain that actually closes deals. Once a new hire can use that system to close without you on the call, then hire the VP to scale the system.</p>
+<ul>
+<li><strong>The logic:</strong> You are spending too much time in sales. You need a leader to build the team and take this off your plate.</li>
+<li><strong>Why it fails:</strong> You are hiring a manager for a system that does not exist. The selling logic is not documented. The VP spends the first six months learning the product, the next six building their own deck, and the final months getting fired because they could not replicate your close rate. SaaStr's Jason Lemkin has tracked this pattern: 70% of first VP of Sales hires at startups do not survive the first year (SaaStr, 2024). The person is not the problem. The absence of transferable infrastructure is. (Related: <a class="inline-link" href="/resources/the-unicorn-fallacy">The Unicorn Fallacy</a> and <a class="inline-link" href="/resources/the-500k-dead-weight">The $500k Dead Weight</a>.)</li>
+<li><strong>The <span class="c-orange">inversion</span>:</strong> Build the narrative infrastructure first. Document the logic chain that actually closes deals. Once a new hire can use that system to close without you on the call, then hire the VP to scale the system.</li>
+</ul>
 <hr>
 
 <h2>2. The brand refresh</h2>
-<p><strong>The logic:</strong> Your visual identity feels outdated. You need to look more enterprise to close bigger deals.</p>
-<p><strong>Why it fails:</strong> Most brand refreshes are aesthetic treatment for a structural problem. You spend $50K to $100K on fonts, colors, and voice guidelines that do not change the narrative logic. Your sales team still cannot handle the "why now?" objection. The brand book sits in a shared drive unopened. The rebrand addresses how you look without addressing what you say or why it does not land when someone other than you says it. (See also: <a class="inline-link" href="/resources/the-solution-graveyard">The Solution Graveyard</a>.)</p>
-<p><strong>The <span class="c-orange">inversion</span>:</strong> Fix the logic before the logo. A rough deck with a high-conviction narrative will outsell a designed deck with a weak one every time. The aesthetic layer matters after the narrative infrastructure is built. Before that, it is decoration on a hollow structure.</p>
+<ul>
+<li><strong>The logic:</strong> Your visual identity feels outdated. You need to look more enterprise to close bigger deals.</li>
+<li><strong>Why it fails:</strong> Most brand refreshes are aesthetic treatment for a structural problem. You spend $50K to $100K on fonts, colors, and voice guidelines that do not change the narrative logic. Your sales team still cannot handle the "why now?" objection. The brand book sits in a shared drive unopened. The rebrand addresses how you look without addressing what you say or why it does not land when someone other than you says it. (See also: <a class="inline-link" href="/resources/the-solution-graveyard">The Solution Graveyard</a>.)</li>
+<li><strong>The <span class="c-orange">inversion</span>:</strong> Fix the logic before the logo. A rough deck with a high-conviction narrative will outsell a designed deck with a weak one every time. The aesthetic layer matters after the narrative infrastructure is built. Before that, it is decoration on a hollow structure.</li>
+</ul>
 <hr>
 
 <h2>3. The marketing automation buildout</h2>
-<p><strong>The logic:</strong> You need to scale reach. Build out HubSpot workflows to nurture leads automatically.</p>
-<p><strong>Why it fails:</strong> Automation multiplies whatever you feed it. If the underlying narrative is generic, automation distributes generic messaging to more people faster. The leads come in. The pipeline fills. Nothing closes because the story that greets the prospect is not the story that would make them buy.</p>
-<p><strong>The <span class="c-orange">inversion</span>:</strong> The narrative must convert in a live conversation before you automate it. If your team cannot articulate the value proposition face to face, no email sequence will do it for them.</p>
+<ul>
+<li><strong>The logic:</strong> You need to scale reach. Build out HubSpot workflows to nurture leads automatically.</li>
+<li><strong>Why it fails:</strong> Automation multiplies whatever you feed it. If the underlying narrative is generic, automation distributes generic messaging to more people faster. The leads come in. The pipeline fills. Nothing closes because the story that greets the prospect is not the story that would make them buy.</li>
+<li><strong>The <span class="c-orange">inversion</span>:</strong> The narrative must convert in a live conversation before you automate it. If your team cannot articulate the value proposition face to face, no email sequence will do it for them.</li>
+</ul>
 <hr>
 
 <h2>4. The sales enablement tooling spend</h2>
-<p><strong>The logic:</strong> The team needs better tools. Gong, Highspot, a new CRM.</p>
-<p><strong>Why it fails:</strong> Tools are multipliers. If your narrative clarity is zero, zero multiplied by Gong is still zero. You end up with detailed data on why your team is losing but no system to help them win. The dashboards confirm what you already suspect. The tooling makes the problem visible without making it solvable.</p>
-<p><strong>The <span class="c-orange">inversion</span>:</strong> One documented logic chain. One talk track. One source of truth for how to sell. Master the manual before you buy the machine.</p>
+<ul>
+<li><strong>The logic:</strong> The team needs better tools. Gong, Highspot, a new CRM.</li>
+<li><strong>Why it fails:</strong> Tools are multipliers. If your narrative clarity is zero, zero multiplied by Gong is still zero. You end up with detailed data on why your team is losing but no system to help them win. The dashboards confirm what you already suspect. The tooling makes the problem visible without making it solvable.</li>
+<li><strong>The <span class="c-orange">inversion</span>:</strong> One documented logic chain. One talk track. One source of truth for how to sell. Master the manual before you buy the machine.</li>
+</ul>
 <hr>
 
 <h2>5. The fractional CMO retainer</h2>
-<p><strong>The logic:</strong> You do not have time to lead marketing. Hire a part-time expert to set the strategy.</p>
-<p><strong>Why it fails:</strong> A fractional CMO brings their playbook to your business. Your business was built on your specific insights, your logic, your understanding of why the market needs what you built. Without extraction, the fractional CMO defaults to standard demand gen tactics: content calendars, lead magnets, paid campaigns. Standard tactics produce standard results. And standard results at $15K to $25K per month burn runway fast.</p>
-<p><strong>The <span class="c-orange">inversion</span>:</strong> You are the CMO until the narrative is extracted. Use a narrative partner to get the logic out of your head, then hand that documented logic to a tactician to execute. The order matters: extraction first, delegation second. (Start here: <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<ul>
+<li><strong>The logic:</strong> You do not have time to lead marketing. Hire a part-time expert to set the strategy.</li>
+<li><strong>Why it fails:</strong> A fractional CMO brings their playbook to your business. Your business was built on your specific insights, your logic, your understanding of why the market needs what you built. Without extraction, the fractional CMO defaults to standard demand gen tactics: content calendars, lead magnets, paid campaigns. Standard tactics produce standard results. And standard results at $15K to $25K per month burn runway fast.</li>
+<li><strong>The <span class="c-orange">inversion</span>:</strong> You are the CMO until the narrative is extracted. Use a narrative partner to get the logic out of your head, then hand that documented logic to a tactician to execute. The order matters: extraction first, delegation second. (Start here: <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</li>
+</ul>
 <hr>
 
 <h2>6. The AI content stack</h2>
-<p><strong>The logic:</strong> AI can produce a hundred blog posts a month at near-zero cost. Dominate the top of funnel.</p>
-<p><strong>Why it fails:</strong> This is the most dangerous decision on this list. The cost of generating content is now effectively zero, which means the value of undifferentiated content is negative. Your competitors are running the same tools with the same prompts. The output converges toward the same statistical mean. You are not differentiating. You are disappearing into the noise. (Related: <a class="inline-link" href="/resources/the-extraction-economy">The Extraction Economy</a>.)</p>
-<p><strong>The <span class="c-orange">inversion</span>:</strong> Extract first, then distribute. Pull the specific arguments, the counterintuitive insights, and the proof sequences that make your deals close. Build a documented voice profile. Then use AI to distribute that specific, extracted logic across channels. The differentiation comes from the input, not the tool.</p>
+<ul>
+<li><strong>The logic:</strong> AI can produce a hundred blog posts a month at near-zero cost. Dominate the top of funnel.</li>
+<li><strong>Why it fails:</strong> This is the most dangerous decision on this list. The cost of generating content is now effectively zero, which means the value of undifferentiated content is negative. Your competitors are running the same tools with the same prompts. The output converges toward the same statistical mean. You are not differentiating. You are disappearing into the noise. (Related: <a class="inline-link" href="/resources/the-extraction-economy">The Extraction Economy</a>.)</li>
+<li><strong>The <span class="c-orange">inversion</span>:</strong> Extract first, then distribute. Pull the specific arguments, the counterintuitive insights, and the proof sequences that make your deals close. Build a documented voice profile. Then use AI to distribute that specific, extracted logic across channels. The differentiation comes from the input, not the tool.</li>
+</ul>
 <hr>
 
 <h2>7. The website rebuild</h2>
-<p><strong>The logic:</strong> The website is your 24/7 salesperson. It needs to be perfect before you scale.</p>
-<p><strong>Why it fails:</strong> Website rebuilds are often the most expensive form of productive procrastination. The project feels strategic. It involves design reviews, copywriting sessions, stakeholder feedback. Six months and $30K to $75K later, the site looks polished and the bounce rate is 80% because the narrative is indistinguishable from every other company in the category.</p>
-<p><strong>The <span class="c-orange">inversion</span>:</strong> If you cannot close a deal with a one-page summary of your value proposition, a redesigned website will not close it for you. Build the narrative infrastructure first. The site becomes a reflection of it, not a substitute.</p>
+<ul>
+<li><strong>The logic:</strong> The website is your 24/7 salesperson. It needs to be perfect before you scale.</li>
+<li><strong>Why it fails:</strong> Website rebuilds are often the most expensive form of productive procrastination. The project feels strategic. It involves design reviews, copywriting sessions, stakeholder feedback. Six months and $30K to $75K later, the site looks polished and the bounce rate is 80% because the narrative is indistinguishable from every other company in the category.</li>
+<li><strong>The <span class="c-orange">inversion</span>:</strong> If you cannot close a deal with a one-page summary of your value proposition, a redesigned website will not close it for you. Build the narrative infrastructure first. The site becomes a reflection of it, not a substitute.</li>
+</ul>
 <hr>
 
 <h2><span class="c-orange">The common thread</span></h2>

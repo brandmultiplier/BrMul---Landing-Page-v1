@@ -55,10 +55,12 @@ const BODY_HTML = `
 
 <h2>The Uncopyable-Asset <span class="c-orange">Instrument</span></h2>
 <p>This is a first-pass extraction, not the full Rumble process—about twenty minutes, done alone, with a notes doc open. Answer each prompt in one or two sentences, in your own words, not the polished version you would use on a sales call.</p>
-<p><strong>Part 1—The judgment call:</strong> Describe a moment you made a call in front of a prospect or customer that you could not have gotten from a competitor's website. What did you see that they did not?</p>
-<p><strong>Part 2—The customer reality:</strong> What is the one thing your best customers understand about their own problem that your worst-fit prospects never do? How did you learn to hear the difference?</p>
-<p><strong>Part 3—The market intuition:</strong> Name a shift in your market you were right about before it was obvious. What told you first? Would a generic AI prompt about your industry have surfaced that, or only you?</p>
-<p><strong>Part 4—The translation test:</strong> Hand what you just wrote to the newest person on your team. Could they say it back in a room, under pressure, and have it land the way it lands when you say it? If not, that gap is the actual size of your extraction problem.</p>
+<ol>
+<li><strong>Part 1—The judgment call:</strong> Describe a moment you made a call in front of a prospect or customer that you could not have gotten from a competitor's website. What did you see that they did not?</li>
+<li><strong>Part 2—The customer reality:</strong> What is the one thing your best customers understand about their own problem that your worst-fit prospects never do? How did you learn to hear the difference?</li>
+<li><strong>Part 3—The market intuition:</strong> Name a shift in your market you were right about before it was obvious. What told you first? Would a generic AI prompt about your industry have surfaced that, or only you?</li>
+<li><strong>Part 4—The translation test:</strong> Hand what you just wrote to the newest person on your team. Could they say it back in a room, under pressure, and have it land the way it lands when you say it? If not, that gap is the actual size of your extraction problem.</li>
+</ol>
 <p><span class="c-orange"><strong>Read back what you just wrote.</strong></span></p>
 <p>That is a first-pass map of the part of your business a language model cannot generate, because it was never public until you just wrote it down. It is also, usually, the first time a founder has seen their own uncopyable asset in one place instead of scattered across a hundred sales calls.</p>
 <p><strong>BONUS:</strong> Here's an interactive version we built for you, to make it as easy as possible to generate value quickly.</p>

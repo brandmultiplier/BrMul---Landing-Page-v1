@@ -77,9 +77,11 @@ const BODY_HTML = `
 
 <h3>Run Your Own Narrative Tax on CAC</h3>
 <p><span class="c-orange"><strong>Three inputs, one number.</strong></span></p>
-<p><span style="text-decoration:underline"><strong>Confusion Tax.</strong></span><br>Of the qualified leads that stall, what share die on inconsistent messaging rather than price or fit? In our diagnostic model, 20-30% for a StoryLocked team.</p>
-<p><span style="text-decoration:underline"><strong>Ramp Burn.</strong></span><br>Fully-loaded rep cost × months to full productivity × reps currently ramping. At nine to twelve months per rep (Brooks Group), that is most of a year of payroll before a single independent close.</p>
-<p><span style="text-decoration:underline"><strong>Cycle Inflation.</strong></span><br>Your team's average sales cycle ÷ your founder-led sales cycle. Every extra month of drag is carrying cost added to every open deal.</p>
+<ul>
+<li><span style="text-decoration:underline"><strong>Confusion Tax.</strong></span><br>Of the qualified leads that stall, what share die on inconsistent messaging rather than price or fit? In our diagnostic model, 20-30% for a StoryLocked team.</li>
+<li><span style="text-decoration:underline"><strong>Ramp Burn.</strong></span><br>Fully-loaded rep cost × months to full productivity × reps currently ramping. At nine to twelve months per rep (Brooks Group), that is most of a year of payroll before a single independent close.</li>
+<li><span style="text-decoration:underline"><strong>Cycle Inflation.</strong></span><br>Your team's average sales cycle ÷ your founder-led sales cycle. Every extra month of drag is carrying cost added to every open deal.</li>
+</ul>
 <p>Multiply the three leaks against your annual new-customer volume. That number is what StoryLock adds to your cost of acquiring a customer—every year you leave it unfixed. It is also the number no brand refresh has ever moved.</p>
 <p>The "fluff" provided by traditional agencies—the mission statements, the vague value props, the artistic decks—does nothing to solve these structural issues.</p>
 

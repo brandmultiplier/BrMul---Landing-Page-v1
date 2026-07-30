@@ -142,9 +142,11 @@ const BODY_HTML = `
 <h2>Founder-Level Conviction, Without Founder Dependency</h2>
 <p>What happens when the StoryLock Tax goes to zero?</p>
 <p>The transformation is visible in three places: your calendar, your P&amp;L, and your valuation.</p>
-<p><strong>On your calendar:</strong> You stop being the "Rescue Closer." You spend your 25 hours a week on the strategic work that actually moves the needle. You work on the business, not in the sales calls.</p>
-<p><strong>On your P&amp;L:</strong> Your Sales Infrastructure Drag vanishes. Your $200k sales hire actually produces 200k worth of results. Your close rates stabilize across the team. Revenue stops being a function of your stamina and starts being a function of your system.</p>
-<p><strong>On your Valuation:</strong> This is the most critical shift. An acquirer looks at a founder-led company and sees "Key Person Risk." They see a business that might collapse if you leave. A company with a Narrative Operating System is an asset. It is a machine that produces revenue regardless of who is in the CEO chair. (Related: <a class="inline-link" href="/resources/the-valuation-killer">The Valuation Killer</a>.)</p>
+<ul>
+<li><strong>On your calendar:</strong> You stop being the "Rescue Closer." You spend your 25 hours a week on the strategic work that actually moves the needle. You work on the business, not in the sales calls.</li>
+<li><strong>On your P&amp;L:</strong> Your Sales Infrastructure Drag vanishes. Your $200k sales hire actually produces 200k worth of results. Your close rates stabilize across the team. Revenue stops being a function of your stamina and starts being a function of your system.</li>
+<li><strong>On your Valuation:</strong> This is the most critical shift. An acquirer looks at a founder-led company and sees "Key Person Risk." They see a business that might collapse if you leave. A company with a Narrative Operating System is an asset. It is a machine that produces revenue regardless of who is in the CEO chair. (Related: <a class="inline-link" href="/resources/the-valuation-killer">The Valuation Killer</a>.)</li>
+</ul>
 <p>You move from a "Magic" business to a "Scalable" business.</p>
 
 <h2>Stop Paying the Tax</h2>
