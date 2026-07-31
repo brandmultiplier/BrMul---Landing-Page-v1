@@ -103,7 +103,7 @@ const BODY_HTML = `
 <h3>What Makes This <span class="c-orange">Different</span> From Everything Else You've Tried</h3>
 <p>The work starts with structured extraction—getting the actual logic out of your head through a diagnostic process designed for tacit knowledge (the kind you can demonstrate but can't easily articulate). It then moves through architecture and installation phases that ensure the narrative doesn't just exist as a document but operates as a system your team runs daily.</p>
 <p>The methodology is grounded in cognitive science research on expert-novice knowledge transfer—specifically why expertise doesn't transfer through surface-level exposure (decks, scripts, onboarding) and what does work instead.</p>
-<p>The full methodology is being published, phase by phase, in the Story-Driven Growth newsletter.</p>
+<p>The full methodology is being published, phase by phase, in the <a class="inline-link" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7405394852714287105">Story-Driven Growth newsletter</a>.</p>
 <hr>
 
 <h2>5. Closing with Founder-Level Conviction: The Transformation</h2>
@@ -126,7 +126,7 @@ const BODY_HTML = `
 <p>It's time to extract the magic. It's time to build the system.</p>
 <p><strong>Ready to build your Narrative Operating System?</strong> Book The Diagnostic with BrandMultiplier. We'll show you exactly how to extract what's in your head and build the B2B narrative infrastructure that makes it travel without you. So your team closes with founder-level conviction. Without founder dependency.</p>
 
-<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">&gt;&gt; Calculate your Founder Dependency Score here</a></p>
+<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your Founder Dependency Score here</a></p>
 <p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% of first sales hires fail within 12 months—SaaStr. Founder-dependency valuation discount (owner-dependent businesses draw offers of 2.93x pre-tax profit vs 4.49x, roughly 35% lower)—John Warrillow's Value Builder analysis of 14,000 businesses; the "key person discount" is recognized by the IRS and the American Society of Appraisers. Engagement results (CAC, sales-cycle, founder-involvement, and hire-success figures, averaged across 120 engagements) reflect BrandMultiplier's diagnostic model—directional, not audited.</em></p></div>

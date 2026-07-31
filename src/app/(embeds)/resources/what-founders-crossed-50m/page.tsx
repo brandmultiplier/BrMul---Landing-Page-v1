@@ -121,7 +121,7 @@ const BODY_HTML = `
 <p>You are paying it in failed hires. You are paying it in high CAC. You are paying it in the 20 hours a week you spend "rescuing" deals that your team should have handled on their own.</p>
 <p>Stop guessing. Start calculating.</p>
 <p>We built a diagnostic tool specifically for founders at the $3M-$50M ARR stage. It will help you see exactly how much your current "Narrative Gap" is costing your bottom line—and which of these five archetypal failures you are currently funding. (Related: <a class="inline-link" href="/resources/the-3-9m-leak">The $3.9M Leak</a>.)</p>
-<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">[RUN YOUR NUMBERS: The StoryLock Tax Calculator]</a></p>
+<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">RUN YOUR NUMBERS: The StoryLock Tax Calculator</a></p>
 
 <div class="callout"><span class="ico">💡</span>
 <h3>The Diagnostic</h3>
