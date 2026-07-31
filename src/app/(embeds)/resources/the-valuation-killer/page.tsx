@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The Valuation Killer</div>
+  <div class="eyebrow">Founder Dependency &amp; Exit Value</div>
   <h1>The Valuation Killer</h1>
   <p class="h1-sub">Why Your 'Founder Magic' Is a <span class="c-orange">Series B Liability</span></p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/the-valuation-killer-cover.png" alt="Futuristic power core with a glowing orange neural sphere nested in purple energy conduits and dark mechanical housing">
     <figcaption>Investors don't see your magic. They see key person risk—and they price it.</figcaption>

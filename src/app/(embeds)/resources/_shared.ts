@@ -14,6 +14,7 @@ img{max-width:100%;display:block}a{color:var(--purple)}
 h1{font-size:40px;line-height:1.14;margin:0 0 14px;letter-spacing:-.01em;font-weight:800}
 .lead{font-size:21px;color:#33333a;margin:0 0 16px}
 .byline{color:var(--gray);font-size:14px;margin:0 0 26px;font-family:Georgia,serif;font-style:italic}
+.byline a{color:var(--purple);text-decoration:underline;text-underline-offset:2px}
 .hero{margin:0 0 34px}
 .hero img{width:100%;height:auto;border-radius:14px;display:block;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line)}
 .hero-ph{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;

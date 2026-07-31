@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The Multi-Protagonist Map</div>
+  <div class="eyebrow">The B2B Buying Committee</div>
   <h1>The Multi-Protagonist Map</h1>
   <p class="h1-sub">Why Your Deal Is <span class="c-orange">Stalling</span> With 8-13 People You've Never Individually Convinced</p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/the-multi-protagonist-map-cover.png" alt="Silhouette in a circular stone chamber connected by glowing orange lines to multiple purple portals around the walls">
     <figcaption>One hero's journey can't carry a committee of thirteen.</figcaption>

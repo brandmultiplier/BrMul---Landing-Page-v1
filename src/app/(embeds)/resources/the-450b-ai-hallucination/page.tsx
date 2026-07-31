@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The $450B AI Hallucination</div>
+  <div class="eyebrow">AI Spend vs. Real ROI</div>
   <h1>The $450B AI Hallucination</h1>
   <p class="h1-sub">Why <span class="c-orange">narrative infrastructure</span>, not software, is the final lever for B2B ROI</p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/the-450b-ai-hallucination-cover.png" alt="Dark tiered pedestal with glowing orange seams supporting a skyline of translucent purple data towers">
     <figcaption>Record spend in. Fractional return out. The missing lever isn't another tool.</figcaption>

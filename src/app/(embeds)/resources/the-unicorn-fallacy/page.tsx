@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The Unicorn Fallacy</div>
+  <div class="eyebrow">The Unicorn-Closer Myth</div>
   <h1>The Unicorn Fallacy</h1>
   <p class="h1-sub">Why your sales hires fail (and how to fix the <span class="c-orange">Narrative Debt</span>)</p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/the-unicorn-fallacy-cover.png" alt="Crystalline unicorn statue shattering into glowing orange shards on a desk, with a purple network map glowing in the background">
     <figcaption>Talent is a multiplier. Multiply it by a story that was never extracted and you get zero.</figcaption>

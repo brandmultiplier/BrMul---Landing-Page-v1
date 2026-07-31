@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The $500k Dead Weight</div>
+  <div class="eyebrow">Why Sales Hires Fail</div>
   <h1>The $500k Dead Weight</h1>
   <p class="h1-sub">A Forensic Audit of the 5 Hires That <span class="c-orange">Bankrupt</span> Founder-Led Sales</p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/the-500k-dead-weight-cover.png" alt="Five cracked metallic egg-shaped weights hanging from an industrial gantry, glowing orange with a purple energy arc overhead">
     <figcaption>Five different resumes. The same empty room.</figcaption>

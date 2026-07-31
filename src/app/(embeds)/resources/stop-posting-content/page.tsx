@@ -14,10 +14,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">Stop Posting Content</div>
+  <div class="eyebrow">Content vs. Infrastructure</div>
   <h1>Stop Posting Content</h1>
   <p class="h1-sub">Start Building <span class="c-orange">Narrative Infrastructure.</span></p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/stop-posting-content-cover.png" alt="Glass figure connected by neural strands to a glowing narrative infrastructure grid">
     <figcaption>Broadcasting louder doesn't fix a story that was never extracted.</figcaption>

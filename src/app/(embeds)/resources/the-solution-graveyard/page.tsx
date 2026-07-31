@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The Solution Graveyard</div>
+  <div class="eyebrow">The Fixes That Fail</div>
   <h1>The Solution Graveyard</h1>
   <p class="h1-sub">Why Eight Fixes Couldn't Solve <span class="c-orange">One Problem</span></p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/the-solution-graveyard-cover.png" alt="Silhouette walking past a row of dark purple monoliths toward a glowing orange doorway">
     <figcaption>Eight headstones. One buried assumption.</figcaption>

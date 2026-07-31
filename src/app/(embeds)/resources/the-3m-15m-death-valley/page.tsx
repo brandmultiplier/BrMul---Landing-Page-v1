@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The $3M-$15M Death Valley</div>
+  <div class="eyebrow">Escaping the Growth Plateau</div>
   <h1>The $3M-$15M Death Valley</h1>
   <p class="h1-sub">7 decisions that look like progress.<br>All 7 fail for the same <span class="c-orange">structural reason</span>.</p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/the-3m-15m-death-valley-cover.png" alt="Glowing purple and orange geometric bridge crossing a dark chasm toward a neon city">
     <figcaption>Seven reasonable decisions. One structural cause. The same plateau.</figcaption>

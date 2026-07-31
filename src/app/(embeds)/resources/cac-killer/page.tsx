@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The CAC Killer</div>
+  <div class="eyebrow">The Narrative Tax on CAC</div>
   <h1>The CAC Killer</h1>
   <p class="h1-sub">Why Your Marketing Agency is <span class="c-orange">Selling You Fluff</span> While Your Sales Team Starves</p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/cac-killer-cover.png" alt="Silhouette with glowing orange chest sending energy into a purple network of connected figures with orange cores">
     <figcaption>When the founder is the only generator, the lights go out the moment they stop.</figcaption>

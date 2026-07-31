@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The Extraction Economy</div>
+  <div class="eyebrow">AI &amp; the Sameness Problem</div>
   <h1>The Extraction Economy</h1>
   <p class="h1-sub">How AI Made Every Competitor <span class="c-orange">Sound Identical</span>—And What's Still Yours</p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/the-extraction-economy-cover.png" alt="Deep purple colonnade of arches with one cracked pillar revealing glowing orange light, and a silhouetted figure reaching toward it">
     <figcaption>96% adoption, one shared corpus, identical output. The moat is what's still in your head.</figcaption>

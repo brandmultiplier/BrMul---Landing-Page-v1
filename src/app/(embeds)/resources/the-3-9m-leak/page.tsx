@@ -13,10 +13,10 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">The $3.9M Leak</div>
+  <div class="eyebrow">The Cost of Founder-Led Sales</div>
   <h1>The $3.9M Leak</h1>
   <p class="h1-sub">A Diagnostic Report on the <span class="c-orange">Founder's Trap</span></p>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/the-3-9m-leak-cover.png" alt="Futuristic hourglass leaking glowing orange energy through a cracked bulb">
     <figcaption>The value isn't lost to competitors. It's draining through one constriction.</figcaption>

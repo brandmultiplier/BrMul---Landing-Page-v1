@@ -13,12 +13,12 @@ const BODY_HTML = `
   <a class="back" href="/resources">← All resources</a>
 </header>
 <main class="resource">
-  <div class="eyebrow">What Founders Who Crossed $50M Did at $10M</div>
+  <div class="eyebrow">Breaking the $10M Ceiling</div>
   <h1>What Founders Who Crossed $50M Did at $10M That Almost Nobody Does</h1>
   <div class="callout"><span class="ico">💡</span>
   <p>Pattern analysis across 12 founder-led B2B companies that <span class="c-orange"><strong>broke the $7M-$12M ceiling</strong></span>—and the 4 traps that catch the ones that don't.</p>
   </div>
-  <p class="byline">By BrandMultiplier</p>
+  <p class="byline">By <a href="https://www.linkedin.com/in/chrisrubin">Chris Rubin</a></p>
   <figure class="hero">
     <img src="/resources/what-founders-crossed-50m-cover.png" alt="Crowds of silhouettes supporting a purple ceiling while a few climb staircases toward a single figure floating in orange light">
     <figcaption>The breakthrough founders did three structural things at $8M-$15M. The stalled ones deferred all three.</figcaption>
