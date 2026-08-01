@@ -103,37 +103,6 @@ export default function Proof() {
                         </div>
                     </div>
                 </motion.div>
-
-                {/* Additional Stats Grid */}
-                <div className="mt-24 sm:mt-32">
-                    <div className="max-w-4xl mb-16 sm:mb-24 space-y-6 sm:space-y-8">
-                        <h3 className="text-xl sm:text-2xl md:text-3xl text-white font-light leading-tight">
-                            This methodology was proven at Accenture’s scale.
-                        </h3>
-                        <p className="text-base sm:text-lg md:text-xl text-text-secondary font-light leading-relaxed max-w-3xl">
-                            We’ve since refined it for the specific challenge founder-led B2B companies face between $3M-$50M: <span className="text-white font-medium">getting the story out of one person’s head and into a system.</span>
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-                        {[
-                            { val: "120+", label: "founder-led B2B companies transformed" },
-                            { val: "30%+", label: "average CAC reduction within 6 months" },
-                            { val: "35%+", label: "deal cycle acceleration" },
-                            { val: "75%", label: "retention beyond initial engagement" },
-                        ].map((stat, i) => (
-                            <motion.div
-                                key={stat.label}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                                transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                                className="bg-[#0A0A0A] border border-white/5 p-6 sm:p-8 rounded hover:border-white/10 transition-colors group"
-                            >
-                                <div className="text-3xl sm:text-4xl md:text-5xl text-white font-light tracking-tight mb-3 sm:mb-4 group-hover:text-accent-indigo transition-colors">{stat.val}</div>
-                                <div className="text-[10px] sm:text-xs text-text-secondary uppercase tracking-wider font-medium leading-relaxed">{stat.label}</div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
             </ScrollFade>
         </section>
     );
