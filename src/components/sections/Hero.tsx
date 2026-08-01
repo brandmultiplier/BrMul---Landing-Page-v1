@@ -1,13 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "../ui/Button";
 import HeroZoomTitle from "../ui/HeroZoomTitle";
 
 export default function Hero() {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(sectionRef, { once: true, margin: "-10%" });
     const { scrollY } = useScroll();
 
     // Parallax & Fade for background elements
@@ -18,7 +15,7 @@ export default function Hero() {
     const titlePhrases = ["You", "can", "close", "any", "room."];
 
     return (
-        <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16 sm:pt-20 lg:pt-32">
+        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16 sm:pt-20 lg:pt-32">
             {/* Ambient Background Elements (Subtle Glow) */}
             <motion.div
                 style={{ y: y1, opacity }}
@@ -68,32 +65,6 @@ export default function Hero() {
                                 <span>Walk away knowing if your problem is structural, or not.</span>
                             </div>
                         </div>
-                    </div>
-                </motion.div>
-
-                {/* 4. FOOTER STATS */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.8 }}
-                    className="w-full max-w-4xl border-t border-white/5 pt-6 md:pt-8 mt-8 md:mt-12"
-                >
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-10">
-                        {[
-                            { label: "founders freed", value: "120+" },
-                            { label: "CAC reduction", value: "30%+" },
-                            { label: "deal acceleration", value: "35%+" },
-                            { label: "retention", value: "75%" },
-                        ].map((stat, i) => (
-                            <div key={i} className="text-center group cursor-default">
-                                <div className="text-2xl sm:text-2xl md:text-3xl font-light text-white mb-1 md:mb-2 group-hover:text-accent-purple transition-colors duration-300">
-                                    {stat.value}
-                                </div>
-                                <div className="text-[9px] sm:text-[10px] md:text-xs font-medium text-text-tertiary uppercase tracking-wider group-hover:text-text-secondary transition-colors leading-relaxed">
-                                    {stat.label}
-                                </div>
-                            </div>
-                        ))}
                     </div>
                 </motion.div>
 
