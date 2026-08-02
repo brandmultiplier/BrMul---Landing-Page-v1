@@ -133,8 +133,78 @@ export default function WhitePaper2024Page() {
         .wp-download:hover { background: #3d35a8; }
         .wp-download-inline { margin-top: 1rem; }
 
+        .wp-body {
+          flex: 1 1 auto;
+          min-height: 0;
+          display: flex;
+          overflow: hidden;
+        }
+
+        .wp-thumbs {
+          flex: 0 0 140px;
+          width: 140px;
+          border-right: 1px solid rgba(255,255,255,0.08);
+          background: #0d0d0d;
+          min-height: 0;
+        }
+
+        .wp-thumbs-scroll {
+          height: 100%;
+          overflow-y: auto;
+          overflow-x: hidden;
+          padding: 0.85rem 0.7rem 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255,255,255,0.25) transparent;
+        }
+        .wp-thumbs-scroll::-webkit-scrollbar { width: 6px; }
+        .wp-thumbs-scroll::-webkit-scrollbar-thumb {
+          background: rgba(255,255,255,0.25);
+          border-radius: 999px;
+        }
+
+        .wp-thumb {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.35rem;
+          padding: 0;
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          color: rgba(255,255,255,0.55);
+        }
+        .wp-thumb-frame {
+          display: block;
+          width: 96px;
+          border-radius: 3px;
+          overflow: hidden;
+          background: #222;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+          outline: 2px solid transparent;
+          outline-offset: 2px;
+          line-height: 0;
+          transition: outline-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .wp-thumb-frame canvas { display: block; width: 100%; height: auto; }
+        .wp-thumb:hover .wp-thumb-frame {
+          outline-color: rgba(255,255,255,0.35);
+        }
+        .wp-thumb.is-active .wp-thumb-frame {
+          outline-color: #4940C6;
+          box-shadow: 0 0 0 1px #4940C6, 0 4px 16px rgba(73,64,198,0.35);
+        }
+        .wp-thumb.is-active { color: #fff; }
+        .wp-thumb-label {
+          font-size: 0.7rem;
+          font-variant-numeric: tabular-nums;
+        }
+
         .wp-stage {
           flex: 1 1 auto;
+          min-width: 0;
           overflow: auto;
           display: flex;
           justify-content: center;
@@ -172,6 +242,8 @@ export default function WhitePaper2024Page() {
           .wp-brand { width: 100%; }
           .wp-controls { order: 3; flex: 1 1 auto; justify-content: center; }
           .wp-download { margin-left: auto; }
+          .wp-thumbs { flex-basis: 108px; width: 108px; }
+          .wp-thumb-frame { width: 72px; }
         }
       `}</style>
       <WhitePaperViewer pdfUrl={PDF_PATH} downloadName={PDF_FILENAME} />
