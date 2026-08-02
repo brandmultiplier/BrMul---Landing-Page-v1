@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 
-const PDF_FILENAME = "BrandMultiplier-White Paper_main.pdf";
+const PDF_FILENAME = "BrandMultiplier—White Paper_main.pdf";
 const PDF_PATH = `/2024-white-paper/${encodeURIComponent(PDF_FILENAME)}`;
 
 export const metadata: Metadata = {
