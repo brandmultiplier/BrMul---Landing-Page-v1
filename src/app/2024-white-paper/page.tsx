@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import WhitePaperViewer from "./WhitePaperViewer";
 
 const PDF_FILENAME = "BrandMultiplier—White Paper_main.pdf";
 const PDF_PATH = `/2024-white-paper/${encodeURIComponent(PDF_FILENAME)}`;
@@ -23,68 +24,157 @@ export const viewport: Viewport = {
 
 export default function WhitePaper2024Page() {
   return (
-    <div className="white-paper-page min-h-screen bg-white text-[#111114]">
+    <>
       <style>{`
-        html body { background: #fff !important; color-scheme: light; }
-        .white-paper-page { font-family: Arial, Helvetica, sans-serif; }
+        html, body {
+          background: #121212 !important;
+          color-scheme: dark;
+          overflow: hidden;
+          height: 100%;
+        }
+
+        .wp-shell {
+          position: fixed;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          font-family: Arial, Helvetica, sans-serif;
+          background: #121212;
+          color: #f5f5f5;
+        }
+
+        .wp-toolbar {
+          flex: 0 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          padding: 0.85rem 1.25rem;
+          background: #0a0a0a;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+          z-index: 10;
+        }
+
+        .wp-brand { min-width: 0; }
+        .wp-kicker {
+          display: block;
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #8B83E8;
+          margin-bottom: 0.2rem;
+        }
+        .wp-title {
+          margin: 0;
+          font-size: clamp(0.95rem, 2vw, 1.15rem);
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: #fff;
+        }
+
+        .wp-controls {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 999px;
+          padding: 0.25rem 0.45rem;
+        }
+
+        .wp-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 2rem;
+          height: 2rem;
+          border: none;
+          border-radius: 999px;
+          background: transparent;
+          color: #fff;
+          cursor: pointer;
+        }
+        .wp-btn:hover:not(:disabled) { background: rgba(255,255,255,0.1); }
+        .wp-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+        .wp-page, .wp-zoom {
+          min-width: 4.5rem;
+          text-align: center;
+          font-size: 0.8rem;
+          font-variant-numeric: tabular-nums;
+          color: rgba(255,255,255,0.75);
+        }
+        .wp-zoom { min-width: 3.25rem; }
+        .wp-sep {
+          width: 1px;
+          height: 1.25rem;
+          background: rgba(255,255,255,0.12);
+          margin: 0 0.35rem;
+        }
+
+        .wp-download {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          background: #4940C6;
+          color: #fff;
+          text-decoration: none;
+          font-size: 0.85rem;
+          font-weight: 700;
+          padding: 0.65rem 1.1rem;
+          border-radius: 0.55rem;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .wp-download:hover { background: #3d35a8; }
+        .wp-download-inline { margin-top: 1rem; }
+
+        .wp-stage {
+          flex: 1 1 auto;
+          overflow: auto;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          padding: 1.5rem 1rem 2.5rem;
+          background:
+            radial-gradient(ellipse at top, rgba(73,64,198,0.12), transparent 55%),
+            #161616;
+        }
+
+        .wp-page-wrap {
+          background: #fff;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+          line-height: 0;
+          transition: opacity 0.15s ease;
+        }
+        .wp-page-wrap.is-rendering { opacity: 0.7; }
+        .wp-page-wrap canvas { display: block; max-width: none; }
+
+        .wp-status {
+          margin: auto;
+          text-align: center;
+          color: rgba(255,255,255,0.7);
+          font-size: 0.95rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        @media (max-width: 820px) {
+          .wp-toolbar {
+            flex-wrap: wrap;
+            row-gap: 0.65rem;
+          }
+          .wp-brand { width: 100%; }
+          .wp-controls { order: 3; flex: 1 1 auto; justify-content: center; }
+          .wp-download { margin-left: auto; }
+        }
       `}</style>
-
-      <header className="border-b border-[#E8E6E1]">
-        <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#4940C6]">
-              BrandMultiplier · 2024
-            </p>
-            <h1 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
-              The SMB Brand Playbook
-            </h1>
-            <p className="mt-1 text-sm text-[#666666] sm:text-base">
-              Integrating AI for Competitive Advantage
-            </p>
-          </div>
-
-          <a
-            href={PDF_PATH}
-            download={PDF_FILENAME}
-            className="inline-flex items-center justify-center rounded-lg bg-[#4940C6] px-5 py-3 text-sm font-bold text-white no-underline shadow-sm transition hover:bg-[#3d35a8]"
-          >
-            Download PDF
-          </a>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-5xl px-6 py-6">
-        <object
-          data={PDF_PATH}
-          type="application/pdf"
-          className="hidden h-[calc(100vh-12rem)] min-h-[70vh] w-full rounded border border-[#E8E6E1] bg-[#fafafa] sm:block"
-          aria-label="2024 BrandMultiplier white paper preview"
-        >
-          <iframe
-            src={PDF_PATH}
-            title="2024 BrandMultiplier white paper preview"
-            className="h-[calc(100vh-12rem)] min-h-[70vh] w-full rounded border border-[#E8E6E1] bg-[#fafafa]"
-          />
-        </object>
-
-        <iframe
-          src={PDF_PATH}
-          title="2024 BrandMultiplier white paper preview"
-          className="block h-[calc(100vh-12rem)] min-h-[70vh] w-full rounded border border-[#E8E6E1] bg-[#fafafa] sm:hidden"
-        />
-
-        <p className="mt-4 text-center text-sm text-[#666666]">
-          PDF not displaying?{" "}
-          <a href={PDF_PATH} download={PDF_FILENAME} className="font-bold text-[#4940C6] underline">
-            Download the file
-          </a>{" "}
-          or{" "}
-          <a href={PDF_PATH} target="_blank" rel="noopener noreferrer" className="font-bold text-[#4940C6] underline">
-            open in a new tab
-          </a>
-          .
-        </p>
-      </main>
-    </div>
+      <WhitePaperViewer pdfUrl={PDF_PATH} downloadName={PDF_FILENAME} />
+    </>
   );
 }
