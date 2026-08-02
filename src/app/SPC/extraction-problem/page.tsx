@@ -130,7 +130,7 @@ const BODY_HTML = `
 
   <div class="eyebrow">Addendum to the 2024 BrandMultiplier White Paper</div>
   <h1>The Extraction Problem</h1>
-  <p class="deck">A founder's commercial judgment is the last thing in a company that will not transfer, and nobody has ever measured what a story is worth. Two years of evidence since, and what it forced me to build.</p>
+  <p class="deck">A founder's commercial judgment is the hardest thing in a company to transfer, and no one has ever measured what it is worth in pipeline. My 2024 white paper missed both. Two years of evidence, six killed versions of this company, and what they forced me to build.</p>
   <p class="byline"><b>Chris Rubin</b> &nbsp;·&nbsp; Founder and CEO, BrandMultiplier &nbsp;·&nbsp; Aspen, Colorado &nbsp;·&nbsp; July 2026</p>
 
   <div class="orient">
