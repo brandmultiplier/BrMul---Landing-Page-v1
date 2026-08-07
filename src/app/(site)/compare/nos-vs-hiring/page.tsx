@@ -711,9 +711,9 @@ export default function NosVsHiringPage() {
                 <cite>Gong</cite>
               </div>
               <div className="ndh-card">
-                <p className="ndh-stat"><span>10–25%</span></p>
-                <p>key-person valuation discount recognized in appraisal practice and accepted by U.S. Tax Court for businesses overly dependent on one founder.</p>
-                <cite>Damodaran (NYU Stern); U.S. Tax Court</cite>
+                <p className="ndh-stat"><span>~35%</span></p>
+                <p>lower acquisition offers for owner-dependent businesses&mdash;2.93&times; pre-tax profit against 4.49&times; for owner-independent ones.</p>
+                <cite>John Warrillow, The Value Builder System</cite>
               </div>
             </div>
 
