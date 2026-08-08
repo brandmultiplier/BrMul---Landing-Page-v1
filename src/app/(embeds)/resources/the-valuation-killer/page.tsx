@@ -127,7 +127,7 @@ const BODY_HTML = `
 <p><strong>Ready to build your Narrative Operating System?</strong> Book The Diagnostic with BrandMultiplier. We'll show you exactly how to extract what's in your head and build the B2B narrative infrastructure that makes it travel without you. So your team closes with founder-level conviction. Without founder dependency.</p>
 
 <p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your Founder Dependency Score here</a></p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=the-valuation-killer">Book The Diagnostic</a></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% of first sales hires fail within 12 months—SaaStr. Founder-dependency valuation discount (owner-dependent businesses draw offers of 2.93x pre-tax profit vs 4.49x, roughly 35% lower)—John Warrillow's Value Builder analysis of 14,000 businesses; the "key person discount" is recognized by the IRS and the American Society of Appraisers. Engagement results (CAC, sales-cycle, founder-involvement, and hire-success figures, averaged across 120 engagements) reflect BrandMultiplier's diagnostic model—directional, not audited.</em></p></div>
   </article>

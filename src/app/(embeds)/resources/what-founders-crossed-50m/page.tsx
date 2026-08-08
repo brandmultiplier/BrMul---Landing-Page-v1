@@ -126,7 +126,7 @@ const BODY_HTML = `
 <div class="callout"><span class="ico">💡</span>
 <h3>The Diagnostic</h3>
 <p>Before the call, we've already run your public content through our tooling—your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural.</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=what-founders-crossed-50m">Book The Diagnostic</a></p>
 </div>
 
 <p><em>BrandMultiplier installs Narrative Operating Systems for founder-led B2B companies between $3M and $50M ARR. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></em></p>

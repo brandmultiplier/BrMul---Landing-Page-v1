@@ -163,7 +163,7 @@ const BODY_HTML = `
 
 <div class="callout "><span class="ico">💡</span><h3>The Diagnostic</h3>
 <p>Before the call, we've already run your public content through our tooling—your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural.</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p></div>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=the-3-9m-leak">Book The Diagnostic</a></p></div>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year sales-hire failure—SaaStr. The three-part StoryLock Tax (revenue leakage, founder time tax, infrastructure drag) is BrandMultiplier's diagnostic model applied to a worked example—directional, not audited.</em></p></div>
   </article>

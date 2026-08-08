@@ -105,7 +105,7 @@ const BODY_HTML = `
 <p>Three minutes. Your specific number.</p>
 <p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your StoryLock Tax</a></p>
 <p>Or, if you already know the problem is structural, and want to talk about what building the infrastructure looks like:</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=the-3m-15m-death-valley">Book The Diagnostic</a></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: 70% of first VP of Sales hires fail—SaaStr. Tacit knowledge, knowing more than we can tell—Michael Polanyi, The Tacit Dimension (1966). The seven-decision cost figures and portfolio outcome metrics reflect BrandMultiplier's internal diagnostic model—directional, not an audited figure.</em></p></div>
   </article>

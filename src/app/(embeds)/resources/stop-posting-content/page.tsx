@@ -127,9 +127,9 @@ const BODY_HTML = `
 <ol>
 <li><strong>Audit your team:</strong> Ask your three best salespeople to explain your value proposition in 60 seconds. If you get three different answers, you have a StoryLock problem.</li>
 <li><strong>Audit your agency:</strong> Ask them how many of your LinkedIn impressions turned into "Stage 2" sales opportunities last month. If they don't know, they are selling you fluff.</li>
-<li><strong><a class="inline-link" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic:</a></strong> We don't do "discovery calls." We do an in-depth diagnostic. We will spend 30 minutes (or less) diagnosing your narrative infrastructure and identifying exactly where your logic is getting trapped.</li>
+<li><strong><a class="inline-link" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=stop-posting-content">Book The Diagnostic:</a></strong> We don't do "discovery calls." We do an in-depth diagnostic. We will spend 30 minutes (or less) diagnosing your narrative infrastructure and identifying exactly where your logic is getting trapped.</li>
 </ol>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=stop-posting-content">Book The Diagnostic</a></p>
 <p>Stop being an influencer. Start building infrastructure.</p>
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year failure rate for first sales hires at founder-led B2B companies—SaaStr.</em></p></div>
   </article>

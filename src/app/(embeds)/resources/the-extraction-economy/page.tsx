@@ -71,7 +71,7 @@ const BODY_HTML = `
 <p>The monoculture is not a permanent condition—it is a temporary market failure that gets arbitraged away. The founders who extract their proprietary narrative now compound an advantage every quarter the rest of the category keeps generating the mean. The founders who wait are training the next version of the model that will describe their own category back to them, generically, forever.</p>
 <p>What you just wrote in the Instrument above is not a finished asset. It is the first extraction. The full process, The Rumble, goes deeper than twenty minutes alone with a notes doc can reach—but it starts exactly where you just started. (Full blueprint: <a class="inline-link" href="/what-is-a-narrative-operating-system">Narrative Operating System</a>.)</p>
 
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=the-extraction-economy">Book The Diagnostic</a></p>
 <hr>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: 96% of B2B marketers use AI; 39% cite brand voice as the hardest thing to get right—Content Marketing Institute, 2026.</em></p></div>

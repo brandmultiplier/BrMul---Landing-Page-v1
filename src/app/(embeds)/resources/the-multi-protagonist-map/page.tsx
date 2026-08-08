@@ -64,7 +64,7 @@ const BODY_HTML = `
 <h2>The bridge</h2>
 <p>You can build this map by hand, for one deal, in about twenty minutes. A system builds it automatically, for every deal, for every rep, the moment a new stakeholder is added to a CRM record—which is the difference between solving this once and solving it as infrastructure. (That is what a <a class="inline-link" href="/what-is-a-narrative-operating-system">Narrative Operating System</a> is for. Related: <a class="inline-link" href="/resources/the-solution-graveyard">The Solution Graveyard</a>.)</p>
 
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=the-multi-protagonist-map">Book The Diagnostic</a></p>
 <hr>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: Average B2B buying committee of ~22 people (13 internal, 9 external)—Forrester (2026). 86% of B2B purchases stall before closing—Forrester, The State of Business Buying. 74% of buying teams experience unhealthy conflict during the purchase—Gartner (2025). 40-60% of qualified deals lost to 'no decision', 56% to buyer indecision, across 2.5M sales conversations—Matthew Dixon &amp; Ted McKenna, The JOLT Effect (2022).</em></p></div>

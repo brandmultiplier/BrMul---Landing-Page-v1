@@ -153,7 +153,7 @@ const BODY_HTML = `
 <div class="callout"><span class="ico">💡</span>
 <h3>The Diagnostic</h3>
 <p>Before the call, we've already run your public content through our tooling—your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural.</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=cac-killer">Book The Diagnostic</a></p>
 </div>
 
 <p><em>BrandMultiplier.ai—B2B Narrative Infrastructure for Founder-Led Companies. Extract the logic. Build the system. Scale the conviction.</em></p>

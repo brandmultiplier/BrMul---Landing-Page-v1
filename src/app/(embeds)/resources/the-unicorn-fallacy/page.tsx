@@ -82,7 +82,7 @@ const BODY_HTML = `
 
 <p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your StoryLock Tax</a></p>
 <p>Or, if you already know the problem is real and want to talk about what building the infrastructure looks like for your specific situation:</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=the-unicorn-fallacy">Book The Diagnostic</a></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: 70% of first VP of Sales hires fail—SaaStr. The technical-debt metaphor—Ward Cunningham (1992). Tacit knowledge, knowing more than we can tell—Michael Polanyi, The Tacit Dimension (1966). The Accenture Interactive win-rate figures, the founder-vs-team close-rate gap, and portfolio outcome metrics are BrandMultiplier's own client and diagnostic data—not third-party-published figures.</em></p></div>
   </article>
