@@ -4,7 +4,7 @@
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.62;font-size:18px}
 img{max-width:100%;display:block}a{color:var(--purple)}
-.site-head-bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(6px);border-bottom:1px solid var(--line)}
+.site-head-bar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);transform:translateZ(0)}
 .site-head{position:static;display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:960px;margin:0 auto;padding:20px 24px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
 .logo img{width:40px;height:40px;border-radius:8px;object-fit:contain}
@@ -81,9 +81,8 @@ a.btn-secondary{display:inline-block;background:#fff;color:var(--purple);border:
 .acard .nm{font-weight:800;font-size:16px;margin-bottom:6px;padding-right:30px;line-height:1.2}
 .acard .cz{font-size:13px;color:#555;line-height:1.45}.acard .cz b{color:var(--red)}
 @media (max-width:640px){h1{font-size:31px}.lead{font-size:19px}.cards{grid-template-columns:1fr}
-body{font-size:17px}.head-actions{gap:10px}.back{font-size:13px}a.btn-nav{padding:8px 13px;font-size:13px}.sticky-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(17,17,20,.10)}.sticky-cta-txt{font-size:13px;font-weight:700;color:var(--ink);line-height:1.25;flex:1 1 auto}a.btn-sticky{flex:0 0 auto;display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:11px 16px;border-radius:9px;font-size:14px;white-space:nowrap}.site-foot{padding-bottom:84px}.statrow{grid-template-columns:1fr}.cardgrid .acard{flex-basis:100%}}
+body{font-size:17px}.head-actions{gap:10px}.back{font-size:13px}a.btn-nav{padding:8px 13px;font-size:13px}.sticky-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);transform:translateZ(0)}.sticky-cta-txt{font-size:13px;font-weight:700;color:var(--ink);line-height:1.25;flex:1 1 auto}a.btn-sticky{flex:0 0 auto;display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:11px 16px;border-radius:9px;font-size:14px;white-space:nowrap}.site-foot{padding-bottom:84px}.statrow{grid-template-columns:1fr}.cardgrid .acard{flex-basis:100%}}
 @media (max-width:400px){.back{display:none}}
-@media (prefers-reduced-motion:no-preference){.sticky-cta{transition:transform .2s ease}}
 `;
 
 export const RESOURCE_LOGO = "/brandmultiplier-logo.png";
