@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 const BODY_HTML = `
 <header class="site-head">
   <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
-  <a class="back" href="/resources">← All resources</a>
+  <div class="head-actions">
+    <a class="back" href="/resources">← All resources</a>
+    <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-500k-dead-weight__nav" data-cta="nav">Book The Diagnostic</a>
+  </div>
 </header>
 <main class="resource">
   <div class="eyebrow">Why Sales Hires Fail</div>

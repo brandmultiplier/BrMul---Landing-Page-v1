@@ -9,6 +9,9 @@ img{max-width:100%;display:block}a{color:var(--purple)}
 .logo img{width:40px;height:40px;border-radius:8px;object-fit:contain}
 .logo b{font-weight:700;letter-spacing:.06em;font-size:15px;text-transform:uppercase}
 .back{font-size:14px;color:var(--gray);text-decoration:none}.back:hover{color:var(--purple)}
+.head-actions{display:flex;align-items:center;gap:16px}
+a.btn-nav{position:fixed;right:16px;bottom:16px;z-index:1000;display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:9px 16px;border-radius:8px;font-size:14px;line-height:1.2;white-space:nowrap;box-shadow:0 3px 10px rgba(243,105,1,.22)}
+a.btn-nav:hover{filter:brightness(1.05)}
 .resource{max-width:720px;margin:0 auto;padding:8px 24px 40px}
 .eyebrow{color:var(--purple);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;margin:24px 0 10px}
 h1{font-size:40px;line-height:1.14;margin:0 0 14px;letter-spacing:-.01em;font-weight:800}
@@ -74,7 +77,8 @@ a.btn-secondary{display:inline-block;background:#fff;color:var(--purple);border:
 .acard .nm{font-weight:800;font-size:16px;margin-bottom:6px;padding-right:30px;line-height:1.2}
 .acard .cz{font-size:13px;color:#555;line-height:1.45}.acard .cz b{color:var(--red)}
 @media (max-width:640px){h1{font-size:31px}.lead{font-size:19px}.cards{grid-template-columns:1fr}
-body{font-size:17px}.statrow{grid-template-columns:1fr}.cardgrid .acard{flex-basis:100%}}
+body{font-size:17px}.head-actions{gap:10px}.back{font-size:13px}a.btn-nav{right:12px;bottom:12px;padding:8px 13px;font-size:13px}.statrow{grid-template-columns:1fr}.cardgrid .acard{flex-basis:100%}}
+@media (max-width:400px){.back{display:none}}
 `;
 
 export const RESOURCE_LOGO = "/brandmultiplier-logo.png";
