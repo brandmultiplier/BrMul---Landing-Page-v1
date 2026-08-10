@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const BODY_HTML = `
-<header class="site-head">
+<div class="site-head-bar"><header class="site-head">
   <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
     <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=what-founders-crossed-50m__nav" data-cta="nav">Book The Diagnostic</a>
   </div>
-</header>
+</header></div>
 <main class="resource">
   <div class="eyebrow">Breaking the $10M Ceiling</div>
   <h1>What Founders Who Crossed $50M Did at $10M That Almost Nobody Does</h1>
@@ -44,6 +44,12 @@ const BODY_HTML = `
 <div class="stat"><div class="n">3</div><div class="l">Structural Moves</div><div class="d">what the founders who crossed $50M did at $8M-$15M</div></div>
 </div><figcaption class="fig-cap">The ceiling is mathematical. The way across is structural.</figcaption></figure>
 
+<div class="callout mid-cta">
+<span class="ico">🎯</span>
+<h3>Not sure if this is your problem?</h3>
+<p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=what-founders-crossed-50m__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+</div>
 <h2>The Three Moves That Get Founders Across the Threshold</h2>
 
 <h3>Move 1: They extracted the founding story before they were forced to</h3>
@@ -138,6 +144,7 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-valuation-killer"><span class="k">What dependency costs at exit</span><span class="t">The Valuation Killer</span></a><a class="card" href="/resources/the-3-9m-leak"><span class="k">Put a number on it</span><span class="t">The $3.9M Leak</span></a></div></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=what-founders-crossed-50m__sticky" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

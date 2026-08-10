@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const BODY_HTML = `
-<header class="site-head">
+<div class="site-head-bar"><header class="site-head">
   <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
     <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-unicorn-fallacy__nav" data-cta="nav">Book The Diagnostic</a>
   </div>
-</header>
+</header></div>
 <main class="resource">
   <div class="eyebrow">The Unicorn-Closer Myth</div>
   <h1>The Unicorn Fallacy</h1>
@@ -48,6 +48,12 @@ const BODY_HTML = `
 <p>Every deal lost to that gap is a tax on undocumented selling logic. And it compounds. (That tax has a name: the <a class="inline-link" href="/storylock-tax">StoryLock Tax</a>.)</p>
 <hr>
 
+<div class="callout mid-cta">
+<span class="ico">🎯</span>
+<h3>Not sure if this is your problem?</h3>
+<p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=the-unicorn-fallacy__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+</div>
 <h2>Narrative Debt</h2>
 <p>Software engineers understand technical debt: the accumulated cost of code shortcuts that make future development slower and more expensive. Ward Cunningham coined the term at OOPSLA in 1992 because he needed a metaphor that would make business stakeholders feel the weight of invisible engineering costs.</p>
 <p>Narrative Debt works the same way.</p>
@@ -91,6 +97,7 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-500k-dead-weight"><span class="k">The five hires that prove it</span><span class="t">The $500k Dead Weight</span></a><a class="card" href="/resources/the-extraction-economy"><span class="k">Why AI won't save you</span><span class="t">The Extraction Economy</span></a></div></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=the-unicorn-fallacy__sticky" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

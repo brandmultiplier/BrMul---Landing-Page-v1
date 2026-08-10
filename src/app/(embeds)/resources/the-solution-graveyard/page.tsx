@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const BODY_HTML = `
-<header class="site-head">
+<div class="site-head-bar"><header class="site-head">
   <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
     <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-solution-graveyard__nav" data-cta="nav">Book The Diagnostic</a>
   </div>
-</header>
+</header></div>
 <main class="resource">
   <div class="eyebrow">The Fixes That Fail</div>
   <h1>The Solution Graveyard</h1>
@@ -38,6 +38,12 @@ const BODY_HTML = `
 <div class="stat"><div class="n">3-4x</div><div class="l">Not 7-8x</div><div class="d">the EBITDA multiple a founder-dependent business settles for</div></div>
 </div><figcaption class="fig-cap">Eight headstones. One cause underneath all of them.</figcaption></figure>
 
+<div class="callout mid-cta">
+<span class="ico">🎯</span>
+<h3>Not sure if this is your problem?</h3>
+<p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=the-solution-graveyard__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+</div>
 <h2>Eight purchases, one buried assumption</h2>
 <ul>
 <li><strong>The brand agency.</strong><br>$10,000 to $30,000. Delivers a positioning deck and a style guide. The sales team opens it once, in the kickoff call, and never again—because a deck is not something a rep can improvise from under pressure on a live call.</li>
@@ -86,6 +92,7 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-multi-protagonist-map"><span class="k">Why one story fails</span><span class="t">The Multi-Protagonist Map</span></a><a class="card" href="/resources/the-3m-15m-death-valley"><span class="k">The plateau underneath</span><span class="t">The $3M-$15M Death Valley</span></a></div></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=the-solution-graveyard__sticky" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const BODY_HTML = `
-<header class="site-head">
+<div class="site-head-bar"><header class="site-head">
   <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
     <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-3-9m-leak__nav" data-cta="nav">Book The Diagnostic</a>
   </div>
-</header>
+</header></div>
 <main class="resource">
   <div class="eyebrow">The Cost of Founder-Led Sales</div>
   <h1>The $3.9M Leak</h1>
@@ -53,6 +53,12 @@ const BODY_HTML = `
 <p>You save the deal. The AE watches you in awe. You feel like a hero.</p>
 <p>But you've just reinforced the trap. You've proven that the "system" doesn't work without you. You are now paying for a $200k/year assistant to set up demos for you to finish. This is <strong>Sales Infrastructure Drag</strong>, and it is the first sign that your business is unscalable.</p>
 
+<div class="callout mid-cta">
+<span class="ico">🎯</span>
+<h3>Not sure if this is your problem?</h3>
+<p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=the-3-9m-leak__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+</div>
 <h2>The StoryLock Tax</h2>
 <p>The breakthrough insight isn't that you need better "sales training." It's that you need <strong>Narrative Infrastructure</strong>.</p>
 <p>Narrative is not "storytelling." It is the logical operating system of your company. When that logic is trapped in your head, we call it <a class="inline-link" href="/storylock-tax"><strong>StoryLock</strong></a>.</p>
@@ -172,6 +178,7 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-500k-dead-weight"><span class="k">The hires behind the leak</span><span class="t">The $500k Dead Weight</span></a><a class="card" href="/resources/the-valuation-killer"><span class="k">What it does to your exit</span><span class="t">The Valuation Killer</span></a></div></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=the-3-9m-leak__sticky" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const BODY_HTML = `
-<header class="site-head">
+<div class="site-head-bar"><header class="site-head">
   <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
     <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=cac-killer__nav" data-cta="nav">Book The Diagnostic</a>
   </div>
-</header>
+</header></div>
 <main class="resource">
   <div class="eyebrow">The Narrative Tax on CAC</div>
   <h1>The CAC Killer</h1>
@@ -65,6 +65,12 @@ const BODY_HTML = `
 <p>You realized that the agency had given you a coat of paint, but the engine was still missing a transmission. The logic was still stuck in your head. (Related: <a class="inline-link" href="/resources/the-solution-graveyard">The Solution Graveyard</a>.)</p>
 <hr>
 
+<div class="callout mid-cta">
+<span class="ico">🎯</span>
+<h3>Not sure if this is your problem?</h3>
+<p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=cac-killer__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+</div>
 <h2>3. Why "Fluff" Fails at Scale</h2>
 <p>The wall you are hitting is the <strong>Narrative Gap</strong>.</p>
 <p>Most marketing agencies are built to solve for <em>attention</em>. They want to make you look good. They want to "elevate" your presence.</p>
@@ -165,6 +171,7 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-3-9m-leak"><span class="k">Same lane · bigger number</span><span class="t">The $3.9M Leak</span></a><a class="card" href="/resources/the-valuation-killer"><span class="k">Raises the stakes</span><span class="t">The Valuation Killer</span></a></div></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=cac-killer__sticky" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

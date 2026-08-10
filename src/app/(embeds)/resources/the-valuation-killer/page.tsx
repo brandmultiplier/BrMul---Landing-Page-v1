@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const BODY_HTML = `
-<header class="site-head">
+<div class="site-head-bar"><header class="site-head">
   <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
     <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-valuation-killer__nav" data-cta="nav">Book The Diagnostic</a>
   </div>
-</header>
+</header></div>
 <main class="resource">
   <div class="eyebrow">Founder Dependency &amp; Exit Value</div>
   <h1>The Valuation Killer</h1>
@@ -56,6 +56,12 @@ const BODY_HTML = `
 <p>You aren't building a machine. You're building a dependency.</p>
 <hr>
 
+<div class="callout mid-cta">
+<span class="ico">🎯</span>
+<h3>Not sure if this is your problem?</h3>
+<p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=the-valuation-killer__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+</div>
 <h2>2. The $10M Plateau and the "StoryLock" Problem: The Wall</h2>
 <p>By the time you hit $5M or $7M ARR, the cracks become canyons. You're facing the "Series B Wall." To get the valuation you want, you need to prove that your growth is a mathematical certainty, not a series of founder-led miracles.</p>
 <p>But your metrics tell a different story. Your Customer Acquisition Cost (CAC) is ballooning because your sales cycle is tethered to your calendar. Your ramp time for new hires is six months or longer—if they survive at all. And the 70% failure rate for first sales hires isn't just a statistic; it's a multi-million dollar leak in your balance sheet. (Related: <a class="inline-link" href="/resources/cac-killer">The CAC Killer</a>.)</p>
@@ -136,6 +142,7 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-multi-protagonist-map"><span class="k">Why deals stall</span><span class="t">The Multi-Protagonist Map</span></a><a class="card" href="/resources/what-founders-crossed-50m"><span class="k">The way across</span><span class="t">What Founders Crossed $50M</span></a></div></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=the-valuation-killer__sticky" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

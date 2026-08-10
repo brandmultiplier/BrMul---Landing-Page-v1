@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const BODY_HTML = `
-<header class="site-head">
+<div class="site-head-bar"><header class="site-head">
   <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
     <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-multi-protagonist-map__nav" data-cta="nav">Book The Diagnostic</a>
   </div>
-</header>
+</header></div>
 <main class="resource">
   <div class="eyebrow">The B2B Buying Committee</div>
   <h1>The Multi-Protagonist Map</h1>
@@ -43,6 +43,12 @@ const BODY_HTML = `
 <p>One narrative, built for one buyer, was never going to carry all four—let alone the other nine to eighteen people in the room behind them.</p>
 <hr>
 
+<div class="callout mid-cta">
+<span class="ico">🎯</span>
+<h3>Not sure if this is your problem?</h3>
+<p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=the-multi-protagonist-map__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+</div>
 <h2>Why one story can't carry a committee</h2>
 <p>A single hero's journey assumes a single hero. Real B2B deals have a cast: the economic buyer weighing total cost of ownership, the technical evaluator weighing architecture and risk, the end user weighing whether this makes their job easier or harder, and the internal champion weighing whether recommending you is safe for their own career.</p>
 <p>Most sales narratives are written for the first person in that list and recited, unchanged, to the other three. The champion is left to translate a CFO-shaped pitch into something that will hold up when their CTO asks a question nobody on your team prepared them for.</p>
@@ -74,6 +80,7 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-valuation-killer"><span class="k">What stalled deals cost</span><span class="t">The Valuation Killer</span></a><a class="card" href="/resources/the-solution-graveyard"><span class="k">The fixes that missed</span><span class="t">The Solution Graveyard</span></a></div></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=the-multi-protagonist-map__sticky" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

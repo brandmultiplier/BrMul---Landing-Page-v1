@@ -9,13 +9,13 @@ export const metadata: Metadata = {
 };
 
 const BODY_HTML = `
-<header class="site-head">
+<div class="site-head-bar"><header class="site-head">
   <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
     <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=stop-posting-content__nav" data-cta="nav">Book The Diagnostic</a>
   </div>
-</header>
+</header></div>
 <main class="resource">
   <div class="eyebrow">Content vs. Infrastructure</div>
   <h1>Stop Posting Content</h1>
@@ -49,6 +49,12 @@ const BODY_HTML = `
 <p>They weren't selling your value. They were selling features. They were competing on price. They were getting stuck in "vendor bake-offs" that you used to bypass entirely.</p>
 <p>You realized that your "magic" didn't transfer. It stayed in your head.</p>
 
+<div class="callout mid-cta">
+<span class="ico">🎯</span>
+<h3>Not sure if this is your problem?</h3>
+<p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
+<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=stop-posting-content__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+</div>
 <h2>3. The 70% Failure Rate</h2>
 <p>This is the reality of the Founder's Trap.</p>
 <p>70% of first sales hires at founder-led B2B companies fail within their first year (SaaStr). This isn't a hiring problem. It's a transmission problem. (Related: <a class="inline-link" href="/resources/the-500k-dead-weight">The $500k Dead Weight</a>.)</p>
@@ -138,6 +144,7 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-extraction-economy"><span class="k">The AI sameness problem</span><span class="t">The Extraction Economy</span></a><a class="card" href="/resources/the-unicorn-fallacy"><span class="k">The debt underneath</span><span class="t">The Unicorn Fallacy</span></a></div></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=stop-posting-content__sticky" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 
