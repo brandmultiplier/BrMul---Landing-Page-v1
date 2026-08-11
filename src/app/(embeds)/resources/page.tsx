@@ -10,13 +10,17 @@ export const metadata: Metadata = {
 
 const INDEX_CSS = `
 .index-wrap{max-width:960px;margin:0 auto;padding:8px 24px 60px}
-.index-lead{font-size:21px;color:#33333a;margin:0 0 36px;max-width:640px}
+.index-lead{font-size:21px;color:#33333a;margin:0 0 22px;max-width:640px}
+.index-wrap .cta-wrap{margin:0 0 36px}
 .index-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .index-card{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:20px 22px;transition:border-color .15s,box-shadow .15s;background:#fff}
 .index-card:hover{border-color:var(--purple);box-shadow:0 8px 22px rgba(73,64,198,.10)}
 .index-card .k{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:8px}
 .index-card .t{display:block;font-weight:800;font-size:19px;line-height:1.28;margin-bottom:8px}
 .index-card .d{font-size:14px;color:#555;line-height:1.5}
+.index-cta{max-width:960px;margin:44px auto 0;padding:32px 24px;border-top:1px solid var(--line);text-align:center}
+.index-cta h2{font-size:28px;margin:0 0 10px;color:var(--purple);font-weight:800;letter-spacing:-.01em}
+.index-cta p{max-width:560px;margin:0 auto 20px;color:#33333a}
 @media (max-width:640px){.index-grid{grid-template-columns:1fr}}
 `;
 
@@ -121,9 +125,18 @@ export default function Page() {
           <img src={RESOURCE_LOGO} alt="BrandMultiplier b✳" />
           <b>BrandMultiplier</b>
         </Link>
-        <Link className="back" href="/">
-          brandmultiplier.ai →
-        </Link>
+        <div className="head-actions">
+          <Link className="back" href="/what-is-a-narrative-operating-system">
+            What is NOS?
+          </Link>
+          <a
+            className="btn-nav"
+            href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=resources-index__nav"
+            data-cta="nav"
+          >
+            Book The Diagnostic
+          </a>
+        </div>
       </header>
       <main className="index-wrap">
         <div className="eyebrow">Resources</div>
@@ -132,6 +145,22 @@ export default function Page() {
           Diagnostics on narrative infrastructure, StoryLock, and the
           structural reasons founder-led B2B companies stall between $3M and
           $50M ARR.
+        </p>
+        <p className="cta-wrap">
+          <a
+            className="btn-primary"
+            href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=index_hero&utm_campaign=narrative_diagnostic&utm_content=resources-index__hero"
+            data-cta="index_hero"
+          >
+            Book The Diagnostic
+          </a>
+          <a
+            className="btn-secondary"
+            href="/storylock-tax"
+            style={{ marginLeft: 10 }}
+          >
+            Calculate your StoryLock Tax
+          </a>
         </p>
         <div className="index-grid">
           {ARTICLES.map((article) => (
@@ -146,6 +175,23 @@ export default function Page() {
             </Link>
           ))}
         </div>
+        <section className="index-cta">
+          <h2>Read enough?</h2>
+          <p>
+            These are diagnostics, not brochures. The live version takes 30
+            minutes and uses your own public content. You keep the scorecard
+            either way.
+          </p>
+          <p className="cta-wrap">
+            <a
+              className="btn-primary"
+              href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=index_footer&utm_campaign=narrative_diagnostic&utm_content=resources-index__footer"
+              data-cta="index_footer"
+            >
+              Book The Diagnostic
+            </a>
+          </p>
+        </section>
       </main>
       <footer className="site-foot">
         <p>
