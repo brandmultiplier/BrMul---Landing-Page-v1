@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "The Solution Graveyard—BrandMultiplier",
   description:
     "Why eight fixes couldn't solve one problem. Every founder-led company buys the same eight fixes in the same order. None of them reach the layer underneath.",
+  alternates: {
+    canonical:
+      "https://www.brandmultiplier.ai/resources/the-solution-graveyard",
+  },
 };
 
 const BODY_HTML = `

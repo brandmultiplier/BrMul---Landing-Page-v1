@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "The Extraction Economy—BrandMultiplier",
   description:
     "How AI made every competitor sound identical—and what's still yours. When everyone prompts the same models on the same public corpus, the output converges. Your extracted logic is the one thing that can't be copied.",
+  alternates: {
+    canonical: "https://www.brandmultiplier.ai/resources/the-extraction-economy",
+  },
 };
 
 const BODY_HTML = `

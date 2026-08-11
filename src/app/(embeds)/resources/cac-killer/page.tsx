@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "The CAC Killer—BrandMultiplier",
   description:
     "Why your marketing agency is selling you fluff while your sales team starves. Your marketing agency is selling you aesthetics. Your sales team needs infrastructure.",
+  alternates: {
+    canonical: "https://www.brandmultiplier.ai/resources/cac-killer",
+  },
 };
 
 const BODY_HTML = `

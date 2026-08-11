@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "The $450B AI Hallucination—BrandMultiplier",
   description:
     "Why narrative infrastructure, not software, is the final lever for B2B ROI. The industry spent $450B on AI infrastructure. The returns aren't showing up where everyone promised.",
+  alternates: {
+    canonical:
+      "https://www.brandmultiplier.ai/resources/the-450b-ai-hallucination",
+  },
 };
 
 const BODY_HTML = `

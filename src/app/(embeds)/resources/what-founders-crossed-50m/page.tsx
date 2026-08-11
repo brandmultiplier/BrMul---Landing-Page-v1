@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "What Founders Who Crossed $50M Did at $10M—BrandMultiplier",
   description:
     "Pattern analysis across 12 founder-led B2B companies that broke the $7M-$12M ceiling—and the 4 traps that catch the ones that don't.",
+  alternates: {
+    canonical:
+      "https://www.brandmultiplier.ai/resources/what-founders-crossed-50m",
+  },
 };
 
 const BODY_HTML = `

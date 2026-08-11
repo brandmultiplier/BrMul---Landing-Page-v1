@@ -6,6 +6,10 @@ export const metadata: Metadata = {
     "Stop Posting Content. Start Building Narrative Infrastructure.—BrandMultiplier",
   description:
     "Your marketing agency is turning you into a LinkedIn influencer—and it's the fastest way to stay trapped in every sales call.",
+  alternates: {
+    canonical:
+      "https://www.brandmultiplier.ai/resources/stop-posting-content",
+  },
 };
 
 const BODY_HTML = `

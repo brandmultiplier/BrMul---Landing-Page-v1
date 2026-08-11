@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Resources - BrandMultiplier",
   description:
     "The BrandMultiplier resource library: narrative infrastructure diagnostics for founder-led B2B companies between $3M and $50M ARR.",
+  alternates: {
+    canonical: "https://www.brandmultiplier.ai/resources",
+  },
 };
 
 const INDEX_CSS = `

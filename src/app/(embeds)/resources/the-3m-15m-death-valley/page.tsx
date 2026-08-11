@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "The $3M-$15M Death Valley—BrandMultiplier",
   description:
     "7 decisions that look like progress. All 7 fail for the same structural reason.",
+  alternates: {
+    canonical:
+      "https://www.brandmultiplier.ai/resources/the-3m-15m-death-valley",
+  },
 };
 
 const BODY_HTML = `

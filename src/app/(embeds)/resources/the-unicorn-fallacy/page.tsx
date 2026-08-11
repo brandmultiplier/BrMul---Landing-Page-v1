@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "The Unicorn Fallacy—BrandMultiplier",
   description:
     "Why your sales hires fail and how to fix the Narrative Debt. The unicorn closer you're hunting doesn't exist. The problem was never the talent—it's the debt underneath it.",
+  alternates: {
+    canonical: "https://www.brandmultiplier.ai/resources/the-unicorn-fallacy",
+  },
 };
 
 const BODY_HTML = `

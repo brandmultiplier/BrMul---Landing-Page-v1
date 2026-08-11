@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "The Valuation Killer—BrandMultiplier",
   description:
     "Why your 'Founder Magic' is a Series B liability. To a Series B investor, it's a single point of failure that can carve more than a third off your valuation.",
+  alternates: {
+    canonical: "https://www.brandmultiplier.ai/resources/the-valuation-killer",
+  },
 };
 
 const BODY_HTML = `

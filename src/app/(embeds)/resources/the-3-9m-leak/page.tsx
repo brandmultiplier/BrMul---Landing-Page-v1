@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "The $3.9M Leak—BrandMultiplier",
   description:
     "A diagnostic report on the Founder's Trap. Your \"magic touch\" in the sales process isn't a competitive advantage—it's a $3.9M structural tax on your growth.",
+  alternates: {
+    canonical: "https://www.brandmultiplier.ai/resources/the-3-9m-leak",
+  },
 };
 
 const BODY_HTML = `

@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "The Multi-Protagonist Map—BrandMultiplier",
   description:
     "Why your deal is stalling with 8-13 people you've never individually convinced. It's stalling because each person needs a different version of the story, and your team is telling all of them the same one.",
+  alternates: {
+    canonical:
+      "https://www.brandmultiplier.ai/resources/the-multi-protagonist-map",
+  },
 };
 
 const BODY_HTML = `
