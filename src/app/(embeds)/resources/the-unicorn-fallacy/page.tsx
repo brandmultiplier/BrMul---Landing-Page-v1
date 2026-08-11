@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
+import {
+  RESOURCE_ARTICLE_DATES,
+  RESOURCE_CSS,
+  RESOURCE_LOGO,
+  buildArticleLd,
+  buildBreadcrumbLd,
+} from "../_shared";
 
 export const metadata: Metadata = {
   title: "The Unicorn Fallacy—BrandMultiplier",
@@ -9,6 +15,15 @@ export const metadata: Metadata = {
     canonical: "https://www.brandmultiplier.ai/resources/the-unicorn-fallacy",
   },
 };
+
+const ARTICLE_META = {
+  slug: "the-unicorn-fallacy",
+  title: "The Unicorn Fallacy",
+  subtitle: "Why your sales hires fail (and how to fix the Narrative Debt)",
+  eyebrow: "The Unicorn-Closer Myth",
+  description:
+    "Why your sales hires fail and how to fix the Narrative Debt. The unicorn closer you're hunting doesn't exist. The problem was never the talent—it's the debt underneath it.",
+} as const;
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">
@@ -105,10 +120,26 @@ const BODY_HTML = `
 `;
 
 export default function Page() {
+  const dates = RESOURCE_ARTICLE_DATES[ARTICLE_META.slug];
+  const articleLd = buildArticleLd({
+    ...ARTICLE_META,
+    datePublished: dates?.datePublished,
+    dateModified: dates?.dateModified,
+  });
+  const breadcrumbLd = buildBreadcrumbLd(ARTICLE_META.title, ARTICLE_META.slug);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS }} />
       <div dangerouslySetInnerHTML={{ __html: BODY_HTML }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
     </>
   );
 }

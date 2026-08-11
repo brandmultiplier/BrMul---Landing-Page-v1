@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
+import {
+  RESOURCE_ARTICLE_DATES,
+  RESOURCE_CSS,
+  RESOURCE_LOGO,
+  buildArticleLd,
+  buildBreadcrumbLd,
+} from "../_shared";
 
 export const metadata: Metadata = {
   title: "The $3.9M Leak—BrandMultiplier",
@@ -9,6 +15,15 @@ export const metadata: Metadata = {
     canonical: "https://www.brandmultiplier.ai/resources/the-3-9m-leak",
   },
 };
+
+const ARTICLE_META = {
+  slug: "the-3-9m-leak",
+  title: "The $3.9M Leak",
+  subtitle: "A Diagnostic Report on the Founder's Trap",
+  eyebrow: "The Cost of Founder-Led Sales",
+  description:
+    "A diagnostic report on the Founder's Trap. Your \"magic touch\" in the sales process isn't a competitive advantage—it's a $3.9M structural tax on your growth.",
+} as const;
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">
@@ -186,10 +201,26 @@ const BODY_HTML = `
 `;
 
 export default function Page() {
+  const dates = RESOURCE_ARTICLE_DATES[ARTICLE_META.slug];
+  const articleLd = buildArticleLd({
+    ...ARTICLE_META,
+    datePublished: dates?.datePublished,
+    dateModified: dates?.dateModified,
+  });
+  const breadcrumbLd = buildBreadcrumbLd(ARTICLE_META.title, ARTICLE_META.slug);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS }} />
       <div dangerouslySetInnerHTML={{ __html: BODY_HTML }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
     </>
   );
 }

@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
+import {
+  RESOURCE_ARTICLE_DATES,
+  RESOURCE_CSS,
+  RESOURCE_LOGO,
+  buildArticleLd,
+  buildBreadcrumbLd,
+} from "../_shared";
 
 export const metadata: Metadata = {
   title:
@@ -11,6 +17,15 @@ export const metadata: Metadata = {
       "https://www.brandmultiplier.ai/resources/stop-posting-content",
   },
 };
+
+const ARTICLE_META = {
+  slug: "stop-posting-content",
+  title: "Stop Posting Content",
+  subtitle: "Start Building Narrative Infrastructure.",
+  eyebrow: "Content vs. Infrastructure",
+  description:
+    "Your marketing agency is turning you into a LinkedIn influencer—and it's the fastest way to stay trapped in every sales call.",
+} as const;
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">
@@ -153,10 +168,26 @@ const BODY_HTML = `
 `;
 
 export default function Page() {
+  const dates = RESOURCE_ARTICLE_DATES[ARTICLE_META.slug];
+  const articleLd = buildArticleLd({
+    ...ARTICLE_META,
+    datePublished: dates?.datePublished,
+    dateModified: dates?.dateModified,
+  });
+  const breadcrumbLd = buildBreadcrumbLd(ARTICLE_META.title, ARTICLE_META.slug);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS }} />
       <div dangerouslySetInnerHTML={{ __html: BODY_HTML }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
     </>
   );
 }

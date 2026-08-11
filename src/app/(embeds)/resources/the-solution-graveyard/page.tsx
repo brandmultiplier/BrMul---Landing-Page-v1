@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
+import {
+  RESOURCE_ARTICLE_DATES,
+  RESOURCE_CSS,
+  RESOURCE_LOGO,
+  buildArticleLd,
+  buildBreadcrumbLd,
+} from "../_shared";
 
 export const metadata: Metadata = {
   title: "The Solution Graveyard—BrandMultiplier",
@@ -10,6 +16,15 @@ export const metadata: Metadata = {
       "https://www.brandmultiplier.ai/resources/the-solution-graveyard",
   },
 };
+
+const ARTICLE_META = {
+  slug: "the-solution-graveyard",
+  title: "The Solution Graveyard",
+  subtitle: "Why Eight Fixes Couldn't Solve One Problem",
+  eyebrow: "The Fixes That Fail",
+  description:
+    "Why eight fixes couldn't solve one problem. Every founder-led company buys the same eight fixes in the same order. None of them reach the layer underneath.",
+} as const;
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">
@@ -101,10 +116,26 @@ const BODY_HTML = `
 `;
 
 export default function Page() {
+  const dates = RESOURCE_ARTICLE_DATES[ARTICLE_META.slug];
+  const articleLd = buildArticleLd({
+    ...ARTICLE_META,
+    datePublished: dates?.datePublished,
+    dateModified: dates?.dateModified,
+  });
+  const breadcrumbLd = buildBreadcrumbLd(ARTICLE_META.title, ARTICLE_META.slug);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS }} />
       <div dangerouslySetInnerHTML={{ __html: BODY_HTML }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
     </>
   );
 }

@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { RESOURCE_CSS, RESOURCE_LOGO } from "../_shared";
+import {
+  RESOURCE_ARTICLE_DATES,
+  RESOURCE_CSS,
+  RESOURCE_LOGO,
+  buildArticleLd,
+  buildBreadcrumbLd,
+} from "../_shared";
 
 export const metadata: Metadata = {
   title: "The Extraction Economy—BrandMultiplier",
@@ -9,6 +15,15 @@ export const metadata: Metadata = {
     canonical: "https://www.brandmultiplier.ai/resources/the-extraction-economy",
   },
 };
+
+const ARTICLE_META = {
+  slug: "the-extraction-economy",
+  title: "The Extraction Economy",
+  subtitle: "How AI Made Every Competitor Sound Identical-And What's Still Yours",
+  eyebrow: "AI & the Sameness Problem",
+  description:
+    "How AI made every competitor sound identical—and what's still yours. When everyone prompts the same models on the same public corpus, the output converges. Your extracted logic is the one thing that can't be copied.",
+} as const;
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">
@@ -95,10 +110,26 @@ const BODY_HTML = `
 `;
 
 export default function Page() {
+  const dates = RESOURCE_ARTICLE_DATES[ARTICLE_META.slug];
+  const articleLd = buildArticleLd({
+    ...ARTICLE_META,
+    datePublished: dates?.datePublished,
+    dateModified: dates?.dateModified,
+  });
+  const breadcrumbLd = buildBreadcrumbLd(ARTICLE_META.title, ARTICLE_META.slug);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS }} />
       <div dangerouslySetInnerHTML={{ __html: BODY_HTML }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
     </>
   );
 }

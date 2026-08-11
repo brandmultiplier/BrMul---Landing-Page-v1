@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { RESOURCE_CSS, RESOURCE_LOGO } from "./_shared";
+import {
+  RESOURCE_CSS,
+  RESOURCE_LOGO,
+  buildResourcesCollectionLd,
+} from "./_shared";
 
 export const metadata: Metadata = {
   title: "Resources - BrandMultiplier",
@@ -119,6 +123,10 @@ const ARTICLES = [
 ];
 
 export default function Page() {
+  const collectionLd = buildResourcesCollectionLd(
+    ARTICLES.map(({ slug, title, description }) => ({ slug, title, description })),
+  );
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS + INDEX_CSS }} />
@@ -203,6 +211,10 @@ export default function Page() {
           <a href="https://brandmultiplier.ai">brandmultiplier.ai</a>
         </p>
       </footer>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
+      />
     </>
   );
 }

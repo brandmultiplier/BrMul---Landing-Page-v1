@@ -86,3 +86,137 @@ body{font-size:17px}.head-actions{gap:10px}.back{font-size:13px}a.btn-nav{paddin
 `;
 
 export const RESOURCE_LOGO = "/brandmultiplier-logo.png";
+
+const SITE = "https://www.brandmultiplier.ai";
+
+export const RESOURCE_ARTICLE_DATES: Partial<
+  Record<
+    string,
+    {
+      datePublished?: string;
+      dateModified?: string;
+    }
+  >
+> = {};
+
+const truncateHeadline = (value: string): string =>
+  value.length <= 110 ? value : `${value.slice(0, 107).trimEnd()}...`;
+
+type BuildArticleLdArgs = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  eyebrow: string;
+  datePublished?: string;
+  dateModified?: string;
+};
+
+export const buildArticleLd = ({
+  slug,
+  title,
+  subtitle,
+  description,
+  eyebrow,
+  datePublished,
+  dateModified,
+}: BuildArticleLdArgs) => {
+  const articleLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${SITE}/resources/${slug}#article`,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE}/resources/${slug}`,
+    },
+    url: `${SITE}/resources/${slug}`,
+    headline: truncateHeadline(title),
+    alternativeHeadline: subtitle,
+    description,
+    articleSection: eyebrow,
+    inLanguage: "en-US",
+    image: {
+      "@type": "ImageObject",
+      url: `${SITE}/resources/${slug}-og.jpg`,
+      width: 1200,
+      height: 630,
+    },
+    author: {
+      "@type": "Person",
+      name: "Chris Rubin",
+      url: "https://www.linkedin.com/in/chrisrubin",
+      jobTitle: "Founder",
+      worksFor: { "@id": `${SITE}/#organization` },
+    },
+    publisher: {
+      "@type": "Organization",
+      "@id": `${SITE}/#organization`,
+      name: "BrandMultiplier",
+      alternateName: "BrandMultiplier.ai",
+      url: SITE,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE}/brandmultiplier-logo.png`,
+        width: 512,
+        height: 512,
+      },
+    },
+    isAccessibleForFree: true,
+  };
+
+  if (datePublished) {
+    articleLd.datePublished = datePublished;
+    articleLd.dateModified = dateModified ?? datePublished;
+  } else if (dateModified) {
+    articleLd.dateModified = dateModified;
+  }
+
+  return articleLd;
+};
+
+export const buildBreadcrumbLd = (title: string, slug: string) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Resources",
+      item: `${SITE}/resources`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: title,
+      item: `${SITE}/resources/${slug}`,
+    },
+  ],
+});
+
+type ResourceItem = {
+  slug: string;
+  title: string;
+  description: string;
+};
+
+export const buildResourcesCollectionLd = (items: ResourceItem[]) => ({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${SITE}/resources#collection`,
+  url: `${SITE}/resources`,
+  name: "BrandMultiplier Resources",
+  description:
+    "The BrandMultiplier resource library: narrative infrastructure diagnostics for founder-led B2B companies between $3M and $50M ARR.",
+  inLanguage: "en-US",
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${SITE}/resources/${item.slug}`,
+      name: item.title,
+      description: item.description,
+    })),
+  },
+});
