@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Button from "../ui/Button";
 import HeroZoomTitle from "../ui/HeroZoomTitle";
+import { CTA_LABEL } from "@/lib/cta";
 
 export default function Hero() {
     const { scrollY } = useScroll();
@@ -57,7 +58,7 @@ export default function Hero() {
                         <div className="flex flex-col items-center gap-2">
                             <a href="#cta">
                                 <Button className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg font-bold text-white bg-gradient-to-r from-[#A855F7] to-[#6366F1] border border-white/20 rounded-full shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)] hover:scale-105 transition-all duration-300">
-                                    Schedule The Diagnostic
+                                    {CTA_LABEL}
                                 </Button>
                             </a>
                             <div className="flex flex-col items-center text-[10px] sm:text-xs text-text-tertiary uppercase tracking-wider gap-0.5">

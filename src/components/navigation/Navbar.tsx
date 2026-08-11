@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { CTA_LABEL } from "@/lib/cta";
 
 const navItems = [
     { name: "Founder's Trap", href: "/#trap" },
@@ -188,7 +189,7 @@ export default function Navbar() {
                                         >
                                             <span className="absolute inset-0 bg-gradient-to-r from-[#a855f7] to-[#6366f1] opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
                                             <span className="absolute inset-0 border border-white/20 rounded-full group-hover:border-transparent transition-colors" />
-                                            <span className="relative whitespace-nowrap">Schedule The Diagnostic</span>
+                                            <span className="relative whitespace-nowrap">{CTA_LABEL}</span>
                                         </a>
                                     </motion.div>
                                 </div>
@@ -260,7 +261,7 @@ export default function Navbar() {
                                         onClick={() => setMobileMenuOpen(false)}
                                         className="btn btn-primary w-full text-center justify-center text-lg"
                                     >
-                                        <span>Schedule The Diagnostic</span>
+                                        <span>{CTA_LABEL}</span>
                                     </a>
                                 </motion.div>
                             </nav>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/navigation/Footer";
 import RoomTest from "./RoomTest";
+import { CTA_LABEL } from "@/lib/cta";
 
 export const metadata: Metadata = {
   title: "Hiring In-House vs. Installing a Narrative Operating System | BrandMultiplier",
@@ -857,7 +858,7 @@ export default function NosVsHiringPage() {
             <div className="ndh-cta-block">
               <h2>Run the diagnostic before you run the search</h2>
               <p>Thirty minutes or less. Zero pressure, purely diagnostic. You&apos;ll leave knowing whether your next dollar belongs in a hire or in the system the hire needs.</p>
-              <a className="ndh-cta-btn" href="https://calendly.com/book-crc/storyline/">Schedule The Diagnostic</a>
+              <a className="ndh-cta-btn" href="https://calendly.com/book-crc/storyline/">{CTA_LABEL}</a>
               <p className="ndh-cta-sub"><a className="ndh-accent-link" href="https://brandmultiplier.ai/storylock-tax">Or calculate your StoryLock Tax first &rarr;</a></p>
             </div>
           </section>

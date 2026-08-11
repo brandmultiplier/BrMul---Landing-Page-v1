@@ -8,6 +8,7 @@ import {
     BUSINESS_EMAIL_REQUIRED_MESSAGE,
     isBusinessEmail,
 } from "@/lib/business-email";
+import { CTA_LABEL } from "@/lib/cta";
 
 const EMPTY_FORM = {
     first_name: "",
@@ -212,7 +213,7 @@ export default function FinalCTA() {
                                 disabled={isLoading}
                                 className="btn-primary w-full justify-center h-12 disabled:opacity-60 disabled:cursor-not-allowed"
                             >
-                                {isLoading ? "Submitting..." : "Schedule The Diagnostic"}
+                                {isLoading ? "Submitting..." : CTA_LABEL}
                             </button>
 
                             {/* Network / server error */}

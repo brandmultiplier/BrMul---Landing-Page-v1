@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import ScrollFade from "@/components/ui/ScrollFade";
 import { Check, Star } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { CTA_LABEL } from "@/lib/cta";
 
 const tiers = [
     {
@@ -203,7 +204,7 @@ export default function Pricing() {
                     <div className="mt-12">
                         <a href="#cta">
                             <Button className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg bg-gradient-to-r from-[#A855F7] to-[#6366F1] border border-white/20 shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:shadow-[0_0_60px_rgba(168,85,247,0.8)] text-white">
-                                Schedule The Diagnostic <span className="ml-2">→</span>
+                                {CTA_LABEL}
                             </Button>
                         </a>
                     </div>

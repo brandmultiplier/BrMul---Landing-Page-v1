@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CTA_LABEL } from "@/lib/cta";
 
 export default function Footer() {
     return (
@@ -45,7 +46,7 @@ export default function Footer() {
                                     <Link href="/#pricing" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Pricing Plan</Link>
                                 </li>
                                 <li>
-                                    <Link href="/#cta" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Schedule The Diagnostic</Link>
+                                    <Link href="/#cta" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">{CTA_LABEL}</Link>
                                 </li>
                                 <li>
                                     <Link href="/what-is-a-narrative-operating-system" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">What is a NarrativeOS&#8482;</Link>

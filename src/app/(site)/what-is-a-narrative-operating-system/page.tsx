@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Footer from "@/components/navigation/Footer";
+import { CTA_LABEL } from "@/lib/cta";
 
 export const metadata: Metadata = {
   title: "What Is a Narrative Operating System? | BrandMultiplier",
@@ -797,7 +798,7 @@ export default function WhatIsNarrativeOSPage() {
             <div className="cta-block">
               <h2>Does your company have StoryLock?</h2>
               <p>Run the Room Test with us. In 30 minutes or less, walk away knowing whether your problem is structural, and what installing a Narrative Operating System would change.</p>
-              <a className="cta-btn" href="https://calendly.com/book-crc/storyline/">Schedule The Diagnostic</a>
+              <a className="cta-btn" href="https://calendly.com/book-crc/storyline/">{CTA_LABEL}</a>
             </div>
           </section>
 
