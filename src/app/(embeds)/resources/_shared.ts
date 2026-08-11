@@ -54,6 +54,13 @@ a.btn-secondary{display:inline-block;background:#fff;color:var(--purple);border:
 .card:hover{border-color:var(--purple);box-shadow:0 6px 18px rgba(73,64,198,.10)}
 .card .k{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);font-weight:700}
 .card .t{display:block;font-weight:700;margin-top:6px;font-size:17px;line-height:1.25}
+.tail-cta{max-width:720px;margin:0 auto;padding:26px 24px 8px;text-align:center}
+.tail-cta-line{font-size:19px;font-weight:700;color:var(--ink);margin:0 0 16px}
+.tail-cta .cta-wrap{margin:0 0 18px}
+.tail-links{font-size:14px;margin:0}
+.tail-links .back{color:var(--gray);text-decoration:none}
+.tail-links .back:hover{color:var(--purple)}
+.tail-sep{color:var(--line);margin:0 10px}
 .site-foot{max-width:720px;margin:26px auto 0;padding:24px;border-top:1px solid var(--line);color:var(--gray);font-size:13px}
 .site-foot a{color:var(--gray)}
 .sticky-cta{display:none}
@@ -82,6 +89,7 @@ a.btn-secondary{display:inline-block;background:#fff;color:var(--purple);border:
 .acard .cz{font-size:13px;color:#555;line-height:1.45}.acard .cz b{color:var(--red)}
 @media (max-width:640px){h1{font-size:31px}.lead{font-size:19px}.cards{grid-template-columns:1fr}
 body{font-size:17px}.head-actions{gap:10px}.back{font-size:13px}a.btn-nav{padding:8px 13px;font-size:13px}.sticky-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);transform:translateZ(0)}.sticky-cta-txt{font-size:13px;font-weight:700;color:var(--ink);line-height:1.25;flex:1 1 auto}a.btn-sticky{flex:0 0 auto;display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:11px 16px;border-radius:9px;font-size:14px;white-space:nowrap}.site-foot{padding-bottom:84px}.statrow{grid-template-columns:1fr}.cardgrid .acard{flex-basis:100%}}
+@media (max-width:640px){.tail-links{display:flex;flex-direction:column;gap:8px}.tail-sep{display:none}}
 @media (max-width:400px){.back{display:none}}
 `;
 
