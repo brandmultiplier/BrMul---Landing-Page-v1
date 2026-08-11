@@ -28,7 +28,9 @@ const INDEX_CSS = `
 .index-cta{max-width:960px;margin:44px auto 0;padding:32px 24px;border-top:1px solid var(--line);text-align:center}
 .index-cta h2{font-size:28px;margin:0 0 10px;color:var(--purple);font-weight:800;letter-spacing:-.01em}
 .index-cta p{max-width:560px;margin:0 auto 20px;color:#33333a}
-@media (max-width:640px){.index-grid{grid-template-columns:1fr}}
+.index-wrap > .cta-wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.index-cta .cta-wrap{display:flex;justify-content:center;margin:0 auto;max-width:none}
+@media (max-width:640px){.index-grid{grid-template-columns:1fr}.index-wrap > .cta-wrap{flex-direction:column;align-items:flex-start}}
 `;
 
 const ARTICLES = [
@@ -165,11 +167,7 @@ export default function Page() {
           >
             Book The Diagnostic
           </a>
-          <a
-            className="btn-secondary"
-            href="/storylock-tax"
-            style={{ marginLeft: 10 }}
-          >
+          <a className="btn-secondary" href="/storylock-tax">
             Calculate your StoryLock Tax
           </a>
         </p>
@@ -208,7 +206,7 @@ export default function Page() {
         <p>
           <strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for
           Founder-Led Companies.{" "}
-          <a href="https://brandmultiplier.ai">brandmultiplier.ai</a>
+          <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a>
         </p>
       </footer>
       <script
