@@ -333,6 +333,7 @@ export default function StoryLockTaxPage() {
   const [unlocked, setUnlocked] = useState<boolean>(false);
   const [formName, setFormName] = useState<string>("");
   const [formEmail, setFormEmail] = useState<string>("");
+  const [formPhone, setFormPhone] = useState<string>("");
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [formError, setFormError] = useState<string>("");
 
@@ -372,6 +373,7 @@ export default function StoryLockTaxPage() {
       e.preventDefault();
       const name = formName.trim();
       const email = formEmail.trim();
+      const phone = formPhone.trim();
       if (!name || !email) {
         setFormError("Please fill both fields.");
         return;
@@ -389,6 +391,8 @@ export default function StoryLockTaxPage() {
           body: JSON.stringify({
             name,
             email,
+            phone: phone || undefined,
+            phone_provided: phone.length > 0,
             source: "storylock-tax-calculator",
             submitted_at: new Date().toISOString(),
             submitted_from_tab: tab,
@@ -1020,6 +1024,20 @@ export default function StoryLockTaxPage() {
                       required
                       style={gateInputStyle}
                     />
+                    <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                      <label htmlFor="slt-phone" style={{ fontSize: 11, color: "var(--ink-dim)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                        Phone <span style={{ textTransform: "none", letterSpacing: "normal", opacity: 0.65 }}>(optional)</span>
+                      </label>
+                      <input
+                        type="tel"
+                        id="slt-phone"
+                        placeholder="Your phone number"
+                        value={formPhone}
+                        onChange={(e) => setFormPhone(e.target.value)}
+                        autoComplete="tel"
+                        style={gateInputStyle}
+                      />
+                    </div>
                     <button
                       type="submit"
                       disabled={submitting}
@@ -1051,6 +1069,15 @@ export default function StoryLockTaxPage() {
                         {formError}
                       </div>
                     )}
+                    <p style={{ fontSize: 11, color: "var(--ink-dim)", lineHeight: 1.55, marginTop: 12 }}>
+                      By submitting, you agree to our{" "}
+                      <a href="https://brandmultiplier.ai/terms" target="_blank" rel="noopener" style={{ color: "#A1A1AA" }}>Terms</a>{" "}
+                      and{" "}
+                      <a href="https://brandmultiplier.ai/privacy" target="_blank" rel="noopener" style={{ color: "#A1A1AA" }}>Privacy Policy</a>,
+                      and you&rsquo;ll receive your report plus occasional emails from BrandMultiplier.
+                      If you provide a phone number, someone from our team may call you about it &mdash; no robocalls, no marketing texts.
+                      Unsubscribe anytime.
+                    </p>
                   </form>
                 </div>
               )}

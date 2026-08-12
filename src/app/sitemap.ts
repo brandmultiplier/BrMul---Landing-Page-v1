@@ -8,5 +8,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 1,
     },
+    {
+      url: 'https://www.brandmultiplier.ai/privacy',
+      lastModified: new Date('2026-08-17'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: 'https://www.brandmultiplier.ai/terms',
+      lastModified: new Date('2026-08-17'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ]
 }

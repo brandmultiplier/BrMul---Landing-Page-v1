@@ -9,18 +9,34 @@ const STORYLOCK_WEBHOOK_URL =
 
 type StorylockPayload = {
   email?: string;
+  name?: string;
+  phone?: string;
+  phone_provided?: boolean;
+  source?: string;
+  submitted_at?: string;
+  source_url?: string;
+  resource_requested?: string;
+  [key: string]: unknown;
 };
 
 export async function POST(req: Request) {
   try {
-    const payload = (await req.json()) as StorylockPayload;
+    const raw = (await req.json()) as StorylockPayload;
 
-    if (!(await isStrictBusinessEmail(payload.email ?? ""))) {
+    if (!(await isStrictBusinessEmail(raw.email ?? ""))) {
       return NextResponse.json(
         { ok: false, error: BUSINESS_EMAIL_REQUIRED_MESSAGE },
         { status: 400 },
       );
     }
+
+    const payload: StorylockPayload = {
+      ...raw,
+      submitted_at: raw.submitted_at ?? new Date().toISOString(),
+      source_url: raw.source_url ?? req.headers.get("referer") ?? undefined,
+      resource_requested: raw.resource_requested ?? "storylock-tax-calculator",
+      phone_provided: typeof raw.phone === "string" && raw.phone.trim().length > 0,
+    };
 
     const upstream = await fetch(STORYLOCK_WEBHOOK_URL, {
       method: "POST",

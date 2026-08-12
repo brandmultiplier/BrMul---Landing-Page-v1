@@ -12,7 +12,9 @@ export function middleware(request: NextRequest) {
   // RULE 1 — weservefounders.com/ → transparent rewrite to /servingfounders
   // URL bar stays showing weservefounders.com
   if (isWSF && pathname === "/") {
-    return NextResponse.rewrite(new URL("/servingfounders", request.url));
+    const res = NextResponse.rewrite(new URL("/servingfounders", request.url));
+    res.headers.set("x-pathname", pathname);
+    return res;
   }
 
   // RULE 2 — brandmultiplier.ai/connectors* → 308 to weservefounders.com/connectors*
@@ -28,8 +30,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", "https://weservefounders.com"), 308);
   }
 
-  // RULE 4 — everything else passes through unchanged
-  return NextResponse.next();
+  // RULE 4 — everything else passes through, but always stamp x-pathname so
+  // the root layout can read the request path server-side (used for GPC/tracking suppression).
+  const response = NextResponse.next();
+  response.headers.set("x-pathname", pathname);
+  return response;
 }
 
 export const config = {

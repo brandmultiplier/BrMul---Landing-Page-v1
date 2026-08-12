@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import Script from "next/script";
 import { Suspense } from "react";
+import { headers } from "next/headers";
 import GtmPageViewTracker from "@/components/analytics/GtmPageViewTracker";
 import "./globals.css";
 
 const GTM_ID = "GTM-KS2JZD8Z";
 const CLARITY_PROJECT_ID = "k0r7x8mkc7";
+
+/** Routes where tracking must never fire regardless of GPC state. */
+const NO_TRACKING_ROUTES = new Set(["/privacy", "/terms"]);
 
 const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -50,32 +54,50 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const hdrs = await headers();
+
+  // Sec-GPC: 1 means the browser signals a global opt-out of sale/sharing.
+  // Colorado AG requires server-side honoring — a client-side check is not enough.
+  const gpc = hdrs.get("sec-gpc") === "1";
+
+  // x-pathname is stamped by middleware on every request, giving us a reliable
+  // path without depending on Vercel-specific x-matched-path.
+  const currentPath = hdrs.get("x-pathname") ?? hdrs.get("x-matched-path") ?? "/";
+
+  const suppressTracking = gpc || NO_TRACKING_ROUTES.has(currentPath);
+
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: GTM_SCRIPT }} />
+        {!suppressTracking && (
+          <script dangerouslySetInnerHTML={{ __html: GTM_SCRIPT }} />
+        )}
       </head>
       <body
         className={`${inter.variable} ${outfit.variable} antialiased bg-black`}
         style={{ fontFamily: "var(--font-inter), sans-serif" }}
         suppressHydrationWarning
       >
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-        <Script id="rb2b-loader" strategy="afterInteractive">
-          {`!function(key) {if (window.reb2b) return;window.reb2b = {loaded: true};var s = document.createElement("script");s.async = true;s.src = "https://b2bjsstore.s3.us-west-2.amazonaws.com/b/" + key + "/" + key + ".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);}("ZQ6J2RH73W6D");`}
-        </Script>
+        {!suppressTracking && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
+        {!suppressTracking && (
+          <Script id="rb2b-loader" strategy="afterInteractive">
+            {`!function(key) {if (window.reb2b) return;window.reb2b = {loaded: true};var s = document.createElement("script");s.async = true;s.src = "https://b2bjsstore.s3.us-west-2.amazonaws.com/b/" + key + "/" + key + ".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);}("ZQ6J2RH73W6D");`}
+          </Script>
+        )}
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${CLARITY_PROJECT_ID}");`}
         </Script>

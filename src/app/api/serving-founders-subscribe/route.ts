@@ -6,13 +6,19 @@ const KIT_API_BASE = "https://api.kit.com/v4";
 type SubscribePayload = {
   name?: string;
   email?: string;
+  phone?: string;
+  submitted_at?: string;
+  source_url?: string;
+  resource_requested?: string;
+  phone_provided?: boolean;
 };
 
 export async function POST(req: Request) {
   try {
-    const payload = (await req.json()) as SubscribePayload;
-    const email = (payload.email ?? "").trim();
-    const name = (payload.name ?? "").trim();
+    const raw = (await req.json()) as SubscribePayload;
+    const email = (raw.email ?? "").trim();
+    const name = (raw.name ?? "").trim();
+    const phone = (raw.phone ?? "").trim();
 
     if (!email || !isValidEmailShape(email)) {
       return NextResponse.json(
@@ -20,6 +26,15 @@ export async function POST(req: Request) {
         { status: 400 },
       );
     }
+
+    // Build the enriched payload forwarded downstream for record-keeping.
+    const submissionRecord = {
+      submitted_at: raw.submitted_at ?? new Date().toISOString(),
+      source_url: raw.source_url ?? req.headers.get("referer") ?? undefined,
+      resource_requested: raw.resource_requested ?? "serving-founders-newsletter",
+      phone_provided: phone.length > 0,
+    };
+    void submissionRecord; // available for future webhook forwarding
 
     const apiKey = process.env.KIT_API_KEY;
 

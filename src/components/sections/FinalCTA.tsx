@@ -16,6 +16,7 @@ const EMPTY_FORM = {
     work_email: "",
     company_name: "",
     approximate_arr: "",
+    phone: "",
 };
 
 export default function FinalCTA() {
@@ -70,7 +71,12 @@ export default function FinalCTA() {
             const response = await fetch("/api/final-cta-capture", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    ...formData,
+                    submitted_at: new Date().toISOString(),
+                    source_url: typeof window !== "undefined" ? window.location.href : undefined,
+                    resource_requested: "homepage-cta",
+                }),
             });
 
             if (response.ok) {
@@ -207,6 +213,23 @@ export default function FinalCTA() {
                                 )}
                             </div>
 
+                            {/* Phone (optional) */}
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="final-cta-phone" className="text-xs text-text-tertiary uppercase tracking-wider">
+                                    Phone <span className="normal-case tracking-normal opacity-60">(optional)</span>
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="final-cta-phone"
+                                    name="phone"
+                                    placeholder="Your phone number"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    autoComplete="tel"
+                                    className="w-full h-12 px-4 rounded-lg bg-white/5 border border-border-subtle text-white focus:border-accent-purple focus:outline-none transition-colors"
+                                />
+                            </div>
+
                             {/* Submit button */}
                             <button
                                 type="submit"
@@ -221,9 +244,13 @@ export default function FinalCTA() {
                                 <p className="text-red-400 text-xs text-center">{submitError}</p>
                             )}
 
-                            <p className="text-[10px] sm:text-xs text-text-tertiary text-center mt-4 uppercase tracking-wider flex flex-col gap-1">
-                                <span>30 minutes or less.</span>
-                                <span>Walk away knowing if your problem is structural, or not.</span>
+                            <p className="text-[10px] sm:text-xs text-text-tertiary text-center mt-4 leading-relaxed">
+                                By submitting, you agree to our{" "}
+                                <a href="/terms" className="underline hover:text-white transition-colors">Terms</a> and{" "}
+                                <a href="/privacy" className="underline hover:text-white transition-colors">Privacy Policy</a>,
+                                and you&rsquo;ll receive occasional emails from BrandMultiplier.
+                                If you provide a phone number, someone from our team may call you about it &mdash;
+                                no robocalls, no marketing texts. Unsubscribe anytime.
                             </p>
                         </form>
                 </motion.div>
