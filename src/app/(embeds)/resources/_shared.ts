@@ -1,4 +1,6 @@
-﻿export const RESOURCE_CSS = `
+﻿import type { Metadata } from "next";
+
+export const RESOURCE_CSS = `
 :root{--purple:#4940C6;--orange:#f36901;--ink:#111114;--gray:#666;--line:#E8E6E1;
 --lav:#F3F1FA;--lav2:#EDE8F5;--peach:#FFF4EC;--green:#2E7D32;--red:#C0392B;--pmid:#7a5bd0;
 --site-head-h:81px}
@@ -234,3 +236,47 @@ export const buildResourcesCollectionLd = (items: ResourceItem[]) => ({
     })),
   },
 });
+
+// ---------------------------------------------------------------------------
+// T5 — per-article OG + Twitter metadata
+// ---------------------------------------------------------------------------
+
+export type ArticleMeta = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  eyebrow: string;
+  description: string;
+  heroAlt: string;
+};
+
+export const buildArticleMetadata = (a: ArticleMeta): Metadata => {
+  const url = `${SITE}/resources/${a.slug}`;
+  const image = `${SITE}/resources/${a.slug}-cover.png`;
+  const ogTitle = `${a.title}: ${a.subtitle}`;
+  const dates = RESOURCE_ARTICLE_DATES[a.slug];
+  return {
+    title: `${a.title}—BrandMultiplier`,
+    description: a.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      siteName: "BrandMultiplier.ai",
+      locale: "en_US",
+      title: ogTitle,
+      description: a.description,
+      section: a.eyebrow,
+      authors: ["https://www.linkedin.com/in/chrisrubin"],
+      publishedTime: dates?.datePublished,
+      modifiedTime: dates?.dateModified ?? dates?.datePublished,
+      images: [{ url: image, width: 1200, height: 630, alt: a.heroAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: a.description,
+      images: [image],
+    },
+  };
+};

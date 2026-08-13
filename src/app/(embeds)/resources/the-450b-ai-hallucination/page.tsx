@@ -4,19 +4,10 @@ import {
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
+  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
-
-export const metadata: Metadata = {
-  title: "The $450B AI Hallucination—BrandMultiplier",
-  description:
-    "Why narrative infrastructure, not software, is the final lever for B2B ROI. The industry spent $450B on AI infrastructure. The returns aren't showing up where everyone promised.",
-  alternates: {
-    canonical:
-      "https://www.brandmultiplier.ai/resources/the-450b-ai-hallucination",
-  },
-};
 
 const ARTICLE_META = {
   slug: "the-450b-ai-hallucination",
@@ -25,7 +16,11 @@ const ARTICLE_META = {
   eyebrow: "AI Spend vs. Real ROI",
   description:
     "Why narrative infrastructure, not software, is the final lever for B2B ROI. The industry spent $450B on AI infrastructure. The returns aren't showing up where everyone promised.",
+  heroAlt:
+    "Dark tiered pedestal with glowing orange seams supporting a skyline of translucent purple data towers",
 } as const;
+
+export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">

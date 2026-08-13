@@ -4,18 +4,10 @@ import {
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
+  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
-
-export const metadata: Metadata = {
-  title: "The Valuation Killer—BrandMultiplier",
-  description:
-    "Why your 'Founder Magic' is a Series B liability. To a Series B investor, it's a single point of failure that can carve more than a third off your valuation.",
-  alternates: {
-    canonical: "https://www.brandmultiplier.ai/resources/the-valuation-killer",
-  },
-};
 
 const ARTICLE_META = {
   slug: "the-valuation-killer",
@@ -24,7 +16,11 @@ const ARTICLE_META = {
   eyebrow: "Founder Dependency & Exit Value",
   description:
     "Why your 'Founder Magic' is a Series B liability. To a Series B investor, it's a single point of failure that can carve more than a third off your valuation.",
+  heroAlt:
+    "Futuristic power core with a glowing orange neural sphere nested in purple energy conduits and dark mechanical housing",
 } as const;
+
+export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">

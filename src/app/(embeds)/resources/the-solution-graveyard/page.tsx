@@ -4,19 +4,10 @@ import {
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
+  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
-
-export const metadata: Metadata = {
-  title: "The Solution Graveyard—BrandMultiplier",
-  description:
-    "Why eight fixes couldn't solve one problem. Every founder-led company buys the same eight fixes in the same order. None of them reach the layer underneath.",
-  alternates: {
-    canonical:
-      "https://www.brandmultiplier.ai/resources/the-solution-graveyard",
-  },
-};
 
 const ARTICLE_META = {
   slug: "the-solution-graveyard",
@@ -25,7 +16,11 @@ const ARTICLE_META = {
   eyebrow: "The Fixes That Fail",
   description:
     "Why eight fixes couldn't solve one problem. Every founder-led company buys the same eight fixes in the same order. None of them reach the layer underneath.",
+  heroAlt:
+    "Silhouette walking past a row of dark purple monoliths toward a glowing orange doorway",
 } as const;
+
+export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">
