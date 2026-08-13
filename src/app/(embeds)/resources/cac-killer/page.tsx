@@ -1,12 +1,21 @@
+import type { Metadata } from "next";
 import {
   RESOURCE_ARTICLE_DATES,
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
-  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
+
+export const metadata: Metadata = {
+  title: "The CAC Killer—BrandMultiplier",
+  description:
+    "Why your marketing agency is selling you fluff while your sales team starves. Your marketing agency is selling you aesthetics. Your sales team needs infrastructure.",
+  alternates: {
+    canonical: "https://www.brandmultiplier.ai/resources/cac-killer",
+  },
+};
 
 const ARTICLE_META = {
   slug: "cac-killer",
@@ -16,11 +25,7 @@ const ARTICLE_META = {
   eyebrow: "The Narrative Tax on CAC",
   description:
     "Why your marketing agency is selling you fluff while your sales team starves. Your marketing agency is selling you aesthetics. Your sales team needs infrastructure.",
-  heroAlt:
-    "Silhouette with glowing orange chest sending energy into a purple network of connected figures with orange cores",
 } as const;
-
-export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">

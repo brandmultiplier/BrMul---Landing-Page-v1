@@ -1,12 +1,21 @@
+import type { Metadata } from "next";
 import {
   RESOURCE_ARTICLE_DATES,
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
-  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
+
+export const metadata: Metadata = {
+  title: "The $500k Dead Weight—BrandMultiplier",
+  description:
+    "A forensic audit of the 5 hires that bankrupt founder-led sales. Your $250k Senior AE isn't failing because they lack talent—they're failing because you're asking a pilot to fly a plane that doesn't have an engine.",
+  alternates: {
+    canonical: "https://www.brandmultiplier.ai/resources/the-500k-dead-weight",
+  },
+};
 
 const ARTICLE_META = {
   slug: "the-500k-dead-weight",
@@ -15,11 +24,7 @@ const ARTICLE_META = {
   eyebrow: "Why Sales Hires Fail",
   description:
     "A forensic audit of the 5 hires that bankrupt founder-led sales. Your $250k Senior AE isn't failing because they lack talent—they're failing because you're asking a pilot to fly a plane that doesn't have an engine.",
-  heroAlt:
-    "Five cracked metallic egg-shaped weights hanging from an industrial gantry, glowing orange with a purple energy arc overhead",
 } as const;
-
-export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">

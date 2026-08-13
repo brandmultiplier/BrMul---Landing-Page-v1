@@ -1,12 +1,22 @@
+import type { Metadata } from "next";
 import {
   RESOURCE_ARTICLE_DATES,
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
-  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
+
+export const metadata: Metadata = {
+  title: "The Multi-Protagonist Map—BrandMultiplier",
+  description:
+    "Why your deal is stalling with 8-13 people you've never individually convinced. It's stalling because each person needs a different version of the story, and your team is telling all of them the same one.",
+  alternates: {
+    canonical:
+      "https://www.brandmultiplier.ai/resources/the-multi-protagonist-map",
+  },
+};
 
 const ARTICLE_META = {
   slug: "the-multi-protagonist-map",
@@ -16,11 +26,7 @@ const ARTICLE_META = {
   eyebrow: "The B2B Buying Committee",
   description:
     "Why your deal is stalling with 8-13 people you've never individually convinced. It's stalling because each person needs a different version of the story, and your team is telling all of them the same one.",
-  heroAlt:
-    "Silhouette in a circular stone chamber connected by glowing orange lines to multiple purple portals around the walls",
 } as const;
-
-export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">
