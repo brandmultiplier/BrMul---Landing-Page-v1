@@ -1,19 +1,20 @@
 ﻿export const RESOURCE_CSS = `
 :root{--purple:#4940C6;--orange:#f36901;--ink:#111114;--gray:#666;--line:#E8E6E1;
---lav:#F3F1FA;--lav2:#EDE8F5;--peach:#FFF4EC;--green:#2E7D32;--red:#C0392B;--pmid:#7a5bd0}
+--lav:#F3F1FA;--lav2:#EDE8F5;--peach:#FFF4EC;--green:#2E7D32;--red:#C0392B;--pmid:#7a5bd0;
+--site-head-h:81px}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.62;font-size:18px}
+body{margin:0;font-family:var(--font-inter,'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.62;font-size:18px;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}a{color:var(--purple)}
-.site-head-bar{position:-webkit-sticky;position:sticky;top:0;z-index:120;background:#fff;border-bottom:1px solid var(--line)}
-.site-head{position:static;display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:960px;margin:0 auto;padding:20px 24px}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
-.logo img{width:40px;height:40px;border-radius:8px;object-fit:contain}
-.logo b{font-weight:700;letter-spacing:.06em;font-size:15px;text-transform:uppercase}
+.site-head-bar{position:fixed;top:0;left:0;right:0;z-index:120;background:#fff;border-bottom:1px solid var(--line)}
+.site-head{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:960px;margin:0 auto;padding:20px 24px}
+.logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);border:0}
+.logo img{height:40px;width:auto;border-radius:8px;object-fit:contain;flex:none}
+.logo b,.logo .logo-text{font-weight:700;font-size:18px;line-height:1;letter-spacing:-0.025em;text-transform:none}
 .back{font-size:14px;color:var(--gray);text-decoration:none}.back:hover{color:var(--purple)}
 .head-actions{display:flex;align-items:center;gap:16px}
 a.btn-nav{display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:9px 16px;border-radius:8px;font-size:14px;line-height:1.2;white-space:nowrap;box-shadow:0 3px 10px rgba(243,105,1,.22)}
 a.btn-nav:hover{filter:brightness(1.05)}
-.resource{max-width:720px;margin:0 auto;padding:8px 24px 40px}
+.resource{max-width:720px;margin:0 auto;padding:calc(var(--site-head-h) + 8px) 24px 40px}
 .eyebrow{color:var(--purple);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;margin:24px 0 10px}
 h1{font-size:40px;line-height:1.14;margin:0 0 14px;letter-spacing:-.01em;font-weight:800}
 .lead{font-size:21px;color:#33333a;margin:0 0 16px}
@@ -94,6 +95,11 @@ body{font-size:17px}.head-actions{gap:10px}.back{font-size:13px}a.btn-nav{paddin
 `;
 
 export const RESOURCE_LOGO = "/brandmultiplier-logo.png";
+
+export const RESOURCE_LOGO_MARKUP = `<img src="${RESOURCE_LOGO}" alt="BrandMultiplier"><span class="logo-text">BrandMultiplier</span>`;
+
+export const withLazyImages = (html: string) =>
+  html.replace(/<img(?![^>]*\bloading=)/gi, '<img loading="lazy" decoding="async" ');
 
 const SITE = "https://www.brandmultiplier.ai";
 

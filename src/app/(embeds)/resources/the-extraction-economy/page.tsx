@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import {
   RESOURCE_ARTICLE_DATES,
   RESOURCE_CSS,
-  RESOURCE_LOGO,
+  RESOURCE_LOGO_MARKUP,
   buildArticleLd,
   buildBreadcrumbLd,
+  withLazyImages,
 } from "../_shared";
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ const ARTICLE_META = {
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">
-  <a class="logo" href="/resources"><img src="${RESOURCE_LOGO}" alt="BrandMultiplier b✳"><b>BrandMultiplier</b></a>
+  <a class="logo" href="/resources">${RESOURCE_LOGO_MARKUP}</a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
     <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-extraction-economy__nav" data-cta="nav">Book The Diagnostic</a>
@@ -122,7 +123,7 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS }} />
-      <div dangerouslySetInnerHTML={{ __html: BODY_HTML }} />
+      <div dangerouslySetInnerHTML={{ __html: withLazyImages(BODY_HTML) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}

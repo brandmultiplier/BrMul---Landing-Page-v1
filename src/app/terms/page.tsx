@@ -19,11 +19,14 @@ export default function TermsPage() {
       <header className="masthead">
         <div className="wrap">
           <a className="wordmark" href="/" aria-label="BrandMultiplier home">
-            <img
-              src="/brandmultiplier-logo.png"
-              alt="BrandMultiplier"
-              className="wordmark-logo"
-            />
+            <span className="wordmark-badge">
+              <img
+                src="/brandmultiplier-logo.png"
+                alt="BrandMultiplier"
+                className="wordmark-logo"
+              />
+            </span>
+            <span className="wordmark-text">BrandMultiplier</span>
           </a>
           <nav className="mast-nav" aria-label="Legal">
             <a href="/privacy">Privacy</a>
@@ -787,18 +790,23 @@ const LEGAL_CSS = `
   --font:'Inter','Inter var',-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
   --maxw:1180px;
 }
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font-inter),var(--font),sans-serif;-webkit-font-smoothing:antialiased}
 .skip{position:absolute;left:-9999px;top:0;background:var(--purple);color:#fff;padding:12px 20px;border:0;z-index:99;}
 .skip:focus{left:16px;top:16px;}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
-.masthead{position:sticky;top:0;z-index:80;border-bottom:1px solid var(--line);padding:18px 0;background:rgba(10,10,10,0.92);backdrop-filter:blur(8px);}
+.masthead{position:fixed;top:0;left:0;right:0;z-index:80;border-bottom:1px solid var(--line);padding:16px 0;background:rgba(10,10,10,0.92);backdrop-filter:blur(8px);}
 .masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
-.wordmark{border:0;text-decoration:none;display:inline-flex;align-items:center;}
-.wordmark-logo{height:22px;width:auto;display:block;}
+.wordmark{border:0;border-bottom:0;text-decoration:none;display:inline-flex;align-items:center;gap:12px;color:#fff}
+.wordmark:hover,.wordmark:focus{color:#fff;border-bottom:0}
+.wordmark-badge{position:relative;height:40px;width:auto;display:inline-flex;align-items:center;flex:none}
+.wordmark-logo{height:100%;width:auto;display:block;object-fit:contain;border-radius:8px}
+.wordmark-text{font:inherit;font-weight:700;font-size:1.125rem;line-height:1.75rem;letter-spacing:-0.025em;color:#fff;transition:color .15s ease}
+.wordmark:hover .wordmark-text{color:rgba(255,255,255,.9)}
 .mast-nav{display:flex;gap:28px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;}
-.mast-nav a{color:var(--text-2);border:0;text-decoration:none;}
-.mast-nav a:hover{color:#fff;}
+.mast-nav a{color:var(--text-2);border:0;border-bottom:0;text-decoration:none;}
+.mast-nav a:hover{color:#fff;border-bottom:0}
 .mast-nav a[aria-current="page"]{color:#fff;}
-.hero{padding:88px 0 56px;border-bottom:1px solid var(--line);}
+.hero{padding:88px 0 56px;margin-top:76px;border-bottom:1px solid var(--line);}
 .kicker{font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--orange);margin:0 0 22px;}
 h1{font-size:clamp(40px,6.2vw,69px);font-weight:500;line-height:1.06;letter-spacing:-.02em;margin:0 0 26px;color:var(--text);}
 .standfirst{font-size:clamp(18px,2.2vw,22px);font-weight:300;color:var(--text-2);max-width:60ch;margin:0 0 34px;line-height:1.6;}
@@ -806,7 +814,7 @@ h1{font-size:clamp(40px,6.2vw,69px);font-weight:500;line-height:1.06;letter-spac
 .meta strong{color:var(--text-2);font-weight:500;}
 .layout{padding:64px 0 0;}
 @media (max-width:900px){.layout{padding-top:40px;}}
-.content{max-width:74ch;min-width:0;padding-bottom:40px;margin:0 auto;}
+.content{max-width:74ch;min-width:0;padding-bottom:40px;margin:0;}
 .content section{padding:0 0 56px;scroll-margin-top:32px;}
 h2.sec{font-size:clamp(26px,3.4vw,34px);font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:0 0 8px;padding-top:8px;color:var(--text);}
 h2.sec .num{display:block;font-size:12px;font-weight:700;letter-spacing:.24em;color:var(--purple-lift);margin-bottom:14px;font-variant-numeric:tabular-nums;}

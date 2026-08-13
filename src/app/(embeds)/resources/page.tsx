@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const INDEX_CSS = `
-.index-wrap{max-width:960px;margin:0 auto;padding:8px 24px 60px}
+.index-wrap{max-width:960px;margin:0 auto;padding:calc(var(--site-head-h) + 8px) 24px 60px}
 .index-lead{font-size:21px;color:#33333a;margin:0 0 22px;max-width:640px}
 .index-wrap .cta-wrap{margin:0 0 36px}
 .index-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -132,25 +132,27 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS + INDEX_CSS }} />
-      <header className="site-head">
-        <Link className="logo" href="/resources">
-          {/* eslint-disable-next-line @next/next/no-img-element -- base64 data URI, not a next/image candidate */}
-          <img src={RESOURCE_LOGO} alt="BrandMultiplier b✳" />
-          <b>BrandMultiplier</b>
-        </Link>
-        <div className="head-actions">
-          <Link className="back" href="/what-is-a-narrative-operating-system">
-            What is NOS?
+      <div className="site-head-bar">
+        <header className="site-head">
+          <Link className="logo" href="/resources">
+            {/* eslint-disable-next-line @next/next/no-img-element -- matches homepage logo lockup */}
+            <img src={RESOURCE_LOGO} alt="BrandMultiplier" />
+            <span className="logo-text">BrandMultiplier</span>
           </Link>
-          <a
-            className="btn-nav"
-            href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=resources-index__nav"
-            data-cta="nav"
-          >
-            Book The Diagnostic
-          </a>
-        </div>
-      </header>
+          <div className="head-actions">
+            <Link className="back" href="/what-is-a-narrative-operating-system">
+              What is NOS?
+            </Link>
+            <a
+              className="btn-nav"
+              href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=resources-index__nav"
+              data-cta="nav"
+            >
+              Book The Diagnostic
+            </a>
+          </div>
+        </header>
+      </div>
       <main className="index-wrap">
         <div className="eyebrow">Resources</div>
         <h1>The BrandMultiplier Resource Library</h1>
@@ -177,6 +179,7 @@ export default function Page() {
               key={article.slug}
               className="index-card"
               href={`/resources/${article.slug}`}
+              prefetch
             >
               <span className="k">{article.eyebrow}</span>
               <span className="t">{article.title}</span>

@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 // Session-scoped UTM pass-through for the Calendly CTAs.
 // Visitors landing with UTMs (email, social, paid) keep their original
 // acquisition params on the booking link — utm_term carries the page slug.
@@ -36,7 +38,9 @@ export default function ResourcesLayout({
   return (
     <>
       {children}
-      <script dangerouslySetInnerHTML={{ __html: UTM_PASSTHROUGH }} />
+      <Script id="resources-utm-passthrough" strategy="afterInteractive">
+        {UTM_PASSTHROUGH}
+      </Script>
     </>
   );
 }
