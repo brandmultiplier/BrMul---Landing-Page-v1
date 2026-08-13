@@ -1,21 +1,12 @@
-import type { Metadata } from "next";
 import {
   RESOURCE_ARTICLE_DATES,
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
+  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
-
-export const metadata: Metadata = {
-  title: "The Unicorn Fallacy—BrandMultiplier",
-  description:
-    "Why your sales hires fail and how to fix the Narrative Debt. The unicorn closer you're hunting doesn't exist. The problem was never the talent—it's the debt underneath it.",
-  alternates: {
-    canonical: "https://www.brandmultiplier.ai/resources/the-unicorn-fallacy",
-  },
-};
 
 const ARTICLE_META = {
   slug: "the-unicorn-fallacy",
@@ -24,7 +15,11 @@ const ARTICLE_META = {
   eyebrow: "The Unicorn-Closer Myth",
   description:
     "Why your sales hires fail and how to fix the Narrative Debt. The unicorn closer you're hunting doesn't exist. The problem was never the talent—it's the debt underneath it.",
+  heroAlt:
+    "Crystalline unicorn statue shattering into glowing orange shards on a desk, with a purple network map glowing in the background",
 } as const;
+
+export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">

@@ -214,7 +214,56 @@ type ResourceItem = {
   description: string;
 };
 
+// ---------------------------------------------------------------------------
+// T5 — per-article Metadata (OG + Twitter)
+// ---------------------------------------------------------------------------
+
+import type { Metadata } from "next";
+
+export type ArticleMeta = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  eyebrow: string;
+  description: string;
+  heroAlt: string;
+};
+
+export const buildArticleMetadata = (a: ArticleMeta): Metadata => {
+  const url = `${SITE}/resources/${a.slug}`;
+  // Uses the existing cover PNG (always present). Swap to `${a.slug}-og.jpg` when T5a assets land.
+  const image = `${SITE}/resources/${a.slug}-cover.png`;
+  const ogTitle = `${a.title}: ${a.subtitle}`;
+  const dates = RESOURCE_ARTICLE_DATES[a.slug];
+
+  return {
+    title: `${a.title}—BrandMultiplier`,
+    description: a.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      siteName: "BrandMultiplier.ai",
+      locale: "en_US",
+      title: ogTitle,
+      description: a.description,
+      section: a.eyebrow,
+      authors: ["https://www.linkedin.com/in/chrisrubin"],
+      publishedTime: dates?.datePublished,
+      modifiedTime: dates?.dateModified ?? dates?.datePublished,
+      images: [{ url: image, width: 1200, height: 630, alt: a.heroAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: a.description,
+      images: [image],
+    },
+  };
+};
+
 export const buildResourcesCollectionLd = (items: ResourceItem[]) => ({
+
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "@id": `${SITE}/resources#collection`,

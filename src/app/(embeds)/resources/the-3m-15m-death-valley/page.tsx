@@ -1,22 +1,12 @@
-import type { Metadata } from "next";
 import {
   RESOURCE_ARTICLE_DATES,
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
+  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
-
-export const metadata: Metadata = {
-  title: "The $3M-$15M Death Valley—BrandMultiplier",
-  description:
-    "7 decisions that look like progress. All 7 fail for the same structural reason.",
-  alternates: {
-    canonical:
-      "https://www.brandmultiplier.ai/resources/the-3m-15m-death-valley",
-  },
-};
 
 const ARTICLE_META = {
   slug: "the-3m-15m-death-valley",
@@ -25,7 +15,10 @@ const ARTICLE_META = {
   eyebrow: "Escaping the Growth Plateau",
   description:
     "7 decisions that look like progress. All 7 fail for the same structural reason.",
+  heroAlt: "Glowing purple and orange geometric bridge crossing a dark chasm toward a neon city",
 } as const;
+
+export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">

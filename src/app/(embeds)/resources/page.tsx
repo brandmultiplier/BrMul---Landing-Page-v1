@@ -13,6 +13,30 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.brandmultiplier.ai/resources",
   },
+  openGraph: {
+    type: "website",
+    url: "https://www.brandmultiplier.ai/resources",
+    siteName: "BrandMultiplier.ai",
+    locale: "en_US",
+    title: "The BrandMultiplier Resource Library",
+    description:
+      "Diagnostics on narrative infrastructure, StoryLock, and the structural reasons founder-led B2B companies stall between $3M and $50M ARR.",
+    images: [
+      {
+        url: "https://www.brandmultiplier.ai/brandmultiplier-logo.png",
+        width: 512,
+        height: 512,
+        alt: "The BrandMultiplier Resource Library",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The BrandMultiplier Resource Library",
+    description:
+      "Diagnostics on narrative infrastructure, StoryLock, and the structural reasons founder-led B2B companies stall between $3M and $50M ARR.",
+    images: ["https://www.brandmultiplier.ai/brandmultiplier-logo.png"],
+  },
 };
 
 const INDEX_CSS = `

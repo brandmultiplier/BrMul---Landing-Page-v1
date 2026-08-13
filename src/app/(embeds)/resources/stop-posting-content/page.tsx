@@ -1,23 +1,12 @@
-import type { Metadata } from "next";
 import {
   RESOURCE_ARTICLE_DATES,
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
+  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
-
-export const metadata: Metadata = {
-  title:
-    "Stop Posting Content. Start Building Narrative Infrastructure.—BrandMultiplier",
-  description:
-    "Your marketing agency is turning you into a LinkedIn influencer—and it's the fastest way to stay trapped in every sales call.",
-  alternates: {
-    canonical:
-      "https://www.brandmultiplier.ai/resources/stop-posting-content",
-  },
-};
 
 const ARTICLE_META = {
   slug: "stop-posting-content",
@@ -26,7 +15,11 @@ const ARTICLE_META = {
   eyebrow: "Content vs. Infrastructure",
   description:
     "Your marketing agency is turning you into a LinkedIn influencer—and it's the fastest way to stay trapped in every sales call.",
+  heroAlt:
+    "Glass figure connected by neural strands to a glowing narrative infrastructure grid",
 } as const;
+
+export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">

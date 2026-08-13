@@ -1,22 +1,12 @@
-import type { Metadata } from "next";
 import {
   RESOURCE_ARTICLE_DATES,
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
+  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
-
-export const metadata: Metadata = {
-  title: "What Founders Who Crossed $50M Did at $10M—BrandMultiplier",
-  description:
-    "Pattern analysis across 12 founder-led B2B companies that broke the $7M-$12M ceiling—and the 4 traps that catch the ones that don't.",
-  alternates: {
-    canonical:
-      "https://www.brandmultiplier.ai/resources/what-founders-crossed-50m",
-  },
-};
 
 const ARTICLE_META = {
   slug: "what-founders-crossed-50m",
@@ -26,7 +16,11 @@ const ARTICLE_META = {
   eyebrow: "Breaking the $10M Ceiling",
   description:
     "Pattern analysis across 12 founder-led B2B companies that broke the $7M-$12M ceiling—and the 4 traps that catch the ones that don't.",
+  heroAlt:
+    "Crowds of silhouettes supporting a purple ceiling while a few climb staircases toward a single figure floating in orange light",
 } as const;
+
+export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">

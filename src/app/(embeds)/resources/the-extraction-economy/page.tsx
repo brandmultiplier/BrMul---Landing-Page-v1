@@ -1,21 +1,12 @@
-import type { Metadata } from "next";
 import {
   RESOURCE_ARTICLE_DATES,
   RESOURCE_CSS,
   RESOURCE_LOGO_MARKUP,
   buildArticleLd,
+  buildArticleMetadata,
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
-
-export const metadata: Metadata = {
-  title: "The Extraction Economy—BrandMultiplier",
-  description:
-    "How AI made every competitor sound identical—and what's still yours. When everyone prompts the same models on the same public corpus, the output converges. Your extracted logic is the one thing that can't be copied.",
-  alternates: {
-    canonical: "https://www.brandmultiplier.ai/resources/the-extraction-economy",
-  },
-};
 
 const ARTICLE_META = {
   slug: "the-extraction-economy",
@@ -24,7 +15,11 @@ const ARTICLE_META = {
   eyebrow: "AI & the Sameness Problem",
   description:
     "How AI made every competitor sound identical—and what's still yours. When everyone prompts the same models on the same public corpus, the output converges. Your extracted logic is the one thing that can't be copied.",
+  heroAlt:
+    "Deep purple colonnade of arches with one cracked pillar revealing glowing orange light, and a silhouetted figure reaching toward it",
 } as const;
+
+export const metadata = buildArticleMetadata(ARTICLE_META);
 
 const BODY_HTML = `
 <div class="site-head-bar"><header class="site-head">
