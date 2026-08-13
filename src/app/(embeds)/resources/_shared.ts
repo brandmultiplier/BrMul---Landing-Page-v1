@@ -4,7 +4,7 @@
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.62;font-size:18px}
 img{max-width:100%;display:block}a{color:var(--purple)}
-.site-head-bar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);transform:translateZ(0)}
+.site-head-bar{position:-webkit-sticky;position:sticky;top:0;z-index:120;background:#fff;border-bottom:1px solid var(--line)}
 .site-head{position:static;display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:960px;margin:0 auto;padding:20px 24px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
 .logo img{width:40px;height:40px;border-radius:8px;object-fit:contain}

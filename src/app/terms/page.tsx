@@ -18,8 +18,12 @@ export default function TermsPage() {
 
       <header className="masthead">
         <div className="wrap">
-          <a className="wordmark" href="/">
-            Brand<span>Multiplier</span>
+          <a className="wordmark" href="/" aria-label="BrandMultiplier home">
+            <img
+              src="/brandmultiplier-logo.png"
+              alt="BrandMultiplier"
+              className="wordmark-logo"
+            />
           </a>
           <nav className="mast-nav" aria-label="Legal">
             <a href="/privacy">Privacy</a>
@@ -849,10 +853,10 @@ const LEGAL_CSS = `
 .skip{position:absolute;left:-9999px;top:0;background:var(--purple);color:#fff;padding:12px 20px;border:0;z-index:99;}
 .skip:focus{left:16px;top:16px;}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
-.masthead{border-bottom:1px solid var(--line);padding:28px 0;}
+.masthead{position:sticky;top:0;z-index:80;border-bottom:1px solid var(--line);padding:18px 0;background:rgba(10,10,10,0.92);backdrop-filter:blur(8px);}
 .masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
-.wordmark{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--text);border:0;text-decoration:none;}
-.wordmark span{color:var(--purple-lift);}
+.wordmark{border:0;text-decoration:none;display:inline-flex;align-items:center;}
+.wordmark-logo{height:22px;width:auto;display:block;}
 .mast-nav{display:flex;gap:28px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;}
 .mast-nav a{color:var(--text-2);border:0;text-decoration:none;}
 .mast-nav a:hover{color:#fff;}
@@ -863,11 +867,12 @@ h1{font-size:clamp(40px,6.2vw,69px);font-weight:500;line-height:1.06;letter-spac
 .standfirst{font-size:clamp(18px,2.2vw,22px);font-weight:300;color:var(--text-2);max-width:60ch;margin:0 0 34px;line-height:1.6;}
 .meta{display:flex;flex-wrap:wrap;gap:10px 32px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:500;}
 .meta strong{color:var(--text-2);font-weight:500;}
-.layout{display:grid;grid-template-columns:260px 1fr;gap:72px;padding:64px 0 0;align-items:start;}
+.layout{display:grid;grid-template-columns:1fr 260px;gap:72px;padding:64px 0 0;align-items:start;}
 @media (max-width:900px){.layout{grid-template-columns:1fr;gap:0;padding-top:40px;}}
-.toc{position:sticky;top:32px;min-width:0;}
+.content{grid-column:1;}
+.toc{grid-column:2;position:sticky;top:96px;min-width:0;}
 @media (max-width:900px){
-  .toc{position:static;background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:28px;margin-bottom:48px;}
+  .toc{grid-column:auto;position:static;background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:28px;margin-bottom:48px;}
 }
 .toc h2{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);margin:0 0 18px;}
 .toc ol{list-style:none;margin:0;padding:0;counter-reset:toc;}
