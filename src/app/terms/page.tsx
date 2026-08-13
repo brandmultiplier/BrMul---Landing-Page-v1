@@ -61,69 +61,6 @@ export default function TermsPage() {
 
       <div className="wrap">
         <div className="layout">
-          <nav className="toc" aria-label="Table of contents">
-            <h2>Contents</h2>
-            <ol>
-              <li>
-                <a href="#agreement">Agreement to these terms</a>
-              </li>
-              <li>
-                <a href="#precedence">Order of precedence</a>
-              </li>
-              <li>
-                <a href="#eligibility">Eligibility and business use</a>
-              </li>
-              <li>
-                <a href="#resources">Free resources and tools</a>
-              </li>
-              <li>
-                <a href="#ip">Intellectual property</a>
-              </li>
-              <li>
-                <a href="#acceptable">Acceptable use</a>
-              </li>
-              <li>
-                <a href="#submissions">Your submissions</a>
-              </li>
-              <li>
-                <a href="#ai">AI-assisted output</a>
-              </li>
-              <li>
-                <a href="#noadvice">No professional advice</a>
-              </li>
-              <li>
-                <a href="#results">No guarantee of results</a>
-              </li>
-              <li>
-                <a href="#thirdparty">Third-party links and services</a>
-              </li>
-              <li>
-                <a href="#availability">Availability and changes</a>
-              </li>
-              <li>
-                <a href="#warranties">Disclaimer of warranties</a>
-              </li>
-              <li>
-                <a href="#liability">Limitation of liability</a>
-              </li>
-              <li>
-                <a href="#indemnity">Indemnification</a>
-              </li>
-              <li>
-                <a href="#termination">Termination</a>
-              </li>
-              <li>
-                <a href="#disputes">Governing law and disputes</a>
-              </li>
-              <li>
-                <a href="#general">General provisions</a>
-              </li>
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-            </ol>
-          </nav>
-
           <main className="content" id="main">
             <section id="agreement">
               <h2 className="sec">
@@ -867,21 +804,9 @@ h1{font-size:clamp(40px,6.2vw,69px);font-weight:500;line-height:1.06;letter-spac
 .standfirst{font-size:clamp(18px,2.2vw,22px);font-weight:300;color:var(--text-2);max-width:60ch;margin:0 0 34px;line-height:1.6;}
 .meta{display:flex;flex-wrap:wrap;gap:10px 32px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:500;}
 .meta strong{color:var(--text-2);font-weight:500;}
-.layout{display:grid;grid-template-columns:1fr 260px;gap:72px;padding:64px 0 0;align-items:start;}
-@media (max-width:900px){.layout{grid-template-columns:1fr;gap:0;padding-top:40px;}}
-.content{grid-column:1;}
-.toc{grid-column:2;position:sticky;top:96px;min-width:0;}
-@media (max-width:900px){
-  .toc{grid-column:auto;position:static;background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:28px;margin-bottom:48px;}
-}
-.toc h2{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);margin:0 0 18px;}
-.toc ol{list-style:none;margin:0;padding:0;counter-reset:toc;}
-.toc li{counter-increment:toc;margin:0 0 11px;font-size:14px;line-height:1.45;}
-.toc a{color:var(--text-2);border:0;display:block;padding-left:30px;position:relative;text-decoration:none;}
-.toc a::before{content:counter(toc,decimal-leading-zero);position:absolute;left:0;color:var(--text-3);font-variant-numeric:tabular-nums;font-weight:500;}
-.toc a:hover{color:#fff;}
-.toc a:hover::before{color:var(--purple-lift);}
-.content{max-width:74ch;min-width:0;padding-bottom:40px;}
+.layout{padding:64px 0 0;}
+@media (max-width:900px){.layout{padding-top:40px;}}
+.content{max-width:74ch;min-width:0;padding-bottom:40px;margin:0 auto;}
 .content section{padding:0 0 56px;scroll-margin-top:32px;}
 h2.sec{font-size:clamp(26px,3.4vw,34px);font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:0 0 8px;padding-top:8px;color:var(--text);}
 h2.sec .num{display:block;font-size:12px;font-weight:700;letter-spacing:.24em;color:var(--purple-lift);margin-bottom:14px;font-variant-numeric:tabular-nums;}
