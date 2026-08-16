@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
-import Script from "next/script";
 import { Suspense } from "react";
 import GtmPageViewTracker from "@/components/analytics/GtmPageViewTracker";
 import "./globals.css";
 
 const GTM_ID = "GTM-KS2JZD8Z";
-const CLARITY_PROJECT_ID = "k0r7x8mkc7";
 
 const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -73,12 +71,6 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <Script id="rb2b-loader" strategy="afterInteractive">
-          {`!function(key) {if (window.reb2b) return;window.reb2b = {loaded: true};var s = document.createElement("script");s.async = true;s.src = "https://b2bjsstore.s3.us-west-2.amazonaws.com/b/" + key + "/" + key + ".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);}("ZQ6J2RH73W6D");`}
-        </Script>
-        <Script id="microsoft-clarity" strategy="afterInteractive">
-          {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${CLARITY_PROJECT_ID}");`}
-        </Script>
         <Suspense fallback={null}>
           <GtmPageViewTracker />
         </Suspense>
