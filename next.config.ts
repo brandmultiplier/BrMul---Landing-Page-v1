@@ -57,6 +57,13 @@ const nextConfig: NextConfig = {
         destination: '/compare/nos-vs-hiring',
         permanent: true,
       },
+      {
+        // SFAE Wave 2 — short link for LinkedIn outreach (UTMs live on the destination)
+        source: '/story-fit',
+        destination:
+          'https://calendly.com/book-crc/ae-story-fit?utm_source=linkedin&utm_medium=cold&utm_campaign=sfae_wave2&utm_content=step3',
+        permanent: false,
+      },
     ];
   },
   async headers() {
