@@ -16,6 +16,7 @@ const ARR_OPTIONS = new Set([
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 const rateLimitStore = new Map<string, { count: number; windowStart: number }>();
+const WEBHOOK_TIMEOUT_MS = 1500;
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
@@ -75,7 +76,10 @@ export async function POST(req: Request) {
   }
 
   // Phone is OPTIONAL — validate only if present. Never require it.
-  const ph = b.phone ? parsePhoneNumberFromString(b.phone) : null;
+  const ph = b.phone
+    ? parsePhoneNumberFromString(b.phone) ??
+      parsePhoneNumberFromString(b.phone, "US")
+    : null;
   if (b.phone && !ph?.isValid()) errors.phone = "invalid";
 
   if (b.consent_marketing !== true) errors.consent_marketing = "required";
@@ -112,25 +116,29 @@ export async function POST(req: Request) {
   };
 
   if (WEBHOOK) {
-    // Fire-and-forget so user redirect isn't delayed by webhook latency.
-    void fetch(WEBHOOK, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(payload),
-      cache: "no-store",
-    })
-      .then(async (r) => {
-        if (!r.ok) {
-          console.error(
-            "library-optin webhook failed",
-            r.status,
-            await r.text().catch(() => ""),
-          );
-        }
-      })
-      .catch((err) => {
-        console.error("library-optin webhook error", err);
+    // Try to deliver payload reliably, but never block UX beyond a short budget.
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), WEBHOOK_TIMEOUT_MS);
+    try {
+      const r = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+        cache: "no-store",
+        signal: controller.signal,
       });
+      if (!r.ok) {
+        console.error(
+          "library-optin webhook failed",
+          r.status,
+          await r.text().catch(() => ""),
+        );
+      }
+    } catch (err) {
+      console.error("library-optin webhook error", err);
+    } finally {
+      clearTimeout(timeout);
+    }
   }
 
   // NEVER block the user on a webhook/integration failure — grant access regardless.
