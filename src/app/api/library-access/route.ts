@@ -17,6 +17,39 @@ const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 const rateLimitStore = new Map<string, { count: number; windowStart: number }>();
 const WEBHOOK_TIMEOUT_MS = 1500;
+const WEBHOOK_TIME_ZONE = process.env.LIBRARY_OPTIN_TIMEZONE || "Asia/Kolkata";
+
+function getOrdinal(day: number): string {
+  if (day % 100 >= 11 && day % 100 <= 13) return `${day}th`;
+  if (day % 10 === 1) return `${day}st`;
+  if (day % 10 === 2) return `${day}nd`;
+  if (day % 10 === 3) return `${day}rd`;
+  return `${day}th`;
+}
+
+function formatWebhookSubmissionTime(date: Date): string {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: WEBHOOK_TIME_ZONE,
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).formatToParts(date);
+
+  const hour = parts.find((p) => p.type === "hour")?.value ?? "12";
+  const minute = parts.find((p) => p.type === "minute")?.value ?? "00";
+  const dayRaw = parts.find((p) => p.type === "day")?.value ?? "1";
+  const month = parts.find((p) => p.type === "month")?.value ?? "Jan";
+  const year = parts.find((p) => p.type === "year")?.value ?? "1970";
+  const dayPeriod = (
+    parts.find((p) => p.type === "dayPeriod")?.value ?? "AM"
+  ).toUpperCase();
+  const day = getOrdinal(Number(dayRaw));
+
+  return `${hour}.${minute}${dayPeriod} ${day} ${month} ${year}`;
+}
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
@@ -89,6 +122,9 @@ export async function POST(req: Request) {
   }
 
   const leadId = randomUUID();
+  const submittedAt = new Date();
+  const submittedAtIso = submittedAt.toISOString();
+  const submittedAtFormatted = formatWebhookSubmissionTime(submittedAt);
   const approximateArrRaw =
     typeof b.approximate_arr === "string" ? b.approximate_arr.trim() : "";
   const approximateArr = ARR_OPTIONS.has(approximateArrRaw)
@@ -109,10 +145,11 @@ export async function POST(req: Request) {
     consent_marketing: true,
     consent_text: b.consent_text,
     consent_text_version: "v2-2026-08",
-    consent_ts: new Date().toISOString(),
+    consent_ts: submittedAtIso,
     consent_ip: req.headers.get("x-forwarded-for")?.split(",")[0] ?? null,
     source: "library_gate",
-    submitted_at: new Date().toISOString(),
+    submitted_at: submittedAtIso,
+    submitted_at_formatted: submittedAtFormatted,
   };
 
   if (WEBHOOK) {
