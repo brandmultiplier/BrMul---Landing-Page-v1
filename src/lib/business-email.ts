@@ -116,16 +116,6 @@ const getValidationFieldValue = (field: unknown): boolean | undefined => {
   return undefined;
 };
 
-const hasDnsMxRecord = async (domain: string): Promise<boolean> => {
-  try {
-    const dns = await import("node:dns/promises");
-    const mxRecords = await dns.resolveMx(domain);
-    return mxRecords.length > 0;
-  } catch {
-    return false;
-  }
-};
-
 export const isStrictBusinessEmail = async (email: string): Promise<boolean> => {
   if (!isBusinessEmail(email)) {
     return false;
@@ -135,8 +125,13 @@ export const isStrictBusinessEmail = async (email: string): Promise<boolean> => 
   const domain = getDomain(normalizedEmail);
   const apiKey = process.env.EMAILVALIDATION_API_KEY;
   if (!apiKey) {
-    console.warn("[email-validation] Missing EMAILVALIDATION_API_KEY");
-    return hasDnsMxRecord(domain);
+    // Fail closed: without the API we cannot confirm the mailbox is real,
+    // only that the domain has some mail server. Accepting on that alone is
+    // exactly the gap that let fake mailboxes through, so we reject instead.
+    console.warn(
+      "[email-validation] Missing EMAILVALIDATION_API_KEY — rejecting (fail closed)",
+    );
+    return false;
   }
 
   try {
@@ -144,15 +139,15 @@ export const isStrictBusinessEmail = async (email: string): Promise<boolean> => 
     const response = await fetch(url, { cache: "no-store" });
 
     if (!response.ok) {
-      const dnsFallbackAccepted = await hasDnsMxRecord(domain);
+      // Fail closed on API errors too (bad/expired key, rate limit, outage) —
+      // same reasoning as the missing-key case above.
       console.info("[email-validation]", {
         domain,
-        accepted: dnsFallbackAccepted,
+        accepted: false,
         reason: "api-http-error",
         status: response.status,
-        dnsFallbackAccepted,
       });
-      return dnsFallbackAccepted;
+      return false;
     }
 
     const data = (await response.json()) as EmailValidationResponse;
@@ -199,13 +194,18 @@ export const isStrictBusinessEmail = async (email: string): Promise<boolean> => 
       return false;
     }
 
+    // hasMxRecord only proves the domain accepts mail somewhere — it does NOT
+    // prove this specific mailbox exists. A domain-level signal must never be
+    // treated as sufficient on its own, or any fake address on a real domain
+    // (or a parked/catch-all domain) slips through.
     if (
       reason === "invalid_domain" ||
       reason === "invalid_format" ||
       reason === "invalid_mailbox" ||
       reason === "invalid_smtp" ||
       reason === "invalid_mx" ||
-      (hasMxRecord === false && state === "undeliverable")
+      hasMxRecord === false ||
+      isDeliverable === false
     ) {
       console.info("[email-validation]", {
         domain,
@@ -221,7 +221,9 @@ export const isStrictBusinessEmail = async (email: string): Promise<boolean> => 
       return false;
     }
 
-    if (state === "deliverable" || hasMxRecord === true) {
+    // Only accept when the mailbox itself is explicitly confirmed deliverable —
+    // not merely because the domain has an MX record.
+    if (state === "deliverable" || isDeliverable === true) {
       console.info("[email-validation]", {
         domain,
         accepted: true,
@@ -236,31 +238,30 @@ export const isStrictBusinessEmail = async (email: string): Promise<boolean> => 
       return true;
     }
 
-    // API can return ambiguous timeout/no_connect/unknown states. Resolve via DNS MX before final decision.
-    const dnsFallbackAccepted = await hasDnsMxRecord(domain);
+    // Any remaining ambiguous state (risky, catch-all, unknown, timeout) is
+    // rejected. We deliberately do not fall back to a DNS-MX-only check here,
+    // since MX presence alone cannot confirm a specific mailbox is real.
     console.info("[email-validation]", {
       domain,
-      accepted: dnsFallbackAccepted,
-      reason: reason ?? "dns-fallback",
+      accepted: false,
+      reason: reason ?? "ambiguous-result-rejected",
       state,
       isFreeEmail,
       isDisposableEmail,
       hasMxRecord,
       isDeliverable,
       isFormatValid,
-      dnsFallbackAccepted,
     });
-
-    return dnsFallbackAccepted;
+    return false;
   } catch {
-    const dnsFallbackAccepted = await hasDnsMxRecord(domain);
+    // Fail closed on network/parsing exceptions too — we cannot confirm
+    // deliverability, so we do not accept.
     console.info("[email-validation]", {
       domain,
-      accepted: dnsFallbackAccepted,
+      accepted: false,
       reason: "api-exception",
-      dnsFallbackAccepted,
     });
-    return dnsFallbackAccepted;
+    return false;
   }
 };
 
