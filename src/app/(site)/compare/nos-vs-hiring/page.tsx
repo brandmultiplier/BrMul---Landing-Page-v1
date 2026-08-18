@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description:
     "Should you hire a VP of Sales or install a Narrative Operating System first? The full comparison: fully loaded hiring costs, ramp times, tenure risk, and when hiring first is the right call.",
   alternates: {
-    canonical: "https://brandmultiplier.ai/compare/nos-vs-hiring",
+    canonical: "https://www.brandmultiplier.ai/compare/nos-vs-hiring",
   },
   openGraph: {
     title: "Hiring In-House vs. Installing a Narrative Operating System",
     description:
       "The full comparison: fully loaded hiring costs, ramp times, tenure risk, and when hiring first is the right call. For founder-led B2B companies.",
-    url: "https://brandmultiplier.ai/compare/nos-vs-hiring",
+    url: "https://www.brandmultiplier.ai/compare/nos-vs-hiring",
     type: "article",
   },
 };

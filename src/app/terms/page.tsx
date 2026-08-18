@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "The terms governing use of brandmultiplier.ai, our gated resources, diagnostic tools, and free content. Colorado law applies.",
   robots: { index: true, follow: true },
-  alternates: { canonical: "https://brandmultiplier.ai/terms" },
+  alternates: { canonical: "https://www.brandmultiplier.ai/terms" },
 };
 
 export default function TermsPage() {

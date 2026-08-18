@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "The SMB Brand Playbook: Integrating AI for Competitive Advantage",
     description:
       "BrandMultiplier white paper, 2024. Preview and download the full PDF.",
-    url: "https://brandmultiplier.ai/2024-white-paper",
+    url: "https://www.brandmultiplier.ai/2024-white-paper",
     type: "website",
   },
 };

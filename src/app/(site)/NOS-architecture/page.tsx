@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     'A narrative operating system for founder-led B2B—grounded in cognitive science, in development since 2023. Explore the four-layer NOS architecture.',
   alternates: {
-    canonical: 'https://brandmultiplier.ai/NOS-architecture',
+    canonical: 'https://www.brandmultiplier.ai/NOS-architecture',
   },
   openGraph: {
     title: 'NOS Architecture — The Narrative Operating System',
     description:
       'A narrative operating system for founder-led B2B—grounded in cognitive science, in development since 2023.',
-    url: 'https://brandmultiplier.ai/NOS-architecture',
+    url: 'https://www.brandmultiplier.ai/NOS-architecture',
     type: 'website',
   },
 };

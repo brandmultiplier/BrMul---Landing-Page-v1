@@ -279,10 +279,15 @@ export default function LibraryForm() {
             numberInputProps={{
               name: "phone",
               "aria-invalid": Boolean(errors.phone),
-              "aria-describedby": errors.phone ? "phone-error" : undefined,
+              "aria-describedby": ["phone-help", errors.phone ? "phone-error" : null]
+                .filter(Boolean)
+                .join(" "),
             }}
           />
         </div>
+        <p id="phone-help" className="field-help">
+          Optional. If you add it, a real person may call — no robots, no texts.
+        </p>
         {errors.phone && (
           <p id="phone-error" className="lf-error-text" role="alert">
             {errors.phone}

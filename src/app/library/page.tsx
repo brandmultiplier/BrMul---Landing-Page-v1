@@ -34,6 +34,7 @@ const LIBRARY_CSS = `
   border-color:var(--red);
 }
 .lf-error-text{color:var(--red);font-size:13px;margin:0}
+.field-help{color:var(--gray);font-size:12.5px;line-height:1.45;margin:6px 0 0}
 .lf-phone .PhoneInputInput{
   font-family:inherit;font-size:16px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;
   background:#fff;color:var(--ink);

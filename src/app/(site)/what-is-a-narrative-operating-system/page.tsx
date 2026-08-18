@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   description:
     "A Narrative Operating System (NarrativeOS) is the infrastructure that gets a company's story out of the founder's head and into the team's hands. The 2026 definition for founder-led B2B.",
   alternates: {
-    canonical: "https://brandmultiplier.ai/what-is-a-narrative-operating-system",
+    canonical: "https://www.brandmultiplier.ai/what-is-a-narrative-operating-system",
   },
   openGraph: {
     title: "What Is a Narrative Operating System?",
     description:
       "A Narrative Operating System (NarrativeOS) is the infrastructure that gets a company's story out of the founder's head and into the team's hands.",
-    url: "https://brandmultiplier.ai/what-is-a-narrative-operating-system",
+    url: "https://www.brandmultiplier.ai/what-is-a-narrative-operating-system",
     type: "article",
   },
 };

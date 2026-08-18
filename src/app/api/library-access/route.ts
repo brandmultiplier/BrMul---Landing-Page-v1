@@ -93,6 +93,7 @@ export async function POST(req: Request) {
 
   // Honeypot — silent accept, never call the webhook, don't reveal the trap.
   if (b.website_url) {
+    console.warn("library-optin honeypot triggered", { ip });
     return NextResponse.json({ ok: true });
   }
 

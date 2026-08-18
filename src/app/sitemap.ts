@@ -17,7 +17,6 @@ const RESOURCE_SLUGS = [
 ] as const;
 
 const SITE_WWW = "https://www.brandmultiplier.ai";
-const SITE = "https://brandmultiplier.ai";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -42,13 +41,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
     {
-      url: `${SITE}/privacy`,
+      url: `${SITE_WWW}/privacy`,
       lastModified: new Date("2026-08-17"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
-      url: `${SITE}/terms`,
+      url: `${SITE_WWW}/terms`,
       lastModified: new Date("2026-08-17"),
       changeFrequency: "yearly",
       priority: 0.3,
@@ -60,13 +59,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${SITE}/what-is-a-narrative-operating-system`,
+      url: `${SITE_WWW}/what-is-a-narrative-operating-system`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${SITE}/NOS-architecture`,
+      url: `${SITE_WWW}/NOS-architecture`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,

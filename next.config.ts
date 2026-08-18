@@ -43,6 +43,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'brandmultiplier.ai' }],
+        destination: 'https://www.brandmultiplier.ai/:path*',
+        permanent: true,
+      },
+      {
         source: '/what-is-narrativeos',
         destination: '/what-is-a-narrative-operating-system',
         permanent: true,

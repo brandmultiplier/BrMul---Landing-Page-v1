@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "How BrandMultiplier collects, uses, and protects personal information across brandmultiplier.ai, our gated resources, and Narrative Operating System engagements.",
   robots: { index: true, follow: true },
-  alternates: { canonical: "https://brandmultiplier.ai/privacy" },
+  alternates: { canonical: "https://www.brandmultiplier.ai/privacy" },
 };
 
 export default function PrivacyPage() {
