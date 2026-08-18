@@ -32,7 +32,7 @@ export default function PrivacyPage() {
             <a href="/privacy" aria-current="page">
               Privacy
             </a>
-            <a href="/terms">Terms</a>
+            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>
             <a href="/">Home</a>
           </nav>
         </div>
@@ -823,7 +823,7 @@ export default function PrivacyPage() {
                 deliverables carry human judgment and accountability; our
                 public tools and resources do not, and you should treat their
                 output as a starting point rather than a finding. The disclaimer
-                in our <a href="/terms">Terms of Use</a> covers this in full.
+                in our <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a> covers this in full.
               </p>
             </section>
 
@@ -1369,7 +1369,7 @@ export default function PrivacyPage() {
                   </dd>
                 </dl>
                 <p style={{ marginTop: 32 }}>
-                  <a className="btn" href="/terms">
+                  <a className="btn" href="/terms" target="_blank" rel="noopener noreferrer">
                     Read the Terms of Use
                   </a>
                 </p>
@@ -1387,7 +1387,7 @@ export default function PrivacyPage() {
           </p>
           <nav className="footlinks" aria-label="Legal">
             <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
+            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>
             <a href="mailto:support@brandmultiplier.ai">Contact</a>
           </nav>
         </div>

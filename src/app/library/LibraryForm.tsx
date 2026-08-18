@@ -63,12 +63,12 @@ function ConsentLinks() {
       <a
         href="https://brandmultiplier.ai/privacy"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
       >
         Privacy Policy
       </a>{" "}
       and{" "}
-      <a href="https://brandmultiplier.ai/terms" target="_blank" rel="noopener">
+      <a href="https://brandmultiplier.ai/terms" target="_blank" rel="noopener noreferrer">
         Terms
       </a>
     </>

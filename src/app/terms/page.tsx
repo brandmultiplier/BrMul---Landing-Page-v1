@@ -29,7 +29,7 @@ export default function TermsPage() {
             <span className="wordmark-text">BrandMultiplier</span>
           </a>
           <nav className="mast-nav" aria-label="Legal">
-            <a href="/privacy">Privacy</a>
+            <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
             <a href="/terms" aria-current="page">
               Terms
             </a>
@@ -83,7 +83,7 @@ export default function TermsPage() {
                 If you do not accept them, do not use the site.
               </p>
               <p>
-                Our <a href="/privacy">Privacy Policy</a> is incorporated into
+                Our <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> is incorporated into
                 these terms by reference and forms part of this agreement.
               </p>
             </section>
@@ -330,7 +330,7 @@ export default function TermsPage() {
                   support@brandmultiplier.ai
                 </a>
                 . Section 7 of the{" "}
-                <a href="/privacy">Privacy Policy</a> governs how we use it.
+                <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> governs how we use it.
               </p>
               <p>
                 You retain ownership of what you submit. You grant us a
@@ -391,7 +391,7 @@ export default function TermsPage() {
                 How we handle the data you put into AI-assisted tools,
                 including our commitment not to use it for model training, is
                 set out in Section 9 of the{" "}
-                <a href="/privacy">Privacy Policy</a>.
+                <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
               </p>
             </section>
 
@@ -747,7 +747,7 @@ export default function TermsPage() {
                   <dd>1500 N Grant St, Ste N, Denver, CO 80203, USA</dd>
                 </dl>
                 <p style={{ marginTop: 32 }}>
-                  <a className="btn" href="/privacy">
+                  <a className="btn" href="/privacy" target="_blank" rel="noopener noreferrer">
                     Read the Privacy Policy
                   </a>
                 </p>
@@ -764,7 +764,7 @@ export default function TermsPage() {
             rights reserved.
           </p>
           <nav className="footlinks" aria-label="Legal">
-            <a href="/privacy">Privacy</a>
+            <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
             <a href="/terms">Terms</a>
             <a href="mailto:support@brandmultiplier.ai">Contact</a>
           </nav>
