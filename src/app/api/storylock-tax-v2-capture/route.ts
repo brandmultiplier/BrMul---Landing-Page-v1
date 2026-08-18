@@ -9,7 +9,7 @@ type StorylockV2Payload = {
 };
 
 const STORYLOCK_V2_WEBHOOK_URL =
-  "https://brandmultiplier.app.n8n.cloud/webhook/2858fbb7-bcf0-4a7e-88e7-a7367e28d481";
+  "https://n8n-wkfg.srv1405974.hstgr.cloud/webhook/abc55240-f07d-440e-a7ad-f6a78a786254";
 
 export async function POST(req: Request) {
   try {
