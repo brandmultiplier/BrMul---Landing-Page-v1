@@ -7,6 +7,7 @@ import PhoneInput, {
   parsePhoneNumber,
 } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { isBusinessEmail } from "@/lib/business-email";
 
 // Window.dataLayer is declared globally in GtmPageViewTracker.tsx.
 
@@ -122,7 +123,8 @@ export default function LibraryForm() {
 
     if (!formData.first_name.trim()) next.first_name = "First name is required.";
     if (!formData.last_name.trim()) next.last_name = "Last name is required.";
-    if (!EMAIL_REGEX.test(formData.work_email.trim())) {
+    const trimmedEmail = formData.work_email.trim();
+    if (!EMAIL_REGEX.test(trimmedEmail) || !isBusinessEmail(trimmedEmail)) {
       next.work_email = "Enter a valid work email.";
     }
     const phone = phoneForValidation(formData.phone);

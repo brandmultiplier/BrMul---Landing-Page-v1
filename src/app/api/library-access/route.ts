@@ -1,6 +1,7 @@
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
+import { isStrictBusinessEmail } from "@/lib/business-email";
 
 const WEBHOOK = process.env.LIBRARY_OPTIN_WEBHOOK_URL;
 const ARR_OPTIONS = new Set([
@@ -105,7 +106,12 @@ export async function POST(req: Request) {
   const errors: Record<string, string> = {};
   if (!b.first_name?.trim()) errors.first_name = "required";
   if (!b.last_name?.trim()) errors.last_name = "required";
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(b.work_email ?? "")) {
+
+  // Real deliverability check — same logic as the StoryLock Tax and Final CTA
+  // capture routes. Blocks personal/free-mail domains, disposable domains,
+  // and fake mailboxes on otherwise-real domains, instead of only checking
+  // email shape.
+  if (!(await isStrictBusinessEmail(b.work_email ?? ""))) {
     errors.work_email = "invalid";
   }
 
