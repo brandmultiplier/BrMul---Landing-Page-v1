@@ -128,15 +128,15 @@ const computeVerdict = (
 const valuationDiscountFor = (levelMatch: Verdict["levelMatch"]): number => {
   switch (levelMatch) {
     case 1:
-      return 0.6;
+      return 0.55;
     case 2:
       return 0.4;
     case 3:
-      return 0.25;
+      return 0.35;
     case 4:
-      return 0.1;
+      return 0.2;
     case 5:
-      return 0;
+      return 0.1;
   }
 };
 
@@ -356,7 +356,8 @@ export default function StoryLockTaxPage() {
   }, []);
 
   // Math model: operating drag determines severity; severity determines valuation drag.
-  const hireTax = fails * Math.max(150_000, Math.min(aecost, 250_000));
+  const hireTax =
+    fails * Math.min(Math.max(aecost * 2.0, aecost * 0.5), aecost * 2.0);
   const calTax = hours * 48 * rate;
   // Compounding drag scales with founder close-rate dominance (baseline 70% = 0.15).
   const compTax = arr * 0.15 * (closePct / 70);
@@ -1492,13 +1493,15 @@ export default function StoryLockTaxPage() {
               About the math
             </div>
             <p style={{ margin: 0 }}>
-              Hiring Loop Tax = failed hires × your AE cost (clamped to the
-              $150K–$250K SaaStr range). Calendar Tax = hours/week × 48 working
-              weeks × your hourly value. Compounding Tax = a single year of
-              forgone growth at 15% applied to current ARR… a conservative
-              proxy for the multi-year revenue surface lost while the hiring
-              loop runs (ProductLed). Valuation Tax = ARR × revenue multiple ×
-              the founder-dependency discount implied by your severity level.
+              Hiring Loop Tax = failed hires × your AE cost (replacement cost
+              runs up to 2× their cost, per Cascio). Calendar Tax = hours/week
+              × 48 working weeks × your hourly value. Compounding Tax = a
+              single year of forgone growth at 15% applied to current ARR… a
+              conservative and directional proxy for the multi-year revenue
+              surface lost while the hiring loop runs. Valuation Tax = ARR ×
+              revenue multiple × a founder-dependency discount (averaging ~35%,
+              scaled to your severity level)—the same adjustment the IRS and
+              ASA formally recognize, per Warrillow's Value Builder research.
               The model now lets clean systems escape the discount and makes
               severe founder dependency more expensive.
             </p>
@@ -1724,13 +1727,7 @@ function BreakdownTable({
     {
       name: "The Hiring Loop Tax",
       desc: (
-        <>
-          Cumulative spend on failed sales hires. 70% of first sales hires fail
-          in year one; $150K–$250K per failed cycle.{" "}
-          <strong style={{ color: "var(--ink-dim)" }}>
-            (SaaStr, Brooks Group)
-          </strong>
-        </>
+        "Cumulative spend on failed sales hires. The fully-loaded cost of replacing a failed hire runs up to 200% of their annual cost—direct replacement costs alone run to 60%. (Cascio)"
       ),
       amt: hire,
     },
@@ -1743,24 +1740,14 @@ function BreakdownTable({
     {
       name: "The Compounding Tax",
       desc: (
-        <>
-          One year of forgone growth at 15% on current ARR. A conservative proxy
-          for the multi-year revenue surface lost while the loop runs.{" "}
-          <strong style={{ color: "var(--ink-dim)" }}>(ProductLed)</strong>
-        </>
+        "One year of forgone growth at 15% on current ARR—BrandMultiplier's diagnostic model, a conservative and directional proxy for the multi-year revenue surface lost while the loop runs."
       ),
       amt: comp,
     },
     {
       name: "The Valuation Tax",
       desc: (
-        <>
-          Founder-dependent businesses can sell at a steep discount to
-          comparable independent operations at exit. This run applies a{" "}
-          {Math.round(valDiscount * 100)}% severity-weighted discount to
-          current ARR × exit multiple.{" "}
-          <strong style={{ color: "var(--ink-dim)" }}>(Bain)</strong>
-        </>
+        "Founder-dependent businesses typically sell at a discount to comparable independent operations at exit. This run applies a founder-dependency discount, averaging ~35%, to current ARR × exit multiple, scaled to your severity level. (Warrillow)"
       ),
       amt: val,
     },
