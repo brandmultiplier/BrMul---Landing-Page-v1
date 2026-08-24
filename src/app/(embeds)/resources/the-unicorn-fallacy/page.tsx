@@ -8,6 +8,7 @@ import {
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
+import { calendlyHref } from "@/lib/cta";
 
 const ARTICLE_META = {
   slug: "the-unicorn-fallacy",
@@ -27,7 +28,7 @@ const BODY_HTML = `
   <a class="logo" href="/resources">${RESOURCE_LOGO_MARKUP}</a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
-    <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-unicorn-fallacy__nav" data-cta="nav">Book The Diagnostic</a>
+    <a class="btn-nav" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "nav" })}" data-cta="nav">Book The Diagnostic</a>
   </div>
 </header></div>
 <main class="resource">
@@ -67,7 +68,7 @@ const BODY_HTML = `
 <span class="ico">🎯</span>
 <h3>Not sure if this is your problem?</h3>
 <p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=the-unicorn-fallacy__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "midcontent" })}" data-cta="midcontent">Book The Diagnostic</a></p>
 </div>
 <h2>Narrative Debt</h2>
 <p>Software engineers understand technical debt: the accumulated cost of code shortcuts that make future development slower and more expensive. Ward Cunningham coined the term at OOPSLA in 1992 because he needed a metaphor that would make business stakeholders feel the weight of invisible engineering costs.</p>
@@ -106,14 +107,14 @@ const BODY_HTML = `
 
 <p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your StoryLock Tax</a></p>
 <p>Or, if you already know the problem is real and want to talk about what building the infrastructure looks like for your specific situation:</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=the-unicorn-fallacy">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "endcontent" })}" data-cta="endcontent">Book The Diagnostic</a></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: 70% of first VP of Sales hires fail—SaaStr. The technical-debt metaphor—Ward Cunningham (1992). Tacit knowledge, knowing more than we can tell—Michael Polanyi, The Tacit Dimension (1966). The Accenture Interactive win-rate figures, the founder-vs-team close-rate gap, and portfolio outcome metrics are BrandMultiplier's own client and diagnostic data—not third-party-published figures.</em></p></div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-500k-dead-weight"><span class="k">The five hires that prove it</span><span class="t">The $500k Dead Weight</span></a><a class="card" href="/resources/the-extraction-economy"><span class="k">Why AI won't save you</span><span class="t">The Extraction Economy</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=bottom_cta&utm_campaign=narrative_diagnostic&utm_content=the-unicorn-fallacy__bottom" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
-<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=the-unicorn-fallacy__sticky" data-cta="sticky">Book The Diagnostic</a></div>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

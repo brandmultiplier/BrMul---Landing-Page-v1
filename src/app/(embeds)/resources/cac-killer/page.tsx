@@ -8,6 +8,7 @@ import {
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
+import { calendlyHref } from "@/lib/cta";
 
 const ARTICLE_META = {
   slug: "cac-killer",
@@ -28,7 +29,7 @@ const BODY_HTML = `
   <a class="logo" href="/resources">${RESOURCE_LOGO_MARKUP}</a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
-    <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=cac-killer__nav" data-cta="nav">Book The Diagnostic</a>
+    <a class="btn-nav" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "nav" })}" data-cta="nav">Book The Diagnostic</a>
   </div>
 </header></div>
 <main class="resource">
@@ -85,7 +86,7 @@ const BODY_HTML = `
 <span class="ico">🎯</span>
 <h3>Not sure if this is your problem?</h3>
 <p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=cac-killer__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "midcontent" })}" data-cta="midcontent">Book The Diagnostic</a></p>
 </div>
 <h2>3. Why "Fluff" Fails at Scale</h2>
 <p>The wall you are hitting is the <strong>Narrative Gap</strong>.</p>
@@ -178,7 +179,7 @@ const BODY_HTML = `
 <div class="callout"><span class="ico">💡</span>
 <h3>The Diagnostic</h3>
 <p>Before the call, we've already run your public content through our tooling—your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural.</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=cac-killer">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "endcontent" })}" data-cta="endcontent">Book The Diagnostic</a></p>
 </div>
 
 <p><em>BrandMultiplier.ai—B2B Narrative Infrastructure for Founder-Led Companies. Extract the logic. Build the system. Scale the conviction.</em></p>
@@ -187,8 +188,8 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-3-9m-leak"><span class="k">Same lane · bigger number</span><span class="t">The $3.9M Leak</span></a><a class="card" href="/resources/the-valuation-killer"><span class="k">Raises the stakes</span><span class="t">The Valuation Killer</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=bottom_cta&utm_campaign=narrative_diagnostic&utm_content=cac-killer__bottom" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
-<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=cac-killer__sticky" data-cta="sticky">Book The Diagnostic</a></div>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

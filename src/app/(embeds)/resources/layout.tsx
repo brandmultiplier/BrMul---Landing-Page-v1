@@ -2,12 +2,13 @@ import Script from "next/script";
 
 // Session-scoped UTM pass-through for the Calendly CTAs.
 // Visitors landing with UTMs (email, social, paid) keep their original
-// acquisition params on the booking link — utm_term carries the page slug.
-// Direct/organic visitors fall back to the static internal params in the markup.
+// acquisition params on the booking link. T4 placement stays in utm_content
+// unless inbound UTMs override source/medium/campaign/content.
+// hide_gdpr_banner and bm_lead_id (utm_term) are never clobbered.
 const UTM_PASSTHROUGH = `
 (function () {
   try {
-    var KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    var KEYS = ['utm_source','utm_medium','utm_campaign','utm_content'];
     var params = new URLSearchParams(location.search);
     if (params.get('utm_source')) {
       var inbound = {};
@@ -16,13 +17,19 @@ const UTM_PASSTHROUGH = `
     }
     var stored = null;
     try { stored = JSON.parse(sessionStorage.getItem('bm_utm') || 'null'); } catch (e) {}
-    if (!stored || !stored.utm_source) return;
-    var slug = location.pathname.split('/').filter(Boolean).pop() || '';
+    var leadId = null;
+    try {
+      var match = document.cookie.match(/(?:^|; )bm_lead_id=([^;]*)/);
+      if (match) leadId = decodeURIComponent(match[1]);
+    } catch (e) {}
     document.querySelectorAll('a[href*="calendly.com/book-crc"]').forEach(function (a) {
       try {
         var url = new URL(a.getAttribute('href'), location.origin);
-        KEYS.forEach(function (k) { if (stored[k]) url.searchParams.set(k, stored[k]); });
-        url.searchParams.set('utm_term', slug);
+        if (stored && stored.utm_source) {
+          KEYS.forEach(function (k) { if (stored[k]) url.searchParams.set(k, stored[k]); });
+        }
+        url.searchParams.set('hide_gdpr_banner', '1');
+        if (leadId) url.searchParams.set('utm_term', leadId);
         a.setAttribute('href', url.toString());
       } catch (e) {}
     });

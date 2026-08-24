@@ -8,6 +8,7 @@ import {
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
+import { calendlyHref } from "@/lib/cta";
 
 const ARTICLE_META = {
   slug: "the-multi-protagonist-map",
@@ -28,7 +29,7 @@ const BODY_HTML = `
   <a class="logo" href="/resources">${RESOURCE_LOGO_MARKUP}</a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
-    <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-multi-protagonist-map__nav" data-cta="nav">Book The Diagnostic</a>
+    <a class="btn-nav" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "nav" })}" data-cta="nav">Book The Diagnostic</a>
   </div>
 </header></div>
 <main class="resource">
@@ -63,7 +64,7 @@ const BODY_HTML = `
 <span class="ico">🎯</span>
 <h3>Not sure if this is your problem?</h3>
 <p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=the-multi-protagonist-map__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "midcontent" })}" data-cta="midcontent">Book The Diagnostic</a></p>
 </div>
 <h2>Why one story can't carry a committee</h2>
 <p>A single hero's journey assumes a single hero. Real B2B deals have a cast: the economic buyer weighing total cost of ownership, the technical evaluator weighing architecture and risk, the end user weighing whether this makes their job easier or harder, and the internal champion weighing whether recommending you is safe for their own career.</p>
@@ -94,8 +95,8 @@ const BODY_HTML = `
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-valuation-killer"><span class="k">What stalled deals cost</span><span class="t">The Valuation Killer</span></a><a class="card" href="/resources/the-solution-graveyard"><span class="k">The fixes that missed</span><span class="t">The Solution Graveyard</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=bottom_cta&utm_campaign=narrative_diagnostic&utm_content=the-multi-protagonist-map__bottom" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
-<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=the-multi-protagonist-map__sticky" data-cta="sticky">Book The Diagnostic</a></div>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

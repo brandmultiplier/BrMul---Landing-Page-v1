@@ -2,6 +2,10 @@ import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { isStrictBusinessEmail } from "@/lib/business-email";
+import {
+  CONSENT_CHECKBOX_TEXT,
+  CONSENT_TEXT_VERSION,
+} from "@/lib/library-consent";
 
 const WEBHOOK = process.env.LIBRARY_OPTIN_WEBHOOK_URL;
 const ARR_OPTIONS = new Set([
@@ -150,8 +154,8 @@ export async function POST(req: Request) {
     // Keep both keys for downstream compatibility while webhook mapping is finalized.
     approx_arr: approximateArr,
     consent_marketing: true,
-    consent_text: b.consent_text,
-    consent_text_version: "v2-2026-08",
+    consent_text: CONSENT_CHECKBOX_TEXT,
+    consent_text_version: CONSENT_TEXT_VERSION,
     consent_ts: submittedAtIso,
     consent_ip: req.headers.get("x-forwarded-for")?.split(",")[0] ?? null,
     source: "library_gate",
@@ -187,11 +191,15 @@ export async function POST(req: Request) {
 
   // NEVER block the user on a webhook/integration failure — grant access regardless.
   const res = NextResponse.json({ ok: true, redirect: "/resources" });
-  res.cookies.set("bm_library", "1", {
-    maxAge: 60 * 60 * 24 * 365,
+  const year = 60 * 60 * 24 * 365;
+  const cookieBase = {
     path: "/",
-    sameSite: "lax",
+    sameSite: "lax" as const,
     secure: true,
-  });
+  };
+  res.cookies.set("bm_library", "1", { ...cookieBase, maxAge: year });
+  res.cookies.set("bm_lead_id", leadId, { ...cookieBase, maxAge: year });
+  res.cookies.set("bm_consent", CONSENT_TEXT_VERSION, { ...cookieBase, maxAge: year });
+  res.cookies.set("bm_welcome", "1", { ...cookieBase, maxAge: 60 * 60 });
   return res;
 }

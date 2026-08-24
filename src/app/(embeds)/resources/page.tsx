@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import {
   RESOURCE_CSS,
   RESOURCE_LOGO,
   buildResourcesCollectionLd,
 } from "./_shared";
+import { CTA_LABEL, calendlyHref } from "@/lib/cta";
+import WelcomeBanner from "./WelcomeBanner";
 
 export const metadata: Metadata = {
   title: "Resources - BrandMultiplier",
@@ -53,6 +56,7 @@ const INDEX_CSS = `
 .index-cta h2{font-size:28px;margin:0 0 10px;color:var(--purple);font-weight:800;letter-spacing:-.01em}
 .index-cta p{max-width:560px;margin:0 auto 20px;color:#33333a}
 .index-wrap > .cta-wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.welcome-banner{background:var(--lav);border:1px solid var(--lav2);border-radius:12px;padding:14px 18px;margin:0 0 22px;font-size:16px;font-weight:600;color:var(--ink)}
 .index-cta .cta-wrap{display:flex;justify-content:center;margin:0 auto;max-width:none}
 @media (max-width:640px){.index-grid{grid-template-columns:1fr}.index-wrap > .cta-wrap{flex-direction:column;align-items:flex-start}}
 `;
@@ -148,10 +152,11 @@ const ARTICLES = [
   },
 ];
 
-export default function Page() {
+export default async function Page() {
   const collectionLd = buildResourcesCollectionLd(
     ARTICLES.map(({ slug, title, description }) => ({ slug, title, description })),
   );
+  const showWelcome = (await cookies()).get("bm_welcome")?.value === "1";
 
   return (
     <>
@@ -169,10 +174,10 @@ export default function Page() {
             </Link>
             <a
               className="btn-nav"
-              href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=resources-index__nav"
+              href={calendlyHref({ slug: "resources-index", placement: "index_nav" })}
               data-cta="nav"
             >
-              Book The Diagnostic
+              {CTA_LABEL}
             </a>
           </div>
         </header>
@@ -180,6 +185,7 @@ export default function Page() {
       <main className="index-wrap">
         <div className="eyebrow">Resources</div>
         <h1>The BrandMultiplier Resource Library</h1>
+        {showWelcome ? <WelcomeBanner /> : null}
         <p className="index-lead">
           Diagnostics on narrative infrastructure, StoryLock, and the
           structural reasons founder-led B2B companies stall between $3M and
@@ -188,10 +194,10 @@ export default function Page() {
         <p className="cta-wrap">
           <a
             className="btn-primary"
-            href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=index_hero&utm_campaign=narrative_diagnostic&utm_content=resources-index__hero"
+            href={calendlyHref({ slug: "resources-index", placement: "index_hero" })}
             data-cta="index_hero"
           >
-            Book The Diagnostic
+            {CTA_LABEL}
           </a>
           <a className="btn-secondary" href="/storylock-tax">
             Calculate your StoryLock Tax
@@ -221,10 +227,10 @@ export default function Page() {
           <p className="cta-wrap">
             <a
               className="btn-primary"
-              href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=index_footer&utm_campaign=narrative_diagnostic&utm_content=resources-index__footer"
+              href={calendlyHref({ slug: "resources-index", placement: "index_footer" })}
               data-cta="index_footer"
             >
-              Book The Diagnostic
+              {CTA_LABEL}
             </a>
           </p>
         </section>

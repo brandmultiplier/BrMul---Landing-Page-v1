@@ -113,7 +113,56 @@ export const RESOURCE_ARTICLE_DATES: Partial<
       dateModified?: string;
     }
   >
-> = {};
+> = {
+  "stop-posting-content": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-24T21:38:34.000Z",
+  },
+  "the-3-9m-leak": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-24T21:38:34.000Z",
+  },
+  "the-3m-15m-death-valley": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-13T22:06:07.000Z",
+  },
+  "the-450b-ai-hallucination": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-24T21:38:34.000Z",
+  },
+  "the-500k-dead-weight": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-24T21:38:34.000Z",
+  },
+  "the-extraction-economy": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-24T21:38:34.000Z",
+  },
+  "the-multi-protagonist-map": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-24T21:38:34.000Z",
+  },
+  "the-solution-graveyard": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-24T21:38:34.000Z",
+  },
+  "the-unicorn-fallacy": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-13T22:06:07.000Z",
+  },
+  "the-valuation-killer": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-13T22:06:07.000Z",
+  },
+  "what-founders-crossed-50m": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-13T22:06:07.000Z",
+  },
+  "cac-killer": {
+    datePublished: "2026-07-25T00:59:32.000Z",
+    dateModified: "2026-08-13T22:06:07.000Z",
+  },
+};
 
 const truncateHeadline = (value: string): string =>
   value.length <= 110 ? value : `${value.slice(0, 107).trimEnd()}...`;
@@ -252,7 +301,7 @@ export type ArticleMeta = {
 
 export const buildArticleMetadata = (a: ArticleMeta): Metadata => {
   const url = `${SITE}/resources/${a.slug}`;
-  const image = `${SITE}/resources/${a.slug}-cover.png`;
+  const image = `${SITE}/resources/${a.slug}-og.jpg`;
   const ogTitle = `${a.title}: ${a.subtitle}`;
   const dates = RESOURCE_ARTICLE_DATES[a.slug];
   return {

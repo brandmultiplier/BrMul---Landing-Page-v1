@@ -8,6 +8,7 @@ import {
   buildBreadcrumbLd,
   withLazyImages,
 } from "../_shared";
+import { calendlyHref } from "@/lib/cta";
 
 const ARTICLE_META = {
   slug: "the-valuation-killer",
@@ -27,7 +28,7 @@ const BODY_HTML = `
   <a class="logo" href="/resources">${RESOURCE_LOGO_MARKUP}</a>
   <div class="head-actions">
     <a class="back" href="/resources">← All resources</a>
-    <a class="btn-nav" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=nav_cta&utm_campaign=narrative_diagnostic&utm_content=the-valuation-killer__nav" data-cta="nav">Book The Diagnostic</a>
+    <a class="btn-nav" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "nav" })}" data-cta="nav">Book The Diagnostic</a>
   </div>
 </header></div>
 <main class="resource">
@@ -75,7 +76,7 @@ const BODY_HTML = `
 <span class="ico">🎯</span>
 <h3>Not sure if this is your problem?</h3>
 <p>30 minutes, live. We run your public content through our tooling before the call — your story in your own words, next to what your channels did to it. You keep the scorecard either way.</p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=inline_cta&utm_campaign=narrative_diagnostic&utm_content=the-valuation-killer__midcontent" data-cta="midcontent">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "midcontent" })}" data-cta="midcontent">Book The Diagnostic</a></p>
 </div>
 <h2>2. The $10M Plateau and the "StoryLock" Problem: The Wall</h2>
 <p>By the time you hit $5M or $7M ARR, the cracks become canyons. You're facing the "Series B Wall." To get the valuation you want, you need to prove that your growth is a mathematical certainty, not a series of founder-led miracles.</p>
@@ -151,14 +152,14 @@ const BODY_HTML = `
 <p><strong>Ready to build your Narrative Operating System?</strong> Book The Diagnostic with BrandMultiplier. We'll show you exactly how to extract what's in your head and build the B2B narrative infrastructure that makes it travel without you. So your team closes with founder-level conviction. Without founder dependency.</p>
 
 <p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your Founder Dependency Score here</a></p>
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=the-valuation-killer">Book The Diagnostic</a></p>
+<p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "endcontent" })}" data-cta="endcontent">Book The Diagnostic</a></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% of first sales hires fail within 12 months—SaaStr. Founder-dependency valuation discount (owner-dependent businesses draw offers of 2.93x pre-tax profit vs 4.49x, roughly 35% lower)—John Warrillow's Value Builder analysis of 14,000 businesses; the "key person discount" is recognized by the IRS and the American Society of Appraisers. Engagement results (CAC, sales-cycle, founder-involvement, and hire-success figures, averaged across 120 engagements) reflect BrandMultiplier's diagnostic model—directional, not audited.</em></p></div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-multi-protagonist-map"><span class="k">Why deals stall</span><span class="t">The Multi-Protagonist Map</span></a><a class="card" href="/resources/what-founders-crossed-50m"><span class="k">The way across</span><span class="t">What Founders Crossed $50M</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=bottom_cta&utm_campaign=narrative_diagnostic&utm_content=the-valuation-killer__bottom" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
-<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="https://calendly.com/book-crc/storyline/?utm_source=resources&utm_medium=sticky_cta&utm_campaign=narrative_diagnostic&utm_content=the-valuation-killer__sticky" data-cta="sticky">Book The Diagnostic</a></div>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 

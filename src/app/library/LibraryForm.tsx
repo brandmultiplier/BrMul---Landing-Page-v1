@@ -8,14 +8,10 @@ import PhoneInput, {
 } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { isBusinessEmail } from "@/lib/business-email";
-
-// Window.dataLayer is declared globally in GtmPageViewTracker.tsx.
-
-const CONSENT_CHECKBOX_TEXT =
-  "I'd like access to the library. I agree that BrandMultiplier may store and process the details above to give me access, and may contact me at the email address — and, if I've given one, the phone number — I've provided, by email and by live phone call placed by BrandMultiplier or someone acting on its behalf, about the Diagnostic and related services. No automated dialing, no recorded messages, no marketing texts. Not a condition of any purchase, and you can stop it anytime by replying to any email or writing to support@brandmultiplier.ai. I've read the Privacy Policy and Terms.";
-
-const DISCLOSURE_TEXT =
-  "We use your details to give you access to the library and to follow up about the Diagnostic. We do not sell your data or share it with third parties for their own marketing. You can withdraw consent or request deletion at any time by emailing support@brandmultiplier.ai. If you are in the EU/EEA or UK, you have the right to access, rectify, erase, restrict, and port your data, and to lodge a complaint with your supervisory authority. See our Privacy Policy and Terms.";
+import {
+  CONSENT_CHECKBOX_TEXT,
+  DISCLOSURE_TEXT,
+} from "@/lib/library-consent";
 
 const ARR_OPTIONS = ["Under $3M", "$3M - $10M", "$10M - $50M", "$50M+"];
 
@@ -61,14 +57,14 @@ function ConsentLinks() {
   return (
     <>
       <a
-        href="https://brandmultiplier.ai/privacy"
+        href="https://www.brandmultiplier.ai/privacy"
         target="_blank"
         rel="noopener noreferrer"
       >
         Privacy Policy
       </a>{" "}
       and{" "}
-      <a href="https://brandmultiplier.ai/terms" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.brandmultiplier.ai/terms" target="_blank" rel="noopener noreferrer">
         Terms
       </a>
     </>
