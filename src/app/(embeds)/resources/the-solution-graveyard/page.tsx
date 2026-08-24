@@ -99,8 +99,6 @@ const BODY_HTML = `
 <p>None of the eight purchases above are shopping for what actually fixes this, because the category does not have a name in most founders' vocabularies yet. It is not a hire. It is not a deck. It is not a subscription.</p>
 <p>It is extraction, codification, and installation, done as one connected system instead of three separate purchases made in three different years from three different vendors who never talk to each other.</p>
 <p>You do not need a ninth headstone in this graveyard. You need to know which one you are standing over right now, and what the one purchase looks like that actually reaches the layer underneath it. (That purchase is a <a class="inline-link" href="/what-is-a-narrative-operating-system">Narrative Operating System</a>.)</p>
-
-<p class="cta-wrap"><a class="btn-primary" href="https://calendly.com/book-crc/storyline/?utm_source=brandmultiplier&utm_medium=internal&utm_campaign=the-solution-graveyard">Book The Diagnostic</a></p>
 <hr>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Cost ranges reflect typical founder-led B2B spend at the $3M-$50M ARR stage, as referenced in the companion LinkedIn post. ~70% first-year failure rate for early sales hires—SaaStr (Jason Lemkin). The founder-dependency valuation gap is documented in John Warrillow's Value Builder analysis of 14,000 businesses—owner-dependent companies draw acquisition offers of 2.93x pre-tax profit versus 4.49x for owner-independent ones—and in the IRS- and ASA-recognized "key person discount"; the specific 3-4x vs 7-8x EBITDA figures reflect BrandMultiplier's diagnostic model.</em></p></div>
