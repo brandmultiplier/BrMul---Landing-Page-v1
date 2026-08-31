@@ -51,7 +51,7 @@ const BODY_HTML = `
 <p>It is a cycle of burning cash and ego—and it's costing you $40k a month in ghost overhead.</p>
 <p>The reality is colder: it's not a talent problem. It's a structural defect.</p>
 <p>Roughly 70% of first sales hires at founder-led B2B companies fail within their first year (SaaStr)—and it is almost never about the caliber of the hire.</p>
-<p>You've hired the "Big-Logo Veteran" from Salesforce or the "Hungry Closer" from a competitor, but the sales logic is still <a class="inline-link" href="/storylock-tax"><strong>StoryLocked</strong></a> inside your head.</p>
+<p>You've hired the "Big-Logo Veteran" from Salesforce or the "Hungry Closer" from a competitor, but the sales logic is still <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLocked</strong></a> inside your head.</p>
 <p>By the time you realize the hire has failed, you've already lost nine months of market velocity, $200k in salary, and hundreds of hours of your own time "saving" deals that should have been closed by the team.</p>
 <p>Ghost Overhead is an invisible tax. You keep paying it because the failure looks like a people problem.</p>
 <p>This document is not a hiring guide. It is a forensic audit of the five archetypal sales hires that are mathematically guaranteed to fail in a founder-led environment—and the structural cause that ensures their failure before they even sign the offer letter.</p>
@@ -74,7 +74,7 @@ const BODY_HTML = `
 <p>By month nine, you're exhausted. You realize that if you aren't on the call, the deal doesn't close. The hire is frustrated. You're frustrated. You eventually part ways, citing "culture fit" or "market timing."</p>
 <p>Then, you do it again.</p>
 <p>You think the problem was the person. You think you just need to find a "hungrier" version or someone with more "domain expertise."</p>
-<p>The wall you keep hitting isn't a lack of talent. It's the <a class="inline-link" href="/storylock-tax"><strong>StoryLock Problem</strong></a>.</p>
+<p>The wall you keep hitting isn't a lack of talent. It's the <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock Problem</strong></a>.</p>
 <p>You are trying to scale a narrative that only exists in your subconscious. You are asking a team to execute a strategy that hasn't been codified into a <a class="inline-link" href="/what-is-a-narrative-operating-system">Narrative Operating System (NOS)</a>.</p>
 <p>Without that infrastructure, even the best sales talent in the world is just a high-priced amateur. (Related: <a class="inline-link" href="/resources/the-unicorn-fallacy">The Unicorn Fallacy</a>.)</p>
 <hr>
@@ -96,7 +96,7 @@ const BODY_HTML = `
 <p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "midcontent" })}" data-cta="midcontent">Book The Diagnostic</a></p>
 </div>
 <h2>The Forensic Audit (The 5 Archetypes)</h2>
-<p>Below are the autopsy reports for the five most common sales failures in B2B. Read them carefully. If you've made more than two of these hires in the last 24 months, you are paying a massive <a class="inline-link" href="/storylock-tax">StoryLock Tax</a>.</p>
+<p>Below are the autopsy reports for the five most common sales failures in B2B. Read them carefully. If you've made more than two of these hires in the last 24 months, you are paying a massive <a class="inline-link" href="/storylock-tax-tool">StoryLock Tax</a>.</p>
 
 <h3>1. The Big-Logo Senior AE</h3>
 <ul>
@@ -158,11 +158,11 @@ const BODY_HTML = `
 <hr>
 
 <h3><span class="c-orange">Stop Paying the Tax</span></h3>
-<p>Every day you operate without Narrative Infrastructure, you are paying the <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax</strong></a>.</p>
+<p>Every day you operate without Narrative Infrastructure, you are paying the <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock Tax</strong></a>.</p>
 <p>You are paying it in failed hires. You are paying it in high CAC. You are paying it in the 20 hours a week you spend "rescuing" deals that your team should have handled on their own.</p>
 <p>Stop guessing. Start calculating.</p>
 <p>We built a diagnostic tool specifically for founders at the $3M-$50M ARR stage. It will help you see exactly how much your current "Narrative Gap" is costing your bottom line—and which of these five archetypal failures you are currently funding.</p>
-<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">RUN YOUR NUMBERS: The StoryLock Tax Calculator</a></p>
+<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax-tool">RUN YOUR NUMBERS: The StoryLock Tax Calculator</a></p>
 <p>Don't make the next $500k mistake. Build the infrastructure first. Hire the talent second.</p>
 <p>Running the number shows you the <em>size</em> of the tax. The next step tells you whether it's <em>structural</em>—and that's a live read, not another download.</p>
 
@@ -172,10 +172,14 @@ const BODY_HTML = `
 </div>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year failure rate for early sales hires at founder-led B2B companies—SaaStr. The five sales-hire archetypes and the ghost-overhead / cost-per-failed-hire math reflect BrandMultiplier's internal diagnostic model—directional, not an audited figure.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-unicorn-fallacy"><span class="k">Why they fail = Narrative Debt</span><span class="t">The Unicorn Fallacy</span></a><a class="card" href="/resources/the-3-9m-leak"><span class="k">Put a number on it</span><span class="t">The $3.9M Leak</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

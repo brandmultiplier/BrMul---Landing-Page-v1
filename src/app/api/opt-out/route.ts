@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { postWebhook } from "@/lib/webhook";
 
 // Privacy §7 / TCPA do-not-call: this route is the landing-page write path.
 // The setter dial queue MUST read the flag from CRM/n8n after DNC_WEBHOOK_URL
@@ -34,30 +35,15 @@ export async function POST(req: Request) {
     do_not_call: true,
   };
 
-  if (WEBHOOK) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), WEBHOOK_TIMEOUT_MS);
-    try {
-      const r = await fetch(WEBHOOK, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload),
-        cache: "no-store",
-        signal: controller.signal,
-      });
-      if (!r.ok) {
-        console.error("dnc webhook failed", r.status, await r.text().catch(() => ""));
-      }
-    } catch (err) {
-      console.error("dnc webhook error", err);
-    } finally {
-      clearTimeout(timeout);
-    }
-  } else {
-    console.warn(
-      "dnc webhook skipped: DNC_WEBHOOK_URL is not set. Setter-queue write is blocked until CRM/n8n is wired.",
-    );
-  }
+  // A miss here leaves the permanent setter-queue flag unwritten; that CRM
+  // wiring stays blocked until DNC_WEBHOOK_URL is configured.
+  await postWebhook(
+    "dnc",
+    WEBHOOK,
+    payload,
+    "DNC_WEBHOOK_URL",
+    WEBHOOK_TIMEOUT_MS,
+  );
 
   return NextResponse.json({ ok: true });
 }

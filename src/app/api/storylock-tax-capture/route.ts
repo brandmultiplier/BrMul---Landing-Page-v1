@@ -3,9 +3,9 @@ import {
   BUSINESS_EMAIL_REQUIRED_MESSAGE,
   isStrictBusinessEmail,
 } from "@/lib/business-email";
+import { postWebhook } from "@/lib/webhook";
 
-const STORYLOCK_WEBHOOK_URL =
-  "https://n8n-wkfg.srv1405974.hstgr.cloud/webhook/abc55240-f07d-440e-a7ad-f6a78a786254";
+const STORYLOCK_WEBHOOK_URL = process.env.STORYLOCK_WEBHOOK_URL;
 
 type StorylockPayload = {
   email?: string;
@@ -22,16 +22,14 @@ export async function POST(req: Request) {
       );
     }
 
-    const upstream = await fetch(STORYLOCK_WEBHOOK_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-      cache: "no-store",
-    });
+    const result = await postWebhook(
+      "storylock-tax",
+      STORYLOCK_WEBHOOK_URL,
+      payload,
+      "STORYLOCK_WEBHOOK_URL",
+    );
 
-    if (!upstream.ok) {
+    if (!result.ok) {
       return NextResponse.json(
         { ok: false, error: "Webhook request failed" },
         { status: 502 },

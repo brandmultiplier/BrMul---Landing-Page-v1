@@ -42,9 +42,9 @@ const logos = [
 
 export default function LogoCarousel() {
     return (
-        <section className="py-16 sm:py-24 bg-bg-page relative overflow-hidden border-t border-white/5">
+        <section className="py-12 sm:py-16 md:py-24 bg-bg-page relative overflow-hidden border-t border-white/5">
             <div className="container-width text-center">
-                <p className="text-sm font-bold text-text-tertiary uppercase tracking-[0.2em] mb-12 sm:mb-16">
+                <p className="text-sm font-bold text-text-tertiary uppercase tracking-[0.2em] mb-8 sm:mb-12 md:mb-16 px-4">
                     Trusted by SMBs & Enterprise alike
                 </p>
             </div>
@@ -62,9 +62,9 @@ export default function LogoCarousel() {
                     {[...logos, ...logos].map((logo, i) => (
                         <div
                             key={i}
-                            className="mx-6 sm:mx-12 shrink-0"
+                            className="mx-4 sm:mx-8 md:mx-12 shrink-0"
                         >
-                            <div className="flex h-14 sm:h-20 w-[150px] sm:w-[210px] items-center justify-center">
+                            <div className="flex h-10 sm:h-14 md:h-20 w-[110px] sm:w-[160px] md:w-[210px] items-center justify-center">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={logo.src}

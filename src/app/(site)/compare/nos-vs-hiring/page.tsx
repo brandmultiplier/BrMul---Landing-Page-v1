@@ -751,7 +751,7 @@ export default function NosVsHiringPage() {
                 <p>The most expensive line on the list. Every deal you personally rescue is calendar capacity the company can&apos;t scale, and it compounds monthly while the alternatives above underperform.</p>
               </div>
             </div>
-            <p className="ndh-body ndh-narrow" style={{ marginTop: "40px" }}>Run in the right order, these same investments compound: the system gets extracted and installed first, and the PMM, the fractional, the agency, and the new VP all deploy it instead of guessing at it. A NOS installation runs as a 75-day pilot with monthly fees starting at $7.5K, against the $250K–$500K+ fully loaded year-one cost of the senior hire it de-risks. Or get your own number first with the <a className="ndh-inline" href="https://brandmultiplier.ai/storylock-tax">StoryLock Tax Calculator</a>.</p>
+            <p className="ndh-body ndh-narrow" style={{ marginTop: "40px" }}>Run in the right order, these same investments compound: the system gets extracted and installed first, and the PMM, the fractional, the agency, and the new VP all deploy it instead of guessing at it. A NOS installation runs as a 75-day pilot with monthly fees starting at $7.5K, against the $250K–$500K+ fully loaded year-one cost of the senior hire it de-risks. Or get your own number first with the <a className="ndh-inline" href="https://brandmultiplier.ai/storylock-tax-tool">StoryLock Tax Calculator</a>.</p>
           </section>
 
           {/* THE VP OBJECTION */}
@@ -859,7 +859,7 @@ export default function NosVsHiringPage() {
               <h2>Run the diagnostic before you run the search</h2>
               <p>Thirty minutes or less. Zero pressure, purely diagnostic. You&apos;ll leave knowing whether your next dollar belongs in a hire or in the system the hire needs.</p>
               <a className="ndh-cta-btn" href="https://calendly.com/book-crc/storyline/">{CTA_LABEL}</a>
-              <p className="ndh-cta-sub"><a className="ndh-accent-link" href="https://brandmultiplier.ai/storylock-tax">Or calculate your StoryLock Tax first &rarr;</a></p>
+              <p className="ndh-cta-sub"><a className="ndh-accent-link" href="https://brandmultiplier.ai/storylock-tax-tool">Or calculate your StoryLock Tax first &rarr;</a></p>
             </div>
           </section>
 

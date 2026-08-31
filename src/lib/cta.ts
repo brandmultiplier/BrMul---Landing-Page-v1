@@ -13,6 +13,7 @@ export const CALENDLY_PLACEMENTS = {
   index_nav: { medium: "nav_cta", content: "nav" },
   index_hero: { medium: "index_hero", content: "hero" },
   index_footer: { medium: "index_footer", content: "footer" },
+  vsl_strip: { medium: "vsl_strip", content: "vsl_strip" },
 } as const;
 
 export type CalendlyPlacement = keyof typeof CALENDLY_PLACEMENTS;

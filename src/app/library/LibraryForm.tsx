@@ -12,6 +12,12 @@ import {
   CONSENT_CHECKBOX_TEXT,
   DISCLOSURE_TEXT,
 } from "@/lib/library-consent";
+import { readVslWatchDepth } from "@/lib/vsl-watch-depth";
+import {
+  sanitizeLibraryNext,
+  type LibraryIntent,
+  type LibraryNextPath,
+} from "@/lib/library-next";
 
 const ARR_OPTIONS = ["Under $3M", "$3M - $10M", "$10M - $50M", "$50M+"];
 
@@ -71,7 +77,13 @@ function ConsentLinks() {
   );
 }
 
-export default function LibraryForm() {
+export default function LibraryForm({
+  redirectTo,
+  intent,
+}: {
+  redirectTo?: LibraryNextPath;
+  intent?: LibraryIntent;
+} = {}) {
   const router = useRouter();
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -167,18 +179,24 @@ export default function LibraryForm() {
           consent_text: CONSENT_CHECKBOX_TEXT,
           website_url: honeypotRef.current?.value ?? "",
           form_ts: formStartRef.current,
+          vsl_watch: readVslWatchDepth(),
+          next: redirectTo,
+          intent,
         }),
       });
 
       const data = (await response.json().catch(() => ({}))) as {
         ok?: boolean;
         errors?: Record<string, string>;
+        redirect?: string;
       };
 
       if (response.ok && data.ok) {
         window.dataLayer = window.dataLayer ?? [];
         window.dataLayer.push({ event: "library_optin" });
-        router.push("/resources");
+        router.push(
+          sanitizeLibraryNext(data.redirect ?? redirectTo),
+        );
         return;
       }
 

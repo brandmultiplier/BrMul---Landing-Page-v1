@@ -26,10 +26,12 @@ const EMBED_ROUTES = [
     '/mtg-deal-win',
     '/mtg-go-live',
     '/storylock-tax',
+    '/storylock-tax-tool',
 ];
 
 const MINIMAL_HEADER_ROUTES = [
     '/storylock-tax',
+    '/storylock-tax-tool',
 ];
 
 const LOGO_ONLY_HEADER_ROUTES = [
@@ -72,7 +74,7 @@ export default function Navbar() {
                                 className="h-full w-auto object-contain rounded-lg"
                             />
                         </div>
-                        <span className="font-bold text-lg tracking-tight text-[#111114] group-hover:text-[#4940C6] transition-colors">
+                        <span className="hidden sm:inline font-bold text-lg tracking-tight text-[#111114] group-hover:text-[#4940C6] transition-colors">
                             BrandMultiplier
                         </span>
                     </Link>
@@ -100,7 +102,7 @@ export default function Navbar() {
                                     className="h-full w-auto object-contain rounded-lg"
                                 />
                             </div>
-                            <span className="font-bold text-lg tracking-tight text-white group-hover:text-white/90 transition-colors">
+                            <span className="hidden sm:inline font-bold text-lg tracking-tight text-white group-hover:text-white/90 transition-colors">
                                 BrandMultiplier
                             </span>
                         </Link>
@@ -151,7 +153,7 @@ export default function Navbar() {
                                             className="h-full w-auto object-contain rounded-lg"
                                         />
                                     </div>
-                                    <span className="font-bold text-lg tracking-tight text-white group-hover:text-white/90 transition-colors">
+                                    <span className="hidden sm:inline font-bold text-lg tracking-tight text-white group-hover:text-white/90 transition-colors">
                                         BrandMultiplier
                                     </span>
                                 </Link>
@@ -295,7 +297,7 @@ export default function Navbar() {
                                         className="h-full w-auto object-contain rounded-lg"
                                     />
                                 </div>
-                                <span className="font-bold text-lg tracking-tight text-white group-hover:text-white/90 transition-colors">
+                                <span className="hidden sm:inline font-bold text-lg tracking-tight text-white group-hover:text-white/90 transition-colors">
                                     BrandMultiplier
                                 </span>
                             </Link>

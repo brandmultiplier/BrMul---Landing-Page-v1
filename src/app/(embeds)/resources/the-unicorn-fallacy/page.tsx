@@ -61,7 +61,7 @@ const BODY_HTML = `
 <p>Every deal that stalled because the rep could not create urgency the way you can. Every prospect who heard a diluted, half-accurate version of your value proposition and chose a competitor. Every month you spent jumping back onto calls to "save" deals instead of building the company. Every qualified lead that hit a pipeline graveyard because nobody else in the building could explain why your product matters the way that you explain it.</p>
 <p>Across 120+ founder-led B2B engagements, BrandMultiplier has measured the gap between founder close rates and team close rates. The typical gap exceeds 40%.</p>
 <p>That means your team, with access to the same product, the same market, and the same leads, closes at less than 60% of your rate. The difference is not talent, training, or motivation. The difference is a documented, transferable logic chain that does not exist.</p>
-<p>Every deal lost to that gap is a tax on undocumented selling logic. And it compounds. (That tax has a name: the <a class="inline-link" href="/storylock-tax">StoryLock Tax</a>.)</p>
+<p>Every deal lost to that gap is a tax on undocumented selling logic. And it compounds. (That tax has a name: the <a class="inline-link" href="/storylock-tax-tool">StoryLock Tax</a>.)</p>
 <hr>
 
 <div class="callout mid-cta">
@@ -105,15 +105,19 @@ const BODY_HTML = `
 <p>If you are a founder doing $3M to $50M ARR, you have lost at least one expensive sales hire to this cycle, and your team still cannot close without you in the room, the problem is Narrative Debt.</p>
 <p>Quantify the damage before you decide what to do about it. The StoryLock Tax Calculator runs the math on what undocumented selling logic has already cost you across four dimensions: the hiring loop, your calendar, compounding forgone growth, and the founder-dependency discount at exit. It takes three minutes and produces a number most founders have never seen.</p>
 
-<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your StoryLock Tax</a></p>
+<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax-tool">Calculate your StoryLock Tax</a></p>
 <p>Or, if you already know the problem is real and want to talk about what building the infrastructure looks like for your specific situation:</p>
 <p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "endcontent" })}" data-cta="endcontent">Book The Diagnostic</a></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: 70% of first VP of Sales hires fail—SaaStr. The technical-debt metaphor—Ward Cunningham (1992). Tacit knowledge, knowing more than we can tell—Michael Polanyi, The Tacit Dimension (1966). The Accenture Interactive win-rate figures, the founder-vs-team close-rate gap, and portfolio outcome metrics are BrandMultiplier's own client and diagnostic data—not third-party-published figures.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-500k-dead-weight"><span class="k">The five hires that prove it</span><span class="t">The $500k Dead Weight</span></a><a class="card" href="/resources/the-extraction-economy"><span class="k">Why AI won't save you</span><span class="t">The Extraction Economy</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

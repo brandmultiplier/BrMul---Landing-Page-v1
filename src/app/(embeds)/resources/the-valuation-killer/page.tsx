@@ -51,7 +51,7 @@ const BODY_HTML = `
 <h2>Your "Founder Magic" isn't a competitive advantage...</h2>
 <p>It's a single point of failure that can carve more than a third off your Series B valuation.</p>
 <p>Every B2B founder thinks their ability to "just get in the room and close" is their greatest asset. To a Series B investor, it's a red flag. It's the sound of a business that doesn't scale.</p>
-<p>The problem? <a class="inline-link" href="/storylock-tax"><strong>StoryLock</strong></a>.</p>
+<p>The problem? <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock</strong></a>.</p>
 <p>Your narrative—the logic, the nuance, the "why us"—is trapped in your head. When you hire sales reps, they don't have a system; they have a deck they never use and a "gut feeling" they can't replicate.</p>
 <p>This is why 70% of first sales hires fail within 12 months (SaaStr). They aren't bad at sales. They just can't be you. (Related: <a class="inline-link" href="/resources/the-500k-dead-weight">The $500k Dead Weight</a> and <a class="inline-link" href="/resources/the-unicorn-fallacy">The Unicorn Fallacy</a>.)</p>
 <p>If your team can't articulate your value proposition with founder-level conviction without you in the Zoom room, you don't have a company. You have a high-stress job that's impossible to exit.</p>
@@ -151,14 +151,18 @@ const BODY_HTML = `
 <p>It's time to extract the magic. It's time to build the system.</p>
 <p><strong>Ready to build your Narrative Operating System?</strong> Book The Diagnostic with BrandMultiplier. We'll show you exactly how to extract what's in your head and build the B2B narrative infrastructure that makes it travel without you. So your team closes with founder-level conviction. Without founder dependency.</p>
 
-<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your Founder Dependency Score here</a></p>
+<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax-tool">Calculate your Founder Dependency Score here</a></p>
 <p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "endcontent" })}" data-cta="endcontent">Book The Diagnostic</a></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% of first sales hires fail within 12 months—SaaStr. Founder-dependency valuation discount (owner-dependent businesses draw offers of 2.93x pre-tax profit vs 4.49x, roughly 35% lower)—John Warrillow's Value Builder analysis of 14,000 businesses; the "key person discount" is recognized by the IRS and the American Society of Appraisers. Engagement results (CAC, sales-cycle, founder-involvement, and hire-success figures, averaged across 120 engagements) reflect BrandMultiplier's diagnostic model—directional, not audited.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-multi-protagonist-map"><span class="k">Why deals stall</span><span class="t">The Multi-Protagonist Map</span></a><a class="card" href="/resources/what-founders-crossed-50m"><span class="k">The way across</span><span class="t">What Founders Crossed $50M</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

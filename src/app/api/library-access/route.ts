@@ -6,6 +6,12 @@ import {
   CONSENT_CHECKBOX_TEXT,
   CONSENT_TEXT_VERSION,
 } from "@/lib/library-consent";
+import {
+  sanitizeVslWatchDepth,
+  vslWatchWebhookFields,
+} from "@/lib/vsl-watch-depth";
+import { sanitizeLibraryIntent, sanitizeLibraryNext } from "@/lib/library-next";
+import { postWebhook } from "@/lib/webhook";
 
 const WEBHOOK = process.env.LIBRARY_OPTIN_WEBHOOK_URL;
 const ARR_OPTIONS = new Set([
@@ -21,7 +27,7 @@ const ARR_OPTIONS = new Set([
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 const rateLimitStore = new Map<string, { count: number; windowStart: number }>();
-const WEBHOOK_TIMEOUT_MS = 1500;
+const WEBHOOK_TIMEOUT_MS = 8000;
 const WEBHOOK_TIME_ZONE = process.env.LIBRARY_OPTIN_TIMEZONE || "Asia/Kolkata";
 
 function getOrdinal(day: number): string {
@@ -80,6 +86,9 @@ type LibraryAccessPayload = {
   consent_text?: string;
   website_url?: string;
   form_ts?: number | string;
+  vsl_watch?: unknown;
+  next?: string;
+  intent?: string;
 };
 
 export async function POST(req: Request) {
@@ -142,6 +151,10 @@ export async function POST(req: Request) {
     ? approximateArrRaw
     : null;
 
+  const watch = sanitizeVslWatchDepth(b.vsl_watch);
+  const next = sanitizeLibraryNext(b.next);
+  const intent = sanitizeLibraryIntent(b.intent);
+
   const payload = {
     lead_id: leadId,
     first_name: b.first_name!.trim(),
@@ -159,47 +172,50 @@ export async function POST(req: Request) {
     consent_ts: submittedAtIso,
     consent_ip: req.headers.get("x-forwarded-for")?.split(",")[0] ?? null,
     source: "library_gate",
+    intent,
     submitted_at: submittedAtIso,
     submitted_at_formatted: submittedAtFormatted,
+    ...vslWatchWebhookFields(watch),
   };
 
-  if (WEBHOOK) {
-    // Try to deliver payload reliably, but never block UX beyond a short budget.
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), WEBHOOK_TIMEOUT_MS);
-    try {
-      const r = await fetch(WEBHOOK, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload),
-        cache: "no-store",
-        signal: controller.signal,
-      });
-      if (!r.ok) {
-        console.error(
-          "library-optin webhook failed",
-          r.status,
-          await r.text().catch(() => ""),
-        );
-      }
-    } catch (err) {
-      console.error("library-optin webhook error", err);
-    } finally {
-      clearTimeout(timeout);
-    }
-  }
+  // Try to deliver payload reliably, but never block UX beyond a short budget.
+  await postWebhook(
+    "library-optin",
+    WEBHOOK,
+    payload,
+    "LIBRARY_OPTIN_WEBHOOK_URL",
+    WEBHOOK_TIMEOUT_MS,
+  );
 
   // NEVER block the user on a webhook/integration failure — grant access regardless.
-  const res = NextResponse.json({ ok: true, redirect: "/resources" });
+  const res = NextResponse.json({ ok: true, redirect: next });
   const year = 60 * 60 * 24 * 365;
   const cookieBase = {
     path: "/",
     sameSite: "lax" as const,
-    secure: true,
+    // Secure cookies are dropped over plain http, which silently breaks local
+    // testing on the LAN address Next prints alongside localhost.
+    secure: process.env.NODE_ENV === "production",
   };
   res.cookies.set("bm_library", "1", { ...cookieBase, maxAge: year });
   res.cookies.set("bm_lead_id", leadId, { ...cookieBase, maxAge: year });
   res.cookies.set("bm_consent", CONSENT_TEXT_VERSION, { ...cookieBase, maxAge: year });
+
+  // Identity for the gated instruments. They must never ask a second time, so
+  // the lead travels with the browser and gets replayed into their webhooks.
+  // httpOnly: only our own route handlers read it, never client JS.
+  res.cookies.set(
+    "bm_lead",
+    JSON.stringify({
+      first_name: payload.first_name,
+      last_name: payload.last_name,
+      email: payload.email,
+      phone: payload.phone,
+      company_name: payload.company_name,
+      approximate_arr: payload.approximate_arr,
+    }),
+    { ...cookieBase, httpOnly: true, maxAge: year },
+  );
   res.cookies.set("bm_welcome", "1", { ...cookieBase, maxAge: 60 * 60 });
   return res;
 }

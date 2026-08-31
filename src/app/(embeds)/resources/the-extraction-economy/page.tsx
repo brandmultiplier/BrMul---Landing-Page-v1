@@ -76,7 +76,7 @@ const BODY_HTML = `
 <h2>What's actually uncopyable in your company</h2>
 <p>Most founders assume their moat is the product, the roadmap, or the team. All three are visible to competitors, and increasingly, all three are approximated by AI faster than you can defend them.</p>
 <p>What is not visible, and what no model can generate because it was never published anywhere for a model to train on, is the specific set of judgment calls that got your company from zero to where it is now: the customer objection you learned to defuse in a way nobody taught you, the market shift you saw two years before the trade press named it, the reason a prospect chooses you that has nothing to do with the feature comparison.</p>
-<p>That is the uncopyable asset. Most founders have never written it down, which means it is currently doing nothing for the business except living in one person's head and closing deals one Zoom call at a time. (That is the <a class="inline-link" href="/storylock-tax">StoryLock</a> problem in another form.)</p>
+<p>That is the uncopyable asset. Most founders have never written it down, which means it is currently doing nothing for the business except living in one person's head and closing deals one Zoom call at a time. (That is the <a class="inline-link" href="/storylock-tax-tool">StoryLock</a> problem in another form.)</p>
 
 <h2>The Uncopyable-Asset <span class="c-orange">Instrument</span></h2>
 <p>This is a first-pass extraction, not the full Rumble process—about twenty minutes, done alone, with a notes doc open. Answer each prompt in one or two sentences, in your own words, not the polished version you would use on a sales call.</p>
@@ -98,10 +98,14 @@ const BODY_HTML = `
 <hr>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: 96% of B2B marketers use AI; 39% cite brand voice as the hardest thing to get right—Content Marketing Institute, 2026.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-450b-ai-hallucination"><span class="k">Spend vs return</span><span class="t">The $450B AI Hallucination</span></a><a class="card" href="/resources/stop-posting-content"><span class="k">Content that converges</span><span class="t">Stop Posting Content</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

@@ -39,6 +39,7 @@ Placement map (medium and content suffix derived together):
 | `index_nav` | `nav_cta` | `nav` |
 | `index_hero` | `index_hero` | `hero` |
 | `index_footer` | `index_footer` | `footer` |
+| `vsl_strip` | `vsl_strip` | `vsl_strip` |
 
 `utm_term` is reserved for the library `bm_lead_id` cookie (appended client-side after opt-in). Inbound UTMs may overlay source/medium/campaign/content; they must not clear `hide_gdpr_banner` or a stored lead id.
 

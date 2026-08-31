@@ -43,7 +43,7 @@ const BODY_HTML = `
 
 <h2>The corridor</h2>
 <p>Between $3M and $15M ARR, founder-led B2B companies face a specific set of decisions. Each one looks like the responsible next step. Each one feels like progress. Each one fails for the same structural reason: the logic that closes deals lives in the founder's head and has never been extracted into a system anyone else can run.</p>
-<p>This is <a class="inline-link" href="/storylock-tax"><strong>StoryLock</strong></a>. And the decisions below do not solve it. They compound it.</p>
+<p>This is <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock</strong></a>. And the decisions below do not solve it. They compound it.</p>
 
 <h3>This page is a diagnostic.</h3>
 <p>Find the <strong>decision</strong> you are about to make… Then read the <span class="c-orange"><strong>inversion</strong></span> before you write the check.</p>
@@ -125,17 +125,21 @@ const BODY_HTML = `
 <hr>
 
 <h2>Quantify the damage before making your next decision</h2>
-<p>The <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax Calculator</strong></a> runs the math on what undocumented selling logic has already cost you: the hiring loop, your calendar, compounding forgone growth, and the founder-dependency discount at exit.</p>
+<p>The <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock Tax Calculator</strong></a> runs the math on what undocumented selling logic has already cost you: the hiring loop, your calendar, compounding forgone growth, and the founder-dependency discount at exit.</p>
 <p>Three minutes. Your specific number.</p>
-<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate your StoryLock Tax</a></p>
+<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax-tool">Calculate your StoryLock Tax</a></p>
 <p>Or, if you already know the problem is structural, and want to talk about what building the infrastructure looks like:</p>
 <p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "endcontent" })}" data-cta="endcontent">Book The Diagnostic</a></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: 70% of first VP of Sales hires fail—SaaStr. Tacit knowledge, knowing more than we can tell—Michael Polanyi, The Tacit Dimension (1966). The seven-decision cost figures and portfolio outcome metrics reflect BrandMultiplier's internal diagnostic model—directional, not an audited figure.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-solution-graveyard"><span class="k">The fixes that fail</span><span class="t">The Solution Graveyard</span></a><a class="card" href="/resources/the-valuation-killer"><span class="k">What the plateau costs</span><span class="t">The Valuation Killer</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

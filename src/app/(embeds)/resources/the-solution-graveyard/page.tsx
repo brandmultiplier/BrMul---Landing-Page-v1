@@ -103,10 +103,14 @@ const BODY_HTML = `
 <hr>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Cost ranges reflect typical founder-led B2B spend at the $3M-$50M ARR stage, as referenced in the companion LinkedIn post. ~70% first-year failure rate for early sales hires—SaaStr (Jason Lemkin). The founder-dependency valuation gap is documented in John Warrillow's Value Builder analysis of 14,000 businesses—owner-dependent companies draw acquisition offers of 2.93x pre-tax profit versus 4.49x for owner-independent ones—and in the IRS- and ASA-recognized "key person discount"; the specific 3-4x vs 7-8x EBITDA figures reflect BrandMultiplier's diagnostic model.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-multi-protagonist-map"><span class="k">Why one story fails</span><span class="t">The Multi-Protagonist Map</span></a><a class="card" href="/resources/the-3m-15m-death-valley"><span class="k">The plateau underneath</span><span class="t">The $3M-$15M Death Valley</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

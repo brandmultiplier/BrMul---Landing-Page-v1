@@ -47,7 +47,7 @@ const BODY_HTML = `
 <p>The $20k brand refresh didn't lower your Customer Acquisition Cost (CAC). The "stunning" deck they delivered? Your sales reps haven't opened it in three months.</p>
 <p>Why?</p>
 <p>Because agencies optimize for "vibes"—while your sales team is starving for the conviction that only lives in your head.</p>
-<p>This is the <a class="inline-link" href="/storylock-tax"><strong>StoryLock problem</strong></a>.</p>
+<p>This is the <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock problem</strong></a>.</p>
 <p>You are the human bottleneck of your own revenue. If a deal requires your "magic touch" to close, you don't have a sales process. You have a dependency.</p>
 <p>The result is predictable—CAC balloons, roughly 70% of first sales hires fail within their first year (SaaStr), and you're still jumping on every "big" sales call to save the deal at the eleventh hour. (Related: <a class="inline-link" href="/resources/the-500k-dead-weight">The $500k Dead Weight</a>.)</p>
 <p>This is not a branding issue. It is a narrative failure.</p>
@@ -168,11 +168,11 @@ const BODY_HTML = `
 <p>Build the infrastructure so the brand story travels without you.</p>
 
 <h3><span class="c-orange">Stop Paying the Tax</span></h3>
-<p>Every day you operate without Narrative Infrastructure, you are paying the <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax</strong></a>.</p>
+<p>Every day you operate without Narrative Infrastructure, you are paying the <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock Tax</strong></a>.</p>
 <p>You are paying it in failed hires. You are paying it in high CAC. You are paying it in the 20 hours a week you spend "rescuing" deals that your team should have handled on their own.</p>
 <p>Stop guessing. Start calculating.</p>
 <p>We built a diagnostic tool specifically for founders at the $3M-$50M ARR stage. It will help you see exactly how much your current "Narrative Gap" is costing your bottom line—and which of these five archetypal failures you are currently funding.</p>
-<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">RUN YOUR NUMBERS: The StoryLock Tax Calculator</a></p>
+<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax-tool">RUN YOUR NUMBERS: The StoryLock Tax Calculator</a></p>
 <p><strong>The logic is in your head. It's time to get it out.</strong></p>
 <p>Running the number tells you the <em>size</em> of the tax. The next step tells you whether it's <em>structural</em>—and that is a live read, not another download.</p>
 
@@ -185,10 +185,14 @@ const BODY_HTML = `
 <p><em>BrandMultiplier.ai—B2B Narrative Infrastructure for Founder-Led Companies. Extract the logic. Build the system. Scale the conviction.</em></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year failure rate for early sales hires—SaaStr. New-hire ramp to full productivity (9-12 months)—Brooks Group analysis across 150+ B2B leaders. The Confusion Tax / Consistency Tax percentages (20-30%) reflect BrandMultiplier's internal diagnostic model—directional, not an audited figure.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-3-9m-leak"><span class="k">Same lane · bigger number</span><span class="t">The $3.9M Leak</span></a><a class="card" href="/resources/the-valuation-killer"><span class="k">Raises the stakes</span><span class="t">The Valuation Killer</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

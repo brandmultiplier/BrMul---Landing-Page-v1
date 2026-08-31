@@ -48,7 +48,7 @@ const BODY_HTML = `
 <p>That "magic" is actually a bottleneck. It is the single greatest inhibitor to your company's valuation. It is the reason your sales team feels like a group of expensive assistants rather than a revenue engine.</p>
 <p>Right now, your competitors sound exactly like you. With today's frontier AI models, the cost of looking "authoritative" has dropped to near zero. Your "voice" has been commoditized on the front end—but your sales execution is diverging on the back end.</p>
 <p>This is not a marketing problem. It is not a "branding" problem. It is a narrative infrastructure failure.</p>
-<p>You are currently paying the <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax</strong></a>—the annualized cost of your narrative logic being trapped inside your head instead of being encoded into your team. This report will show you exactly how to calculate that tax, why your current sales hires are mathematically destined to fail, and how to install the infrastructure required to scale founder-level conviction without founder dependency.</p>
+<p>You are currently paying the <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock Tax</strong></a>—the annualized cost of your narrative logic being trapped inside your head instead of being encoded into your team. This report will show you exactly how to calculate that tax, why your current sales hires are mathematically destined to fail, and how to install the infrastructure required to scale founder-level conviction without founder dependency.</p>
 
 <h2>The Heroic Founder Fallacy</h2>
 <p>To understand the Tax, we have to look at how you got here.</p>
@@ -76,8 +76,8 @@ const BODY_HTML = `
 </div>
 <h2>The StoryLock Tax</h2>
 <p>The breakthrough insight isn't that you need better "sales training." It's that you need <strong>Narrative Infrastructure</strong>.</p>
-<p>Narrative is not "storytelling." It is the logical operating system of your company. When that logic is trapped in your head, we call it <a class="inline-link" href="/storylock-tax"><strong>StoryLock</strong></a>.</p>
-<p>StoryLock creates a measurable financial drain on your P&amp;L. We have quantified this as the <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax</strong></a>. It is the sum of three structurally distinct dollar drains that most founders ignore until it's too late.</p>
+<p>Narrative is not "storytelling." It is the logical operating system of your company. When that logic is trapped in your head, we call it <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock</strong></a>.</p>
+<p>StoryLock creates a measurable financial drain on your P&amp;L. We have quantified this as the <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock Tax</strong></a>. It is the sum of three structurally distinct dollar drains that most founders ignore until it's too late.</p>
 
 <h3>Component 1: <span class="c-orange">Revenue Leakage</span> (The Growth Ceiling)</h3>
 <p>This is the structural revenue your company cannot access because your team cannot convert at your rate.</p>
@@ -179,20 +179,24 @@ const BODY_HTML = `
 <p>In a world where AI has commoditized your "voice," your only remaining moat is your <strong>Narrative Logic</strong>.</p>
 <p>You can continue to be the "hero" who saves every deal while your company's growth remains capped by your own capacity. Or, you can install the system that allows your team to close with your conviction.</p>
 <p>The next step is diagnostic.</p>
-<p>Calculate your specific leak using our <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax Calculator</strong></a>. See the numbers for yourself. Itemize the drain on your Growth, your Life, and your Capital.</p>
+<p>Calculate your specific leak using our <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock Tax Calculator</strong></a>. See the numbers for yourself. Itemize the drain on your Growth, your Life, and your Capital.</p>
 <p>Once you see the "Tax" on paper, you can never un-see it.</p>
 
-<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">Calculate Your StoryLock Tax Now</a></p>
+<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax-tool">Calculate Your StoryLock Tax Now</a></p>
 <p>Running the number shows you the <em>size of the leak</em>. The next step tells you whether it's <em>structural</em>—and that's a live read, not another download.</p>
 
 <div class="callout "><span class="ico">💡</span><h3>The Diagnostic</h3>
 <p>Before the call, we've already run your public content through our tooling—your story in your own words, next to what your channels did to it. 30 minutes, live. You keep the scorecard either way, and you leave knowing whether the problem is structural.</p></div>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year sales-hire failure—SaaStr. The three-part StoryLock Tax (revenue leakage, founder time tax, infrastructure drag) is BrandMultiplier's diagnostic model applied to a worked example—directional, not audited.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-500k-dead-weight"><span class="k">The hires behind the leak</span><span class="t">The $500k Dead Weight</span></a><a class="card" href="/resources/the-valuation-killer"><span class="k">What it does to your exit</span><span class="t">The Valuation Killer</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

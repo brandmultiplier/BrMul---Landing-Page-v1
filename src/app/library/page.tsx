@@ -4,6 +4,9 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import { RESOURCE_CSS, RESOURCE_LOGO } from "../(embeds)/resources/_shared";
+import VslToolStrip from "../(embeds)/resources/VslToolStrip";
+import { VSL_CSS, VSL_STRIP_CSS } from "@/lib/vsl";
+import VslBlock from "@/components/vsl/VslBlock";
 import LibraryForm from "./LibraryForm";
 
 export const metadata: Metadata = {
@@ -17,9 +20,19 @@ export const metadata: Metadata = {
 };
 
 const LIBRARY_CSS = `
-.library-wrap{max-width:560px;margin:0 auto;padding:calc(var(--site-head-h) + 32px) 24px 60px}
-.library-lead{font-size:19px;color:#33333a;margin:0 0 28px;max-width:520px}
-.library-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 26px;box-shadow:0 8px 26px rgba(73,64,198,.06)}
+.library-wrap{max-width:960px;margin:0 auto;padding:calc(var(--site-head-h) + 8px) 24px 60px}
+.library-lead{font-size:19px;color:#33333a;margin:0 0 22px;max-width:640px}
+.library-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 26px 28px;box-shadow:0 8px 26px rgba(73,64,198,.06)}
+.library-panel .bm-strip{margin:0;padding:0}
+.library-panel .bm-strip__head{font-size:22px}
+.library-panel .bm-tools{margin-bottom:16px}
+.library-panel .bm-diag{margin:0}
+.library-panel a.bm-diag__btn{background:#fff;color:var(--purple);border:2px solid var(--purple);box-shadow:none;padding:13px 24px}
+.library-panel a.bm-diag__btn:hover{background:var(--lav);color:var(--purple);box-shadow:none;transform:none}
+.library-gate{max-width:560px;margin:28px auto 0;padding-top:28px;border-top:1px solid var(--line)}
+.library-gate__k{font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--purple);margin:0 0 8px}
+.library-gate__title{font-size:22px;font-weight:800;letter-spacing:-0.2px;line-height:1.2;color:var(--ink);margin:0 0 6px}
+.library-gate__hint{font-size:15px;line-height:1.5;color:var(--gray);margin:0 0 22px}
 .lf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .lf-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
 .lf-field label{font-size:13px;font-weight:700;color:var(--ink)}
@@ -55,7 +68,8 @@ const LIBRARY_CSS = `
 .lf-submit:disabled{opacity:.6;cursor:not-allowed}
 .lf-honeypot{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
 .lf-network-error{color:var(--red);font-size:13.5px;text-align:center;margin:0 0 14px}
-@media (max-width:520px){.lf-row{grid-template-columns:1fr}}
+@media (max-width:860px){.library-wrap{padding:calc(var(--site-head-h) + 8px) 16px 48px}.library-panel{padding:20px 16px 22px}}
+@media (max-width:520px){.lf-row{grid-template-columns:1fr}.library-lead{font-size:16px}.library-gate{margin-top:22px;padding-top:22px}}
 `;
 
 export default async function LibraryPage() {
@@ -66,7 +80,7 @@ export default async function LibraryPage() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS + LIBRARY_CSS }} />
+      <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS + LIBRARY_CSS + VSL_CSS + VSL_STRIP_CSS }} />
       <div className="site-head-bar">
         <header className="site-head">
           <Link className="logo" href="/">
@@ -84,8 +98,17 @@ export default async function LibraryPage() {
           infrastructure, StoryLock, and the structural reasons founder-led
           B2B companies stall between $3M and $50M ARR.
         </p>
-        <div className="library-card">
-          <LibraryForm />
+        <VslBlock location="library" />
+        <div className="library-panel">
+          <VslToolStrip ctaSlug="library" embedded gated />
+          <div className="library-gate">
+            <p className="library-gate__k">Resource library</p>
+            <h2 className="library-gate__title">Get access</h2>
+            <p className="library-gate__hint">
+              One form. Then the rest of the library is on this browser.
+            </p>
+            <LibraryForm />
+          </div>
         </div>
       </main>
       <footer className="site-foot">

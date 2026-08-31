@@ -45,7 +45,7 @@ const BODY_HTML = `
 
 <h2>1. <span class="c-orange">The Influencer Trap</span></h2>
 <p>Your marketing agency is turning you into a LinkedIn influencer—and it's the fastest way to stay trapped in every sales call.</p>
-<p>They celebrate "reach" and "engagement" while your sales team starves. You get high-fives for impressions; they get ghosted on discovery calls. This is the <a class="inline-link" href="/storylock-tax"><strong>StoryLock problem</strong></a>. The narrative logic is trapped in your head, while your team is stuck reading a generic deck that sounds like every other B2B commodity.</p>
+<p>They celebrate "reach" and "engagement" while your sales team starves. You get high-fives for impressions; they get ghosted on discovery calls. This is the <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock problem</strong></a>. The narrative logic is trapped in your head, while your team is stuck reading a generic deck that sounds like every other B2B commodity.</p>
 <p>It's not a brand refresh. It's a system.</p>
 <p>Content is noise. Narrative is infrastructure. If your team cannot articulate your value proposition with your level of conviction, your LinkedIn presence is just a vanity project. You are building a personal brand when you should be building a scalable asset.</p>
 <p>You don't need a viral post. You need a <a class="inline-link" href="/what-is-a-narrative-operating-system"><strong>Narrative Operating System (NOS)</strong></a> that makes your value travel without you. You need to stop the cycle of first sales hires failing because they couldn't translate your "founder magic" into a closed deal. (See also: <a class="inline-link" href="/resources/the-unicorn-fallacy">The Unicorn Fallacy</a>.)</p>
@@ -155,10 +155,14 @@ const BODY_HTML = `
 </ol>
 <p>Stop being an influencer. Start building infrastructure.</p>
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: ~70% first-year failure rate for first sales hires at founder-led B2B companies—SaaStr.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-extraction-economy"><span class="k">The AI sameness problem</span><span class="t">The Extraction Economy</span></a><a class="card" href="/resources/the-unicorn-fallacy"><span class="k">The debt underneath</span><span class="t">The Unicorn Fallacy</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

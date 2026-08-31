@@ -7,7 +7,11 @@ import {
   buildResourcesCollectionLd,
 } from "./_shared";
 import { CTA_LABEL, calendlyHref } from "@/lib/cta";
+import { VSL_CSS, VSL_STRIP_CSS, buildVslVideoLd } from "@/lib/vsl";
+import { VSL_TRANSCRIPT, VSL_TRANSCRIPT_TEXT } from "./vsl-transcript";
 import WelcomeBanner from "./WelcomeBanner";
+import VslBlock from "@/components/vsl/VslBlock";
+import VslToolStrip from "./VslToolStrip";
 
 export const metadata: Metadata = {
   title: "Resources - BrandMultiplier",
@@ -56,9 +60,24 @@ const INDEX_CSS = `
 .index-cta h2{font-size:28px;margin:0 0 10px;color:var(--purple);font-weight:800;letter-spacing:-.01em}
 .index-cta p{max-width:560px;margin:0 auto 20px;color:#33333a}
 .index-wrap > .cta-wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.welcome-banner{background:var(--lav);border:1px solid var(--lav2);border-radius:12px;padding:14px 18px;margin:0 0 22px;font-size:16px;font-weight:600;color:var(--ink)}
 .index-cta .cta-wrap{display:flex;justify-content:center;margin:0 auto;max-width:none}
-@media (max-width:640px){.index-grid{grid-template-columns:1fr}.index-wrap > .cta-wrap{flex-direction:column;align-items:flex-start}}
+.welcome-banner{background:var(--lav);border:1px solid var(--lav2);border-radius:12px;padding:14px 18px;margin:0 0 22px;font-size:16px;font-weight:600;color:var(--ink)}
+.bm-strip{margin:4px 0 8px;padding:8px 0 4px}
+@media (max-width:860px){
+  .index-wrap{padding:calc(var(--site-head-h) + 8px) 16px 48px}
+  .index-grid{grid-template-columns:1fr}
+  .bm-tools{grid-template-columns:1fr}
+  .bm-diag{flex-direction:column;align-items:flex-start;padding:18px 18px;gap:16px}
+  .bm-diag__btn{width:100%;text-align:center}
+  .bm-strip__head{font-size:22px}
+  .bm-strip__sub{font-size:15px;margin-bottom:18px}
+  .index-wrap > .cta-wrap{flex-direction:column;align-items:flex-start}
+  .index-lead{font-size:17px;margin-bottom:18px}
+  .index-card{padding:16px 16px}
+  .index-card .t{font-size:17px}
+  .index-cta{padding:28px 0 0;margin-top:32px}
+  .index-cta h2{font-size:24px}
+}
 `;
 
 const ARTICLES = [
@@ -156,11 +175,12 @@ export default async function Page() {
   const collectionLd = buildResourcesCollectionLd(
     ARTICLES.map(({ slug, title, description }) => ({ slug, title, description })),
   );
+  const videoLd = buildVslVideoLd(VSL_TRANSCRIPT_TEXT);
   const showWelcome = (await cookies()).get("bm_welcome")?.value === "1";
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS + INDEX_CSS }} />
+      <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS + INDEX_CSS + VSL_CSS + VSL_STRIP_CSS }} />
       <div className="site-head-bar">
         <header className="site-head">
           <Link className="logo" href="/resources">
@@ -191,18 +211,8 @@ export default async function Page() {
           structural reasons founder-led B2B companies stall between $3M and
           $50M ARR.
         </p>
-        <p className="cta-wrap">
-          <a
-            className="btn-primary"
-            href={calendlyHref({ slug: "resources-index", placement: "index_hero" })}
-            data-cta="index_hero"
-          >
-            {CTA_LABEL}
-          </a>
-          <a className="btn-secondary" href="/storylock-tax">
-            Calculate your StoryLock Tax
-          </a>
-        </p>
+        <VslBlock showTranscript transcript={VSL_TRANSCRIPT} />
+        <VslToolStrip />
         <div className="index-grid">
           {ARTICLES.map((article) => (
             <Link
@@ -245,6 +255,10 @@ export default async function Page() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }}
       />
     </>
   );

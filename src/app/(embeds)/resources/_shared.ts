@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const RESOURCE_CSS = `
 :root{--purple:#4940C6;--orange:#f36901;--ink:#111114;--gray:#666;--line:#E8E6E1;
@@ -35,7 +35,7 @@ display:flex;align-items:center;justify-content:center;border:1px solid var(--li
 .body h2{font-size:26px;line-height:1.2;color:var(--purple);margin:40px 0 12px;font-weight:800;letter-spacing:-.01em}
 .body h3{font-size:20px;line-height:1.25;color:#1F2A5A;margin:28px 0 8px;font-weight:700}
 .body h4{font-size:17px;margin:22px 0 6px;font-weight:700}
-.body p{margin:0 0 16px}.body ul,.body ol{margin:0 0 18px;padding-left:22px}.body ul{list-style:disc outside}.body ol{list-style:decimal outside}.body li{margin:0 0 8px}
+.body p{margin:0 0 16px}.body ul,.body ol{margin:0 0 18px;padding-left:1.4em;overflow:visible;list-style-position:outside}.body ul{list-style-type:disc}.body ol{list-style-type:decimal}.body ul li,.body ol li{display:list-item;margin:0 0 8px}.body li::marker{color:var(--ink)}
 .body strong{font-weight:700}.body hr{border:0;height:1px;background:var(--line);margin:30px 0}
 .c-orange{color:var(--orange)}.c-red{color:var(--red);font-weight:700}.c-green{color:var(--green)}
 .c-purple{color:var(--purple)}.c-gray{color:var(--gray)}.c-yellow{background:#FFF3BF;padding:.05em .28em;border-radius:3px}
@@ -64,6 +64,10 @@ a.btn-secondary{display:inline-block;background:#fff;color:var(--purple);border:
 .tail-links .back{color:var(--gray);text-decoration:none}
 .tail-links .back:hover{color:var(--purple)}
 .tail-sep{color:var(--line);margin:0 10px}
+.vsl-pointer{margin:28px 0 8px;padding:16px 18px;border:1px solid var(--lav2);border-left:4px solid var(--purple);border-radius:10px;background:var(--lav)}
+.vsl-pointer__k{font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--purple);margin:0 0 6px}
+.vsl-pointer p{margin:0;font-size:15px;line-height:1.5;color:#33333a}
+.vsl-pointer a{color:var(--purple);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .site-foot{max-width:720px;margin:26px auto 0;padding:24px;border-top:1px solid var(--line);color:var(--gray);font-size:13px}
 .site-foot a{color:var(--gray)}
 .sticky-cta{display:none}
@@ -90,10 +94,32 @@ a.btn-secondary{display:inline-block;background:#fff;color:var(--purple);border:
 .acard .num{position:absolute;top:12px;right:16px;font-size:28px;font-weight:800;color:var(--lav2)}
 .acard .nm{font-weight:800;font-size:16px;margin-bottom:6px;padding-right:30px;line-height:1.2}
 .acard .cz{font-size:13px;color:#555;line-height:1.45}.acard .cz b{color:var(--red)}
-@media (max-width:640px){h1{font-size:31px}.lead{font-size:19px}.cards{grid-template-columns:1fr}
-body{font-size:17px}.head-actions{gap:10px}.back{font-size:13px}a.btn-nav{padding:8px 13px;font-size:13px}.sticky-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);transform:translateZ(0)}.sticky-cta-txt{font-size:13px;font-weight:700;color:var(--ink);line-height:1.25;flex:1 1 auto}a.btn-sticky{flex:0 0 auto;display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:11px 16px;border-radius:9px;font-size:14px;white-space:nowrap}.site-foot{padding-bottom:84px}.statrow{grid-template-columns:1fr}.cardgrid .acard{flex-basis:100%}}
-@media (max-width:640px){.tail-links{display:flex;flex-direction:column;gap:8px}.tail-sep{display:none}}
-@media (max-width:400px){.back{display:none}}
+@media (max-width:720px){
+:root{--site-head-h:64px}
+html,body{overflow-x:hidden}
+.site-head{padding:12px 16px;gap:10px;flex-wrap:nowrap}
+.logo{gap:8px;min-width:0}
+.logo img{height:32px}
+.logo-text{display:none}
+.head-actions{gap:8px;flex:0 0 auto}
+.back{display:none}
+a.btn-nav{padding:8px 12px;font-size:13px}
+.resource{padding:calc(var(--site-head-h) + 8px) 16px 40px}
+h1{font-size:28px}
+.lead{font-size:18px}
+.eyebrow{margin:16px 0 8px}
+.cards{grid-template-columns:1fr}
+body{font-size:17px}
+.sticky-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);transform:translateZ(0)}
+.sticky-cta-txt{font-size:13px;font-weight:700;color:var(--ink);line-height:1.25;flex:1 1 auto}
+a.btn-sticky{flex:0 0 auto;display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:11px 16px;border-radius:9px;font-size:14px;white-space:nowrap}
+.site-foot{padding:20px 16px 84px}
+.statrow{grid-template-columns:1fr}
+.cardgrid .acard{flex-basis:100%}
+.tail-links{display:flex;flex-direction:column;gap:8px}
+.tail-sep{display:none}
+.related,.tail-cta{padding-left:16px;padding-right:16px}
+}
 `;
 
 export const RESOURCE_LOGO = "/brandmultiplier-logo.png";

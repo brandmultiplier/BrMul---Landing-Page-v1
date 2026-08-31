@@ -143,11 +143,11 @@ const BODY_HTML = `
 <hr>
 
 <h3><span class="c-orange">Stop Paying the Tax</span></h3>
-<p>Every day you operate without Narrative Infrastructure, you are paying the <a class="inline-link" href="/storylock-tax"><strong>StoryLock Tax</strong></a>.</p>
+<p>Every day you operate without Narrative Infrastructure, you are paying the <a class="inline-link" href="/storylock-tax-tool"><strong>StoryLock Tax</strong></a>.</p>
 <p>You are paying it in failed hires. You are paying it in high CAC. You are paying it in the 20 hours a week you spend "rescuing" deals that your team should have handled on their own.</p>
 <p>Stop guessing. Start calculating.</p>
 <p>We built a diagnostic tool specifically for founders at the $3M-$50M ARR stage. It will help you see exactly how much your current "Narrative Gap" is costing your bottom line—and which of these five archetypal failures you are currently funding. (Related: <a class="inline-link" href="/resources/the-3-9m-leak">The $3.9M Leak</a>.)</p>
-<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax">RUN YOUR NUMBERS: The StoryLock Tax Calculator</a></p>
+<p class="cta-wrap"><a class="btn-secondary" href="/storylock-tax-tool">RUN YOUR NUMBERS: The StoryLock Tax Calculator</a></p>
 
 <div class="callout"><span class="ico">💡</span>
 <h3>The Diagnostic</h3>
@@ -158,10 +158,14 @@ const BODY_HTML = `
 <p><em>BrandMultiplier installs Narrative Operating Systems for founder-led B2B companies between $3M and $50M ARR. <a href="https://brandmultiplier.ai">brandmultiplier.ai</a></em></p>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: Growth-ceiling and survival figures (92% of software companies growing at ~20%/yr cease to exist within a few years; only 28% ever reach $100M)—McKinsey, "Grow Fast or Die Slow." Founder-dependency valuation discount (owner-dependent businesses draw offers of 2.93x pre-tax profit vs 4.49x, roughly 35% lower)—John Warrillow's Value Builder analysis of 14,000 businesses; the "key person discount" is a valuation adjustment recognized by the IRS and the American Society of Appraisers. ~70% first-year failure rate for first sales hires, and the observation that nearly all first VPs of Sales fail when the founder steps out of sales—SaaStr (Jason Lemkin). Founder quotes—David Blake (Degreed), Mike Molinet (Branch), Mark Suster, and Seth DeHart, from public statements. Per-hire cost and cycle-cost figures reflect BrandMultiplier's diagnostic model—directional, not audited.</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-valuation-killer"><span class="k">What dependency costs at exit</span><span class="t">The Valuation Killer</span></a><a class="card" href="/resources/the-3-9m-leak"><span class="k">Put a number on it</span><span class="t">The $3.9M Leak</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;

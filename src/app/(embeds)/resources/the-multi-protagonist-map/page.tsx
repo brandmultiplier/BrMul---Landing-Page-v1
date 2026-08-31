@@ -9,6 +9,7 @@ import {
   withLazyImages,
 } from "../_shared";
 import { calendlyHref } from "@/lib/cta";
+import LibraryGateOverlay from "@/components/library/LibraryGateOverlay";
 
 const ARTICLE_META = {
   slug: "the-multi-protagonist-map",
@@ -92,15 +93,23 @@ const BODY_HTML = `
 <hr>
 
 <div class="callout note"><span class="ico">📎</span><p><em>Sources: Average B2B buying committee of ~22 people (13 internal, 9 external)—Forrester (2026). 86% of B2B purchases stall before closing—Forrester, The State of Business Buying. 74% of buying teams experience unhealthy conflict during the purchase—Gartner (2025). 40-60% of qualified deals lost to 'no decision', 56% to buyer indecision, across 2.5M sales conversations—Matthew Dixon &amp; Ted McKenna, The JOLT Effect (2022).</em></p></div>
+<div class="vsl-pointer">
+  <p class="vsl-pointer__k">Watch the walkthrough</p>
+  <p>Eight minutes on what this company does and what you'd hold at the end of an engagement. <a href="/resources#vsl">Play it on the resource hub →</a></p>
+</div>
   </article>
 </main>
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-valuation-killer"><span class="k">What stalled deals cost</span><span class="t">The Valuation Killer</span></a><a class="card" href="/resources/the-solution-graveyard"><span class="k">The fixes that missed</span><span class="t">The Solution Graveyard</span></a></div></section>
-<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax">Calculate your StoryLock Tax →</a></p></section>
+<section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
 <footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
 `;
 
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ gate?: string }>;
+}) {
   const dates = RESOURCE_ARTICLE_DATES[ARTICLE_META.slug];
   const articleLd = buildArticleLd({
     ...ARTICLE_META,
@@ -108,11 +117,18 @@ export default function Page() {
     dateModified: dates?.dateModified,
   });
   const breadcrumbLd = buildBreadcrumbLd(ARTICLE_META.title, ARTICLE_META.slug);
+  const { gate } = await searchParams;
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS }} />
       <div dangerouslySetInnerHTML={{ __html: withLazyImages(BODY_HTML) }} />
+      <LibraryGateOverlay
+        title="The Multi-Protagonist Map"
+        redirectTo="/resources/the-multi-protagonist-map"
+        intent="multi_protagonist_map"
+        show={gate === "1"}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
