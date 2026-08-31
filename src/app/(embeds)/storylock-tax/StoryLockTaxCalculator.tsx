@@ -1207,7 +1207,7 @@ export default function StoryLockTaxCalculator({
                 {reportStatus === "sent" ? (
                   <p
                     style={{
-                      margin: 0 auto,
+                      margin: "0 auto",
                       maxWidth: 420,
                       fontSize: 14,
                       lineHeight: 1.55,
