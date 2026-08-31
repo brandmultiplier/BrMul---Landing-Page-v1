@@ -107,11 +107,6 @@ export default function PrivacyPage() {
               <div className="card">
                 <ul>
                   <li>
-                    <strong>We do not sell your personal information</strong>{" "}
-                    and we do not share it for cross-context behavioral
-                    advertising by third parties.
-                  </li>
-                  <li>
                     If you download a resource or subscribe, we will email you.
                     Every email has a one-click unsubscribe and we honor it.
                   </li>
@@ -123,10 +118,11 @@ export default function PrivacyPage() {
                     ends the calls permanently.
                   </li>
                   <li>
-                    We use analytics and advertising technologies on our site.
-                    Section 6 names them. Section 16 tells you how to switch
-                    them off, including via a browser-level Global Privacy
-                    Control signal, which we honor.
+                    We do not sell your personal information, and we never
+                    have. We do run advertising and identity technologies that
+                    share limited information with third parties &mdash;
+                    Section 6 names every one, and a single browser-level
+                    signal switches them all off.
                   </li>
                   <li>
                     Client material from an engagement is confidential.{" "}
@@ -462,7 +458,7 @@ export default function PrivacyPage() {
               </h2>
               <p>
                 Cookies are small files a site stores in your browser. We use
-                them, along with pixels and similar technologies, in four
+                them, along with pixels and similar technologies, in six
                 categories.
               </p>
               <div className="tablewrap">
@@ -534,6 +530,35 @@ export default function PrivacyPage() {
                         any browser sending a Global Privacy Control signal.
                       </td>
                     </tr>
+                    <tr>
+                      <td>
+                        <strong>Session recording</strong>
+                      </td>
+                      <td>
+                        <strong>Microsoft Clarity</strong> records and replays
+                        how individual visits unfold &mdash; mouse movement,
+                        scrolling, clicks, and the path you take through the
+                        site &mdash; so we can see where pages confuse people.
+                      </td>
+                      <td>Yes.</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Identity resolution</strong>
+                      </td>
+                      <td>
+                        <strong>LiveIntent&rsquo;s LiveConnect</strong>{" "}
+                        contributes to and queries a cross-site identity graph,
+                        using hashed identifiers to recognize the same person
+                        across the sites in its network. It is used for
+                        advertising reach and measurement. Along with RB2B, it
+                        is the most intrusive technology on our site.
+                      </td>
+                      <td>
+                        Yes &mdash; and it is switched off for any browser
+                        sending a Global Privacy Control signal.
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -542,7 +567,7 @@ export default function PrivacyPage() {
                 <li>
                   <strong>Global Privacy Control.</strong> If your browser or
                   extension transmits a GPC signal, we treat it as a valid
-                  opt-out of analytics, advertising, and
+                  opt-out of analytics, advertising, session-recording, and
                   visitor-identification technologies for that browser, and we
                   process the signal server-side. This is the fastest way to
                   switch all of it off, and it works across every site that
@@ -568,9 +593,13 @@ export default function PrivacyPage() {
                 </li>
               </ul>
               <p>
-                We do not use cookies to build profiles of your activity across
-                unrelated websites, and we do not permit third parties to do so
-                through our site beyond the technologies named above.
+                We do not build profiles of your activity across unrelated
+                websites ourselves. The technologies named above &mdash; RB2B
+                and LiveConnect in particular &mdash; draw on third-party
+                identity networks that do operate across sites. That is exactly
+                why we list them individually rather than folding them into
+                &ldquo;analytics,&rdquo; and why we tell you how to switch each
+                one off.
               </p>
               <p>
                 We do not currently operate a cookie consent banner. Our
@@ -969,9 +998,19 @@ export default function PrivacyPage() {
                       </td>
                       <td>Usage data, device data, IP address</td>
                       <td>
-                        Google Analytics 4, Meta, LinkedIn, RB2B &mdash; see
-                        Section 6
+                        Google Analytics 4, Meta, LinkedIn, RB2B, LiveIntent
+                        (LiveConnect) &mdash; see Section 6
                       </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Session recording</strong>
+                      </td>
+                      <td>
+                        Usage data, device data, IP address, on-page
+                        interaction recordings
+                      </td>
+                      <td>Microsoft Clarity &mdash; see Section 6</td>
                     </tr>
                     <tr>
                       <td>
@@ -1003,11 +1042,25 @@ export default function PrivacyPage() {
                 <p>
                   <strong>
                     We do not sell personal information. We have never sold
-                    personal information. We do not share personal information
-                    for cross-context behavioral advertising by third parties,
-                    as those terms are defined under California, Colorado, and
-                    comparable state privacy laws.
+                    personal information, and we have never taken money for
+                    access to it.
                   </strong>
+                </p>
+                <p>
+                  We do share personal information for advertising and identity
+                  resolution, in the specific ways Section 6 names: the Meta
+                  Pixel and LinkedIn Insight Tag, which let us show ads to
+                  people who have visited the site; RB2B, which resolves
+                  individual US visitors to a named person; and
+                  LiveIntent&rsquo;s LiveConnect, which contributes to a
+                  cross-site identity graph. Under California, Colorado and
+                  comparable state privacy laws, some of that is
+                  &ldquo;sharing for cross-context behavioral
+                  advertising.&rdquo; We would rather say so plainly than rely
+                  on a narrow reading of the definition. All of it can be
+                  switched off &mdash; Section 6 explains how, and a Global
+                  Privacy Control signal does it in one step, which we honor
+                  server-side.
                 </p>
                 <p>
                   <strong>
@@ -1242,10 +1295,10 @@ export default function PrivacyPage() {
                 <li>
                   <strong>Opt out.</strong> Of marketing email, of marketing
                   calls and texts, of targeted advertising, of profiling, and
-                  of any sale or sharing &mdash; noting that we do not sell or
-                  share in the first place. Opting out of one channel does not
-                  require you to opt out of the others, and you can ask us to
-                  stop all of them at once.
+                  of any sale or sharing &mdash; we do not sell, and sharing
+                  for advertising is described in Section 6. Opting out of one
+                  channel does not require you to opt out of the others, and
+                  you can ask us to stop all of them at once.
                 </li>
                 <li>
                   <strong>Object and restrict.</strong> Object to processing

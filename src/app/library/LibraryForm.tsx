@@ -2,16 +2,9 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import PhoneInput, {
-  isValidPhoneNumber,
-  parsePhoneNumber,
-} from "react-phone-number-input";
-import "react-phone-number-input/style.css";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input/input";
 import { isBusinessEmail } from "@/lib/business-email";
-import {
-  CONSENT_CHECKBOX_TEXT,
-  DISCLOSURE_TEXT,
-} from "@/lib/library-consent";
+import { CONSENT_CHECKBOX_TEXT } from "@/lib/library-consent";
 import { readVslWatchDepth } from "@/lib/vsl-watch-depth";
 import {
   sanitizeLibraryNext,
@@ -31,15 +24,6 @@ const EMPTY_FORM = {
   consent_marketing: false,
 };
 
-function isCountryCodeOnly(value: string): boolean {
-  try {
-    const parsed = parsePhoneNumber(value);
-    return Boolean(parsed && !parsed.nationalNumber);
-  } catch {
-    return false;
-  }
-}
-
 function normalizePhoneValue(value?: string): string | undefined {
   if (!value) return undefined;
   return value;
@@ -58,24 +42,6 @@ const FIELD_ORDER = [
   "phone",
   "consent_marketing",
 ] as const;
-
-function ConsentLinks() {
-  return (
-    <>
-      <a
-        href="https://www.brandmultiplier.ai/privacy"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Privacy Policy
-      </a>{" "}
-      and{" "}
-      <a href="https://www.brandmultiplier.ai/terms" target="_blank" rel="noopener noreferrer">
-        Terms
-      </a>
-    </>
-  );
-}
 
 export default function LibraryForm({
   redirectTo,
@@ -177,6 +143,7 @@ export default function LibraryForm({
           approximate_arr: formData.approximate_arr,
           consent_marketing: formData.consent_marketing,
           consent_text: CONSENT_CHECKBOX_TEXT,
+          page_url: window.location.href,
           website_url: honeypotRef.current?.value ?? "",
           form_ts: formStartRef.current,
           vsl_watch: readVslWatchDepth(),
@@ -286,19 +253,16 @@ export default function LibraryForm({
         <div className="lf-phone">
           <PhoneInput
             id="phone"
-            international
-            defaultCountry="US"
-            countryCallingCodeEditable={false}
+            country="US"
             smartCaret={false}
             value={formData.phone}
             onChange={handlePhoneChange}
-            numberInputProps={{
-              name: "phone",
-              "aria-invalid": Boolean(errors.phone),
-              "aria-describedby": ["phone-help", errors.phone ? "phone-error" : null]
-                .filter(Boolean)
-                .join(" "),
-            }}
+            className="PhoneInputInput"
+            name="phone"
+            aria-invalid={Boolean(errors.phone)}
+            aria-describedby={["phone-help", errors.phone ? "phone-error" : null]
+              .filter(Boolean)
+              .join(" ")}
           />
         </div>
         <p id="phone-help" className="field-help">
@@ -367,8 +331,8 @@ export default function LibraryForm({
           }
         />
         <label htmlFor="consent_marketing" className="lf-consent-text">
-          {CONSENT_CHECKBOX_TEXT.replace("I've read the Privacy Policy and Terms.", "")}
-          I&apos;ve read the <ConsentLinks />.
+          {CONSENT_CHECKBOX_TEXT.replace(/ Privacy Policy$/, "")}{" "}
+          <a href="/privacy">Privacy Policy</a>
         </label>
       </div>
       {errors.consent_marketing && (
@@ -376,11 +340,6 @@ export default function LibraryForm({
           {errors.consent_marketing}
         </p>
       )}
-
-      <p className="lf-disclosure">
-        {DISCLOSURE_TEXT.replace("See our Privacy Policy and Terms.", "")}
-        See our <ConsentLinks />.
-      </p>
 
       <button type="submit" className="lf-submit" disabled={isLoading}>
         {isLoading ? "Submitting…" : "Get access"}

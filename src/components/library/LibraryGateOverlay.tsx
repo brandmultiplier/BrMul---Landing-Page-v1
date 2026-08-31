@@ -24,16 +24,14 @@ const OVERLAY_CSS = `
 .lgo .field-help{color:#666;font-size:12.5px;line-height:1.45;margin:6px 0 0}
 .lgo .lf-phone .PhoneInputInput{
   font-family:inherit;font-size:16px;padding:11px 13px;border:1px solid #E8E6E1;border-radius:9px;
-  background:#fff;color:#111114;
+  background:#fff;color:#111114;width:100%;box-sizing:border-box;
 }
 .lgo .lf-phone .PhoneInputInput:focus{outline:none;border-color:#4940C6}
 .lgo .lf-phone{display:flex;align-items:center;gap:8px;border:1px solid transparent;border-radius:9px}
-.lgo .lf-consent{display:flex;gap:10px;align-items:flex-start;margin:20px 0 14px;padding:14px 16px;background:#F3F1FA;border-radius:10px;border:1px solid #EDE8F5}
+.lgo .lf-consent{display:flex;gap:10px;align-items:flex-start;margin:20px 0 22px}
 .lgo .lf-consent input[type="checkbox"]{margin-top:3px;width:18px;height:18px;flex:none;accent-color:#4940C6}
 .lgo .lf-consent-text{font-size:13.5px;line-height:1.5;color:#333}
 .lgo .lf-consent-text a{color:#4940C6;text-decoration:underline;text-underline-offset:2px}
-.lgo .lf-disclosure{font-size:12.5px;line-height:1.55;color:#666;margin:0 0 22px}
-.lgo .lf-disclosure a{color:#666;text-decoration:underline;text-underline-offset:2px}
 .lgo .lf-submit{width:100%;display:block;text-align:center;background:#f36901;color:#fff;border:0;font-weight:700;
   padding:15px 26px;border-radius:10px;font-size:17px;box-shadow:0 6px 18px rgba(243,105,1,.24);cursor:pointer;
   font-family:inherit;transition:filter .15s;

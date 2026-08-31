@@ -62,6 +62,22 @@ function formatWebhookSubmissionTime(date: Date): string {
   return `${hour}.${minute}${dayPeriod} ${day} ${month} ${year}`;
 }
 
+function sanitizePageUrl(raw: unknown, fallback: string | null): string | null {
+  const candidates = [raw, fallback];
+  for (const candidate of candidates) {
+    if (typeof candidate !== "string" || !candidate.trim()) continue;
+    try {
+      const url = new URL(candidate);
+      if (url.protocol === "http:" || url.protocol === "https:") {
+        return url.href;
+      }
+    } catch {
+      // ignore malformed values and try the next candidate
+    }
+  }
+  return null;
+}
+
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
   const entry = rateLimitStore.get(ip);
@@ -89,6 +105,7 @@ type LibraryAccessPayload = {
   vsl_watch?: unknown;
   next?: string;
   intent?: string;
+  page_url?: string;
 };
 
 export async function POST(req: Request) {
@@ -154,6 +171,7 @@ export async function POST(req: Request) {
   const watch = sanitizeVslWatchDepth(b.vsl_watch);
   const next = sanitizeLibraryNext(b.next);
   const intent = sanitizeLibraryIntent(b.intent);
+  const pageUrl = sanitizePageUrl(b.page_url, req.headers.get("referer"));
 
   const payload = {
     lead_id: leadId,
@@ -171,8 +189,10 @@ export async function POST(req: Request) {
     consent_text_version: CONSENT_TEXT_VERSION,
     consent_ts: submittedAtIso,
     consent_ip: req.headers.get("x-forwarded-for")?.split(",")[0] ?? null,
+    form_id: "library_gate",
     source: "library_gate",
     intent,
+    page_url: pageUrl,
     submitted_at: submittedAtIso,
     submitted_at_formatted: submittedAtFormatted,
     ...vslWatchWebhookFields(watch),

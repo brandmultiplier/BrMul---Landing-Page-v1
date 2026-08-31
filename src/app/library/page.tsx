@@ -50,16 +50,14 @@ const LIBRARY_CSS = `
 .field-help{color:var(--gray);font-size:12.5px;line-height:1.45;margin:6px 0 0}
 .lf-phone .PhoneInputInput{
   font-family:inherit;font-size:16px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;
-  background:#fff;color:var(--ink);
+  background:#fff;color:var(--ink);width:100%;box-sizing:border-box;
 }
 .lf-phone .PhoneInputInput:focus{outline:none;border-color:var(--purple)}
 .lf-phone{display:flex;align-items:center;gap:8px;border:1px solid transparent;border-radius:9px}
-.lf-consent{display:flex;gap:10px;align-items:flex-start;margin:20px 0 14px;padding:14px 16px;background:var(--lav);border-radius:10px;border:1px solid var(--lav2)}
+.lf-consent{display:flex;gap:10px;align-items:flex-start;margin:20px 0 22px}
 .lf-consent input[type="checkbox"]{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--purple)}
 .lf-consent-text{font-size:13.5px;line-height:1.5;color:#333}
 .lf-consent-text a{color:var(--purple);text-decoration:underline;text-underline-offset:2px}
-.lf-disclosure{font-size:12.5px;line-height:1.55;color:var(--gray);margin:0 0 22px}
-.lf-disclosure a{color:var(--gray);text-decoration:underline;text-underline-offset:2px}
 .lf-submit{width:100%;display:block;text-align:center;background:var(--orange);color:#fff;border:0;font-weight:700;
   padding:15px 26px;border-radius:10px;font-size:17px;box-shadow:0 6px 18px rgba(243,105,1,.24);cursor:pointer;
   font-family:inherit;transition:filter .15s;
@@ -116,6 +114,11 @@ export default async function LibraryPage() {
           <strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for
           Founder-Led Companies.{" "}
           <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a>
+        </p>
+        <p>
+          <a href="/privacy">Privacy Policy</a>
+          {" · "}
+          <a href="/terms">Terms</a>
         </p>
       </footer>
     </>
