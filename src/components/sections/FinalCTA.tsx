@@ -9,6 +9,7 @@ import {
     isBusinessEmail,
 } from "@/lib/business-email";
 import { CTA_LABEL } from "@/lib/cta";
+import LegalLinks from "@/components/legal/LegalLinks";
 
 const EMPTY_FORM = {
     first_name: "",
@@ -224,6 +225,9 @@ export default function FinalCTA() {
                             <p className="text-[10px] sm:text-xs text-text-tertiary text-center mt-4 uppercase tracking-wider flex flex-col gap-1">
                                 <span>30 minutes or less.</span>
                                 <span>Walk away knowing if your problem is structural, or not.</span>
+                            </p>
+                            <p className="text-xs text-text-tertiary text-center mt-3">
+                                <LegalLinks />
                             </p>
                         </form>
                 </motion.div>

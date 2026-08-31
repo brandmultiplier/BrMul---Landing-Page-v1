@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import LegalLinks from "@/components/legal/LegalLinks";
 
 export default function SignupForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -57,6 +58,9 @@ export default function SignupForm() {
           Something went wrong — please try again.
         </p>
       )}
+      <p style={{ fontSize: "12.5px", color: "#666", marginTop: "12px" }}>
+        <LegalLinks />
+      </p>
     </>
   );
 }

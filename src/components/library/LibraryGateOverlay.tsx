@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import LibraryForm from "@/app/library/LibraryForm";
+import LegalLinks from "@/components/legal/LegalLinks";
 import type { LibraryIntent, LibraryNextPath } from "@/lib/library-next";
 
 const OVERLAY_CSS = `
@@ -31,7 +32,10 @@ const OVERLAY_CSS = `
 .lgo .lf-consent{display:flex;gap:10px;align-items:flex-start;margin:20px 0 22px}
 .lgo .lf-consent input[type="checkbox"]{margin-top:3px;width:18px;height:18px;flex:none;accent-color:#4940C6}
 .lgo .lf-consent-text{font-size:13.5px;line-height:1.5;color:#333}
+.lgo .lf-consent-text label{font-weight:400;display:inline}
 .lgo .lf-consent-text a{color:#4940C6;text-decoration:underline;text-underline-offset:2px}
+.lgo__legal{margin:18px 0 0;font-size:12.5px;line-height:1.5;color:#666;text-align:center}
+.lgo__legal a{color:#666;text-decoration:underline;text-underline-offset:2px}
 .lgo .lf-submit{width:100%;display:block;text-align:center;background:#f36901;color:#fff;border:0;font-weight:700;
   padding:15px 26px;border-radius:10px;font-size:17px;box-shadow:0 6px 18px rgba(243,105,1,.24);cursor:pointer;
   font-family:inherit;transition:filter .15s;
@@ -84,6 +88,9 @@ export default async function LibraryGateOverlay({
             wall.
           </p>
           <LibraryForm redirectTo={redirectTo} intent={intent} />
+          <p className="lgo__legal">
+            <LegalLinks />
+          </p>
         </div>
       </div>
     </>

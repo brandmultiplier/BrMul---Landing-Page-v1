@@ -353,7 +353,8 @@ const BODY_HTML = `
   <footer>
     <div class="footrule"></div>
     <p><b>Chris Rubin</b>, Founder and CEO, BrandMultiplier &nbsp;·&nbsp; Aspen, Colorado<br>
-    <a href="https://brandmultiplier.ai">brandmultiplier.ai</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/chrisrubin">linkedin.com/in/chrisrubin</a></p>
+    <a href="https://brandmultiplier.ai">brandmultiplier.ai</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/chrisrubin">linkedin.com/in/chrisrubin</a><br>
+    <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a></p>
     <p style="margin-top:1.1rem;font-size:.75rem">Addendum to <a href="/2024-white-paper">The SMB Brand Playbook</a> (BrandMultiplier, 2024). StoryLock&trade;, Narrative Operating System&trade;, NOS&trade;, Voice Fidelity Gates&trade;, and Multi-Protagonist Framework&trade; are trademarks of BrandMultiplier, used in commerce and not yet registered. © 2026 BrandMultiplier.</p>
   </footer>
 

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Download, Minus, Plus, ChevronLeft, ChevronRight } from "lucide-react";
 import * as pdfjs from "pdfjs-dist";
+import LegalLinks from "@/components/legal/LegalLinks";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -249,6 +250,15 @@ export default function WhitePaperViewer({ pdfUrl, downloadName }: Props) {
           <Download size={16} />
           Download PDF
         </a>
+        <span
+          style={{
+            fontSize: "0.78rem",
+            color: "rgba(255,255,255,0.55)",
+            whiteSpace: "nowrap",
+          }}
+        >
+          <LegalLinks />
+        </span>
       </header>
 
       <div className="wp-body">

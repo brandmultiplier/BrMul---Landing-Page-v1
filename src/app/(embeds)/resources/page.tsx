@@ -12,6 +12,7 @@ import { VSL_TRANSCRIPT, VSL_TRANSCRIPT_TEXT } from "./vsl-transcript";
 import WelcomeBanner from "./WelcomeBanner";
 import VslBlock from "@/components/vsl/VslBlock";
 import VslToolStrip from "./VslToolStrip";
+import LegalLinks from "@/components/legal/LegalLinks";
 
 export const metadata: Metadata = {
   title: "Resources - BrandMultiplier",
@@ -250,6 +251,9 @@ export default async function Page() {
           <strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for
           Founder-Led Companies.{" "}
           <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a>
+        </p>
+        <p>
+          <LegalLinks />
         </p>
       </footer>
       <script

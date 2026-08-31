@@ -8,6 +8,7 @@ import VslToolStrip from "../(embeds)/resources/VslToolStrip";
 import { VSL_CSS, VSL_STRIP_CSS } from "@/lib/vsl";
 import VslBlock from "@/components/vsl/VslBlock";
 import LibraryForm from "./LibraryForm";
+import LegalLinks from "@/components/legal/LegalLinks";
 
 export const metadata: Metadata = {
   title: "Access the Library — BrandMultiplier",
@@ -57,6 +58,7 @@ const LIBRARY_CSS = `
 .lf-consent{display:flex;gap:10px;align-items:flex-start;margin:20px 0 22px}
 .lf-consent input[type="checkbox"]{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--purple)}
 .lf-consent-text{font-size:13.5px;line-height:1.5;color:#333}
+.lf-consent-text label{font-weight:400;display:inline}
 .lf-consent-text a{color:var(--purple);text-decoration:underline;text-underline-offset:2px}
 .lf-submit{width:100%;display:block;text-align:center;background:var(--orange);color:#fff;border:0;font-weight:700;
   padding:15px 26px;border-radius:10px;font-size:17px;box-shadow:0 6px 18px rgba(243,105,1,.24);cursor:pointer;
@@ -116,9 +118,7 @@ export default async function LibraryPage() {
           <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a>
         </p>
         <p>
-          <a href="/privacy">Privacy Policy</a>
-          {" · "}
-          <a href="/terms">Terms</a>
+          <LegalLinks />
         </p>
       </footer>
     </>

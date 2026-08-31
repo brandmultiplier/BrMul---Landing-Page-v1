@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             <span className="wordmark-text">BrandMultiplier</span>
           </a>
           <nav className="mast-nav" aria-label="Legal">
-            <a href="/privacy" aria-current="page">
+            <a href="/privacy" aria-current="page" target="_blank" rel="noopener noreferrer">
               Privacy
             </a>
             <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>
@@ -1439,7 +1439,7 @@ export default function PrivacyPage() {
             rights reserved.
           </p>
           <nav className="footlinks" aria-label="Legal">
-            <a href="/privacy">Privacy</a>
+            <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
             <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>
             <a href="mailto:support@brandmultiplier.ai">Contact</a>
           </nav>

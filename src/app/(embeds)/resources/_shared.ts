@@ -70,6 +70,8 @@ a.btn-secondary{display:inline-block;background:#fff;color:var(--purple);border:
 .vsl-pointer a{color:var(--purple);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .site-foot{max-width:720px;margin:26px auto 0;padding:24px;border-top:1px solid var(--line);color:var(--gray);font-size:13px}
 .site-foot a{color:var(--gray)}
+.site-foot p{margin:0}
+.site-foot p + p{margin-top:8px}
 .sticky-cta{display:none}
 .fig{margin:28px 0}
 .fig-cap{font-size:13px;color:var(--gray);margin-top:10px;font-style:italic}

@@ -30,7 +30,7 @@ export default function TermsPage() {
           </a>
           <nav className="mast-nav" aria-label="Legal">
             <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
-            <a href="/terms" aria-current="page">
+            <a href="/terms" aria-current="page" target="_blank" rel="noopener noreferrer">
               Terms
             </a>
             <a href="/">Home</a>
@@ -765,7 +765,7 @@ export default function TermsPage() {
           </p>
           <nav className="footlinks" aria-label="Legal">
             <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
-            <a href="/terms">Terms</a>
+            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>
             <a href="mailto:support@brandmultiplier.ai">Contact</a>
           </nav>
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProtagonistMapWidget from "./ProtagonistMapWidget";
+import LegalLinks from "@/components/legal/LegalLinks";
 
 export const metadata: Metadata = {
   title: "The Multi-Protagonist Mapper \u2014 BrandMultiplier",
@@ -7,5 +8,21 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <ProtagonistMapWidget />;
+  return (
+    <>
+      <ProtagonistMapWidget />
+      <p
+        style={{
+          margin: 0,
+          padding: "16px 24px 32px",
+          textAlign: "center",
+          fontSize: 13,
+          color: "#A1A1AA",
+          background: "#0A0A0A",
+        }}
+      >
+        <LegalLinks />
+      </p>
+    </>
+  );
 }

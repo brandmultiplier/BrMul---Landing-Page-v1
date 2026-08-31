@@ -434,6 +434,8 @@ export default function ConnectorsPage() {
             <a href="#signals">The signal bank</a>
             <a href="#assets">Your assets</a>
             <a href="https://www.brandmultiplier.ai/NOS-architecture">Full NOS architecture</a>
+            <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>
           </div>
         </div>
       </footer>

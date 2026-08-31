@@ -500,6 +500,10 @@ export default function NosArchitectureClient() {
           <div className="foot-r">
             BRANDMULTIPLIER &nbsp;{' '}
             <a href="https://brandmultiplier.ai" target="_blank" rel="noopener noreferrer">brandmultiplier.ai</a>
+            {' · '}
+            <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            {' · '}
+            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>
           </div>
         </footer>
       </div>

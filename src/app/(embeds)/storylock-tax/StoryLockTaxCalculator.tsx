@@ -19,6 +19,7 @@ import {
   BUSINESS_EMAIL_REQUIRED_MESSAGE,
   isBusinessEmail,
 } from "@/lib/business-email";
+import LegalLinks from "@/components/legal/LegalLinks";
 
 declare global {
   interface Window {
@@ -1140,6 +1141,17 @@ export default function StoryLockTaxCalculator({
                         {formError}
                       </div>
                     )}
+                    <p
+                      style={{
+                        margin: "14px 0 0",
+                        fontSize: 12,
+                        lineHeight: 1.5,
+                        color: "var(--ink-dim)",
+                        textAlign: "center",
+                      }}
+                    >
+                      <LegalLinks />
+                    </p>
                   </form>
                 </div>
               )}

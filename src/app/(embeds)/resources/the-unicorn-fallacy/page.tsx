@@ -119,7 +119,7 @@ const BODY_HTML = `
 <section class="related"><h3>Keep going</h3><div class="cards"><a class="card" href="/resources/the-500k-dead-weight"><span class="k">The five hires that prove it</span><span class="t">The $500k Dead Weight</span></a><a class="card" href="/resources/the-extraction-economy"><span class="k">Why AI won't save you</span><span class="t">The Extraction Economy</span></a></div></section>
 <section class="tail-cta"><p class="tail-cta-line">Or stop reading and get the live read.</p><p class="cta-wrap"><a class="btn-primary" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "bottom" })}" data-cta="bottom">Book The Diagnostic</a></p><p class="tail-links"><a class="back" href="/resources">← All resources</a><span class="tail-sep">·</span><a class="back" href="/storylock-tax-tool">Calculate your StoryLock Tax →</a></p></section>
 <div class="sticky-cta" role="complementary" aria-label="Book The Diagnostic"><span class="sticky-cta-txt">Is your bottleneck structural?</span><a class="btn-sticky" href="${calendlyHref({ slug: ARTICLE_META.slug, placement: "sticky" })}" data-cta="sticky">Book The Diagnostic</a></div>
-<footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p></footer>
+<footer class="site-foot"><p><strong>BrandMultiplier</strong>—B2B Narrative Infrastructure for Founder-Led Companies. <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a></p><p><a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> · <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a></p></footer>
 `;
 
 export default function Page() {

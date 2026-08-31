@@ -349,6 +349,8 @@ export default function ServingFoundersPage() {
             <a href="#referral">The referral program</a>
             <a href="https://calendly.com/book-crc/connector-call" target="_blank" rel="noopener">Book a fit call</a>
             <a href="https://www.brandmultiplier.ai/NOS-architecture">How the NOS works</a>
+            <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>
           </div>
         </div>
       </footer>

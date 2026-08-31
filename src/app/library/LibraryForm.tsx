@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input/input";
 import { isBusinessEmail } from "@/lib/business-email";
 import { CONSENT_CHECKBOX_TEXT } from "@/lib/library-consent";
+import { LEGAL_NEW_TAB } from "@/lib/legal-links";
 import { readVslWatchDepth } from "@/lib/vsl-watch-depth";
 import {
   sanitizeLibraryNext,
@@ -330,10 +331,14 @@ export default function LibraryForm({
             errors.consent_marketing ? "consent_marketing-error" : undefined
           }
         />
-        <label htmlFor="consent_marketing" className="lf-consent-text">
-          {CONSENT_CHECKBOX_TEXT.replace(/ Privacy Policy$/, "")}{" "}
-          <a href="/privacy">Privacy Policy</a>
-        </label>
+        <span className="lf-consent-text">
+          <label htmlFor="consent_marketing">
+            {CONSENT_CHECKBOX_TEXT.replace(/ Privacy Policy$/, "")}{" "}
+          </label>
+          <a href="/privacy" {...LEGAL_NEW_TAB}>
+            Privacy Policy
+          </a>
+        </span>
       </div>
       {errors.consent_marketing && (
         <p id="consent_marketing-error" className="lf-error-text" role="alert">

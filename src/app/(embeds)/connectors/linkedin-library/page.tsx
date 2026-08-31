@@ -263,6 +263,8 @@ export default function LinkedInLibraryPage() {
           </div>
           <div className="links">
             <a className="backlink" href="/connectors">&larr; Back to the Connector Hub</a>
+            <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>
           </div>
         </div>
       </footer>
