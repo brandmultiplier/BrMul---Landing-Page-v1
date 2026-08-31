@@ -505,7 +505,9 @@ export default function StoryLockTaxCalculator({
   });
 
   const handleEmailReport = useCallback(async () => {
+    if (reportStatus === "sending" || reportStatus === "sent") return;
     setReportStatus("sending");
+    const started = Date.now();
     try {
       const response = await fetch("/api/storylock-tax-tool-capture", {
         method: "POST",
@@ -518,6 +520,8 @@ export default function StoryLockTaxCalculator({
         }),
       });
       if (!response.ok) throw new Error("Request failed");
+      const wait = Math.max(0, 700 - (Date.now() - started));
+      if (wait) await new Promise((resolve) => setTimeout(resolve, wait));
       setReportStatus("sent");
     } catch {
       setReportStatus("error");
@@ -540,6 +544,7 @@ export default function StoryLockTaxCalculator({
     valuationDiscount,
     verdict.tier,
     verdict.levelMatch,
+    reportStatus,
   ]);
 
   const handleTabClick = (next: TabKey): void => {
@@ -600,6 +605,20 @@ export default function StoryLockTaxCalculator({
           max-width: 1120px;
           margin: 0 auto;
           padding: 56px 32px 96px;
+        }
+        .sltax-spin {
+          width: 14px;
+          height: 14px;
+          border: 2px solid var(--border);
+          border-top-color: var(--ink);
+          border-radius: 50%;
+          animation: sltax-spin 0.7s linear infinite;
+          flex: none;
+        }
+        @keyframes sltax-spin {
+          to {
+            transform: rotate(360deg);
+          }
         }
         @media (max-width: 768px) {
           .sltax-wrap {
@@ -1185,34 +1204,54 @@ export default function StoryLockTaxCalculator({
 
             {reportOpen && !gated ? (
               <div style={{ marginTop: 20, textAlign: "center" }}>
-                <button
-                  type="button"
-                  onClick={() => void handleEmailReport()}
-                  disabled={reportStatus === "sending" || reportStatus === "sent"}
-                  style={{
-                    display: "inline-block",
-                    padding: "13px 24px",
-                    background: "transparent",
-                    color: "var(--ink)",
-                    border: "1px solid var(--border)",
-                    borderRadius: 8,
-                    fontSize: 14,
-                    fontWeight: 600,
-                    fontFamily: "inherit",
-                    cursor:
-                      reportStatus === "sending" || reportStatus === "sent"
-                        ? "not-allowed"
-                        : "pointer",
-                  }}
-                >
-                  {reportStatus === "sending"
-                    ? "Sending…"
-                    : reportStatus === "sent"
-                      ? "Report sent"
-                      : reportStatus === "error"
-                        ? "Try again"
-                        : "Email me this report"}
-                </button>
+                {reportStatus === "sent" ? (
+                  <p
+                    style={{
+                      margin: 0 auto,
+                      maxWidth: 420,
+                      fontSize: 14,
+                      lineHeight: 1.55,
+                      color: "var(--ink-dim)",
+                    }}
+                  >
+                    Your report is on the way. Check the inbox for the work
+                    email you used at the library gate.
+                  </p>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => void handleEmailReport()}
+                    disabled={reportStatus === "sending"}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 10,
+                      padding: "13px 24px",
+                      background: "transparent",
+                      color: "var(--ink)",
+                      border: "1px solid var(--border)",
+                      borderRadius: 8,
+                      fontSize: 14,
+                      fontWeight: 600,
+                      fontFamily: "inherit",
+                      maxWidth: "100%",
+                      cursor:
+                        reportStatus === "sending" ? "not-allowed" : "pointer",
+                    }}
+                  >
+                    {reportStatus === "sending" ? (
+                      <>
+                        <span className="sltax-spin" aria-hidden="true" />
+                        Sending…
+                      </>
+                    ) : reportStatus === "error" ? (
+                      "Try again"
+                    ) : (
+                      "Send this report to my email"
+                    )}
+                  </button>
+                )}
               </div>
             ) : null}
 
