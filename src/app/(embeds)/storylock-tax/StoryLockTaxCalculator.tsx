@@ -37,6 +37,18 @@ const UNLOCK_EMAIL_KEY = "storylock_tax_email";
 
 type TabKey = "calc" | "levels" | "proof";
 
+// n8n founder email still keys the 5 Levels tab as "model" (the name
+// from the original calculator). Keep that value on the wire.
+const WEBHOOK_TAB: Record<TabKey, "calc" | "model" | "proof"> = {
+  calc: "calc",
+  levels: "model",
+  proof: "proof",
+};
+
+function sharePct(part: number, whole: number): number {
+  return whole > 0 ? Math.round((part / whole) * 100) : 0;
+}
+
 type Verdict = {
   tier: string;
   levelMatch: 1 | 2 | 3 | 4 | 5;
@@ -335,6 +347,12 @@ export default function StoryLockTaxCalculator({
   const [rate, setRate] = useState<number>(500);
 
   const [tab, setTab] = useState<TabKey>("calc");
+  const [visitedTabs, setVisitedTabs] = useState<Set<TabKey>>(
+    () => new Set<TabKey>(["calc"]),
+  );
+  const [touchedFields, setTouchedFields] = useState<Set<string>>(
+    () => new Set(),
+  );
   const [unlocked, setUnlocked] = useState<boolean>(!gated);
   const [formName, setFormName] = useState<string>("");
   const [formEmail, setFormEmail] = useState<string>("");
@@ -381,6 +399,78 @@ export default function StoryLockTaxCalculator({
   const valTax = arr * mult * valuationDiscount;
   const total = hireTax + calTax + compTax + valTax;
 
+  const markTouched = (field: string, setter: (v: number) => void) => {
+    return (v: number) => {
+      setTouchedFields((prev) => {
+        if (prev.has(field)) return prev;
+        const next = new Set(prev);
+        next.add(field);
+        return next;
+      });
+      setter(v);
+    };
+  };
+
+  const buildCalculatorPayload = () => {
+    const hiring_loop_tax = Math.round(hireTax);
+    const calendar_tax = Math.round(calTax);
+    const compounding_tax = Math.round(compTax);
+    const valuation_tax = Math.round(valTax);
+    const storylock_tax_total = Math.round(total);
+    // The founder email's three boxes are the old operating taxes.
+    // Percentages share those three, not the valuation line.
+    const operatingThree = hiring_loop_tax + calendar_tax + compounding_tax;
+    const submittedFromTab = WEBHOOK_TAB[tab];
+    const visited = Array.from(visitedTabs).map((t) => WEBHOOK_TAB[t]);
+    const touched = Array.from(touchedFields);
+
+    return {
+      submitted_from_tab: submittedFromTab,
+      current_tab_when_submitted: submittedFromTab,
+      viewed_all_tabs: visitedTabs.size === 3,
+      fields_touched: touched,
+      fields_touched_count: touched.length,
+      visited_tabs: visited,
+
+      arr,
+      mult,
+      closePct,
+      hours,
+      fails,
+      aecost,
+      rate,
+
+      hiring_loop_tax,
+      calendar_tax,
+      compounding_tax,
+      valuation_tax,
+      storylock_tax_total,
+      operating_tax_ratio: Math.round(operatingTaxRatio * 1000) / 10,
+      valuation_discount_pct: Math.round(valuationDiscount * 100),
+      tier: verdict.tier,
+      level_match: verdict.levelMatch,
+
+      // Aliases the original n8n founder email still reads.
+      your_close_rate: closePct,
+      hours_per_week_selling: hours,
+      annual_sales_hire_cost: aecost,
+      revenue_leakage: compounding_tax,
+      payroll_waste: hiring_loop_tax,
+      founder_time_tax: calendar_tax,
+      revenue_leakage_pct: sharePct(compounding_tax, operatingThree),
+      payroll_waste_pct: sharePct(hiring_loop_tax, operatingThree),
+      founder_time_pct: sharePct(calendar_tax, operatingThree),
+
+      // These inputs were removed with the old calculator. Send numbers so
+      // n8n `.toLocaleString()` does not throw; they are not user-entered.
+      team_close_rate: 0,
+      average_deal_size: 0,
+      deals_per_quarter: 0,
+      deals_per_year: 0,
+      close_rate_gap: 0,
+    };
+  };
+
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -405,29 +495,7 @@ export default function StoryLockTaxCalculator({
             email,
             source: "storylock-tax-calculator",
             submitted_at: new Date().toISOString(),
-            submitted_from_tab: tab,
-
-            // Calculator inputs
-            arr,
-            mult,
-            closePct,
-            hours,
-            fails,
-            aecost,
-            rate,
-
-            // Calculated taxes
-            hiring_loop_tax: Math.round(hireTax),
-            calendar_tax: Math.round(calTax),
-            compounding_tax: Math.round(compTax),
-            valuation_tax: Math.round(valTax),
-            storylock_tax_total: Math.round(total),
-            operating_tax_ratio: Math.round(operatingTaxRatio * 1000) / 10,
-            valuation_discount_pct: Math.round(valuationDiscount * 100),
-
-            // Severity
-            tier: verdict.tier,
-            level_match: verdict.levelMatch,
+            ...buildCalculatorPayload(),
           }),
         });
 
@@ -467,6 +535,8 @@ export default function StoryLockTaxCalculator({
       formName,
       formEmail,
       tab,
+      visitedTabs,
+      touchedFields,
       arr,
       mult,
       closePct,
@@ -486,24 +556,7 @@ export default function StoryLockTaxCalculator({
     ],
   );
 
-  const taxPayload = () => ({
-    arr,
-    mult,
-    closePct,
-    hours,
-    fails,
-    aecost,
-    rate,
-    hiring_loop_tax: Math.round(hireTax),
-    calendar_tax: Math.round(calTax),
-    compounding_tax: Math.round(compTax),
-    valuation_tax: Math.round(valTax),
-    storylock_tax_total: Math.round(total),
-    operating_tax_ratio: Math.round(operatingTaxRatio * 1000) / 10,
-    valuation_discount_pct: Math.round(valuationDiscount * 100),
-    tier: verdict.tier,
-    level_match: verdict.levelMatch,
-  });
+  const taxPayload = () => buildCalculatorPayload();
 
   const handleEmailReport = useCallback(async () => {
     if (reportStatus === "sending" || reportStatus === "sent") return;
@@ -516,7 +569,6 @@ export default function StoryLockTaxCalculator({
         body: JSON.stringify({
           source: "storylock_tax_tool",
           submitted_at: new Date().toISOString(),
-          submitted_from_tab: tab,
           ...taxPayload(),
         }),
       });
@@ -529,6 +581,8 @@ export default function StoryLockTaxCalculator({
     }
   }, [
     tab,
+    visitedTabs,
+    touchedFields,
     arr,
     mult,
     closePct,
@@ -554,6 +608,12 @@ export default function StoryLockTaxCalculator({
       if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
+    setVisitedTabs((prev) => {
+      if (prev.has(next)) return prev;
+      const copy = new Set(prev);
+      copy.add(next);
+      return copy;
+    });
     setTab(next);
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -909,7 +969,7 @@ export default function StoryLockTaxCalculator({
                   sub="Annual recurring revenue, today"
                   prefix="$"
                   value={arr}
-                  onChange={setArr}
+                  onChange={markTouched("arr", setArr)}
                   min={1_000_000}
                   step={500_000}
                 />
@@ -918,7 +978,7 @@ export default function StoryLockTaxCalculator({
                   sub="Revenue multiple your bankers imply"
                   suffix="x"
                   value={mult}
-                  onChange={setMult}
+                  onChange={markTouched("mult", setMult)}
                   min={1}
                   max={15}
                   step={0.5}
@@ -931,7 +991,7 @@ export default function StoryLockTaxCalculator({
                   sub="Complex deals you personally close"
                   suffix="%"
                   value={closePct}
-                  onChange={setClosePct}
+                  onChange={markTouched("closePct", setClosePct)}
                   min={0}
                   max={100}
                   step={5}
@@ -941,7 +1001,7 @@ export default function StoryLockTaxCalculator({
                   sub="Calls, demos, deal saves, founder bailouts"
                   suffix="hrs"
                   value={hours}
-                  onChange={setHours}
+                  onChange={markTouched("hours", setHours)}
                   min={0}
                   max={80}
                   step={1}
@@ -953,7 +1013,7 @@ export default function StoryLockTaxCalculator({
                   label="Failed Sales Hires (24 mo)"
                   sub="Including the one you haven't fired yet"
                   value={fails}
-                  onChange={setFails}
+                  onChange={markTouched("fails", setFails)}
                   min={0}
                   max={10}
                   step={1}
@@ -963,7 +1023,7 @@ export default function StoryLockTaxCalculator({
                   sub="Base + variable + benefits + ramp"
                   prefix="$"
                   value={aecost}
-                  onChange={setAecost}
+                  onChange={markTouched("aecost", setAecost)}
                   min={100_000}
                   step={10_000}
                 />
@@ -975,7 +1035,7 @@ export default function StoryLockTaxCalculator({
                   sub="What an hour of your time is worth on product, strategy, or what only you can do"
                   prefix="$"
                   value={rate}
-                  onChange={setRate}
+                  onChange={markTouched("rate", setRate)}
                   min={100}
                   step={50}
                 />
