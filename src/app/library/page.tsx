@@ -3,7 +3,11 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
-import { RESOURCE_CSS, RESOURCE_LOGO } from "../(embeds)/resources/_shared";
+import {
+  RESOURCE_CSS,
+  RESOURCE_LOGO,
+  RESOURCE_NEW_TAB,
+} from "../(embeds)/resources/_shared";
 import VslToolStrip from "../(embeds)/resources/VslToolStrip";
 import { VSL_CSS, VSL_STRIP_CSS, buildVslVideoLd } from "@/lib/vsl";
 import VslBlock from "@/components/vsl/VslBlock";
@@ -89,7 +93,7 @@ export default async function LibraryPage() {
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS + LIBRARY_CSS + VSL_CSS + VSL_STRIP_CSS }} />
       <div className="site-head-bar">
         <header className="site-head">
-          <Link className="logo" href="/">
+          <Link className="logo" href="/" {...RESOURCE_NEW_TAB}>
             {/* eslint-disable-next-line @next/next/no-img-element -- matches homepage/resources logo lockup */}
             <img src={RESOURCE_LOGO} alt="BrandMultiplier" />
             <span className="logo-text">BrandMultiplier</span>
@@ -125,7 +129,9 @@ export default async function LibraryPage() {
         <p>
           <strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for
           Founder-Led Companies.{" "}
-          <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a>
+          <a href="https://www.brandmultiplier.ai" {...RESOURCE_NEW_TAB}>
+            brandmultiplier.ai
+          </a>
         </p>
         <p>
           <LegalLinks />

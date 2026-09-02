@@ -1,4 +1,5 @@
 import { CTA_LABEL, calendlyHref } from "@/lib/cta";
+import { RESOURCE_NEW_TAB } from "./_shared";
 
 const ARROW = (
   <svg
@@ -77,7 +78,12 @@ export default function VslToolStrip({
 
       <div className="bm-tools">
         {TOOLS.map((tool) => (
-          <a key={tool.href} className="bm-tool" href={gated ? tool.gatedHref : tool.href}>
+          <a
+            key={tool.href}
+            className="bm-tool"
+            href={gated ? tool.gatedHref : tool.href}
+            {...RESOURCE_NEW_TAB}
+          >
             <p className="bm-tool__eyebrow">
               <span className="bm-tool__num">{tool.num}</span> {tool.eyebrow}
             </p>

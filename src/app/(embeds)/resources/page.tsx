@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import {
   RESOURCE_CSS,
   RESOURCE_LOGO,
+  RESOURCE_NEW_TAB,
   buildResourcesCollectionLd,
 } from "./_shared";
 import { CTA_LABEL, calendlyHref } from "@/lib/cta";
@@ -190,7 +191,11 @@ export default async function Page() {
             <span className="logo-text">BrandMultiplier</span>
           </Link>
           <div className="head-actions">
-            <Link className="back" href="/what-is-a-narrative-operating-system">
+            <Link
+              className="back"
+              href="/what-is-a-narrative-operating-system"
+              {...RESOURCE_NEW_TAB}
+            >
               What is NOS?
             </Link>
             <a
@@ -225,6 +230,7 @@ export default async function Page() {
               className="index-card"
               href={`/resources/${article.slug}`}
               prefetch
+              {...RESOURCE_NEW_TAB}
             >
               <span className="k">{article.eyebrow}</span>
               <span className="t">{article.title}</span>
@@ -254,7 +260,9 @@ export default async function Page() {
         <p>
           <strong>BrandMultiplier</strong> - B2B Narrative Infrastructure for
           Founder-Led Companies.{" "}
-          <a href="https://www.brandmultiplier.ai">brandmultiplier.ai</a>
+          <a href="https://www.brandmultiplier.ai" {...RESOURCE_NEW_TAB}>
+            brandmultiplier.ai
+          </a>
         </p>
         <p>
           <LegalLinks />

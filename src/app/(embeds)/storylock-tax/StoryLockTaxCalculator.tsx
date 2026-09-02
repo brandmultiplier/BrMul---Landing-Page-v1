@@ -1755,8 +1755,6 @@ export default function StoryLockTaxCalculator({
         {reportOpen ? (
           <a
             href={CTA_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
             className="sltax-sticky-cta__btn"
           >
             Book Diagnostic →
@@ -2108,8 +2106,6 @@ function CTABlock() {
       </p>
       <a
         href={CTA_HREF}
-        target="_blank"
-        rel="noopener noreferrer"
         style={{
           display: "inline-block",
           padding: "14px 28px",

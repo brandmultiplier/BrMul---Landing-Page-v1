@@ -144,8 +144,31 @@ export const RESOURCE_LOGO = "/brandmultiplier-logo.png";
 
 export const RESOURCE_LOGO_MARKUP = `<img src="${RESOURCE_LOGO}" alt="BrandMultiplier"><span class="logo-text">BrandMultiplier</span>`;
 
+export const RESOURCE_NEW_TAB = {
+  target: "_blank",
+  rel: "noopener noreferrer",
+} as const;
+
+/** Keep visitors on the lead magnet: every <a> opens in a new tab except Calendly. */
+export const withLeadMagnetNewTabs = (html: string) =>
+  html.replace(/<a\b([^>]*)>/gi, (full, attrs: string) => {
+    const href = attrs.match(/\bhref\s*=\s*(["'])([\s\S]*?)\1/i)?.[2]?.trim() ?? "";
+    if (!href || href === "#" || href.startsWith("#") || /calendly\.com/i.test(href)) {
+      return full;
+    }
+    if (/\btarget\s*=/i.test(attrs)) {
+      return full;
+    }
+    const withRel = /\brel\s*=/i.test(attrs)
+      ? attrs
+      : `${attrs} rel="noopener noreferrer"`;
+    return `<a${withRel} target="_blank">`;
+  });
+
 export const withLazyImages = (html: string) =>
-  html.replace(/<img(?![^>]*\bloading=)/gi, '<img loading="lazy" decoding="async" ');
+  withLeadMagnetNewTabs(
+    html.replace(/<img(?![^>]*\bloading=)/gi, '<img loading="lazy" decoding="async" '),
+  );
 
 const SITE = "https://www.brandmultiplier.ai";
 
