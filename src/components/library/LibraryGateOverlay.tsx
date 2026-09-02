@@ -42,7 +42,7 @@ const OVERLAY_CSS = `
 }
 .lgo .lf-submit:hover{filter:brightness(1.05)}
 .lgo .lf-submit:disabled{opacity:.6;cursor:not-allowed}
-.lgo .lf-honeypot{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
+.lgo .lf-honeypot{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0;white-space:nowrap}
 .lgo .lf-network-error{color:#C0392B;font-size:13.5px;text-align:center;margin:0 0 14px}
 @media (max-width:520px){
   .lgo__panel{margin:16px auto;padding:20px 16px}

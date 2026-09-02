@@ -70,7 +70,7 @@ const LIBRARY_CSS = `
 }
 .lf-submit:hover{filter:brightness(1.05)}
 .lf-submit:disabled{opacity:.6;cursor:not-allowed}
-.lf-honeypot{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
+.lf-honeypot{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0;white-space:nowrap}
 .lf-network-error{color:var(--red);font-size:13.5px;text-align:center;margin:0 0 14px}
 @media (max-width:860px){.library-wrap{padding:calc(var(--site-head-h) + 8px) 16px 48px}.library-panel{padding:20px 16px 22px}}
 @media (max-width:520px){.lf-row{grid-template-columns:1fr}.library-lead{font-size:16px}.library-gate{margin-top:22px;padding-top:22px}}

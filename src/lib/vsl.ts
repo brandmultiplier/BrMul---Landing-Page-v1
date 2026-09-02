@@ -99,7 +99,7 @@ export const VSL_CSS = `
 .library-vsl-slot{max-width:960px;margin:0 auto;padding:calc(var(--site-head-h) + 8px) 24px 0}
 @media (max-width:720px){
   .library-vsl-slot{padding:calc(var(--site-head-h) + 8px) 16px 0}
-  .vsl-player{border-radius:10px;transform:translateZ(0);contain:layout paint}
+  .vsl-player{border-radius:10px;transform:translateZ(0)}
   .vsl-player__play{width:56px;height:56px}
   .vsl-player__bar{gap:2px;padding:8px 8px 10px}
   .vsl-player__btn{min-width:28px;padding:4px 6px;font-size:12px}
