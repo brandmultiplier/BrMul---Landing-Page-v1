@@ -13,9 +13,16 @@ type Props = {
   cues: VslTranscriptCue[];
   currentTime: number;
   onSeek: (seconds: number) => void;
+  /** Clip the UI but leave every cue in the HTML for crawlers / models. */
+  forAi?: boolean;
 };
 
-export default function VslTranscript({ cues, currentTime, onSeek }: Props) {
+export default function VslTranscript({
+  cues,
+  currentTime,
+  onSeek,
+  forAi = false,
+}: Props) {
   const activeIndex = useMemo(() => {
     let idx = 0;
     for (let i = 0; i < cues.length; i += 1) {
@@ -25,7 +32,11 @@ export default function VslTranscript({ cues, currentTime, onSeek }: Props) {
   }, [cues, currentTime]);
 
   return (
-    <details className="vsl-transcript">
+    <details
+      className={forAi ? "vsl-transcript vsl-transcript--for-ai" : "vsl-transcript"}
+      open={forAi || undefined}
+      aria-hidden={forAi || undefined}
+    >
       <summary>Read the transcript</summary>
       <div className="vsl-transcript__body">
         {cues.map((cue, i) => (

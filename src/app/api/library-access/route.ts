@@ -209,7 +209,7 @@ export async function POST(req: Request) {
 
   // NEVER block the user on a webhook/integration failure — grant access regardless.
   const res = NextResponse.json({ ok: true, redirect: next });
-  const year = 60 * 60 * 24 * 365;
+  const TWO_YEARS = 60 * 60 * 24 * 365 * 2;
   const cookieBase = {
     path: "/",
     sameSite: "lax" as const,
@@ -217,13 +217,13 @@ export async function POST(req: Request) {
     // testing on the LAN address Next prints alongside localhost.
     secure: process.env.NODE_ENV === "production",
   };
-  res.cookies.set("bm_library", "1", { ...cookieBase, maxAge: year });
-  res.cookies.set("bm_lead_id", leadId, { ...cookieBase, maxAge: year });
-  res.cookies.set("bm_consent", CONSENT_TEXT_VERSION, { ...cookieBase, maxAge: year });
+  res.cookies.set("bm_library", "1", { ...cookieBase, maxAge: TWO_YEARS });
+  res.cookies.set("bm_lead_id", leadId, { ...cookieBase, maxAge: TWO_YEARS });
+  res.cookies.set("bm_consent", CONSENT_TEXT_VERSION, { ...cookieBase, maxAge: TWO_YEARS });
 
-  // Identity for the gated instruments. They must never ask a second time, so
-  // the lead travels with the browser and gets replayed into their webhooks.
-  // httpOnly: only our own route handlers read it, never client JS.
+  // Identity for the gated instruments. Replay it into their webhooks so a
+  // report is not sent with nobody attached. httpOnly: only our own route
+  // handlers read it, never client JS.
   res.cookies.set(
     "bm_lead",
     JSON.stringify({
@@ -234,7 +234,7 @@ export async function POST(req: Request) {
       company_name: payload.company_name,
       approximate_arr: payload.approximate_arr,
     }),
-    { ...cookieBase, httpOnly: true, maxAge: year },
+    { ...cookieBase, httpOnly: true, maxAge: TWO_YEARS },
   );
   res.cookies.set("bm_welcome", "1", { ...cookieBase, maxAge: 60 * 60 });
   return res;

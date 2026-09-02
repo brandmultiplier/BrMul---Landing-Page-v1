@@ -8,12 +8,15 @@ import VslTranscript from "./VslTranscript";
 
 type Props = {
   showTranscript?: boolean;
+  /** When false, the transcript stays in the HTML but the UI is clipped. */
+  hideTranscriptUi?: boolean;
   transcript?: VslTranscriptCue[];
   location?: VslAnalyticsLocation;
 };
 
 export default function VslBlock({
   showTranscript = false,
+  hideTranscriptUi = false,
   transcript = [],
   location,
 }: Props) {
@@ -30,6 +33,8 @@ export default function VslBlock({
     void video.play();
   };
 
+  const renderTranscript = transcript.length > 0 && (showTranscript || hideTranscriptUi);
+
   return (
     <div id="vsl" className="vsl-block">
       <VslPlayer
@@ -37,11 +42,12 @@ export default function VslBlock({
         location={resolvedLocation}
         onTime={setCurrentTime}
       />
-      {showTranscript && transcript.length > 0 ? (
+      {renderTranscript ? (
         <VslTranscript
           cues={transcript}
           currentTime={currentTime}
           onSeek={seek}
+          forAi={hideTranscriptUi}
         />
       ) : null}
     </div>

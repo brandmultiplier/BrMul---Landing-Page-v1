@@ -5,10 +5,14 @@ import Link from "next/link";
 
 import { RESOURCE_CSS, RESOURCE_LOGO } from "../(embeds)/resources/_shared";
 import VslToolStrip from "../(embeds)/resources/VslToolStrip";
-import { VSL_CSS, VSL_STRIP_CSS } from "@/lib/vsl";
+import { VSL_CSS, VSL_STRIP_CSS, buildVslVideoLd } from "@/lib/vsl";
 import VslBlock from "@/components/vsl/VslBlock";
 import LibraryForm from "./LibraryForm";
 import LegalLinks from "@/components/legal/LegalLinks";
+import {
+  VSL_TRANSCRIPT,
+  VSL_TRANSCRIPT_TEXT,
+} from "../(embeds)/resources/vsl-transcript";
 
 export const metadata: Metadata = {
   title: "Access the Library — BrandMultiplier",
@@ -78,6 +82,8 @@ export default async function LibraryPage() {
     redirect("/resources");
   }
 
+  const videoLd = buildVslVideoLd(VSL_TRANSCRIPT_TEXT);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: RESOURCE_CSS + LIBRARY_CSS + VSL_CSS + VSL_STRIP_CSS }} />
@@ -98,7 +104,11 @@ export default async function LibraryPage() {
           infrastructure, StoryLock, and the structural reasons founder-led
           B2B companies stall between $3M and $50M ARR.
         </p>
-        <VslBlock location="library" />
+        <VslBlock
+          location="library"
+          transcript={VSL_TRANSCRIPT}
+          hideTranscriptUi
+        />
         <div className="library-panel">
           <VslToolStrip ctaSlug="library" embedded gated />
           <div className="library-gate">
@@ -121,6 +131,10 @@ export default async function LibraryPage() {
           <LegalLinks />
         </p>
       </footer>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }}
+      />
     </>
   );
 }
