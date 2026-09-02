@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProtagonistMapWidget from "./ProtagonistMapWidget";
+import LibraryGateOverlay from "@/components/library/LibraryGateOverlay";
 import LegalLinks from "@/components/legal/LegalLinks";
 
 export const metadata: Metadata = {
@@ -23,6 +24,12 @@ export default function Page() {
       >
         <LegalLinks />
       </p>
+      <LibraryGateOverlay
+        title="The Multi-Protagonist Map"
+        redirectTo="/protagonist-map"
+        intent="multi_protagonist_map"
+        show
+      />
     </>
   );
 }

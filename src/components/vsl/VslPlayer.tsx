@@ -26,6 +26,7 @@ import {
 } from "@/lib/video-analytics";
 
 const SPEEDS = [0.75, 1, 1.25, 1.5, 2] as const;
+const DEFAULT_SPEED = 1.25;
 
 function formatClock(seconds: number) {
   if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
@@ -48,7 +49,8 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   const [current, setCurrent] = useState(0);
   const [captionsOn, setCaptionsOn] = useState(false);
   const [cueText, setCueText] = useState("");
-  const [speed, setSpeed] = useState(1);
+  const [speed, setSpeed] = useState(DEFAULT_SPEED);
+  const speedRef = useRef(DEFAULT_SPEED);
   const [speedOpen, setSpeedOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [focused, setFocused] = useState(false);
@@ -102,6 +104,13 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
     }
 
     bindCaptions(video, false);
+    video.playbackRate = speedRef.current;
+
+    if (hls) {
+      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        if (videoRef.current) videoRef.current.playbackRate = speedRef.current;
+      });
+    }
 
     return () => {
       hls?.destroy();
@@ -163,12 +172,18 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   }, []);
 
   const showBufferingSoon = useCallback(() => {
+    const video = videoRef.current;
+    // HLS fires waiting/stalled while attaching and on idle poster. Never
+    // show the spinner unless playback is actually requested and stuck.
+    if (!video || video.paused) return;
     if (bufferDelayRef.current != null) return;
     bufferDelayRef.current = setTimeout(() => {
       bufferDelayRef.current = null;
+      const current = videoRef.current;
+      if (!current || current.paused) return;
       setBuffering(true);
-    }, 180);
-  }, []);
+    }, 400);
+  }, [videoRef]);
 
   useEffect(() => () => hideBuffering(), [hideBuffering]);
 
@@ -189,6 +204,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   const handlePlay = () => {
     const video = videoRef.current;
     if (!video) return;
+    video.playbackRate = speedRef.current;
     setPaused(false);
     analyticsRef.current.onPlay(video.currentTime, video.duration || duration);
   };
@@ -201,6 +217,8 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
     setCurrent(t);
     onTime(t);
     analyticsRef.current.onTime(t, d);
+    // Time is advancing, so this is not a stall — drop a spurious HLS waiting.
+    if (!video.seeking) hideBuffering();
   };
 
   const togglePlay = async () => {
@@ -229,6 +247,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
 
   const changeSpeed = (next: number) => {
     const video = videoRef.current;
+    speedRef.current = next;
     if (video) video.playbackRate = next;
     setSpeed(next);
     setSpeedOpen(false);
@@ -288,6 +307,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
         onCanPlay={hideBuffering}
         onSeeked={hideBuffering}
         onLoadedMetadata={(e) => {
+          e.currentTarget.playbackRate = speedRef.current;
           setDuration(e.currentTarget.duration || 0);
           bindCaptions(e.currentTarget, captionsOn);
         }}
@@ -318,7 +338,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
           </div>
         ) : null}
 
-        {buffering && !error ? (
+        {buffering && !paused && !error ? (
           <div className="vsl-player__center">
             <div
               className="vsl-player__spinner"

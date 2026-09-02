@@ -40,13 +40,13 @@ const TOOLS = [
     go: "Answer four prompts",
   },
   {
-    href: "/resources/the-multi-protagonist-map",
-    gatedHref: "/resources/the-multi-protagonist-map?gate=1",
+    href: "/protagonist-map",
+    gatedHref: "/protagonist-map",
     num: "03",
     eyebrow: "Map",
     title: "The Multi-Protagonist Map",
     body: "Eight to thirteen people have to say yes. Work out what each of them actually needs to hear.",
-    go: "Open the map",
+    go: "Build your map",
   },
 ] as const;
 
