@@ -212,7 +212,11 @@ export default async function Page() {
           structural reasons founder-led B2B companies stall between $3M and
           $50M ARR.
         </p>
-        <VslBlock showTranscript transcript={VSL_TRANSCRIPT} />
+        <VslBlock
+          location="resources"
+          transcript={VSL_TRANSCRIPT}
+          hideTranscriptUi
+        />
         <VslToolStrip />
         <div className="index-grid">
           {ARTICLES.map((article) => (

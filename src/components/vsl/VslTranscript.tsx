@@ -31,12 +31,20 @@ export default function VslTranscript({
     return idx;
   }, [cues, currentTime]);
 
+  if (forAi) {
+    return (
+      <div className="vsl-transcript--for-ai" aria-hidden="true">
+        {cues.map((cue) => (
+          <p key={cue.seconds}>
+            {formatClock(cue.seconds)} {cue.text}
+          </p>
+        ))}
+      </div>
+    );
+  }
+
   return (
-    <details
-      className={forAi ? "vsl-transcript vsl-transcript--for-ai" : "vsl-transcript"}
-      open={forAi || undefined}
-      aria-hidden={forAi || undefined}
-    >
+    <details className="vsl-transcript">
       <summary>Read the transcript</summary>
       <div className="vsl-transcript__body">
         {cues.map((cue, i) => (

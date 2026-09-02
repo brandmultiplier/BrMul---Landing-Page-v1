@@ -41,7 +41,7 @@ export function buildVslVideoLd(transcript: string) {
 }
 
 export const VSL_CSS = `
-.vsl-block{margin:0 0 28px}
+.vsl-block{margin:0 0 28px;position:relative}
 .vsl-player{position:relative;background:#111114;border:1px solid var(--line);border-radius:14px;overflow:hidden;aspect-ratio:16/9;cursor:pointer;width:100%;max-width:100%}
 .vsl-player video{display:block;width:100%;height:100%;object-fit:contain;background:#111114;vertical-align:top}
 .vsl-player__ui{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none}
@@ -78,10 +78,19 @@ export const VSL_CSS = `
 .vsl-transcript__line{appearance:none;border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:8px;cursor:pointer;font:inherit;font-size:15px;line-height:1.5;color:var(--ink)}
 .vsl-transcript__line:hover,.vsl-transcript__line.is-active{background:var(--lav)}
 .vsl-transcript__time{display:inline-block;font-size:12px;font-weight:700;color:var(--purple);margin-right:8px;font-variant-numeric:tabular-nums}
-/* Library gate: keep the words in the HTML for crawlers/models, clip the UI. */
+/* Keep cue text in the HTML for crawlers/models. Never paint the UI. */
 .vsl-transcript--for-ai{
-  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  position:absolute !important;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+  padding:0;
+  margin:0;
 }
 .vsl-pointer{margin:28px 0 8px;padding:16px 18px;border:1px solid var(--lav2);border-left:4px solid var(--purple);border-radius:10px;background:var(--lav)}
 .vsl-pointer__k{font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--purple);margin:0 0 6px}
