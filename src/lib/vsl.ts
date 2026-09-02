@@ -78,19 +78,19 @@ export const VSL_CSS = `
 .vsl-transcript__line{appearance:none;border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:8px;cursor:pointer;font:inherit;font-size:15px;line-height:1.5;color:var(--ink)}
 .vsl-transcript__line:hover,.vsl-transcript__line.is-active{background:var(--lav)}
 .vsl-transcript__time{display:inline-block;font-size:12px;font-weight:700;color:var(--purple);margin-right:8px;font-variant-numeric:tabular-nums}
-/* Keep cue text in the HTML for crawlers/models. Never paint the UI. */
+/* Keep cue text in the HTML for crawlers/models. Never paint the UI.
+   Do not offset with left:-10000px — that inflates the scrollport. */
 .vsl-transcript--for-ai{
   position:absolute !important;
-  left:-10000px;
-  top:auto;
   width:1px;
   height:1px;
+  padding:0;
+  margin:-1px;
   overflow:hidden;
+  clip:rect(0,0,0,0);
   clip-path:inset(50%);
   white-space:nowrap;
   border:0;
-  padding:0;
-  margin:0;
 }
 .vsl-pointer{margin:28px 0 8px;padding:16px 18px;border:1px solid var(--lav2);border-left:4px solid var(--purple);border-radius:10px;background:var(--lav)}
 .vsl-pointer__k{font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--purple);margin:0 0 6px}
@@ -99,7 +99,7 @@ export const VSL_CSS = `
 .library-vsl-slot{max-width:960px;margin:0 auto;padding:calc(var(--site-head-h) + 8px) 24px 0}
 @media (max-width:720px){
   .library-vsl-slot{padding:calc(var(--site-head-h) + 8px) 16px 0}
-  .vsl-player{border-radius:10px}
+  .vsl-player{border-radius:10px;transform:translateZ(0);contain:layout paint}
   .vsl-player__play{width:56px;height:56px}
   .vsl-player__bar{gap:2px;padding:8px 8px 10px}
   .vsl-player__btn{min-width:28px;padding:4px 6px;font-size:12px}
@@ -139,8 +139,12 @@ a.bm-diag__btn{flex:0 0 auto;background:var(--orange);color:#fff;font-size:16px;
 a.bm-diag__btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(243,105,1,.32);color:#fff;text-decoration:none}
 a.bm-diag__btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(243,105,1,.35)}
 .bm-strip__rule{border:0;border-top:1px solid var(--line);margin:34px 0 0}
+@media (hover:none){
+  a.bm-tool:hover,a.bm-tool:focus-visible{transform:none;box-shadow:none}
+  a.bm-diag__btn:hover{transform:none}
+}
 @media (max-width:860px){
-  .bm-tools{grid-template-columns:1fr}
+  .bm-tools{grid-template-columns:repeat(1,minmax(0,1fr))}
   .bm-diag{flex-direction:column;align-items:flex-start;padding:18px 18px;gap:16px}
   a.bm-diag__btn{width:100%;text-align:center}
   .bm-strip__head{font-size:22px}
