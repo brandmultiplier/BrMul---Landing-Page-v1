@@ -15,7 +15,6 @@ import {
   Minimize2,
   Pause,
   Play,
-  RotateCw,
   Volume2,
   VolumeX,
   X,
@@ -102,7 +101,6 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   const [focused, setFocused] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fakeFs, setFakeFs] = useState(false);
-  const [forceRotate, setForceRotate] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [mobileLandscape, setMobileLandscape] = useState(false);
   const [showControls, setShowControls] = useState(true);
@@ -220,7 +218,6 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
         await lockLandscape();
       } else {
         unlockOrientation();
-        setForceRotate(false);
         setFakeFs(false);
       }
     };
@@ -243,9 +240,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
 
     const mq = window.matchMedia("(orientation: landscape)");
     const onOrient = () => {
-      if (!mq.matches) return;
-      setForceRotate(false);
-      if (inFsRef.current) void lockLandscape();
+      if (mq.matches && inFsRef.current) void lockLandscape();
     };
     mq.addEventListener("change", onOrient);
     screen.orientation?.addEventListener?.("change", onOrient);
@@ -275,13 +270,15 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   }, [videoRef]);
 
   useEffect(() => {
-    const landscape = window.matchMedia("(orientation: landscape)");
     const coarsePointer = window.matchMedia("(hover: none) and (pointer: coarse)");
 
     const syncMobileLandscape = () => {
       const isTouchDevice =
         coarsePointer.matches || navigator.maxTouchPoints > 0;
-      const expanded = hasStarted && isTouchDevice && landscape.matches;
+      const viewport = window.visualViewport;
+      const width = viewport?.width ?? window.innerWidth;
+      const height = viewport?.height ?? window.innerHeight;
+      const expanded = hasStarted && isTouchDevice && width > height;
       setMobileLandscape(expanded);
       document.documentElement.classList.toggle(
         "vsl-mobile-landscape-open",
@@ -291,14 +288,16 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
     };
 
     syncMobileLandscape();
-    landscape.addEventListener("change", syncMobileLandscape);
     coarsePointer.addEventListener("change", syncMobileLandscape);
     window.addEventListener("resize", syncMobileLandscape);
+    window.addEventListener("orientationchange", syncMobileLandscape);
+    window.visualViewport?.addEventListener("resize", syncMobileLandscape);
 
     return () => {
-      landscape.removeEventListener("change", syncMobileLandscape);
       coarsePointer.removeEventListener("change", syncMobileLandscape);
       window.removeEventListener("resize", syncMobileLandscape);
+      window.removeEventListener("orientationchange", syncMobileLandscape);
+      window.visualViewport?.removeEventListener("resize", syncMobileLandscape);
       document.documentElement.classList.remove("vsl-mobile-landscape-open");
     };
   }, [hasStarted]);
@@ -430,7 +429,6 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
     }
     if (video?.webkitDisplayingFullscreen) video.webkitExitFullscreen?.();
     setFakeFs(false);
-    setForceRotate(false);
     unlockOrientation();
     inFsRef.current = false;
     document.documentElement.classList.remove("vsl-fs-open");
@@ -469,35 +467,6 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
     await lockLandscape();
   };
 
-  const rotateFullscreen = async () => {
-    bumpControls();
-    const root = playerRef.current as FsEl | null;
-    const alreadyFs = Boolean(nativeFsElement() || fakeFs);
-    if (!alreadyFs && root) {
-      try {
-        if (root.requestFullscreen) await root.requestFullscreen();
-        else if (root.webkitRequestFullscreen) await root.webkitRequestFullscreen();
-        else {
-          setFakeFs(true);
-          inFsRef.current = true;
-          setIsFullscreen(true);
-          document.documentElement.classList.add("vsl-fs-open");
-        }
-      } catch {
-        setFakeFs(true);
-        inFsRef.current = true;
-        setIsFullscreen(true);
-        document.documentElement.classList.add("vsl-fs-open");
-      }
-    }
-    const locked = await lockLandscape();
-    if (locked) {
-      setForceRotate(false);
-      return;
-    }
-    setForceRotate((on) => !on);
-  };
-
   const handleSurfaceClick = (event: MouseEvent<HTMLDivElement>) => {
     if (error) return;
     const node = event.target as HTMLElement;
@@ -512,12 +481,11 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   };
 
   const inFs = isFullscreen || fakeFs;
-  const rotateOn = forceRotate && inFs;
 
   return (
     <div
       ref={playerRef}
-      className={`vsl-player${paused ? " is-paused" : ""}${focused ? " is-focused" : ""}${buffering ? " is-buffering" : ""}${inFs ? " is-fs" : ""}${mobileLandscape ? " is-mobile-landscape" : ""}${rotateOn ? " is-fs-rotate" : ""}${showControls ? " is-controls" : ""}`}
+      className={`vsl-player${paused ? " is-paused" : ""}${focused ? " is-focused" : ""}${buffering ? " is-buffering" : ""}${inFs ? " is-fs" : ""}${mobileLandscape ? " is-mobile-landscape" : ""}${showControls ? " is-controls" : ""}`}
       onClick={handleSurfaceClick}
       onFocus={() => setFocused(true)}
       onBlur={(e) => {
@@ -698,16 +666,6 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
               </div>
             ) : null}
           </div>
-          <button
-            type="button"
-            className="vsl-player__btn vsl-player__btn--icon"
-            aria-label={rotateOn ? "Exit landscape" : "Rotate to landscape"}
-            title={rotateOn ? "Exit landscape" : "Rotate to landscape"}
-            aria-pressed={rotateOn}
-            onClick={() => void rotateFullscreen()}
-          >
-            <RotateCw size={18} strokeWidth={2.25} aria-hidden="true" />
-          </button>
           <button
             type="button"
             className="vsl-player__btn vsl-player__btn--icon"

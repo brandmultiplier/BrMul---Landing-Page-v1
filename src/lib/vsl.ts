@@ -64,16 +64,6 @@ html.vsl-mobile-landscape-open,html.vsl-mobile-landscape-open body{overflow:hidd
   background:#000
 }
 .vsl-player:fullscreen video,.vsl-player:-webkit-full-screen video,.vsl-player.is-fs video{width:100%;height:100%;object-fit:contain;background:#000}
-.vsl-player.is-fs-rotate,
-.vsl-player.is-fs-rotate:fullscreen,
-.vsl-player.is-fs-rotate:-webkit-full-screen{
-  inset:auto;top:50%;left:50%;width:100dvh !important;height:100dvw !important;transform:translate(-50%,-50%) rotate(90deg);transform-origin:center center
-}
-.vsl-player.is-fs-rotate .vsl-player__stage,
-.vsl-player.is-fs-rotate:fullscreen .vsl-player__stage,
-.vsl-player.is-fs-rotate:-webkit-full-screen .vsl-player__stage{
-  width:100%;height:100%
-}
 .vsl-player.is-fs .vsl-player__top{display:flex;padding:8px 10px}
 .vsl-player.is-fs.is-controls .vsl-player__top,.vsl-player.is-fs.is-paused .vsl-player__top,.vsl-player.is-fs:hover .vsl-player__top{opacity:1}
 .vsl-player.is-fs .vsl-player__bar{padding:8px 10px 10px}
