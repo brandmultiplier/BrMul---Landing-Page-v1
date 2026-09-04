@@ -46,14 +46,20 @@ type FsDoc = Document & {
   webkitExitFullscreen?: () => Promise<void> | void;
 };
 
+type LockableOrientation = ScreenOrientation & {
+  lock?: (orientation: "landscape") => Promise<void>;
+};
+
 function nativeFsElement() {
   const doc = document as FsDoc;
   return document.fullscreenElement ?? doc.webkitFullscreenElement ?? null;
 }
 
 async function lockLandscape() {
+  const orientation = screen.orientation as LockableOrientation;
+  if (!orientation.lock) return false;
   try {
-    await screen.orientation.lock("landscape");
+    await orientation.lock("landscape");
     return true;
   } catch {
     return false;
@@ -97,6 +103,8 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fakeFs, setFakeFs] = useState(false);
   const [forceRotate, setForceRotate] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [mobileLandscape, setMobileLandscape] = useState(false);
   const [showControls, setShowControls] = useState(true);
   const [buffering, setBuffering] = useState(false);
   const bufferDelayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -266,6 +274,35 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
     };
   }, [videoRef]);
 
+  useEffect(() => {
+    const landscape = window.matchMedia("(orientation: landscape)");
+    const coarsePointer = window.matchMedia("(hover: none) and (pointer: coarse)");
+
+    const syncMobileLandscape = () => {
+      const isTouchDevice =
+        coarsePointer.matches || navigator.maxTouchPoints > 0;
+      const expanded = hasStarted && isTouchDevice && landscape.matches;
+      setMobileLandscape(expanded);
+      document.documentElement.classList.toggle(
+        "vsl-mobile-landscape-open",
+        expanded,
+      );
+      if (expanded) setShowControls(true);
+    };
+
+    syncMobileLandscape();
+    landscape.addEventListener("change", syncMobileLandscape);
+    coarsePointer.addEventListener("change", syncMobileLandscape);
+    window.addEventListener("resize", syncMobileLandscape);
+
+    return () => {
+      landscape.removeEventListener("change", syncMobileLandscape);
+      coarsePointer.removeEventListener("change", syncMobileLandscape);
+      window.removeEventListener("resize", syncMobileLandscape);
+      document.documentElement.classList.remove("vsl-mobile-landscape-open");
+    };
+  }, [hasStarted]);
+
   const hideBuffering = useCallback(() => {
     if (bufferDelayRef.current != null) {
       clearTimeout(bufferDelayRef.current);
@@ -308,6 +345,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
     const video = videoRef.current;
     if (!video) return;
     video.playbackRate = speedRef.current;
+    setHasStarted(true);
     setPaused(false);
     bumpControls(true);
     analyticsRef.current.onPlay(video.currentTime, video.duration || duration);
@@ -479,7 +517,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   return (
     <div
       ref={playerRef}
-      className={`vsl-player${paused ? " is-paused" : ""}${focused ? " is-focused" : ""}${buffering ? " is-buffering" : ""}${inFs ? " is-fs" : ""}${rotateOn ? " is-fs-rotate" : ""}${showControls ? " is-controls" : ""}`}
+      className={`vsl-player${paused ? " is-paused" : ""}${focused ? " is-focused" : ""}${buffering ? " is-buffering" : ""}${inFs ? " is-fs" : ""}${mobileLandscape ? " is-mobile-landscape" : ""}${rotateOn ? " is-fs-rotate" : ""}${showControls ? " is-controls" : ""}`}
       onClick={handleSurfaceClick}
       onFocus={() => setFocused(true)}
       onBlur={(e) => {
