@@ -15,8 +15,10 @@ import {
   Minimize2,
   Pause,
   Play,
+  RotateCw,
   Volume2,
   VolumeX,
+  X,
 } from "lucide-react";
 import { VSL_CAPTIONS, VSL_HLS_URL, VSL_POSTER } from "@/lib/vsl";
 import {
@@ -27,6 +29,55 @@ import {
 
 const SPEEDS = [0.75, 1, 1.25, 1.5, 2] as const;
 const DEFAULT_SPEED = 1.25;
+const CONTROLS_HIDE_MS = 2800;
+
+type WebkitVideo = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void;
+  webkitExitFullscreen?: () => void;
+  webkitDisplayingFullscreen?: boolean;
+};
+
+type FsEl = HTMLElement & {
+  webkitRequestFullscreen?: () => Promise<void> | void;
+};
+
+type FsDoc = Document & {
+  webkitFullscreenElement?: Element | null;
+  webkitExitFullscreen?: () => Promise<void> | void;
+};
+
+function nativeFsElement() {
+  const doc = document as FsDoc;
+  return document.fullscreenElement ?? doc.webkitFullscreenElement ?? null;
+}
+
+async function lockLandscape() {
+  try {
+    await screen.orientation.lock("landscape");
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function unlockOrientation() {
+  try {
+    screen.orientation.unlock();
+  } catch {
+    /* some browsers throw if nothing is locked */
+  }
+}
+
+function isPhoneViewport() {
+  if (typeof window === "undefined") return false;
+  const ios =
+    /iPad|iPhone|iPod/i.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (ios) return true;
+  const touch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+  const compact = Math.min(window.innerWidth, window.innerHeight) <= 900;
+  return touch && compact;
+}
 
 function formatClock(seconds: number) {
   if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
@@ -55,8 +106,14 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [focused, setFocused] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [fakeFs, setFakeFs] = useState(false);
+  const [forceRotate, setForceRotate] = useState(false);
+  const [showControls, setShowControls] = useState(true);
   const [buffering, setBuffering] = useState(false);
   const bufferDelayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hideControlsRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
+  const inFsRef = useRef(false);
   const menuId = useId();
 
   const bindCaptions = useCallback(
@@ -158,10 +215,67 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
   }, [bindCaptions, captionsOn, videoRef]);
 
   useEffect(() => {
-    const onFs = () => setIsFullscreen(Boolean(document.fullscreenElement));
+    const applyFsChrome = async (on: boolean) => {
+      inFsRef.current = on;
+      setIsFullscreen(on);
+      document.documentElement.classList.toggle("vsl-fs-open", on);
+      if (on) {
+        const locked = await lockLandscape();
+        if (!locked && window.matchMedia("(orientation: portrait)").matches) {
+          setForceRotate(true);
+        }
+      } else {
+        unlockOrientation();
+        setForceRotate(false);
+        setFakeFs(false);
+      }
+    };
+
+    const onFs = () => {
+      void applyFsChrome(Boolean(nativeFsElement()));
+    };
     document.addEventListener("fullscreenchange", onFs);
-    return () => document.removeEventListener("fullscreenchange", onFs);
-  }, []);
+    document.addEventListener("webkitfullscreenchange", onFs);
+
+    const video = videoRef.current as WebkitVideo | null;
+    const onWebkitBegin = () => {
+      void applyFsChrome(true);
+    };
+    const onWebkitEnd = () => {
+      void applyFsChrome(false);
+    };
+    video?.addEventListener("webkitbeginfullscreen", onWebkitBegin);
+    video?.addEventListener("webkitendfullscreen", onWebkitEnd);
+
+    const mq = window.matchMedia("(orientation: landscape)");
+    const onOrient = () => {
+      if (mq.matches) setForceRotate(false);
+      else if (inFsRef.current) setForceRotate(true);
+    };
+    mq.addEventListener("change", onOrient);
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape" || !inFsRef.current) return;
+      const fs = nativeFsElement();
+      if (fs) {
+        const doc = document as FsDoc;
+        void (document.exitFullscreen?.() ?? doc.webkitExitFullscreen?.());
+      }
+      setFakeFs(false);
+    };
+    document.addEventListener("keydown", onKey);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", onFs);
+      document.removeEventListener("webkitfullscreenchange", onFs);
+      video?.removeEventListener("webkitbeginfullscreen", onWebkitBegin);
+      video?.removeEventListener("webkitendfullscreen", onWebkitEnd);
+      mq.removeEventListener("change", onOrient);
+      document.removeEventListener("keydown", onKey);
+      document.documentElement.classList.remove("vsl-fs-open");
+      unlockOrientation();
+    };
+  }, [videoRef]);
 
   const hideBuffering = useCallback(() => {
     if (bufferDelayRef.current != null) {
@@ -206,6 +320,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
     if (!video) return;
     video.playbackRate = speedRef.current;
     setPaused(false);
+    bumpControls(true);
     analyticsRef.current.onPlay(video.currentTime, video.duration || duration);
   };
 
@@ -260,27 +375,131 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
     setMuted(video.muted);
   };
 
-  const toggleFullscreen = async () => {
-    const root = videoRef.current?.parentElement;
-    if (!root) return;
-    if (document.fullscreenElement) {
-      await document.exitFullscreen();
-    } else {
-      await root.requestFullscreen();
+  const bumpControls = useCallback((playing?: boolean) => {
+    setShowControls(true);
+    if (hideControlsRef.current != null) {
+      clearTimeout(hideControlsRef.current);
+      hideControlsRef.current = null;
     }
+    const stillPlaying = playing ?? !videoRef.current?.paused;
+    if (!stillPlaying) return;
+    hideControlsRef.current = setTimeout(() => {
+      hideControlsRef.current = null;
+      setShowControls(false);
+    }, CONTROLS_HIDE_MS);
+  }, [videoRef]);
+
+  useEffect(() => () => {
+    if (hideControlsRef.current != null) clearTimeout(hideControlsRef.current);
+  }, []);
+
+  const exitFullscreen = useCallback(async () => {
+    const video = videoRef.current as WebkitVideo | null;
+    const fs = nativeFsElement();
+    if (fs) {
+      const doc = document as FsDoc;
+      if (document.exitFullscreen) await document.exitFullscreen();
+      else await doc.webkitExitFullscreen?.();
+    }
+    if (video?.webkitDisplayingFullscreen) video.webkitExitFullscreen?.();
+    setFakeFs(false);
+    setForceRotate(false);
+    unlockOrientation();
+    inFsRef.current = false;
+    document.documentElement.classList.remove("vsl-fs-open");
+    setIsFullscreen(false);
+  }, [videoRef]);
+
+  const toggleFullscreen = async () => {
+    const root = playerRef.current as FsEl | null;
+    const video = videoRef.current as WebkitVideo | null;
+    if (!root || !video) return;
+    bumpControls();
+
+    if (nativeFsElement() || fakeFs || video.webkitDisplayingFullscreen) {
+      await exitFullscreen();
+      return;
+    }
+
+    // Phones: fullscreen the <video> itself so the OS player covers the
+    // whole screen and can rotate — same path Safari/Chrome use for YouTube.
+    if (isPhoneViewport()) {
+      try {
+        if (video.paused) {
+          try {
+            await video.play();
+          } catch {
+            /* iOS still allows webkitEnterFullscreen after a user tap */
+          }
+        }
+        if (typeof video.webkitEnterFullscreen === "function") {
+          video.webkitEnterFullscreen();
+          return;
+        }
+        if (video.requestFullscreen) {
+          await video.requestFullscreen();
+          await lockLandscape();
+          return;
+        }
+      } catch {
+        /* fall through to the wrapper fullscreen below */
+      }
+    }
+
+    try {
+      if (root.requestFullscreen) {
+        await root.requestFullscreen();
+      } else if (root.webkitRequestFullscreen) {
+        await root.webkitRequestFullscreen();
+      } else {
+        setFakeFs(true);
+        inFsRef.current = true;
+        setIsFullscreen(true);
+        document.documentElement.classList.add("vsl-fs-open");
+      }
+    } catch {
+      setFakeFs(true);
+      inFsRef.current = true;
+      setIsFullscreen(true);
+      document.documentElement.classList.add("vsl-fs-open");
+    }
+
+    const locked = await lockLandscape();
+    if (!locked && window.matchMedia("(orientation: portrait)").matches) {
+      setForceRotate(true);
+    }
+  };
+
+  const rotateFullscreen = async () => {
+    bumpControls();
+    const locked = await lockLandscape();
+    if (locked) {
+      setForceRotate(false);
+      return;
+    }
+    setForceRotate((on) => !on);
   };
 
   const handleSurfaceClick = (event: MouseEvent<HTMLDivElement>) => {
     if (error) return;
     const node = event.target as HTMLElement;
-    if (node.closest("button, input, .vsl-player__bar, .vsl-player__menu")) return;
+    if (node.closest("button, input, .vsl-player__bar, .vsl-player__menu, .vsl-player__top")) return;
     if (speedOpen) setSpeedOpen(false);
+    if (!showControls) {
+      bumpControls();
+      return;
+    }
+    bumpControls();
     void togglePlay();
   };
 
+  const inFs = isFullscreen || fakeFs;
+  const rotateOn = forceRotate && inFs;
+
   return (
     <div
-      className={`vsl-player${paused ? " is-paused" : ""}${focused ? " is-focused" : ""}${buffering ? " is-buffering" : ""}`}
+      ref={playerRef}
+      className={`vsl-player${paused ? " is-paused" : ""}${focused ? " is-focused" : ""}${buffering ? " is-buffering" : ""}${inFs ? " is-fs" : ""}${rotateOn ? " is-fs-rotate" : ""}${showControls ? " is-controls" : ""}`}
       onClick={handleSurfaceClick}
       onFocus={() => setFocused(true)}
       onBlur={(e) => {
@@ -296,6 +515,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
         onPlay={handlePlay}
         onPause={() => {
           setPaused(true);
+          bumpControls(false);
           hideBuffering();
           flushVslWatchToN8n();
         }}
@@ -332,6 +552,30 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
       {error ? <div className="vsl-player__error">{error}</div> : null}
 
       <div className="vsl-player__ui">
+        {inFs ? (
+          <div className="vsl-player__top">
+            <button
+              type="button"
+              className="vsl-player__btn vsl-player__btn--icon"
+              aria-label="Exit fullscreen"
+              title="Exit fullscreen"
+              onClick={() => void exitFullscreen()}
+            >
+              <X size={20} strokeWidth={2.25} aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              className="vsl-player__btn vsl-player__btn--icon"
+              aria-label="Rotate fullscreen"
+              title="Rotate fullscreen"
+              aria-pressed={rotateOn}
+              onClick={() => void rotateFullscreen()}
+            >
+              <RotateCw size={18} strokeWidth={2.25} aria-hidden="true" />
+            </button>
+          </div>
+        ) : null}
+
         {captionsOn && cueText && !error ? (
           <div className="vsl-player__cues" aria-live="polite">
             <span className="vsl-player__cue">{cueText}</span>
