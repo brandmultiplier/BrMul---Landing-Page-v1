@@ -68,17 +68,6 @@ function unlockOrientation() {
   }
 }
 
-function isPhoneViewport() {
-  if (typeof window === "undefined") return false;
-  const ios =
-    /iPad|iPhone|iPod/i.test(navigator.userAgent) ||
-    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  if (ios) return true;
-  const touch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
-  const compact = Math.min(window.innerWidth, window.innerHeight) <= 900;
-  return touch && compact;
-}
-
 function formatClock(seconds: number) {
   if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
   const m = Math.floor(seconds / 60);
@@ -220,10 +209,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
       setIsFullscreen(on);
       document.documentElement.classList.toggle("vsl-fs-open", on);
       if (on) {
-        const locked = await lockLandscape();
-        if (!locked && window.matchMedia("(orientation: portrait)").matches) {
-          setForceRotate(true);
-        }
+        await lockLandscape();
       } else {
         unlockOrientation();
         setForceRotate(false);
@@ -249,10 +235,12 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
 
     const mq = window.matchMedia("(orientation: landscape)");
     const onOrient = () => {
-      if (mq.matches) setForceRotate(false);
-      else if (inFsRef.current) setForceRotate(true);
+      if (!mq.matches) return;
+      setForceRotate(false);
+      if (inFsRef.current) void lockLandscape();
     };
     mq.addEventListener("change", onOrient);
+    screen.orientation?.addEventListener?.("change", onOrient);
 
     const onKey = (event: KeyboardEvent) => {
       if (event.key !== "Escape" || !inFsRef.current) return;
@@ -271,6 +259,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
       video?.removeEventListener("webkitbeginfullscreen", onWebkitBegin);
       video?.removeEventListener("webkitendfullscreen", onWebkitEnd);
       mq.removeEventListener("change", onOrient);
+      screen.orientation?.removeEventListener?.("change", onOrient);
       document.removeEventListener("keydown", onKey);
       document.documentElement.classList.remove("vsl-fs-open");
       unlockOrientation();
@@ -421,31 +410,6 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
       return;
     }
 
-    // Phones: fullscreen the <video> itself so the OS player covers the
-    // whole screen and can rotate — same path Safari/Chrome use for YouTube.
-    if (isPhoneViewport()) {
-      try {
-        if (video.paused) {
-          try {
-            await video.play();
-          } catch {
-            /* iOS still allows webkitEnterFullscreen after a user tap */
-          }
-        }
-        if (typeof video.webkitEnterFullscreen === "function") {
-          video.webkitEnterFullscreen();
-          return;
-        }
-        if (video.requestFullscreen) {
-          await video.requestFullscreen();
-          await lockLandscape();
-          return;
-        }
-      } catch {
-        /* fall through to the wrapper fullscreen below */
-      }
-    }
-
     try {
       if (root.requestFullscreen) {
         await root.requestFullscreen();
@@ -464,14 +428,30 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
       document.documentElement.classList.add("vsl-fs-open");
     }
 
-    const locked = await lockLandscape();
-    if (!locked && window.matchMedia("(orientation: portrait)").matches) {
-      setForceRotate(true);
-    }
+    await lockLandscape();
   };
 
   const rotateFullscreen = async () => {
     bumpControls();
+    const root = playerRef.current as FsEl | null;
+    const alreadyFs = Boolean(nativeFsElement() || fakeFs);
+    if (!alreadyFs && root) {
+      try {
+        if (root.requestFullscreen) await root.requestFullscreen();
+        else if (root.webkitRequestFullscreen) await root.webkitRequestFullscreen();
+        else {
+          setFakeFs(true);
+          inFsRef.current = true;
+          setIsFullscreen(true);
+          document.documentElement.classList.add("vsl-fs-open");
+        }
+      } catch {
+        setFakeFs(true);
+        inFsRef.current = true;
+        setIsFullscreen(true);
+        document.documentElement.classList.add("vsl-fs-open");
+      }
+    }
     const locked = await lockLandscape();
     if (locked) {
       setForceRotate(false);
@@ -506,6 +486,7 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
         if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false);
       }}
     >
+      <div className="vsl-player__stage">
       <video
         ref={videoRef}
         poster={VSL_POSTER}
@@ -562,16 +543,6 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
               onClick={() => void exitFullscreen()}
             >
               <X size={20} strokeWidth={2.25} aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              className="vsl-player__btn vsl-player__btn--icon"
-              aria-label="Rotate fullscreen"
-              title="Rotate fullscreen"
-              aria-pressed={rotateOn}
-              onClick={() => void rotateFullscreen()}
-            >
-              <RotateCw size={18} strokeWidth={2.25} aria-hidden="true" />
             </button>
           </div>
         ) : null}
@@ -692,17 +663,28 @@ export default function VslPlayer({ videoRef, location, onTime }: Props) {
           <button
             type="button"
             className="vsl-player__btn vsl-player__btn--icon"
-            aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
-            title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+            aria-label={rotateOn ? "Exit landscape" : "Rotate to landscape"}
+            title={rotateOn ? "Exit landscape" : "Rotate to landscape"}
+            aria-pressed={rotateOn}
+            onClick={() => void rotateFullscreen()}
+          >
+            <RotateCw size={18} strokeWidth={2.25} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="vsl-player__btn vsl-player__btn--icon"
+            aria-label={inFs ? "Exit fullscreen" : "Fullscreen"}
+            title={inFs ? "Exit fullscreen" : "Fullscreen"}
             onClick={toggleFullscreen}
           >
-            {isFullscreen ? (
+            {inFs ? (
               <Minimize2 size={18} strokeWidth={2.25} aria-hidden="true" />
             ) : (
               <Maximize2 size={18} strokeWidth={2.25} aria-hidden="true" />
             )}
           </button>
         </div>
+      </div>
       </div>
     </div>
   );
