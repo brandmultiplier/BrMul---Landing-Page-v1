@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import ExtractionInstrumentWidget from "./ExtractionInstrumentWidget";
-import LibraryGateOverlay from "@/components/library/LibraryGateOverlay";
 import LegalLinks from "@/components/legal/LegalLinks";
+
+// Public page. Always open, cookie or not. The library-gated twin is
+// /extraction-instrument-tool.
 
 export const metadata: Metadata = {
   title: "The Uncopyable-Asset Instrument \u2014 BrandMultiplier",
@@ -11,13 +13,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ gate?: string }>;
-}) {
-  const { gate } = await searchParams;
-
+export default function Page() {
   return (
     <>
       <ExtractionInstrumentWidget />
@@ -33,12 +29,6 @@ export default async function Page({
       >
         <LegalLinks />
       </p>
-      <LibraryGateOverlay
-        title="The Uncopyable-Asset Instrument"
-        redirectTo="/extraction-instrument"
-        intent="extraction_instrument"
-        show={gate === "1"}
-      />
     </>
   );
 }

@@ -81,7 +81,7 @@ const BODY_HTML = `
 <p>This is not metaphor. The neuroscience is specific.</p>
 <p>Paul Zak's research at Claremont Graduate University demonstrated that stories with clear tension and resolution produce measurable oxytocin release, increasing trust and cooperation in listeners (Zak, <em>Harvard Business Review</em>, 2014). Uri Hasson's neural coupling research at Princeton showed that a speaker's brain activity can literally synchronize with a listener's, but only when the narrative structure is coherent (Hasson et al., <em>Proceedings of the National Academy of Sciences</em>, 2010). Jennifer Aaker at Stanford found that stories are up to 22 times more memorable than facts presented alone.</p>
 <p>Your conviction works in the room because you are delivering a coherent narrative with tension, resolution, and emotional architecture. Your team cannot replicate it because they are guessing at the structure. They have the facts. They do not have the architecture.</p>
-<p>The fix is extraction: pulling the logic out of your head and codifying it into a system that travels without you. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>The fix is extraction: pulling the logic out of your head and codifying it into a system that travels without you. (Start with the <a class="inline-link" href="/extraction-instrument-tool">Uncopyable-Asset Instrument</a>.)</p>
 <hr>
 
 <h2>What a Narrative Operating System does</h2>

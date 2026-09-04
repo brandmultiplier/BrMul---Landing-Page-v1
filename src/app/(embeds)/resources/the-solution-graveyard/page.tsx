@@ -93,7 +93,7 @@ const BODY_HTML = `
 <li><strong>Doing nothing:</strong><br>How long has it been? What is your current valuation multiple, and where do you think it would sit if the team could sell without you?</li>
 </ol>
 <p><span class="c-orange"><strong>Count your marks.</strong></span></p>
-<p>If you are like most founders who run this audit, you have stood in at least three of these graves, spent real money in each one, and are still the senior-most closer in your own company. That is not a talent gap in your team. It is the one purchase you have not made yet—the one that starts by extracting what is currently only in your head. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>If you are like most founders who run this audit, you have stood in at least three of these graves, spent real money in each one, and are still the senior-most closer in your own company. That is not a talent gap in your team. It is the one purchase you have not made yet—the one that starts by extracting what is currently only in your head. (Start with the <a class="inline-link" href="/extraction-instrument-tool">Uncopyable-Asset Instrument</a>.)</p>
 <hr>
 
 <h2>The one thing not for sale in any of these eight categories</h2>

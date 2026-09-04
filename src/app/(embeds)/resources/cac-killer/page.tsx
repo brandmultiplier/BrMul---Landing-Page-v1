@@ -130,7 +130,7 @@ const BODY_HTML = `
 </ul>
 <p>When we work with founders through the <strong>Rumble Phase</strong>, we aren't looking for catchy slogans. We are performing a "Narrative Extraction." We are pulling the "StoryLock" out of your head and documenting the logic, the objections, the market shifts, and the "Why Now" into a repeatable framework.</p>
 <p>This is the birth of the Narrative Operating System.</p>
-<p>Once this infrastructure exists, your sales team no longer has to guess. They don't have to "find their voice." They utilize <em>your</em> voice, backed by a system that has been tested and certified for fluency. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>Once this infrastructure exists, your sales team no longer has to guess. They don't have to "find their voice." They utilize <em>your</em> voice, backed by a system that has been tested and certified for fluency. (Start with the <a class="inline-link" href="/extraction-instrument-tool">Uncopyable-Asset Instrument</a>.)</p>
 <p>The result? Your team closes with founder-level conviction, without the founder dependency.</p>
 <hr>
 

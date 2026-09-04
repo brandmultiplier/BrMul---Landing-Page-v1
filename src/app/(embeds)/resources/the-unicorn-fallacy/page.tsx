@@ -79,7 +79,7 @@ const BODY_HTML = `
 <p>The philosopher Michael Polanyi described this category of knowledge as "tacit knowledge," the phenomenon of knowing more than you can tell (Polanyi, <em>The Tacit Dimension</em>, 1966). You know which case study to mention when a prospect hesitates. You know how to pivot the conversation when the stated objection is not the real one. You know the exact framing that turns price resistance into a value conversation.</p>
 <p>You know all of this, but you have never documented it because it operates below conscious articulation. It is procedural, not declarative. It is judgment, not process.</p>
 <p>Standard sales playbooks fail because they document declarative knowledge: feature lists, competitive battlecards, objection responses. They capture what you say without capturing why you say it, or when to say something different.</p>
-<p>A better recruiter does not reduce Narrative Debt. A higher base salary does not reduce it. A better playbook template does not reduce it. Only extraction reduces it: pulling the tacit logic out of the founder's head and codifying it into a system that travels without you. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>A better recruiter does not reduce Narrative Debt. A higher base salary does not reduce it. A better playbook template does not reduce it. Only extraction reduces it: pulling the tacit logic out of the founder's head and codifying it into a system that travels without you. (Start with the <a class="inline-link" href="/extraction-instrument-tool">Uncopyable-Asset Instrument</a>.)</p>
 <hr>
 
 <h2>What extraction looks like</h2>

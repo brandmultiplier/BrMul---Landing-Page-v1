@@ -132,7 +132,7 @@ const BODY_HTML = `
 <p>This isn't a brand refresh. It's an infrastructure project. Here is the 4-step plan to extract the logic and encode it into your team. (Full blueprint: <a class="inline-link" href="/NOS-architecture">NOS architecture</a>.)</p>
 
 <h3>Step 1: The Rumble Phase (Narrative Extraction)</h3>
-<p>You cannot document what you haven't defined. We use a "Rumble" process to extract the non-obvious logic from the founder's head. (Try the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>You cannot document what you haven't defined. We use a "Rumble" process to extract the non-obvious logic from the founder's head. (Try the <a class="inline-link" href="/extraction-instrument-tool">Uncopyable-Asset Instrument</a>.)</p>
 <ul>
 <li>We don't ask "what do you do?"</li>
 <li>We ask "why does the status quo fail?"</li>

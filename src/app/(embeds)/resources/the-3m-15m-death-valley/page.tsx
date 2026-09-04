@@ -97,7 +97,7 @@ const BODY_HTML = `
 <ul>
 <li><strong>The logic:</strong> You do not have time to lead marketing. Hire a part-time expert to set the strategy.</li>
 <li><strong>Why it fails:</strong> A fractional CMO brings their playbook to your business. Your business was built on your specific insights, your logic, your understanding of why the market needs what you built. Without extraction, the fractional CMO defaults to standard demand gen tactics: content calendars, lead magnets, paid campaigns. Standard tactics produce standard results. And standard results at $15K to $25K per month burn runway fast.</li>
-<li><strong>The <span class="c-orange">inversion</span>:</strong> You are the CMO until the narrative is extracted. Use a narrative partner to get the logic out of your head, then hand that documented logic to a tactician to execute. The order matters: extraction first, delegation second. (Start here: <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</li>
+<li><strong>The <span class="c-orange">inversion</span>:</strong> You are the CMO until the narrative is extracted. Use a narrative partner to get the logic out of your head, then hand that documented logic to a tactician to execute. The order matters: extraction first, delegation second. (Start here: <a class="inline-link" href="/extraction-instrument-tool">Uncopyable-Asset Instrument</a>.)</li>
 </ul>
 <hr>
 

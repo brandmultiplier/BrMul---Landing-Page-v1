@@ -86,7 +86,7 @@ const BODY_HTML = `
 <p>You've been focused on the <em>who</em>, when you should have been focused on the <em>how</em>.</p>
 <p>The reason these five archetypal hires fail is that they are walking into a vacuum where your "founder-intuition" should be. They are trying to articulate a value proposition they don't actually understand, using tools that don't actually work, in a process that isn't actually defined.</p>
 <p>To stop the cycle, you have to move from <strong>Founder-Led Sales to Narrative-Driven Sales</strong>.</p>
-<p>You have to extract the logic, certify the fluency, and build the infrastructure that allows your team to close with your level of conviction—without your presence. (Start with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>You have to extract the logic, certify the fluency, and build the infrastructure that allows your team to close with your level of conviction—without your presence. (Start with the <a class="inline-link" href="/extraction-instrument-tool">Uncopyable-Asset Instrument</a>.)</p>
 <hr>
 
 <div class="callout mid-cta">

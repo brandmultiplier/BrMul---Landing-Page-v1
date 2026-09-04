@@ -1,7 +1,7 @@
 export const LIBRARY_NEXT_PATHS = [
   "/resources",
   "/storylock-tax-tool",
-  "/extraction-instrument",
+  "/extraction-instrument-tool",
   "/protagonist-map",
   "/resources/the-multi-protagonist-map",
 ] as const;

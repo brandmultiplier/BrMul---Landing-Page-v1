@@ -32,8 +32,10 @@ const TOOLS = [
     go: "Run the numbers",
   },
   {
-    href: "/extraction-instrument",
-    gatedHref: "/extraction-instrument?gate=1",
+    // Always the library-gated twin: the tool page gates itself on the
+    // bm_library cookie, so it never sends a known lead through a second ask.
+    href: "/extraction-instrument-tool",
+    gatedHref: "/extraction-instrument-tool",
     num: "02",
     eyebrow: "Instrument",
     title: "The Uncopyable-Asset Instrument",

@@ -95,7 +95,7 @@ const BODY_HTML = `
 <p>When you shift from "Influencer" to "Infrastructure Architect," everything changes.</p>
 <p>You stop caring about "viral" posts and start caring about "conviction" posts. You stop trying to "elevate the brand" and start trying to "certify the team." You realize that the goal of LinkedIn isn't to get a like—it's to pre-wire the prospect's brain with the narrative logic they will hear again in the first five minutes of the discovery call.</p>
 <p>Not a brand refresh. <span class="c-orange"><strong>A system.</strong></span></p>
-<p>A system where the founder's conviction is extracted, documented, and weaponized so that a 24-year-old SDR can speak with the same authority as the 45-year-old founder. (Start the work with the <a class="inline-link" href="/extraction-instrument">Uncopyable-Asset Instrument</a>.)</p>
+<p>A system where the founder's conviction is extracted, documented, and weaponized so that a 24-year-old SDR can speak with the same authority as the 45-year-old founder. (Start the work with the <a class="inline-link" href="/extraction-instrument-tool">Uncopyable-Asset Instrument</a>.)</p>
 
 <h2>5. The Narrative Operating System (<span class="c-orange">NOS</span>)</h2>
 <p>To break the Founder's Trap and build true Narrative Infrastructure, you must move through a diagnostic, four-phase process.</p>
