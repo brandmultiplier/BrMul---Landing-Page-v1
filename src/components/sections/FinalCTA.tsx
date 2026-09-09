@@ -30,7 +30,9 @@ function redirectToCalendlyAfterTracking() {
     window.dataLayer.push({
         event: "final_cta_submit",
         form_name: "final_cta_storyline",
-        eventCallback: go,
+        // GTM reports success as soon as tags are dispatched; give the
+        // pixel requests a moment to leave before unloading the page.
+        eventCallback: () => window.setTimeout(go, 300),
         eventTimeout: 1500,
     });
     // Safety net if GTM never invokes the callback (e.g. container blocked).
