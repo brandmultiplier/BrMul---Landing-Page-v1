@@ -8,8 +8,34 @@ import {
     BUSINESS_EMAIL_REQUIRED_MESSAGE,
     isBusinessEmail,
 } from "@/lib/business-email";
-import { CTA_LABEL } from "@/lib/cta";
+import { CALENDLY_BASE, CTA_LABEL } from "@/lib/cta";
 import LegalLinks from "@/components/legal/LegalLinks";
+
+// Push a GTM event before leaving the page so ad platforms (LinkedIn, Meta)
+// can record the form submission. eventCallback fires once tags are done,
+// eventTimeout guarantees the redirect even if a tag hangs or is blocked.
+function redirectToCalendlyAfterTracking() {
+    let redirected = false;
+    const go = () => {
+        if (redirected) return;
+        redirected = true;
+        window.location.href = CALENDLY_BASE;
+    };
+
+    if (typeof window === "undefined" || !Array.isArray(window.dataLayer)) {
+        go();
+        return;
+    }
+
+    window.dataLayer.push({
+        event: "final_cta_submit",
+        form_name: "final_cta_storyline",
+        eventCallback: go,
+        eventTimeout: 1500,
+    });
+    // Safety net if GTM never invokes the callback (e.g. container blocked).
+    window.setTimeout(go, 2000);
+}
 
 const EMPTY_FORM = {
     first_name: "",
@@ -75,7 +101,7 @@ export default function FinalCTA() {
             });
 
             if (response.ok) {
-                window.location.href = "https://calendly.com/book-crc/storyline/";
+                redirectToCalendlyAfterTracking();
                 return;
             } else if (response.status === 400) {
                 const data = (await response.json()) as { error?: string };
