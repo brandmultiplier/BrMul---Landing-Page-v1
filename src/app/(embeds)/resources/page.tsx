@@ -210,12 +210,11 @@ export default async function Page() {
       </div>
       <main className="index-wrap">
         <div className="eyebrow">Resources</div>
-        <h1>The BrandMultiplier Resource Library</h1>
+        <h1>Three instruments. Twelve diagnostics. Run them on your own company.</h1>
         {showWelcome ? <WelcomeBanner /> : null}
         <p className="index-lead">
-          Diagnostics on narrative infrastructure, StoryLock, and the
-          structural reasons founder-led B2B companies stall between $3M and
-          $50M ARR.
+          The structural reasons founder-led B2B companies stall between $3M
+          and $50M ARR—and what each one is costing you.
         </p>
         <VslBlock
           location="resources"

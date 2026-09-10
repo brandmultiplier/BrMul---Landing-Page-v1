@@ -102,11 +102,11 @@ export default async function LibraryPage() {
       </div>
       <main className="library-wrap">
         <div className="eyebrow">Resource Library</div>
-        <h1>Get access to the library</h1>
+        <h1>Three instruments. Twelve diagnostics. Run them on your own company.</h1>
         <p className="library-lead">
-          One quick form and you&apos;re in — diagnostics on narrative
-          infrastructure, StoryLock, and the structural reasons founder-led
-          B2B companies stall between $3M and $50M ARR.
+          The structural reasons founder-led B2B companies stall between $3M
+          and $50M ARR—and what each one is costing you. Work email is the
+          only required field.
         </p>
         <VslBlock
           location="library"
