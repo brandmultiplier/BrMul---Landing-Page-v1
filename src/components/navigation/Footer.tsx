@@ -40,7 +40,7 @@ export default function Footer() {
                                     <Link href="/#system" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">The System</Link>
                                 </li>
                                 <li>
-                                    <Link href="/#case-studies" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Case Studies</Link>
+                                    <Link href="/case-studies" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Case Studies</Link>
                                 </li>
                                 <li>
                                     <Link href="/#pricing" className="text-[rgba(255,255,255,0.4)] hover:text-white transition-colors">Pricing Plan</Link>

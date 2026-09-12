@@ -18,7 +18,7 @@ const navItems = [
 const contentPageNavItems = [
     { name: "NarrativeOS™", href: "/what-is-a-narrative-operating-system" },
     { name: "Compare", href: "/compare/nos-vs-hiring" },
-    { name: "Pricing", href: "https://brandmultiplier.ai/#pricing" },
+    { name: "Pricing", href: "/#pricing" },
 ];
 
 const EMBED_ROUTES = [
