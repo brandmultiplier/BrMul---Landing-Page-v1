@@ -64,6 +64,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/results',
+        destination: '/case-studies',
+        permanent: true,
+      },
+      {
+        source: '/work',
+        destination: '/case-studies',
+        permanent: true,
+      },
+      {
         // SFAE Wave 2 — short link for LinkedIn outreach (UTMs live on the destination)
         source: '/story-fit',
         destination:

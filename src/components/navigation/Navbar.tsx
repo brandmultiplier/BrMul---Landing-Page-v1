@@ -41,6 +41,7 @@ const LOGO_ONLY_HEADER_ROUTES = [
 const CONTENT_PAGE_ROUTES = [
     '/what-is-a-narrative-operating-system',
     '/compare/nos-vs-hiring',
+    '/case-studies',
 ];
 
 export default function Navbar() {

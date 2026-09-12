@@ -14,6 +14,8 @@ export const CALENDLY_PLACEMENTS = {
   index_hero: { medium: "index_hero", content: "hero" },
   index_footer: { medium: "index_footer", content: "footer" },
   vsl_strip: { medium: "vsl_strip", content: "vsl_strip" },
+  case_studies_primary: { medium: "case_studies_cta", content: "primary" },
+  case_studies_library: { medium: "case_studies_cta", content: "library" },
 } as const;
 
 export type CalendlyPlacement = keyof typeof CALENDLY_PLACEMENTS;
