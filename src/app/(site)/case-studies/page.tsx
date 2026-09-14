@@ -36,12 +36,15 @@ type Case = {
   headline: string;
   description: string;
   stats: Stat[];
+  /** White-knockout mark from the site asset library. Omitted for anonymized entries and Remark (no file). */
+  logo?: string;
 };
 
 const CASES: Case[] = [
   {
     category: "IT Management / B2B SaaS",
     client: "BetterCloud",
+    logo: "/case-studies/bettercloud.png",
     headline: "From Gartner Visionary to Market Leader",
     description:
       "A strategic narrative overhaul that repositioned a formerly dominant SaaS platform from rapid decline to category leader\u2014recapturing lost market share and earning industry-analyst recognition through a story that aligned product, brand, and buyer experience.",
@@ -59,6 +62,7 @@ const CASES: Case[] = [
   {
     category: "B2B / Technology",
     client: "Apto Solutions",
+    logo: "/case-studies/apto.png",
     headline: "Brand Narrative That Drove YoY Growth",
     description:
       "Partnered with the founding team to build a differentiated brand narrative, sharpen go-to-market strategy, and deploy fresh marketing tactics\u2014positioning the company to lead its category with a story that resonated across buyers and stakeholders.",
@@ -67,6 +71,7 @@ const CASES: Case[] = [
   {
     category: "Crypto / Web3",
     client: "Ledger",
+    logo: "/case-studies/ledger.png",
     headline: "From Hardware Startup to Global Brand Leader",
     description:
       "Unified a fast-scaling crypto company under one cohesive brand identity, then built two new sub-brands\u2014Ledger Quest and Ledger Trust Services\u2014to drive expansion into web3 education and consumer services.",
@@ -110,6 +115,7 @@ const CASES: Case[] = [
   {
     category: "Ecommerce / DTC",
     client: "Tria Beauty",
+    logo: "/case-studies/tria.png",
     headline: "Brand Refresh That Drove Immediate Revenue",
     description:
       "Repositioned a light-based skincare technology brand for the North American market with a new verbal identity, audience personas, and emotionally resonant website copy that converted browsers into buyers.",
@@ -191,7 +197,12 @@ const CASE_STUDIES_CSS = `
 }
 .cs-cat{font-size:12px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:#4940C6;
   filter:brightness(1.65);margin:0 0 12px}
+.cs-logo{height:36px;margin:0 0 12px;display:flex;align-items:center}
+.cs-logo img{height:36px;width:auto;max-width:210px;object-fit:contain;filter:brightness(0) invert(1)}
 .cs-client{font-size:27px;font-weight:700;letter-spacing:-.015em;line-height:1.15;margin:0}
+.cs-case:has(.cs-logo) .cs-client{font-size:16px;font-weight:700;color:#C9C6DA;margin-top:2px}
+.cs-page ul,.cs-page ol{list-style:revert;padding-left:1.5em}
+.cs-page footer ul,.cs-page footer ol{list-style:none;padding-left:0}
 .cs-head{font-size:21px;font-weight:700;color:#fff;margin:0 0 14px;line-height:1.3}
 .cs-desc{font-size:16.5px;line-height:1.62;color:#C9C6DA;margin:0}
 .cs-nums{display:flex;flex-direction:column;gap:22px}
@@ -273,6 +284,12 @@ export default function CaseStudiesPage() {
               <article className="cs-case" key={entry.client}>
                 <div>
                   <p className="cs-cat">{entry.category}</p>
+                  {entry.logo ? (
+                    <div className="cs-logo">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={entry.logo} alt="" />
+                    </div>
+                  ) : null}
                   <h2 className="cs-client">{entry.client}</h2>
                 </div>
                 <div>
