@@ -35,3 +35,4 @@ team can deploy without the founder in the room.
 
 ## Pages
 - Homepage: https://www.brandmultiplier.ai/
+- Client Results: https://www.brandmultiplier.ai/case-studies

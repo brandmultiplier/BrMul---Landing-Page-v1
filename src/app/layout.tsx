@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import { Suspense } from "react";
 import AnalyticsRuntime from "@/components/analytics/AnalyticsRuntime";
 import TrackingScripts from "@/components/analytics/TrackingScripts";
+import UtmPassthrough from "@/components/analytics/UtmPassthrough";
 import "./globals.css";
 
 const inter = Inter({
@@ -59,6 +60,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <AnalyticsRuntime />
         </Suspense>
+        <UtmPassthrough />
         {children}
       </body>
     </html>

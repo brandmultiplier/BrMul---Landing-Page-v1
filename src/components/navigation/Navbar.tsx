@@ -55,7 +55,7 @@ export default function Navbar() {
     const isContentPageRoute = CONTENT_PAGE_ROUTES.includes(pathname);
     const contentPageCalendly = calendlyHref({
         slug: pathname.replace(/^\//, "").replace(/\//g, "-") || "site",
-        placement: "nav",
+        placement: pathname === "/case-studies" ? "case_studies_nav" : "nav",
     });
 
     useEffect(() => {
