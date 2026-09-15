@@ -36,7 +36,7 @@ type Case = {
   headline: string;
   description: string;
   stats: Stat[];
-  /** White-knockout mark from the site asset library. Omitted for anonymized entries and Remark (no file). */
+  /** White-knockout mark. Omitted for the two anonymized entries. */
   logo?: string;
 };
 

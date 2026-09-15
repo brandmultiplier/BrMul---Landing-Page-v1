@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { CTA_LABEL } from "@/lib/cta";
+import { CTA_LABEL, calendlyHref } from "@/lib/cta";
 
 const navItems = [
     { name: "Founder's Trap", href: "/#trap" },
@@ -53,6 +53,10 @@ export default function Navbar() {
     const isMinimalHeaderRoute = MINIMAL_HEADER_ROUTES.includes(pathname);
     const isLogoOnlyHeaderRoute = LOGO_ONLY_HEADER_ROUTES.includes(pathname);
     const isContentPageRoute = CONTENT_PAGE_ROUTES.includes(pathname);
+    const contentPageCalendly = calendlyHref({
+        slug: pathname.replace(/^\//, "").replace(/\//g, "-") || "site",
+        placement: "nav",
+    });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -185,9 +189,10 @@ export default function Navbar() {
                                 <div className="hidden lg:block">
                                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                         <a
-                                            href="https://calendly.com/book-crc/storyline/"
+                                            href={contentPageCalendly}
                                             target="_blank"
                                             rel="noopener noreferrer"
+                                            data-cta={pathname === "/case-studies" ? "case_studies_nav" : undefined}
                                             className="relative px-5 py-2.5 text-sm font-medium text-white rounded-full overflow-hidden group whitespace-nowrap flex-shrink-0 inline-flex"
                                         >
                                             <span className="absolute inset-0 bg-gradient-to-r from-[#a855f7] to-[#6366f1] opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
@@ -258,9 +263,10 @@ export default function Navbar() {
                                     className="pt-12"
                                 >
                                     <a
-                                        href="https://calendly.com/book-crc/storyline/"
+                                        href={contentPageCalendly}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        data-cta={pathname === "/case-studies" ? "case_studies_nav" : undefined}
                                         onClick={() => setMobileMenuOpen(false)}
                                         className="btn btn-primary w-full text-center justify-center text-lg"
                                     >
