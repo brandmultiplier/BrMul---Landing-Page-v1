@@ -84,6 +84,7 @@ const CASES: Case[] = [
   {
     category: "Agency / B2B",
     client: "Remark Growth Marketing",
+    logo: "/case-studies/remark.png",
     headline: "Helping a Marketing Agency Practice What It Preaches",
     description:
       "Rebuilt a seasoned marketing agency\u2019s brand from the foundation up\u2014new identity, positioning framework, proprietary methodology naming, and website narrative\u2014driving new business beyond referrals.",
@@ -198,7 +199,7 @@ const CASE_STUDIES_CSS = `
 .cs-cat{font-size:12px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:#4940C6;
   filter:brightness(1.65);margin:0 0 12px}
 .cs-logo{height:36px;margin:0 0 12px;display:flex;align-items:center}
-.cs-logo img{height:36px;width:auto;max-width:210px;object-fit:contain;filter:brightness(0) invert(1)}
+.cs-logo img{height:36px;width:auto;max-width:230px;object-fit:contain;filter:brightness(0) invert(1)}
 .cs-client{font-size:27px;font-weight:700;letter-spacing:-.015em;line-height:1.15;margin:0}
 .cs-case:has(.cs-logo) .cs-client{font-size:16px;font-weight:700;color:#C9C6DA;margin-top:2px}
 .cs-page ul,.cs-page ol{list-style:revert;padding-left:1.5em}
